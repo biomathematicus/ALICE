@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<doc>
+  <randombook>
+    <content><![CDATA[	<p>UNDER DEVELOPMENT. Nonlinear dynamics is an increasingly important area of applied mathematics capable of describing many phenomena that occur in nature at different scales.</p> 
+
+<iframe width="350" height="197" src="http://www.youtube.com/embed/cpRoCO5z68Y?rel=0&autoplay=1&autohide=1&loop=2" frameborder="0" allowfullscreen></iframe>
+
+<p>Using the set of tools developed in this area, it is possible to model real-world systems ranging from genetic control system at the molecular level, to ecological interactions at a planetary level. </p>	]]></content>
+    <page_counter>
+      <id_pagina>1</id_pagina>
+      <id_opus>1</id_opus>
+      <cd_opus>LITERATRONIC</cd_opus>
+      <ds_opus>Mathematical Biology. UNDER DEVELOPMENT.</ds_opus>
+      <percentage>0</percentage>
+      <perct_complement>100</perct_complement>
+    </page_counter>
+  </randombook>
+  <L_MORE><![CDATA[More...]]></L_MORE>
+  <T_WHY_REGISTER><![CDATA[<TABLE border="0" cellpadding="3" cellspacing="0">
+<TR>
+<TD class="TITLE">
+Why Register?
+</TD>
+</TR>
+<TR>
+		
+    <TD class="CONTENT"> You can access the system without having to register 
+      by using the login "<em>guest</em>" and pa&#115;sword "<em>pa&#115;sword</em>". <A href="../BBS_BRITANNIA/login_user.asp?ReturnPage=aspx&FPage=../src/Initium.aspx"> 
+      Click here to start your session</A>. However, given that many users could 
+      be using that account at the same time, you could experience strange learning 
+      paths. To ensure this does not occur, please register.</TD>
+</TR>
+<TR>
+		
+    <TD class="CONTENT"> When you register, <strong>ALICE</strong> can design 
+      a personalized instructional experience for you based on your interaction. 
+      <A href="../BBS_BRITANNIA/registration_rules.asp?ReturnPage=aspx&FPage=../src/initium.aspx"> 
+      Click here to register</A>. <EM>Your e-mail is not required to register, 
+      neither is any personal information</EM>. <strong>ALICE</strong> is a non-commercial 
+      web site.</TD>
+</TR>
+<TR>
+		
+    <TD class="CONTENT"> If you do not want to start a session, remember that 
+      non-registered users have limited access to <strong>ALICE</strong>. </TD>
+</TR>
+</TABLE>]]></T_WHY_REGISTER>
+  <T_INTRODUCTION><![CDATA[<TABLE width="100%" border="0" cellpadding="3" cellspacing="0">
+  <TR> 
+    <TD class="TITLE"> Introduction </TD>
+  </TR>
+  <TR> 
+    <TD class="CONTENT"><A href="Nuntius.aspx?lng=BRITANNIA&nuntius=T_INTRO_DYNAMIC"><IMG alt="BULLET" src="../images/system/BULLET_orange.gif" width="5" height="9" border="0"> 
+      What is  adaptive learning?</A> </TD>
+  </TR>
+  <TR> 
+    <TD class="CONTENT"><A href="Nuntius.aspx?lng=BRITANNIA&nuntius=T_INTRO_TYPES"><IMG alt="BULLET" src="../images/system/BULLET_orange.gif" width="5" height="9" border="0"> 
+      What type of courses will you find here?</A> </TD>
+  </TR>
+  <TR> 
+    <TD class="CONTENT"><A href="Nuntius.aspx?lng=BRITANNIA&nuntius=T_INTRO_MAP"><IMG alt="BULLET" src="../images/system/BULLET_orange.gif" width="5" height="9" border="0"> 
+      How to use the reading map?</A></TD>
+  </TR>
+  <!--TR> 
+    <TD class="CONTENT"><A href="Nuntius.aspx?lng=BRITANNIA&nuntius=T_INTRO_SEARCH"><IMG alt="BULLET" src="../images/system/BULLET_orange.gif" width="5" height="9" border="0"> How to search?</A> 
+    </TD>
+  </TR-->
+</TABLE>
+]]></T_INTRODUCTION>
+  <T_DEFINITION><![CDATA[<TABLE border="0" cellspacing="0" cellpadding="3">
+	<TR> 
+		
+    <TD class="TITLE">What is ALICE?</TD>
+	</TR>
+	<TR> 
+		
+    <TD class="CONTENT"> ALICE stands for <b>Adaptive Learning for Interdisciplinary 
+      Collaborative Environments</b>. ALICE is an information system that designs 
+      a learning environment for every student based on her/his interaction with 
+      the system. <b>ALICE is under active development</b>. </TD>
+	</TR>
+	<TR> 
+		<TD class="CONTENT"><A href="Nuntius.aspx?lng=BRITANNIA&nuntius=T_COLLABORATORIUM"><IMG alt="BULLET" src="../images/system/BULLET_orange.gif" width="5" height="9" border="0"> 
+			Go to the Topic index</A></TD>
+	</TR>
+	<!--TR> 
+		<TD class="CONTENT"><A href="Nuntius.aspx?lng=BRITANNIA&nuntius=T_CHAT"><IMG alt="BULLET" src="../images/system/BULLET_orange.gif" width="5" height="9" border="0"> Video-chat: The system guide is available for chatting</A>
+<script language="javascript">
+var now = new Date();
+document.write(now.getFullYear() + "/" + now.getMonth() + "/" + now.getDate() + " @ " + now.toLocaleTimeString()); 
+</script></TD>
+	</TR -->
+</TABLE>]]></T_DEFINITION>
+  <L_BOOK><![CDATA[Collaboratorium]]></L_BOOK>
+  <L_PAGE><![CDATA[Page]]></L_PAGE>
+  <L_READ><![CDATA[Read]]></L_READ>
+  <L_RECOMMENDED><![CDATA[Recommended Reading]]></L_RECOMMENDED>
+  <L_MORE><![CDATA[More...]]></L_MORE>
+  <L_LAST_VISITED><![CDATA[Last Page Visited]]></L_LAST_VISITED>
+  <param>
+    <language>BRITANNIA</language>
+    <opus_type>
+    </opus_type>
+    <page_code>P_INITIUM</page_code>
+    <user_logon>iob</user_logon>
+    <page_name>Initium.aspx</page_name>
+    <id_opus>1</id_opus>
+    <user_name>IOB</user_name>
+    <user_status>3</user_status>
+    <user_id>1</user_id>
+  </param>
+  <top_menu>
+    <html_header>
+      <T_PAGE_TITLE>Home</T_PAGE_TITLE>
+      <T_META_KEYWRD>ALICE,Adaptive,Learning,Interdisciplinary,Collaborative,Environments,juan b. gutierrez</T_META_KEYWRD>
+      <T_META_DESCR>ALICE - Adaptive Learning for Interdisciplinary Collaborative Environments</T_META_DESCR>
+      <L_LITERATRONIC>ALICE</L_LITERATRONIC>
+    </html_header>
+    <P_FORUM>Forums</P_FORUM>
+    <P_INITIUM selected="true">Home</P_INITIUM>
+    <P_INDEX>Collaboratorium</P_INDEX>
+    <P_TRACTUS>Map</P_TRACTUS>
+    <P_HISTORIA>History</P_HISTORIA>
+    <P_COLLABORATORIUM>Collaboratorium</P_COLLABORATORIUM>
+    <P_NAUTA>My Profile</P_NAUTA>
+    <P_INDICIUM>About...</P_INDICIUM>
+    <sa_menu>Admin</sa_menu>
+    <L_LOGOUT>Logout</L_LOGOUT>
+    <L_USER>User</L_USER>
+    <L_OLD_USER>Existing User</L_OLD_USER>
+    <L_NEW_USER>New User</L_NEW_USER>
+    <F_SEARCH>Search</F_SEARCH>
+    <L_SEARCH>Search</L_SEARCH>
+    <ERR_SRCH_LEN>The minimum length of the search string is four (4) characters.</ERR_SRCH_LEN>
+    <L_DYNAMIC>Adaptive Hypertext</L_DYNAMIC>
+    <L_STATIC>Static Hypertext</L_STATIC>
+  </top_menu>
+  <footer>
+    <L_COPYRIGHT>© Juan B. Gutierrez</L_COPYRIGHT>
+    <L_PRIVACY>Privacy Statement</L_PRIVACY>
+  </footer>
+</doc>
