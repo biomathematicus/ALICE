@@ -52,13 +52,16 @@ Public Class h1
         sPath = Replace(sPath, ":", "_")
         sPath = Replace(sPath, "(", "_")
         sPath = Replace(sPath, ")", "_")
-
-
+        Dim count As Integer = 1
+        Dim fileNameOnly, extension, path_, newFullPath, tempFileName As String
+        extension = "pdf"
+        tempFileName = iid_new
         If context.Request.Files.Count > 0 Then
             Dim files As HttpFileCollection = context.Request.Files
             For i As Integer = 0 To files.Count - 1
                 Dim file As HttpPostedFile = files(i)
                 '      Dim fname As String
+
                 If HttpContext.Current.Request.Browser.Browser.ToUpper() = "IE" OrElse HttpContext.Current.Request.Browser.Browser.ToUpper() = "INTERNETEXPLORER" Then
                     Dim testfiles As String() = file.FileName.Split(New Char() {"\"c})
                     fname = testfiles(testfiles.Length - 1)
@@ -66,16 +69,29 @@ Public Class h1
                     fname = file.FileName
                     sExtention = Path.GetExtension(file.FileName)
                     sPath = sUser & sExtention
+                    extension = sExtention
 
                 End If
                 Dim path1 As String
                 path1 = context.Server.MapPath(sDir)
                 fname = context.Server.MapPath(sPath)
+                fileNameOnly = iid_new
+                path_ = path1
+                path_ = Path.Combine(path_, "User" + iid_user.ToString + "Course" + iid_opus.ToString + "_Lesson")
+                newFullPath = fname
                 Try
                     ' Determine whether the directory exists.
                     If Directory.Exists(path1) Then
                         If My.Computer.FileSystem.FileExists(fname) Then
-                            Return
+
+                            While (My.Computer.FileSystem.FileExists(newFullPath))
+                                count = count + 1
+                                tempFileName = String.Format("{0}({1})", fileNameOnly, count)
+                                newFullPath = path_ & tempFileName + extension
+                            End While
+
+                            'Return
+                            fname = newFullPath
                         End If
                     Else
                         ' Try to create the directory.
@@ -101,17 +117,17 @@ Public Class h1
         iOpus = Upload.iOpus_id
         iPagina = Upload.iPagina_id
         iUser = Upload.iUser_id
-
+        sUser = sTemp + "User" + iid_user.ToString + "Course" + iid_opus.ToString + "_Lesson" + tempFileName
+        sPath = sUser & sExtention
         sSQL = "exec p_labor_add" & _
                  " @Opus_Id=" & iOpus & _
                 ",@id_pagina=" & iPagina & _
                 ",@userID=" & iUser & _
                 ",@url='" & sPath & "'"
         'response.write (sSQL)
-        'response.end() 
+        'response.end()
 
         oDBService.DBXML(sSQL)
-
 
     End Sub
 

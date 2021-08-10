@@ -2,9 +2,7 @@
 Imports System.Xml.Xsl
 Imports System.Xml
 
-
 Namespace Literatronica
-
 
     Partial Class sa_nauta_lst
         Inherits System.Web.UI.Page
@@ -52,7 +50,6 @@ Namespace Literatronica
 
             sAcces = Request.Form("question")
             If sAcces <> "" Then
-
             Else
                 sAcces = "0000"
             End If
@@ -72,7 +69,7 @@ Namespace Literatronica
             doc.LoadXml(oDBService.DBXML(sSQL))
             trans.Load(Server.MapPath("..\XSL\p_graph.xsl"))
             Session("artifex") = Request.QueryString("artifex")
-            doc.Save(Server.MapPath("..\graph.xml"))
+            '   doc.Save(Server.MapPath("..\graph.xml"))
 
             XMLContent.Document = doc
             XMLContent.Transform = trans

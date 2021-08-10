@@ -2,9 +2,7 @@ Imports Literatronica.DBService
 Imports System.Xml.Xsl
 Imports System.Xml
 
-
 Namespace Literatronica
-
 
     Partial Class Initium
         Inherits System.Web.UI.Page
@@ -26,7 +24,6 @@ Namespace Literatronica
 
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-          
             Dim sAction As String
 
             Dim oDBService As New Connection
@@ -57,8 +54,8 @@ Namespace Literatronica
                 trans.Load(Server.MapPath("..\XSL\p_initium.xsl"))
                 XMLContent.Document = doc
 
-
                 XMLContent.Transform = trans
+                'doc.Save(Server.MapPath("..\initume.xml"))
             Catch ex As Exception
                 If sUserID = "" Then Response.Redirect("../BBS_" & sLinguaCok & "/log_off_user.asp")
                 Response.Redirect("Nuntius.aspx?lng=" & sLinguaCok & "&nuntius=T_ERROR")

@@ -1,3 +1,4 @@
 <%@ Page Language="vb" AutoEventWireup="false" Inherits="Literatronica.Index" CodeFile="Index.aspx.vb" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<asp:Xml id="XMLContent" runat="server" />
+<asp:xml id="XMLContent" runat="server" />

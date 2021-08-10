@@ -2,9 +2,7 @@
 Imports System.Xml.Xsl
 Imports System.Xml
 
-
 Namespace Literatronica
-
 
     Partial Class sa_nauta_lst
         Inherits System.Web.UI.Page
@@ -52,7 +50,6 @@ Namespace Literatronica
             sAcces = Request.Form("question")
 
             If sAcces <> "" Then
-
             Else
                 sAcces = "0000"
             End If

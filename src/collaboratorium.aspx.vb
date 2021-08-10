@@ -2,9 +2,7 @@ Imports Literatronica.DBService
 Imports System.Xml.Xsl
 Imports System.Xml
 
-
 Namespace Literatronica
-
 
     Partial Class Collaboratorium
         Inherits System.Web.UI.Page
@@ -56,7 +54,7 @@ Namespace Literatronica
               ",@PageCode='P_COLLABORATORIUM'" & _
               ",@PageName='Collaboratorium.aspx'"
             'response.write (sSQL)
-            'response.end() 
+            'response.end()
             Try
                 ' Response.Write(sSQL)
                 ' Return

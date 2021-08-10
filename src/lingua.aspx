@@ -27,7 +27,7 @@
     If sRef = "" Or sRef = "cibersociedad" Then sRef = "Initium.aspx"
 
     Select Case sAction
-        Case "ln" 'Choose language - Shows the page 
+        Case "ln" 'Choose language - Shows the page
             sRef = "Lingua.aspx?ref=" & sRef & "&act=st"
         Case "st" 'Write the cookie - Redirect to sRef
             Response.Cookies("Forum")("UserID") = sUserID
@@ -55,15 +55,15 @@
     <meta name="keywords" content="literatronic, hypertext, hypernovel, cibernovel, literatr&oacute;nica, hipernovela, cibernovela, hipertexto, juan b guti&eacute;rrez, juan b gutierrez">
 
     <script type="text/JavaScript">
-		if (top != self) {
-		    top.location = self.location;
-		}
-		if(navigator.appName == "Netscape") {
-			document.write('<link rel="stylesheet" type="text/css" href="../common/styles_ns.css" />');
-			}
-		else {
-			document.write('<link rel="stylesheet" type="text/css" href="../common/styles.css" />');
-		}
+        if (top != self) {
+            top.location = self.location;
+        }
+        if (navigator.appName == "Netscape") {
+            document.write('<link rel="stylesheet" type="text/css" href="../common/styles_ns.css" />');
+        }
+        else {
+            document.write('<link rel="stylesheet" type="text/css" href="../common/styles.css" />');
+        }
     </script>
 
     <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
@@ -74,17 +74,16 @@
     </script>
 
     <style type="text/css">
-        .auto-style1
-        {
+        .auto-style1 {
             width: 233px;
             height: 72px;
         }
     </style>
-
 </head>
 <body>
     <p>
-        &nbsp;</p>
+        &nbsp;
+    </p>
     <table width="80%" border="0" align="center" cellpadding="3" cellspacing="4" summary="LITERATRONICA">
         <tr>
             <td align="center" class="TAG">
@@ -100,21 +99,20 @@
         <tr>
             <td align="center" class="CONTENT">
                 <a href="<%=sRef & sConnector & "lng=HISPANIA"%>">
-                    <h1>
-                        Aprendizaje Adaptative para Entornos Collaborativos Interdisciplinarios</h1>
+                    <h1>Aprendizaje Adaptative para Entornos Collaborativos Interdisciplinarios</h1>
                 </a>
             </td>
             <td align="center" class="CONTENT">
                 <a href="<%=sRef & sConnector & "lng=BRITANNIA"%>">
-                    <h1>
-                        Adaptive Learning for Interdisciplinary Collaborative Environments</h1>
+                    <h1>Adaptive Learning for Interdisciplinary Collaborative Environments</h1>
                 </a>
             </td>
         </tr>
         <tr>
             <td align="center">
                 <p>
-                    &nbsp;</p>
+                    &nbsp;
+                </p>
                 <a href="<%=sRef & sConnector & "lng=HISPANIA"%>">
                     <img src="../images/system/lang_spanish.gif" alt="Castellano" width="17" height="11"
                         border="0" />
@@ -122,7 +120,8 @@
             </td>
             <td align="center">
                 <p>
-                    &nbsp;</p>
+                    &nbsp;
+                </p>
                 <a href="<%=sRef & sConnector & "lng=BRITANNIA"%>">
                     <img src="../images/system/lang_english.gif" alt="English" width="17" height="11"
                         border="0" />
@@ -130,12 +129,9 @@
             </td>
         </tr>
         <tr>
-            <td align="center">
-                &nbsp;</td>
-            <td align="center">
-                &nbsp;</td>
-            <td align="center">
-                &nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
         </tr>
         <tr>
             <td align="center">
@@ -144,27 +140,29 @@
                         luego de pulsar cualquiera de los v&iacute;nculos anteriores, es porque no ha activado
                         cookies. <a href="https://support.google.com/accounts/answer/61416?hl=es">
                             <span class="XSMALL">Pulse aqu&iacute; para ver instrucciones sobre c&oacute;mo activar
-                                cookies</span></a>.</span></p>
+                                cookies</span></a>.</span>
+                </p>
             </td>
-            <td align="center">
-                &nbsp;</td>
+            <td align="center">&nbsp;</td>
             <td align="center">
                 <p>
                     <span class="XSMALL">This site requires cookies. If you keep coming back to this pager
                         after clicking on the links above, then you do not have cookies activated. <a href="https://support.google.com/accounts/answer/61416?hl=en">
-                            <span class="XSMALL">Click here to see instructions about how to to activate cookies</span></a>.</span></p>
+                            <span class="XSMALL">Click here to see instructions about how to to activate cookies</span></a>.</span>
+                </p>
             </td>
         </tr>
         <tr>
             <td align="center">
                 <p>
-                    &nbsp;</p>
+                    &nbsp;
+                </p>
             </td>
-            <td align="center">
-                &nbsp;</td>
+            <td align="center">&nbsp;</td>
             <td align="center">
                 <p>
-                    &nbsp;</p>
+                    &nbsp;
+                </p>
             </td>
         </tr>
     </table>

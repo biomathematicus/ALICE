@@ -2,7 +2,7 @@
    <xsl:template match="/People">
       <xsl:apply-templates select="Person" />
    </xsl:template>
-  
+
    <xsl:template match="Person">
       <table width="100%" border="1">
          <tr>
@@ -18,8 +18,8 @@
             <td>
                <xsl:value-of select="Address/Street" /><br />
                <xsl:value-of select="Address/City" />
-               , 
-               <xsl:value-of select="Address/State" /> 
+               ,
+               <xsl:value-of select="Address/State" />
                <xsl:value-of select="Address/Zip" />
             </td>
          </tr>
@@ -35,21 +35,20 @@
    <xsl:template match="bookstore">
       <!-- Prices and books -->
       <bookstore>
-         <xsl:apply-templates select="book"/>
+         <xsl:apply-templates select="book" />
       </bookstore>
    </xsl:template>
 
    <xsl:template match="book">
       <book>
          <xsl:attribute name="ISBN">
-            <xsl:value-of select="@ISBN"/>
+            <xsl:value-of select="@ISBN" />
          </xsl:attribute>
          <price>
-            <xsl:value-of select="price"/>
+            <xsl:value-of select="price" />
          </price>
          <xsl:text>
          </xsl:text>
       </book>
    </xsl:template>
-
 </xsl:stylesheet>

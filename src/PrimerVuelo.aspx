@@ -5,11 +5,11 @@
 <head runat="server">
     <title>Dict</title>
     <script language="javascript">
-        if(navigator.appName == "Netscape") {
-          document.write('<link rel="stylesheet" type="text/css" href="../common/styles_ns.css" />');
+        if (navigator.appName == "Netscape") {
+            document.write('<link rel="stylesheet" type="text/css" href="../common/styles_ns.css" />');
         } else {
-          document.write('<link rel="stylesheet" type="text/css" href="../common/styles.css" />');
-        }    
+            document.write('<link rel="stylesheet" type="text/css" href="../common/styles.css" />');
+        }
     </script>
     <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
     <script type="text/javascript">
