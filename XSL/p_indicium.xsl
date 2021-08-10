@@ -6,8 +6,8 @@
 	<xsl:include href="l_footer.xsl" />
 	<xsl:template match="/">
 		<html>
-			<head><xsl:apply-templates select="//html_header" /></head>			
-			<body leftmargin="0" topmargin="0" bottommargin="0" rightmargin="0">				
+			<head><xsl:apply-templates select="//html_header" /></head>
+			<body leftmargin="0" topmargin="0" bottommargin="0" rightmargin="0">
 				<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td rowspan="3" valign="top" class='BAR_OFF'>

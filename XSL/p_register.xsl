@@ -12,10 +12,6 @@
 			<body>
         <script type="text/javascript">
 
-
-  
-
-   
 <!--******************************************************************************************************************************
           function blank() {
           var user_val = document.forms["myForm"]["username1"].value;
@@ -26,11 +22,9 @@
           }
 
           }
-          
-          
 
           function letter_num() {
-         var user = document.getElementById("username1");       
+         var user = document.getElementById("username1");
          re = /^\w+$/;
          if(!re.test(user.value)) {
          document.getElementById("username_alert").innerHTML = "Error: Username must contain only letters, numbers and underscores!";
@@ -42,15 +36,14 @@
           function pass_length () {
           var pass = document.forms["myForm"]["password1"];
           if(pass.value.length &lt; 6) {
-         
+
           document.getElementById("password1_alert").innerHTML = "Error: Password must contain at least six characters!";
           pass.focus();
           return 1;
           }
-          
+
           }
-          
-          
+
           function password_format1 () {
           var pass = document.forms["myForm"]["password1"];
           var user = document.forms["myForm"]["username1"];
@@ -62,8 +55,6 @@
           }
 
           }
-
-
 
           function password_format2 () {
           var pass = document.forms["myForm"]["password1"];
@@ -89,7 +80,6 @@
 
           }
 
-
           function password_format4 () {
           var pass = document.forms["myForm"]["password1"];
           var user = document.forms["myForm"]["username1"];
@@ -102,8 +92,6 @@
 
           }
 
- 
-
           function password_format5 () {
           var pass = document.forms["myForm"]["password1"];
           var pass2 = document.forms["myForm"]["password2"];
@@ -115,7 +103,6 @@
 
           }
 
- 
           function validateForm() {
           k=blank();
           if (k=='1'){  return false;}
@@ -136,10 +123,7 @@
 
           }
 
-
 -->
-
-
         </script>
 
         <!--           password2_alert
@@ -157,9 +141,8 @@
 						</td>
 						<td valign="top" width="100%">
 							<!-- Insert header -->
-              
+
 							<xsl:apply-templates select="//top_menu" />
-            
 						</td>
 						<td rowspan="3" valign="top" class='BAR_OFF'>
 							<!-- Insert right menu -->
@@ -167,16 +150,13 @@
 						</td>
 					</tr>
 
-
-
             <tr>
-						<td valign="top" height="350" align="left" class="XSMALL">						
+						<td valign="top" height="350" align="left" class="XSMALL">
 							<!-- ************ BEGINS CONTENT ************ -->
 							<!-- Breadcrumbs -->
-							<a href="initium.aspx"><span class="XSMALL"><xsl:value-of select="//P_INITIUM"/></span></a> &#62;
-							<span class="BOLDXSMALL"><xsl:value-of select="//L_LOGIN"/></span>
-							<p/>
-
+							<a href="initium.aspx"><span class="XSMALL"><xsl:value-of select="//P_INITIUM" /></span></a> &#62;
+							<span class="BOLDXSMALL"><xsl:value-of select="//L_LOGIN" /></span>
+							<p />
 
               <xsl:if test="//user_status_log = '0' ">
 
@@ -184,112 +164,94 @@
 
               <form name="myForm" id="myform_id" action=""   onsubmit="return validateForm()" method="post">
 
-
                 <table border="0" cellpadding="2" width="100%"  align="left">
 
                   <tr>
-                    <td CLASS="TITLE_DARK" >
-                      <xsl:value-of select="//L_LOGIN_NAME"/>: &#160;
+                    <td CLASS="TITLE_DARK">
+                      <xsl:value-of select="//L_LOGIN_NAME" />: &#160;
                     </td>
                     <td>
                       <input type="text" name="txtLogin" id="username1" />
                       <p id="username_alert"></p>
                     </td>
                   </tr>
-                  
+
                   <tr>
                     <td CLASS="TITLE_DARK">
-                      <xsl:value-of select="//L_LOGIN_PWD"/>: &#160;
+                      <xsl:value-of select="//L_LOGIN_PWD" />: &#160;
                     </td>
                     <td>
-                      <input type="password" name="txtPassword" id="password1"/>
+                      <input type="password" name="txtPassword" id="password1" />
                       <p id="password1_alert"></p>
-
                     </td>
                   </tr>
-                  
+
                   <tr>
                     <td CLASS="TITLE_DARK">
-                      <xsl:value-of select="//L_LOGIN_PWD_CON"/>: &#160;
+                      <xsl:value-of select="//L_LOGIN_PWD_CON" />: &#160;
                     </td>
                     <td>
-                      <input type="password" name="txtPassword2" id="password2"/>
+                      <input type="password" name="txtPassword2" id="password2" />
                       <p id="password2_alert"></p>
-
                     </td>
                   </tr>
 
                   <tr>
-                    <td CLASS="TITLE_DARK" >
-                      <xsl:value-of select="//L_AGE"/>: &#160;
+                    <td CLASS="TITLE_DARK">
+                      <xsl:value-of select="//L_AGE" />: &#160;
                     </td>
                     <td>
                     <input type="text" name="age" id="age1" />
                     </td>
                   </tr>
-                  
+
                   <tr>
-                    <td CLASS="TITLE_DARK" >
-                      <xsl:value-of select="//L_email"/>: &#160;
+                    <td CLASS="TITLE_DARK">
+                      <xsl:value-of select="//L_email" />: &#160;
                     </td>
                     <td>
                       <input type="text" name="email" id="email1" />
                     </td>
                   </tr>
-                  
 
                   <tr>
-                    <td CLASS="TITLE_DARK" >
-                      <xsl:value-of select="//L_valid"/>: &#160;
+                    <td CLASS="TITLE_DARK">
+                      <xsl:value-of select="//L_valid" />: &#160;
                     </td>
                     <td>
                       <input type="text" name="valid" id="valid1" />
                     </td>
                   </tr>
 
-
                   <tr>
                     <td CLASS="TITLE_DARK">
                       &#160;
                     </td>
                     <td>
-                      <input type="hidden" name="hAction" value ="login"/>
-                      <input type="submit" name="btnSubmit"/>
+                      <input type="hidden" name="hAction" value ="login" />
+                      <input type="submit" name="btnSubmit" />
                     </td>
                   </tr>
-
                 </table>
-
               </form>
 
-
-
               <!-- ************ form ************************************************************************************************************** -->
-
-
-
 
               <!-- ************  ENDS CONTENT  ************ -->
               </xsl:if>
 
-
               <xsl:if test="//user_status_log = '1' ">
                <span class="MEDIUM">
-                  <xsl:value-of select="//L_SUCC_Reg"/>
+                  <xsl:value-of select="//L_SUCC_Reg" />
                 </span>
-
               </xsl:if>
-
-
 
               <xsl:if test="//user_status_log = '-1' ">
                  <span class="MEDIUM">
-                  <xsl:value-of select="//L_Error_Reg"/>
+                  <xsl:value-of select="//L_Error_Reg" />
                 </span>
-
               </xsl:if>
-
-            </td>         
+            </td>
 					</tr>
          <tr>
 						<td align="center">
@@ -298,7 +260,6 @@
 						</td>
 					</tr>
 				</table>
- 
 			</body>
 		</html>
 	</xsl:template>

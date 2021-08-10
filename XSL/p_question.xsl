@@ -27,28 +27,27 @@
           <tr>
             <td valign="top" height="350" CLASS="CONTENT">
               <!-- ************ BEGINS CONTENT ************ -->
-              
-              
+
               <!-- Breadcrumbs -->
 
               <a href="initium.aspx">
                 <span class="MEDIUM">
-                  <xsl:value-of select="//P_INITIUM"/>
+                  <xsl:value-of select="//P_INITIUM" />
                 </span>
               </a>
               <B>&#62;</B>
               <a href="index.aspx">
                 <span class="MEDIUM">
-                  <xsl:value-of select="//P_INDEX"/>
+                  <xsl:value-of select="//P_INDEX" />
                 </span>
               </a>
               <B>&#62;</B>
               <a>
                 <xsl:attribute name="href">
-                  javascript:document.frmSession.action='Pagina.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id"/>&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
+                  javascript:document.frmSession.action='Pagina.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id" />&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
                 </xsl:attribute>
                 <span class="MEDIUM">
-                  <xsl:value-of select="//opus_name1"/>
+                  <xsl:value-of select="//opus_name1" />
                 </span>
               </a>
               <B>&#62;</B>
@@ -58,36 +57,34 @@
                   javascript:document.frmSession.action='Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
                 </xsl:attribute>
                 <span class="MEDIUM">
-                  <xsl:value-of select="//P_TRACTUS"/>
+                  <xsl:value-of select="//P_TRACTUS" />
                 </span>
               </a>
 
               <B>&#62;</B>
 
-
               <a>
                 <xsl:attribute name="href">
-                  javascript:document.frmSession.action='discussion.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id"/>&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
+                  javascript:document.frmSession.action='discussion.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id" />&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
                 </xsl:attribute>
                 <span class="MEDIUM">
-                  <xsl:value-of select="//L_Question"/>
+                  <xsl:value-of select="//L_Question" />
                 </span>
               </a>
 
               <B>&#62;</B>
               <span class="BOLDMEDIUM">
-                <xsl:value-of select="//L_Comment"/>
+                <xsl:value-of select="//L_Comment" />
               </span>
-              <p/>
-              
-              
-              <p/>
-              <xsl:if test="//user_logon != 'LOGGED-OFF'"    >
+              <p />
+
+              <p />
+              <xsl:if test="//user_logon != 'LOGGED-OFF'">
 <!--pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp-->
-              <form name="p_discussions" method="post" >
+              <form name="p_discussions" method="post">
 
                 <xsl:attribute name="action">
-                  question.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//opus_id"/>&#38;pagina=<xsl:value-of select="//pagina_id"/>&#38;comment=<xsl:value-of select="//comment_id"/>
+                  question.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//opus_id" />&#38;pagina=<xsl:value-of select="//pagina_id" />&#38;comment=<xsl:value-of select="//comment_id" />
               </xsl:attribute>
 
                 <textarea name="question" cols="100" rows="5" wrap="VIRTUAL">
@@ -106,11 +103,10 @@
                   <!--***********************************************************************-->
                   <td colspan="5" CLASS="TITLE_DARK">
                     <b>
-                      <xsl:value-of select="//sa_opus_lst"/> -
+                      <xsl:value-of select="//sa_opus_lst" /> -
                       <a>
                         <xsl:attribute name="href">
                           javascript:document.frmSession.action='sa_opus_lst.aspx?artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
-
                         </xsl:attribute>
                         <xsl:value-of select="//artifex_name" />
                       </a>
@@ -118,28 +114,23 @@
                   </td>
                   <!--***********************************************************************-->
 
-
                   <td align="right" colspan="2" CLASS="TITLE_DARK">
                   </td>
-                </tr>  
-                
-                
+                </tr>
+
                     <tr>
                     <td CLASS="TITLE_LIGHT">
                       <xsl:value-of select="//L_Question_user" />
-                      
                     </td>
 
                       <td CLASS="TITLE_LIGHT">
                         <xsl:value-of select="//respond1_title" />
-
                       </td>
                     </tr>
-                
-      
+
                 <xsl:for-each select="/doc/sa_opus_lst/opus">
                   <tr>
-    
+
                     <td CLASS="TITLE_LIGHT">
                       <a>
                         <xsl:value-of select="id_user1" />
@@ -151,9 +142,6 @@
                         <xsl:value-of select="comment_p" />
                       </a>
                     </td>
-                    
-                    
-                    
                   </tr>
                 </xsl:for-each>
                 <tr>
@@ -162,7 +150,7 @@
                 </tr>
               </table>
               </xsl:if>
-              
+
               <!-- ************  ENDS CONTENT  ************ -->
             </td>
           </tr>
@@ -174,12 +162,8 @@
           </tr>
         </table>
 
-
         <script type="text/javascript">
-
-
         </script>
-        
       </body>
     </html>
   </xsl:template>

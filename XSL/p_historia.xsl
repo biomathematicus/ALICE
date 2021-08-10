@@ -9,17 +9,17 @@
 				<META HTTP-EQUIV="CONTENT-Type" CONTENT="text/html;CHARSET=iso-8859-1" />
 				<LINK REL="SHORTCUT ICON" HREF="../images/system/BOOK06.ICO" />
 				<META name="description">
-					<xsl:attribute name="content"><xsl:value-of select="//T_META_DESCR"/></xsl:attribute>
+					<xsl:attribute name="content"><xsl:value-of select="//T_META_DESCR" /></xsl:attribute>
 				</META>
 				<META name="keywords">
-					<xsl:attribute name="content"><xsl:value-of select="//T_META_KEYWRD"/></xsl:attribute>
+					<xsl:attribute name="content"><xsl:value-of select="//T_META_KEYWRD" /></xsl:attribute>
 				</META>
 				<title>
 					<xsl:value-of select="//L_LITERATRONIC" /> - <xsl:value-of select="//T_PAGE_TITLE" />
-				</title>				
-				<link rel="stylesheet" type="text/css" href="../common/styles.css" />			
+				</title>
+				<link rel="stylesheet" type="text/css" href="../common/styles.css" />
 			</head>
-			<body leftmargin="0" topmargin="0" bottommargin="0" rightmargin="0">				
+			<body leftmargin="0" topmargin="0" bottommargin="0" rightmargin="0">
 				<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td rowspan="3" valign="top" class='BAR_OFF'>
@@ -36,7 +36,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="400">						
+						<td valign="top" height="400">
 							<!-- ************ BEGINS CONTENT ************ -->
 							This page is under construction
 							<!-- ************  ENDS CONTENT  ************ -->

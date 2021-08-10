@@ -1,4 +1,3 @@
-
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <xsl:template match="devguru_staff/programmer">
@@ -21,7 +20,7 @@
 </xsl:template>
 
 <xsl:template match="dob">
-	DOB: 
+	DOB:
     <span style="color:blue;">
 		<xsl:value-of select="." />
     </span>
@@ -29,7 +28,7 @@
 </xsl:template>
 
 <xsl:template match="age">
-	AGE: 
+	AGE:
     <span style="color:green;">
 		<xsl:value-of select="." />
     </span>
@@ -43,5 +42,4 @@
     </span>
     <br />
 </xsl:template>
-
 </xsl:stylesheet>

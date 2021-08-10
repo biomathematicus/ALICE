@@ -1,22 +1,24 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:template match="page_counter">
-		<table border="0" cellpadding="1" cellspacing="0" width="100%" >
+		<table border="0" cellpadding="1" cellspacing="0" width="100%">
 			<tr>
   			<td class="CONTENT" align="left" style="white-space: nowrap">
-          <!-- xsl:value-of select="//L_BOOK"/ --> 
+          <!-- xsl:value-of select="//L_BOOK"/ -->
 					<span class="BOLD">
 					<xsl:choose>
 						<xsl:when test="//L_LINK_PENDING[. != '']">
-							<xsl:value-of select="ds_opus"/>
+							<xsl:value-of select="ds_opus" />
 						</xsl:when>
-						<xsl:otherwise>								
-							<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;"> 
-								<xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language"/>','<xsl:value-of select="id_opus"/>','<xsl:value-of select="id_pagina"/>')</xsl:attribute> 
-								<xsl:value-of select="ds_opus"/>
+						<xsl:otherwise>
+							<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
+						<!--		<xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="id_opus" />','<xsl:value-of select="id_pagina" />')</xsl:attribute> -->
+
+                <xsl:attribute name="href">javascript:Map('<xsl:value-of select="//language" />','<xsl:value-of select="id_opus" />')</xsl:attribute>
+                <xsl:value-of select="ds_opus" />
 							</a>
 						</xsl:otherwise>
 					</xsl:choose>
-					</span>											
+					</span>
 				</td>
         <td width="80%"></td>
         <xsl:if test="//user_id != ''">
@@ -30,28 +32,27 @@
               &#160;
               <table width="100px" height="4px" border="0" cellpadding="0" cellspacing="0" ID="Table2">
                 <tr>
-                  <td align="right" class="BAR_OFF" >
+                  <td align="right" class="BAR_OFF">
                     <img height="4px" src="../images/system/px_green.gif">
                       <xsl:attribute name="width">
                         <xsl:value-of select="//percentage_g" />
                       </xsl:attribute>
                     </img>
                   </td>
-                  <td align="right" class="BAR_OFF" >
+                  <td align="right" class="BAR_OFF">
                     <img height="4px" src="../images/system/px_yellow.gif">
                       <xsl:attribute name="width">
                         <xsl:value-of select="//percentage" />
                       </xsl:attribute>
                     </img>
                   </td>
-                  <td align="right" class="BAR_OFF" >
+                  <td align="right" class="BAR_OFF">
                     <img height="4px" src="../images/system/px_red.gif">
                       <xsl:attribute name="width">
                         <xsl:value-of select="//perct_incomplete" />
                       </xsl:attribute>
                     </img>
                   </td>
-
                 </tr>
               </table>
             </div>

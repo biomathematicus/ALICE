@@ -26,9 +26,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="350" class="CONTENT" align="left">						
+						<td valign="top" height="350" class="CONTENT" align="left">
 							<!-- ************ BEGINS CONTENT ************ -->
-							<BR/>
+							<BR />
 							<table width="100%" border="0" cellpadding="3" cellspacing="0" align="left">
 								<xsl:if test="//id_opus[. != '0']">
 									<tr>
@@ -37,18 +37,18 @@
 											<xsl:apply-templates select="//page_counter" />
 										</td>
 									</tr>
-								</xsl:if>											
+								</xsl:if>
 								<tr>
 									<td class="CONTENT">
-										<xsl:value-of select="//P_NUNTIUS" disable-output-escaping="yes"/>
+										<xsl:value-of select="//P_NUNTIUS" disable-output-escaping="yes" />
 									</td>
 								</tr>
-							</table>	
+							</table>
 							<!-- ************  ENDS CONTENT  ************ -->
 						</td>
 					</tr>
 					<tr>
-						<td align="center" >
+						<td align="center">
 							<!-- Insert footer -->
 							<xsl:apply-templates select="//footer" />
 						</td>

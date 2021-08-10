@@ -12,9 +12,8 @@
       <title>Network | Interaction events</title>
 
       <script type="text/javascript" src="../common/vis.js">
-
       </script>
-      <link href="../common/vis-network.min.css" rel="stylesheet" type="text/css"/>
+      <link href="../common/vis-network.min.css" rel="stylesheet" type="text/css" />
 
       <style type="text/css">
         #mynetwork {
@@ -23,14 +22,11 @@
         border: 1px solid lightgray;
         }
       </style>
-      
-      
-      
+
       <body>
 
+        <script   type="text/javascript">
 
-        <script   type="text/javascript"    >
-          
           function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -39,7 +35,7 @@
     }
     return color;
     }
-          
+
           function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i &lt; 1e7; i++) {
@@ -48,7 +44,7 @@
         }
       }
     }
-          
+
           function myFunction(p,nodes,edges) {
 
           var str =p;
@@ -56,21 +52,15 @@
           var res = str.split(" ");
           alert(res[0]);
 
-
           for (i = 0; i &lt; res.length; i++) {
           var str1 = res[i].split(",");
           edges.add([
           {from: str1[0], to: str1[1]}
           ]);
 
-
-
           }
 
-
-
           }
-
         </script>
         <table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
           <tr valign="top">
@@ -90,28 +80,27 @@
           <tr>
             <td valign="top" height="350" CLASS="CONTENT">
               <!-- ************ BEGINS CONTENT ************ -->
-              
-              
+
               <!-- Breadcrumbs -->
 
               <a href="initium.aspx">
                 <span class="MEDIUM">
-                  <xsl:value-of select="//P_INITIUM"/>
+                  <xsl:value-of select="//P_INITIUM" />
                 </span>
               </a>
               <B>&#62;</B>
               <a href="index.aspx">
                 <span class="MEDIUM">
-                  <xsl:value-of select="//P_INDEX"/>
+                  <xsl:value-of select="//P_INDEX" />
                 </span>
               </a>
               <B>&#62;</B>
               <a>
                 <xsl:attribute name="href">
-                  javascript:document.frmSession.action='Pagina.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id"/>&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
+                  javascript:document.frmSession.action='Pagina.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id" />&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
                 </xsl:attribute>
                 <span class="MEDIUM">
-                  <xsl:value-of select="//opus_name1"/>
+                  <xsl:value-of select="//opus_name1" />
                 </span>
               </a>
               <B>&#62;</B>
@@ -121,45 +110,37 @@
                   javascript:document.frmSession.action='Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
                 </xsl:attribute>
                 <span class="MEDIUM">
-                  <xsl:value-of select="//P_TRACTUS"/>
+                  <xsl:value-of select="//P_TRACTUS" />
                 </span>
               </a>
 
               <B>&#62;</B>
 
-
               <a>
                 <xsl:attribute name="href">
-                  javascript:document.frmSession.action='discussion.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id"/>&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
+                  javascript:document.frmSession.action='discussion.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pagina_id" />&#38;opus=<xsl:value-of select="//opus_id" />';document.frmSession.submit();
                 </xsl:attribute>
                 <span class="MEDIUM">
-                  <xsl:value-of select="//P_TRACTUS"/>
+                  <xsl:value-of select="//P_TRACTUS" />
                 </span>
               </a>
 
               <B>&#62;</B>
               <span class="BOLDMEDIUM">
-                <xsl:value-of select="//P_TRACTUS"/>
+                <xsl:value-of select="//P_TRACTUS" />
               </span>
-              <p/>
-              
-              
-              <p/>
-              <xsl:if test="//user_logon != 'LOGGED-OFF'"    >
+              <p />
 
+              <p />
+              <xsl:if test="//user_logon != 'LOGGED-OFF'">
 
               <!-- TABLE OF WORKS -->
               <table border="0" cellpadding="6" align="center">
-
-
-
-
 
                 <div id="mynetwork"></div>
                 <pre id="eventSpan"></pre>
 
                 <script type="text/javascript">
-
 
                   // create an array with nodes
                   var nodes = new vis.DataSet([   ]);
@@ -176,12 +157,9 @@
                   nodes.add([{id: i, label:i,color:col}]);
                   }
 
-
                   }
 
-
-
-                  var str =','+'<xsl:value-of select="//result1"/>';
+                  var str =','+'<xsl:value-of select="//result1" />';
                   var res = str.split(" ");
                   for (i = 0; i &lt; res.length; i++) {
                   var str1 = res[i].split(",");
@@ -189,7 +167,6 @@
                   {from: str1[1], to: str1[2], arrows:'to'}
                   ]);
                   }
-
 
                   var condition1=1;
 
@@ -223,12 +200,10 @@
                   };
                   var network = new vis.Network(container, data, options);
 
-
                   network.on("click", function (params) {
                   params.event = "[original event]";
                  document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' +  params.nodes;
                   });
-
 
                   network.on("doubleClick", function (params) {
                   params.event = "[original event]";
@@ -240,11 +215,7 @@
 
                   });
 
-
-
-
                   }
-
 
                   //**************************************************************************************************
 
@@ -296,7 +267,6 @@
                   };
                   var data = {nodes:nodesDataset, edges:edgesDataset} // Note: data is coming from ./datasources/WorldCup2014.js
 
-
                   network = new vis.Network(container, data, options);
 
                   // get a JSON object
@@ -315,9 +285,6 @@
 
                   // mark all nodes as hard to read.
                   for (var nodeId in allNodes) {
-
-
-
 
                   if (allNodes[nodeId].hiddenLabel === undefined) {
                   allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
@@ -383,12 +350,10 @@
 
                   redrawAll()
 
-
                   network.on("click", function (params) {
                   params.event = "[original event]";
                   document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' +  params.nodes;
                   });
-
 
                   network.on("doubleClick", function (params) {
                   params.event = "[original event]";
@@ -400,18 +365,7 @@
 
                   });
 
-
-
                   }
-
-
-
-
-
-
-
-
-
 
                   <!--
                   var network;
@@ -456,7 +410,6 @@
                   };
                   var data = {nodes:nodesDataset, edges:edgesDataset} // Note: data is coming from ./datasources/WorldCup2014.js
 
-
                   network = new vis.Network(container, data, options);
 
                   // get a JSON object
@@ -476,8 +429,6 @@
                   // mark all nodes as hard to read.
                   for (var nodeId in allNodes) {
                   allNodes[nodeId].color = 'rgba(150,100,10,0.5)';
-
-
 
                   if (allNodes[nodeId].hiddenLabel === undefined) {
                   allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
@@ -543,67 +494,13 @@
 
   redrawAll()
 
-                 
-
-
 -->
 
-
-
 //*****************************************************************************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </script>
-
-
-
-
-      
-
-              
-
-
- 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
               </table>
               </xsl:if>
-              
+
               <!-- ************  ENDS CONTENT  ************ -->
             </td>
           </tr>
@@ -615,15 +512,12 @@
           </tr>
         </table>
 
-
         <script type="text/javascript">
           $(document).ready(
           function(){
 
           });
-
         </script>
-        
       </body>
     </html>
   </xsl:template>

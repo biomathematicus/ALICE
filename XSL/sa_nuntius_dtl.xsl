@@ -8,7 +8,7 @@
 		<html>
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
-			<body>				
+			<body>
 				<table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td rowspan="3" valign="top" class='BAR_OFF'>
@@ -25,14 +25,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="350" CLASS="CONTENT">						
+						<td valign="top" height="350" CLASS="CONTENT">
 							<!-- ************ BEGINS CONTENT ************ -->
 							<!-- BREADCRUMBS -->
 							<a>
                 <xsl:attribute name="href">
                   sa_menu.aspx?lng=<xsl:value-of select="//language" />
                 </xsl:attribute>
-                <xsl:value-of select="//sa_menu"/>
+                <xsl:value-of select="//sa_menu" />
               </a> &#62;
               <xsl:choose>
                 <xsl:when test="//user_id =1">
@@ -40,41 +40,41 @@
                     <xsl:attribute name="href">
                       sa_nuntius_lst.aspx?lng=<xsl:value-of select="//language" />
                     </xsl:attribute>
-                    <xsl:value-of select="//sa_nuntius_lst"/>
+                    <xsl:value-of select="//sa_nuntius_lst" />
                   </a> &#62;
                 </xsl:when>
                 <xsl:otherwise>
                   <a>
                     <xsl:attribute name="href">
-                      javascript:document.frmSession.action='sa_opus_lst.aspx?artifex=<xsl:value-of select="//user_id"/>&amp;author=true&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
+                      javascript:document.frmSession.action='sa_opus_lst.aspx?artifex=<xsl:value-of select="//user_id" />&amp;author=true&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
                     </xsl:attribute>
                     <xsl:value-of select="/doc/admin_tags/sa_opus_lst" />
                   </a> &#62;
                 </xsl:otherwise>
               </xsl:choose>
-							<b><xsl:value-of select="//sa_nuntius_dtl"/></b>
-							<p/>
+							<b><xsl:value-of select="//sa_nuntius_dtl" /></b>
+							<p />
 							<!-- TABLE WITH DATA -->
 							<form name="sa_nuntius_dtl" method="post" action="">
 							<table border="0" cellpadding="2" align="center"  CLASS="CONTENT">
 								<tr>
 									<td CLASS="TITLE_DARK">
-										<b><xsl:value-of select="//sa_nuntius_dtl"/></b> 
-										- 
+										<b><xsl:value-of select="//sa_nuntius_dtl" /></b>
+										-
 										<xsl:choose>
 											<xsl:when test="/doc/sa_nuntius_dtl/hAction[. = 'Agregar']">
 												<input type="text" name="cd_nuntius" cols="40">
 													<xsl:attribute name="value">
 														<xsl:value-of select="//cd_nuntius" />
-													</xsl:attribute>											
+													</xsl:attribute>
 												</input>
 											</xsl:when>
 											<xsl:otherwise>
-												<b><xsl:value-of select="//cd_nuntius"/></b>
+												<b><xsl:value-of select="//cd_nuntius" /></b>
 												<input type="hidden" name="cd_nuntius">
 													<xsl:attribute name="value">
 														<xsl:value-of select="//cd_nuntius" />
-													</xsl:attribute>											
+													</xsl:attribute>
 												</input>
 											</xsl:otherwise>
 										</xsl:choose>
@@ -111,9 +111,9 @@
 										<input type="hidden" name="cd_lingua">
 											<xsl:attribute name="value">
 												<xsl:value-of select="//cd_lingua" />
-											</xsl:attribute>											
+											</xsl:attribute>
 										</input>
-										<input type="hidden" name="hAction"/>
+										<input type="hidden" name="hAction" />
 										<input type="button">
 											<xsl:attribute name="onclick">javascript:document.sa_nuntius_dtl.hAction.value = '<xsl:value-of select="/doc/sa_nuntius_dtl/hAction" />';document.sa_nuntius_dtl.action='sa_nuntius_dtl.aspx?redirect=true&#38;lng=<xsl:value-of select="//language" />';document.sa_nuntius_dtl.submit();</xsl:attribute>
 											<xsl:attribute name="value"><xsl:value-of select="/doc/sa_nuntius_dtl/hAction" /></xsl:attribute>
@@ -121,7 +121,7 @@
 									</td>
 								</tr>
 							</table>
-							</form>							
+							</form>
 							<!-- ************  ENDS CONTENT  ************ -->
 						</td>
 					</tr>

@@ -25,28 +25,28 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="350" align="left" class="XSMALL">						
+						<td valign="top" height="350" align="left" class="XSMALL">
 							<!-- ************ BEGINS CONTENT ************ -->
 							<!-- Breadcrumbs -->
-							<a href="initium.aspx"><span class="XSMALL"><xsl:value-of select="//P_INITIUM"/></span></a> &#62;
-							<span class="BOLDXSMALL"><xsl:value-of select="//L_SEARCH"/></span>
-							<p/>
+							<a href="initium.aspx"><span class="XSMALL"><xsl:value-of select="//P_INITIUM" /></span></a> &#62;
+							<span class="BOLDXSMALL"><xsl:value-of select="//L_SEARCH" /></span>
+							<p />
 							<table border="0" cellpadding="2" width="100%"  align="left">
 								<tr>
 									<td CLASS="TITLE_DARK" colspan="2">
-										<b><xsl:value-of select="//L_SEARCH_RESULTS"/></b>: &#160;
-										<xsl:value-of select="//L_SEARCH_STRING"/>
+										<b><xsl:value-of select="//L_SEARCH_RESULTS" /></b>: &#160;
+										<xsl:value-of select="//L_SEARCH_STRING" />
 									</td>
 								</tr>
 								<xsl:if test="count(/doc/quaestio/pagina) &lt; 1">
 									<tr>
-										<td class="CONTENT"><xsl:value-of select="//L_SEARCH_NOT_FND"/></td>
+										<td class="CONTENT"><xsl:value-of select="//L_SEARCH_NOT_FND" /></td>
 									</tr>
 								</xsl:if>
 								<xsl:for-each select="/doc/quaestio/pagina">
 									<tr valign="top">
 										<td CLASS="TITLE_DARK">
-											<xsl:value-of select="id"/><br/>
+											<xsl:value-of select="id" /><br />
 											<xsl:if test="//user_id != ''">
 												<xsl:choose>
 											  		<xsl:when test="visited[. = 'true']">
@@ -65,21 +65,21 @@
 										<td CLASS="TITLE_LIGHT">
 											<span class="BOLD"><xsl:value-of select="ds_opus" /></span>&#160;-&#160;
 											<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-												<xsl:attribute name="href">javascript:document.frmSession.action='../src/Pagina.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="id_opus"/>&#38;pagina=<xsl:value-of select="id"/>';document.frmSession.submit();</xsl:attribute>
+												<xsl:attribute name="href">javascript:document.frmSession.action='../src/Pagina.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="id_opus" />&#38;pagina=<xsl:value-of select="id" />';document.frmSession.submit();</xsl:attribute>
 												<b><xsl:value-of select="title" /></b>
 											</a>
 											<span class="XSMALL">
 											  	<xsl:if test="visited[. = 'true'] and //user_id != ''">
-													(<xsl:value-of select="//L_VISITED" />)<br/> 
+													(<xsl:value-of select="//L_VISITED" />)<br />
 													<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-														<xsl:attribute name="href">javascript:document.frmSession.action='../src/Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;action=del&#38;opus=<xsl:value-of select="id_opus"/>&#38;pagina=<xsl:value-of select="id"/>';document.frmSession.submit();</xsl:attribute>
+														<xsl:attribute name="href">javascript:document.frmSession.action='../src/Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;action=del&#38;opus=<xsl:value-of select="id_opus" />&#38;pagina=<xsl:value-of select="id" />';document.frmSession.submit();</xsl:attribute>
 														<img src="../images/system/ico_delete.gif" border="0">
 															<xsl:attribute name="alt"><xsl:value-of select="//L_CHAPTER_DEL" /></xsl:attribute>
 														</img>&#160;
-														<span class="XSMALL"><xsl:value-of select="//L_CHAPTER_DEL" /></span>	
-													</a>&#160; 													
+														<span class="XSMALL"><xsl:value-of select="//L_CHAPTER_DEL" /></span>
+													</a>&#160;
 													<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-														<xsl:attribute name="href">javascript:document.frmSession.action='../src/Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;action=delall&#38;opus=<xsl:value-of select="id_opus"/>&#38;pagina=<xsl:value-of select="id"/>';document.frmSession.submit();</xsl:attribute>
+														<xsl:attribute name="href">javascript:document.frmSession.action='../src/Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;action=delall&#38;opus=<xsl:value-of select="id_opus" />&#38;pagina=<xsl:value-of select="id" />';document.frmSession.submit();</xsl:attribute>
 														<img src="../images/system/ico_delete_all.gif" border="0">
 															<xsl:attribute name="alt"><xsl:value-of select="//L_CHAPTER_DEL_ALL" /></xsl:attribute>
 														</img>&#160;
@@ -90,7 +90,7 @@
 													(<xsl:value-of select="//L_VISITED_NOT" />)
 												</xsl:if>
 											</span>
-											<br/>
+											<br />
 											<xsl:value-of select="tag" />
 										</td>
 									</tr>

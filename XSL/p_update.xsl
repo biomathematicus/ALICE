@@ -10,11 +10,9 @@
       <!-- Insert HTML header -->
       <xsl:apply-templates select="//html_header" />
       <body>
-        <!-- script language="JavaScript" type="text/JavaScript" src="../common/PDF.js"/>
+        <!-- script language="JavaScript" type="text/JavaScript" src="../common/PDF.js" />
         <script language="JavaScript" type="text/JavaScript" src="../common/pdf.worker.js"/ -->
-        <script   type="text/javascript"    >
-
-
+        <script   type="text/javascript">
         </script>
 
         <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
@@ -44,7 +42,7 @@
                         initium.aspx?lng=<xsl:value-of select="//language" />
                       </xsl:attribute>
                       <span class="MEDIUM">
-                        <xsl:value-of select="//P_INITIUM"/>
+                        <xsl:value-of select="//P_INITIUM" />
                       </span>
                     </a>
                     <B>&#62;</B>
@@ -53,12 +51,12 @@
                         index.aspx?lng=<xsl:value-of select="//language" />
                       </xsl:attribute>
                       <span class="MEDIUM">
-                        <xsl:value-of select="//P_INDEX"/>
+                        <xsl:value-of select="//P_INDEX" />
                       </span>
                     </a>
                     <B>&#62;</B>
                     <span class="BOLDMEDIUM">
-                      <xsl:value-of select="//ds_opus"/>
+                      <xsl:value-of select="//ds_opus" />
                     </span>
                   </td>
                   <td width="80%"></td>
@@ -88,7 +86,7 @@
                     <xsl:if test="//page_code[. != 'P_TRACTUS']">
                       <a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
                         <xsl:attribute name="href">
-                          javascript:Map('<xsl:value-of select="//language" />',<xsl:value-of select="//id_opus"/>);
+                          javascript:Map('<xsl:value-of select="//language" />',<xsl:value-of select="//id_opus" />);
                         </xsl:attribute>
                         <span class="XSMALL">
                           <xsl:value-of select="//P_TRACTUS" />
@@ -110,7 +108,7 @@
                 </tr>
               </table>
               <!-- Breadcrumbs End -->
-              <p/>
+              <p />
               <form name="p_pagina" method="post" action="">
                 <xsl:value-of select="//T_REGIS_WARNING" disable-output-escaping="yes" />
                 <table border="0" cellpadding="2" align="left"  CLASS="CONTENT" width="100%">
@@ -123,18 +121,18 @@
                     <td colspan="2" CLASS="TITLE_LIGHT">
                       <xsl:choose>
                         <xsl:when test="/doc/param/user_status[. = '3']">
-                          <!-- <xsl:value-of select="//L_PAGE"/>:  -->
+                          <!-- <xsl:value-of select="//L_PAGE" />:  -->
                           <span class="H1">
                             <a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
                               <xsl:attribute name="href">
-                                javascript:document.frmSession.action='../admin/sa_pagina_dtl.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//id_pagina"/>&#38;opus=<xsl:value-of select="//id_opus" />';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();
+                                javascript:document.frmSession.action='../admin/sa_pagina_dtl.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//id_pagina" />&#38;opus=<xsl:value-of select="//id_opus" />';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();
                               </xsl:attribute>
                               <xsl:value-of select="//pag_title" />
                             </a>
                           </span>
                         </xsl:when>
                         <xsl:otherwise>
-                          <!-- <xsl:value-of select="//L_PAGE"/>:  -->
+                          <!-- <xsl:value-of select="//L_PAGE" />:  -->
                           <span class="H1">
                             <xsl:value-of select="//pag_title" />
                           </span>
@@ -147,7 +145,7 @@
                       <!-- Begin tabulated menu -->
                       <!-- Blue line -->
                       <xsl:text disable-output-escaping="yes">
-		                <![CDATA[<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td height="1" class="TabOff" colspan="15"><img src="../images/system/px_alpha.gif" height="1" width=""/></td></tr></table>]]>
+		                <![CDATA[<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td height="1" class="TabOff" colspan="15"><img src="../images/system/px_alpha.gif" height="1" width="" /></td></tr></table>]]>
 		                </xsl:text>
                       <!-- End tabulated menu -->
                       <div id="container"></div>
@@ -162,22 +160,22 @@
                     <tr>
                       <td align="left" CLASS="TITLE_LIGHT" colspan="2">
                         <span class="BOLDMEDIUM">
-                          <xsl:value-of select="//L_LINK_PENDING" disable-output-escaping="yes"/>
+                          <xsl:value-of select="//L_LINK_PENDING" disable-output-escaping="yes" />
                         </span>
                       </td>
                     </tr>
                     <tr>
                       <td align="left"  CLASS="MEDIUM" colspan="2">
                         <xsl:for-each select="/doc/pending/link">
-                          <xsl:value-of select="score"/>%&#160;
+                          <xsl:value-of select="score" />%&#160;
                           <a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
                             <xsl:attribute name="href">
-                              javascript:Page('<xsl:value-of select="//language"/>','<xsl:value-of select="//id_opus"/>','<xsl:value-of select="id_pagina"/>')
+                              javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="//id_opus" />','<xsl:value-of select="id_pagina" />')
                             </xsl:attribute>
-                            <xsl:value-of select="ds_title"/>
+                            <xsl:value-of select="ds_title" />
                           </a>
-                          <br/>
-                          <xsl:value-of select="ds_tag"/><br/><br/>
+                          <br />
+                          <xsl:value-of select="ds_tag" /><br /><br />
                         </xsl:for-each>
                       </td>
                     </tr>
@@ -187,7 +185,7 @@
                       <td align="left" CLASS="TITLE_LIGHT" width="50%">
                         <a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
                           <xsl:attribute name="href">
-                            javascript:Page('<xsl:value-of select="//language"/>','<xsl:value-of select="//id_opus"/>','<xsl:value-of select="//pag_prv"/>')
+                            javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="//id_opus" />','<xsl:value-of select="//pag_prv" />')
                           </xsl:attribute>
                           <xsl:value-of select="//L_PREVIOUS" />
                         </a>
@@ -195,7 +193,7 @@
                       <td align="right" CLASS="TITLE_LIGHT" width="50%">
                         <a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
                           <xsl:attribute name="href">
-                            javascript:Page('<xsl:value-of select="//language"/>','<xsl:value-of select="//id_opus"/>','<xsl:value-of select="//pag_nxt"/>')
+                            javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="//id_opus" />','<xsl:value-of select="//pag_nxt" />')
                           </xsl:attribute>
                           <xsl:value-of select="//L_NEXT" />
                         </a>
@@ -208,7 +206,6 @@
                 <tr>
                 </tr>
 
-
                 <!--**************************************************************************************************-->
                 <form id="frmUpload" runat="server">
                   <input type="hidden" id="Pagina" value=""> </input>
@@ -219,10 +216,10 @@
 
                     <tr valign="top">
                       <td CLASS="TITLE_DARK">
-                        <xsl:value-of select="id"/>
+                        <xsl:value-of select="id" />
                         <a>
                           <xsl:attribute name="name">
-                            <xsl:value-of select="id"/>
+                            <xsl:value-of select="id" />
                           </xsl:attribute>
                         </a>
                       </td>
@@ -230,7 +227,7 @@
                         <b>
                           <xsl:value-of select="title" />
                         </b>
-                        <br/>
+                        <br />
                         <xsl:value-of select="tag" />
                       </td>
                       <td CLASS="TITLE_LIGHT" align="right" nowrap="">
@@ -238,29 +235,25 @@
                         <xsl:choose>
                           <xsl:when test="take='0'">
 
-
-                            <input type="file" id="FileUpload1" >
-                              <xsl:attribute name="id"  >
-                                <xsl:value-of select="id"/>
+                            <input type="file" id="FileUpload1">
+                              <xsl:attribute name="id">
+                                <xsl:value-of select="id" />
                               </xsl:attribute>
                             </input>
 
-                            <input type="button"  value="Upload Files"  >
+                            <input type="button"  value="Upload Files">
 
                               <xsl:attribute name="onclick">
-                                show( <xsl:value-of select="id"/>,'<xsl:value-of select="//user_name"/>','<xsl:value-of select="//opus_name"/>', '<xsl:value-of select="title"/>' )
+                                show( <xsl:value-of select="id" />,'<xsl:value-of select="//user_name" />','<xsl:value-of select="//opus_name" />', '<xsl:value-of select="title" />' )
                               </xsl:attribute>
-
                             </input>
                           </xsl:when>
                         </xsl:choose>
 
-                        <br/>
+                        <br />
                       </td>
-
                     </tr>
                   </xsl:for-each>
-
                 </form>
                 <!--**************************************************************************************************-->
                 <tr>
@@ -268,7 +261,7 @@
                   </td>
                 </tr>
               </table>
-              <p/>
+              <p />
               <!-- ************  ENDS CONTENT  ************ -->
             </td>
           </tr>

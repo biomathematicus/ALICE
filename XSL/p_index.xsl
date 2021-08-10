@@ -5,11 +5,11 @@
 	<xsl:include href="l_menu_right.xsl" />
 	<xsl:include href="l_footer.xsl" />
 	<xsl:include href="l_counter.xsl" />
-	<xsl:template match="/">	
+	<xsl:template match="/">
 		<html lang="EN">
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
-			<body>				
+			<body>
 				<table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td rowspan="3" valign="top">
@@ -26,18 +26,18 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="350" align="left" CLASS="MEDIUM" >
+						<td valign="top" height="350" align="left" CLASS="MEDIUM">
 							<!-- ************ BEGINS CONTENT ************ -->
 							<!-- Breadcrumbs -->
 							<a href="initium.aspx">
                 <xsl:attribute name="href">
                   initium.aspx?lng=<xsl:value-of select="//language" />
                 </xsl:attribute>
-                <span class="MEDIUM"><xsl:value-of select="//P_INITIUM"/></span>
+                <span class="MEDIUM"><xsl:value-of select="//P_INITIUM" /></span>
               </a>
               <B>&#62;</B>
-							<span class="BOLDMEDIUM"><xsl:value-of select="//P_INDEX"/></span>
-							<p/>
+							<span class="BOLDMEDIUM"><xsl:value-of select="//P_INDEX" /></span>
+							<p />
 							<xsl:value-of select="//T_REGIS_WARNING" disable-output-escaping="yes" />
 							<table width="100%" border="0" cellpadding="3" cellspacing="0">
 								<xsl:for-each select="/doc/opus_list/opus">
@@ -51,13 +51,13 @@
 										<td CLASS="CONTENT">
 											<xsl:value-of select="content" disable-output-escaping="yes" /> &#160;
 											<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-												<xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="page_counter/id_opus"/>','<xsl:value-of select="page_counter/id_pagina"/>')</xsl:attribute>
+												<xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="page_counter/id_opus" />','<xsl:value-of select="page_counter/id_pagina" />')</xsl:attribute>
 												<xsl:value-of select="//L_MORE" />
 											</a>
 										</td>
 									</tr>
                   <tr>
-                    <td>&#160;</td> 
+                    <td>&#160;</td>
                   </tr>
 								</xsl:for-each>
 								</table>

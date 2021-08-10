@@ -8,7 +8,7 @@
 		<html>
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
-			<body>				
+			<body>
 				<table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td rowspan="3" valign="top" class='BAR_OFF'>
@@ -25,7 +25,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="350">						
+						<td valign="top" height="350">
 							<!-- ************ BEGINS CONTENT ************ -->
 							This page is under construction
 							<!-- ************  ENDS CONTENT  ************ -->

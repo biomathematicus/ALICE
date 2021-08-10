@@ -5,11 +5,11 @@
 	<xsl:include href="l_menu_right.xsl" />
 	<xsl:include href="l_footer.xsl" />
 	<xsl:include href="l_counter.xsl" />
-	<xsl:template match="/">	
+	<xsl:template match="/">
 		<html lang="EN">
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
-			<body>				
+			<body>
 				<table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td rowspan="3" valign="top" class='BAR_OFF'>
@@ -26,12 +26,12 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="350" align="left" CLASS="XSMALL" >
+						<td valign="top" height="350" align="left" CLASS="XSMALL">
 							<!-- ************ BEGINS CONTENT ************ -->
 							<!-- Breadcrumbs -->
-							<a href="initium.aspx"><span class="XSMALL"><xsl:value-of select="//P_INITIUM"/></span></a> &#62;
-							<span class="BOLDXSMALL"><xsl:value-of select="//P_INDEX"/></span>
-							<p/>
+							<a href="initium.aspx"><span class="XSMALL"><xsl:value-of select="//P_INITIUM" /></span></a> &#62;
+							<span class="BOLDXSMALL"><xsl:value-of select="//P_INDEX" /></span>
+							<p />
 							<xsl:value-of select="//T_REGIS_WARNING" disable-output-escaping="yes" />
 							<table width="100%" border="0" cellpadding="3" cellspacing="0">
 								<xsl:for-each select="/doc/opus_list/opus">
@@ -45,7 +45,7 @@
 										<td CLASS="CONTENT">
 											<xsl:value-of select="content" disable-output-escaping="yes" /> &#160;
 											<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-												<xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="page_counter/id_opus"/>','<xsl:value-of select="page_counter/id_pagina"/>')</xsl:attribute>
+												<xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="page_counter/id_opus" />','<xsl:value-of select="page_counter/id_pagina" />')</xsl:attribute>
 												<xsl:value-of select="//L_MORE" />
 											</a>
 										</td>

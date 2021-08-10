@@ -8,7 +8,7 @@
 		<html>
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
-			<body>				
+			<body>
 				<table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td rowspan="3" valign="top" class='BAR_OFF'>
@@ -25,36 +25,36 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" height="350">						
+						<td valign="top" height="350">
 							<!-- ************ BEGINS CONTENT ************ -->
               <!-- Breadcrumbs -->
               <a>
                 <xsl:attribute name="href">sa_menu.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
-                <xsl:value-of select="//sa_menu"/>
+                <xsl:value-of select="//sa_menu" />
               </a> &#62;
               <a>
                 <xsl:attribute name="href">
                   ../admin/sa_reading_lst.aspx?lng=<xsl:value-of select="//language" />&#38;group=<xsl:value-of select="//cd_classis" />
                 </xsl:attribute>
-                <xsl:value-of select="//sa_reading_lst"/>
+                <xsl:value-of select="//sa_reading_lst" />
               </a> &#62;
               <b>
-                <xsl:value-of select="//sa_reading_rpt"/>
+                <xsl:value-of select="//sa_reading_rpt" />
               </b>
-              <p/>
+              <p />
               <!-- Reading Report -->
               <table border="0" cellpadding="6" align="center">
                 <tr>
                   <td CLASS="TITLE_DARK" colspan="4">
                     <b>
-                      <xsl:value-of select="//sa_reading_rpt"/>: <xsl:value-of select ="//username"/>
+                      <xsl:value-of select="//sa_reading_rpt" />: <xsl:value-of select ="//username" />
                     </b>
                   </td>
                 </tr>
                 <tr>
                   <td>Paginas:</td>
                   <td colspan="3">
-                    <xsl:value-of select ="//page_count"/>
+                    <xsl:value-of select ="//page_count" />
                   </td>
                 </tr>
                 <tr>
@@ -77,13 +77,13 @@
                 <xsl:for-each select="/doc/pages/page">
                   <tr>
                     <td CLASS="TITLE_LIGHT">
-                      <xsl:value-of select="id_opus"/>
+                      <xsl:value-of select="id_opus" />
                     </td>
                     <td CLASS="TITLE_LIGHT">
-                      <xsl:value-of select="id_pagina"/>
+                      <xsl:value-of select="id_pagina" />
                     </td>
                     <td CLASS="TITLE_LIGHT">
-                      <xsl:value-of select="opus_title"/>
+                      <xsl:value-of select="opus_title" />
                       <br></br>
                       <a>
                         <xsl:attribute name="href">
@@ -95,13 +95,13 @@
                       </a>
                     </td>
                     <td CLASS="TITLE_LIGHT">
-                      <xsl:value-of select="cd_lingua"/>
+                      <xsl:value-of select="cd_lingua" />
                     </td>
                     <td CLASS="TITLE_LIGHT">
-                      <xsl:value-of select="dt_created"/>
+                      <xsl:value-of select="dt_created" />
                     </td>
                   </tr>
-                </xsl:for-each >
+                </xsl:for-each>
                 </table>
 							<!-- ************  ENDS CONTENT  ************ -->
 						</td>
