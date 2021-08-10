@@ -1,0 +1,136 @@
+ 
+/****** Object:  StoredProcedure [dbo].[litTopMenu]    Script Date: 12/19/2017 18:18:52 PM ******/
+/* SET ANSI_NULLS ON */
+ 
+/* SET QUOTED_IDENTIFIER ON */
+ 
+
+
+
+CREATE OR REPLACE FUNCTION litTopMenu ( 
+	p_Language    varchar(15) = null,
+	p_PageCode    varchar(15) = null,
+	p_UserID      varchar(70) = null) RETURNS VOID
+AS $$
+
+begin
+
+
+-- Create XML Table
+
+Drop table IF EXISTS xml;
+Create Table xml (lines Varchar(4000));	
+
+-- STARTS GENERAL TAG
+Insert Into xml (lines) Values ('<top_menu>');
+
+-- HTML HEADER TAGS
+Insert Into xml (lines) Values ('<html_header>');
+Insert Into xml(lines)
+	Select '<T_PAGE_TITLE>' || rtrim(ds_nuntius) || '</T_PAGE_TITLE>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = p_PageCode;
+Insert Into xml(lines)
+	Select '<T_META_KEYWRD>' || rtrim(ds_nuntius) || '</T_META_KEYWRD>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'T_META_KEYWRD';
+Insert Into xml(lines)
+	Select '<T_META_DESCR>' || rtrim(ds_nuntius) || '</T_META_DESCR>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'T_META_DESCR';
+Insert Into xml(lines)
+	Select '<L_LITERATRONIC>' || rtrim(ds_nuntius) || '</L_LITERATRONIC>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_LITERATRONIC';
+Insert Into xml (lines) Values ('</html_header>');
+
+
+
+-- NAVIGATION MENU TAGS
+Insert Into xml(lines)
+	Select '<P_FORUM>' || rtrim(ds_nuntius) || '</P_FORUM>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_FORUM';
+Insert Into xml(lines)
+	Select '<P_INITIUM' || 
+	(case When p_PageCode='P_INITIUM' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</P_INITIUM>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'P_INITIUM';
+Insert Into xml(lines)
+	Select '<P_INDEX' || 
+	(case When p_PageCode='P_INDEX' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</P_INDEX>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'P_INDEX';
+Insert Into xml(lines)
+	Select '<P_TRACTUS' || 
+	(case When p_PageCode='P_TRACTUS' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</P_TRACTUS>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'P_TRACTUS';
+Insert Into xml(lines)
+	Select '<P_HISTORIA' || 
+	(case When p_PageCode='P_HISTORIA' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</P_HISTORIA>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'P_HISTORIA';
+Insert Into xml(lines)
+	Select '<P_COLLABORATORIUM' || 
+	(case When p_PageCode='P_COLLABORATORIUM' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</P_COLLABORATORIUM>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'P_COLLABORATORIUM';
+Insert Into xml(lines)
+	Select '<P_NAUTA' || 
+	(case When p_PageCode='P_NAUTA' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</P_NAUTA>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'P_NAUTA';
+Insert Into xml(lines)
+	Select '<P_INDICIUM' || 
+	(case When p_PageCode='P_INDICIUM' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</P_INDICIUM>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'P_INDICIUM';
+Insert Into xml(lines)
+	Select '<sa_menu' || 
+	(case When p_PageCode='sa_menu' then ' selected = "true"' else '' end) || '>'|| 
+ 	rtrim(ds_nuntius) || '</sa_menu>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'sa_menu';
+
+-- USER TAGS
+
+Insert Into xml(lines)
+	Select '<L_LOGOUT>' || rtrim(ds_nuntius) || '</L_LOGOUT>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_LOGOUT';
+Insert Into xml(lines)
+	Select '<L_USER>' || rtrim(ds_nuntius) || '</L_USER>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_USER';
+Insert Into xml(lines)
+	Select '<L_OLD_USER>' || rtrim(ds_nuntius) || '</L_OLD_USER>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_OLD_USER';
+Insert Into xml(lines)
+	Select '<L_NEW_USER>' || rtrim(ds_nuntius) || '</L_NEW_USER>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_NEW_USER';
+Insert Into xml(lines)
+	Select '<L_LINKS>' || rtrim(ds_nuntius) || '</L_LINKS>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_LINKS';
+
+-- SEARCH TAGS 
+Insert Into xml(lines)
+	Select '<F_SEARCH>' || rtrim(ds_nuntius) || '</F_SEARCH>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'F_SEARCH';
+Insert Into xml(lines)
+	Select '<L_SEARCH>' || rtrim(ds_nuntius) || '</L_SEARCH>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_SEARCH';
+Insert Into xml(lines)
+	Select '<ERR_SRCH_LEN>' || rtrim(ds_nuntius) || '</ERR_SRCH_LEN>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'ERR_SRCH_LEN';
+Insert Into xml(lines)
+	Select '<L_DYNAMIC>' || rtrim(ds_nuntius) || '</L_DYNAMIC>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_DYNAMIC';
+Insert Into xml(lines)
+	Select '<L_STATIC>' || rtrim(ds_nuntius) || '</L_STATIC>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_STATIC';
+
+-- ENDS GENERAL TAG
+Insert Into xml (lines) Values ('</top_menu>');
+ 
+SELECT LINES FROM xml;
+
+end;
+$$ LANGUAGE plpgsql;
+
+
+
+
+

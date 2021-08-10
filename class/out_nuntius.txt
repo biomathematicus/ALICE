@@ -1,0 +1,147 @@
+-- FUNCTION: public.out_nuntius(text, text, text, text, text, integer, text)
+
+-- DROP FUNCTION public.out_nuntius(text, text, text, text, text, integer, text);
+CREATE OR REPLACE FUNCTION public.out_nuntius(
+	p_language text,
+	opustype text,
+	pagecode text,
+	pagename text,
+	p_cd_nuntius text,
+	p_id_opus integer,
+	userid text)
+    RETURNS TABLE(lines text) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE myXml xml;
+v_id_nauta integer;
+v_ds_opus text;
+v_cd_opus text;
+params text;
+
+--DECLARE par1 integer := $1;
+
+BEGIN 
+ 	--perform SELECT dblink_connect('ALICE');
+    --return query
+    
+	Drop table IF EXISTS xml2;
+    Create Temp Table xml2(id SERIAL PRIMARY KEY, lines TEXT);
+    --Main tag
+    Insert Into xml2(lines) Values ('<?xml version="1.0" encoding="iso-8859-1"?><doc>');
+    
+    -- Find the reader's ID
+	 v_id_nauta := (select  id_nauta from nauta where nauta.ds_login = out_nuntius.UserID);
+    --select test_table.name into name from test_table where id = x;
+
+ 	v_ds_opus := (select ds_title from LINGUA_OPUS	where cd_lingua = out_nuntius.p_Language and id_opus = out_nuntius.p_id_opus); 
+	 v_cd_opus := (select cd_opus_type from OPUS where 	id_opus = out_nuntius.p_id_opus); 
+
+-- SPECIFIC CONTENT FOR THIS PAGE
+Insert Into xml2(lines) Values ('<cd_nuntius>' || p_cd_nuntius|| '</cd_nuntius>');
+
+Insert Into xml2(lines) select '<P_NUNTIUS><![CDATA[' || (case when ds_nuntius is null then '' else ds_nuntius end) || ']]></P_NUNTIUS>'  
+	from lingua_nuntius 
+	where cd_nuntius = p_cd_nuntius and cd_lingua = p_Language;
+if out_nuntius.p_id_opus <> 0
+	then
+		-- Calculate reading percentage
+		Insert Into xml2(lines) Values 
+			(
+			'<page_counter>' || 
+			'<id_opus>' || rtrim(cast(out_nuntius.p_id_opus as char(10))) || '</id_opus>' || 
+			'<ds_opus>' || v_ds_opus || '</ds_opus>' || 
+			'<cd_opus>' || v_cd_opus || '</cd_opus>' || --below lines are temp
+            '<percentage_g>' || 1 || '</percentage_g>' ||
+			'<percentage>' || 2 ||'</percentage>' ||
+			'<perct_incomplete>' || 3 || '</perct_incomplete>' ||
+            '<total_read>' || 4 || '</total_read>'
+			); 
+		--Insert Into xml2(lines) Execute litCounter; p_Language, p_id_opus, v_id_nauta
+		Insert Into xml2(lines) Values ('</page_counter>');
+	end if;	
+
+-- Tags
+Insert Into xml2(lines)
+	Select '<L_BOOK>' || rtrim(ds_nuntius) || '</L_BOOK>'
+	from LINGUA_NUNTIUS where cd_lingua = p_Language and cd_nuntius = 'L_BOOK';
+
+-- Session State
+--SELECT * into params from litSessionState(p_language,opustype,pagecode,pagename,userid,p_id_opus) as t;
+
+--Insert Into xml2(lines)	Values (params);
+Insert Into xml2(lines)
+	Select * from litSessionState(p_language,opustype,pagecode,pagename,userid,p_id_opus);
+    
+    
+    /*
+    '<param>
+            <language>BRITANNIA</language>
+            <opus_type></opus_type>
+            <page_code></page_code>
+            <user_logon></user_logon>
+            <page_name></page_name>
+            <id_opus>3</id_opus>
+            <user_name>arnold</user_name>
+            <user_status></user_status>
+            <user_id></user_id>
+            <T_REGIS_WARNING><![CDATA['']]></T_REGIS_WARNING>
+            </param>'
+    */
+    --Execute litSessionState; p_Language, p_OpusType, p_PageCode, p_PageName, p_UserID, p_id_opus
+-- Top Menu
+Insert Into xml2(lines)
+Values('<top_menu>
+<html_header>
+<T_PAGE_TITLE>title</T_PAGE_TITLE>
+	<T_META_KEYWRD></T_META_KEYWRD>
+	<T_META_DESCR></T_META_DESCR>
+	<L_LITERATRONIC></L_LITERATRONIC>
+	</html_header>
+<P_FORUM></P_FORUM>
+	<P_INITIUM selected = "true"></P_INITIUM>
+	<P_INDEX></P_INDEX>
+	<P_TRACTUS></P_TRACTUS>
+	<P_HISTORIA></P_HISTORIA>
+	<P_COLLABORATORIUM selected = "true">
+</P_COLLABORATORIUM>
+<P_NAUTA></P_NAUTA>
+<P_INDICIUM></P_INDICIUM>
+<sa_menu></sa_menu>
+<L_LOGOUT></L_LOGOUT>
+	<L_USER></L_USER>
+	<L_OLD_USER></L_OLD_USER>
+	<L_NEW_USER></L_NEW_USER>
+	<L_LINKS></L_LINKS>
+	<F_SEARCH></F_SEARCH>
+	<L_SEARCH></L_SEARCH>
+	<ERR_SRCH_LEN></ERR_SRCH_LEN>
+	<L_DYNAMIC></L_DYNAMIC>
+	<L_STATIC></L_STATIC>
+</top_menu>');
+	--Execute litTopMenu; p_Language, p_PageCode, p_UserID
+-- Footer
+Insert Into xml2(lines)
+Values('<footer>
+	<L_COPYRIGHT>copyright</L_COPYRIGHT>
+	<L_PRIVACY>privacy</L_PRIVACY>
+	</footer>'
+    );
+    --Execute litFooter; p_Language
+-- Ends main tag
+Insert Into xml2(lines) Values ('</doc>');
+
+return query
+	Select xml2.lines From xml2 order by id; 
+    --RETURN lines;
+END;
+
+$BODY$;
+
+ALTER FUNCTION public.out_nuntius(text, text, text, text, text, integer, text)
+    OWNER TO postgres;
+
