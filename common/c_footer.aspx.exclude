@@ -1,0 +1,13 @@
+<div align="center"class='BAR_FOOTER'>
+	<hr>
+	<a href="javascript:;">
+		<div class='BAR_FOOTER'>&copy;
+			<%=LABEL_LITERATRONIC%>
+			-
+			<%=LABEL_COPYRIGHT%>
+		</div>
+	</a>
+	<a class='BAR_FOOTER' href="javascript:;">
+		<div class='BAR_FOOTER'><%=LABEL_PRIVACY%></div>
+	</a>
+</div>

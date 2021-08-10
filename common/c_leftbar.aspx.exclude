@@ -1,0 +1,47 @@
+<TABLE id="leftbar" cellSpacing="0" cellPadding="3" border="0">
+	<TR>
+		<TD class='BAR_OFF'>
+			<div align="center" class="BAR_SITE_TITLE"><%=LABEL_LITERATRONIC%></div>
+			<IMG alt="Logo" src="../images/system/logo.gif"></TD>
+	</TR>
+	<TR>
+		<TD class='BAR_OFF' valign="middle">
+			<form method="post" action="questio.aspx">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="BAR_MENU"><%=LABEL_SEARCH%></td>
+						<td>
+							<input type="text" id="Search" size="10" name="text">
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+							<input type="submit" value="<%=LABEL_SEARCH%>" name="submit">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</TD>
+	</TR>
+	<TR>
+		<TD CLASS="BAR_OFF">
+			<%
+			'Load the command object
+			sSQL =  "select OPUS.id_opus, ds_title, ds_tag from OPUS, LINGUA_OPUS " & _
+					"where OPUS.id_opus = LINGUA_OPUS.id_opus and cd_lingua = '" & sLingua & "'"
+			oCommand = New OleDbCommand(sSQL, oConn)
+
+			'Load the datareader
+			oDataReader = oCommand.ExecuteReader()
+			While oDataReader.Read()
+				response.write( "<A HREF='JAVASCRIPT:;'><div class='BAR_TITLE'>" & oDataReader("ds_title") & _
+								"</div></A><div class='BAR_TAG'>" & oDataReader("ds_tag")  & "</div><hr>")
+			End While
+
+			'Close the datareader/db connection
+			oDataReader.Close()
+			%>
+		</TD>
+	</TR>
+</TABLE>

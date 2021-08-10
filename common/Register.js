@@ -1,21 +1,15 @@
-
-  
-
-   
 //******************************************************************************************************************************-->
           function blank() {
           var user_val = document.forms["myForm"]["username1"].value;
           if (user_val == "") {
-
           document.getElementById("username_alert").innerHTML = "Error: Username cannot be blank!";
           return 1;
           }
-
           }
 
 //*******************************************************************************************************************************-->
           function letter_num() {
-         var user = document.getElementById("username1");       
+         var user = document.getElementById("username1");
          re = /^\w+$/;
          if(!re.test(user.value)) {
          document.getElementById("username_alert").innerHTML = "Error: Username must contain only letters, numbers and underscores!";
@@ -28,12 +22,10 @@
           function pass_length () {
           var pass = document.forms["myForm"]["password1"];
           if(pass.value.length &lt; 6) {
-         
           document.getElementById("password1_alert").innerHTML = "Error: Password must contain at least six characters!";
           pass.focus();
           return 1;
           }
-          
           }
 //********************************************************************************************************************************-->
           function password_format1 () {
@@ -45,7 +37,6 @@
           pass.focus();
           return 1;
           }
-
           }
 
 //********************************************************************************************************************************-->
@@ -60,7 +51,6 @@
           pass.focus();
           return 1;
           }
-
           }
 
 //********************************************************************************************************************************-->
@@ -73,7 +63,6 @@
           pass.focus();
           return 1;
           }
-
           }
 //********************************************************************************************************************************-->
 
@@ -86,7 +75,6 @@
           pass.focus();
           return 1;
           }
-
           }
 
 //********************************************************************************************************************************-->
@@ -99,7 +87,6 @@
           pass.focus();
           return 1;
           }
-
           }
 
 //********************************************************************************************************************************-->
@@ -120,9 +107,4 @@
           if (k=='1'){  return false;}
           k=password_format5();
           if (k=='1'){  return false;}
-
           }
-
-
-
-

@@ -1,0 +1,197 @@
+<%
+'Detect language settings
+if Session("LNG") = "" then 
+    sLingua = LCASE(LTRIM(RTRIM(Request.QueryString("lingua"))))
+else
+    sLingua = LCASE(LTRIM(RTRIM(Session("LNG"))))
+end if
+if sLingua = "" then sLingua = "hispania"
+
+'List
+'Menu
+Dim MENU_DOMUS as String
+Dim MENU_EDITIO as String
+Dim MENU_EFFLUO as String
+Dim MENU_FOLIUM as String
+Dim MENU_INDICIUM as String
+Dim MENU_NAUTA as String
+Dim MENU_REGISTER as String
+Dim MENU_TRACTUS as String
+'Label names
+Dim AUTH_FAILED as String
+Dim BUTTON_LOGIN as String
+Dim LABEL_ABOUT as String 
+Dim LABEL_ADD as String 
+Dim LABEL_AGE as String 
+Dim LABEL_CONNECTION as String 
+Dim LABEL_COPYRIGHT as String 
+Dim LABEL_DELETE as String 
+Dim LABEL_EMAIL as String 
+Dim LABEL_GENDER as String 
+Dim LABEL_HOME as String 
+Dim LABEL_LANGUAGE as String 
+Dim LABEL_LITERATRONIC as String 
+Dim LABEL_LOGOUT as String 
+Dim LABEL_LOGIN as String 
+Dim LABEL_MAP as String 
+Dim LABEL_MORE as String
+Dim LABEL_NAME as String 
+Dim LABEL_NEXT as String 
+Dim LABEL_NEW as String 
+Dim LABEL_NUMBER as String 
+Dim LABEL_PASSWORD as string
+Dim LABEL_PREVIOUS as String 
+Dim LABEL_PRIVACY as String 
+Dim LABEL_PROFILE as String 
+Dim LABEL_REGISTER as String 
+Dim LABEL_SAVE as String 
+Dim LABEL_SEARCH as String 
+Dim LABEL_TAG as String 
+Dim LABEL_TEXT as String 
+Dim LABEL_TITLE as String 
+Dim LABEL_USER as String 
+Dim LABEL_WORKS as String 
+'Page name
+Dim PAGE_FOLIUM_DTL AS STRING
+Dim PAGE_FOLIUM_LST AS STRING
+Dim PAGE_DOMUS AS STRING
+Dim PAGE_EDITIO AS STRING
+Dim PAGE_EFFLUO AS STRING
+Dim PAGE_FOLIUM AS STRING
+Dim PAGE_INDICIUM AS STRING
+Dim PAGE_NAUTA AS STRING
+Dim PAGE_QUESTIO AS STRING
+Dim PAGE_TRACTUS AS STRING
+'Messages
+
+'Language settings
+select case lcase(sLingua)
+	case "britannia"
+		BUTTON_LOGIN = "Log-in"
+		LABEL_ABOUT = "About"
+		LABEL_ADD = "Add"
+		LABEL_AGE = "Age"
+		AUTH_FAILED = "The information you supplied to log-in is incorrect. Please try again."
+		LABEL_CONNECTION = "Connection"
+		LABEL_COPYRIGHT = "Copyright"
+		LABEL_DELETE = "Delete"
+		LABEL_EMAIL = "E-mail"
+		LABEL_GENDER = "Gender"
+		LABEL_HOME = "Home"
+		LABEL_LANGUAGE = "Language"
+		LABEL_LITERATRONIC = "Literatronic"
+		LABEL_LOGIN = "Name"
+		LABEL_LOGOUT = "Logout"
+		LABEL_MAP = "Map"
+		LABEL_MORE = "more"
+		LABEL_NAME = "Name"
+		LABEL_NEXT = "Next"
+		LABEL_NUMBER = "Number"
+		LABEL_NEW = "New"
+		LABEL_PASSWORD = "Password"
+		LABEL_PREVIOUS = "Previous"
+		LABEL_PRIVACY = "Privacy Statement"
+		LABEL_PROFILE = "Profile"
+		LABEL_REGISTER = "Register"
+		LABEL_SAVE = "Save"
+		LABEL_SEARCH = "Search"
+		LABEL_TAG = "Tag"
+		LABEL_TEXT = "Text"
+		LABEL_TITLE = "Title"
+		LABEL_USER = "User"
+		LABEL_WORKS = "Fiction Works"
+        MENU_DOMUS = "Home" 
+        MENU_EDITIO = "Printable Version"
+        MENU_EFFLUO = "Forgotten Password"
+        MENU_FOLIUM = "Page"
+        MENU_INDICIUM = "About" 
+        MENU_NAUTA = "My Profile" 
+        MENU_REGISTER = "Register" 
+        MENU_TRACTUS = "Map" 
+		PAGE_FOLIUM_DTL = "Chapter Detail"
+		PAGE_FOLIUM_LST  = "Chapter List"
+		PAGE_DOMUS  = "Home"
+		PAGE_EDITIO  = "Printer Friendly Version"
+		PAGE_EFFLUO  = "Forgotten Password"
+		PAGE_FOLIUM  = "Chapter"
+		PAGE_INDICIUM  = "About Edutronica"
+		PAGE_NAUTA  = "User Profile"
+		PAGE_QUESTIO  = "Search"
+		PAGE_TRACTUS  = "Map"
+	case "hispania"
+		BUTTON_LOGIN = "Registrar"
+		LABEL_ABOUT = "Acerca de"
+		LABEL_ADD = "Agregar"
+		LABEL_AGE = "Edad"
+		AUTH_FAILED = "La informaci&oacute;n que usted proporcion&oacute; para acceder el sistema como usuario registrado es incorrecta. Por favor intente de nuevo."
+		LABEL_CONNECTION = "Conexi&oacute;n"
+		LABEL_COPYRIGHT = "Derechos Reservados"
+		LABEL_DELETE = "Borrar"
+		LABEL_EMAIL = "Correo Electr&oacute;nico"
+		LABEL_GENDER = "G&eacute;nero"
+		LABEL_HOME = "Inicio"
+		LABEL_LANGUAGE = "Lenguaje"
+		LABEL_LITERATRONIC = "Literatr&oacute;nica"
+		LABEL_LOGIN = "Nombre"
+		LABEL_LOGOUT = "Cerrar Sesi&oacute;n"
+		LABEL_MAP = "Mapa"
+		LABEL_MORE = "m&aacute;s"
+		LABEL_NAME = "Nombre"
+		LABEL_NUMBER = "N&uacute;mero"
+		LABEL_NEXT = "Pr&oacute;ximo"
+		LABEL_NEW = "Nuevo"
+		LABEL_PASSWORD = "Contraseña"
+		LABEL_PREVIOUS = "Previo"
+		LABEL_PRIVACY = "Declaraci&oacute;n de Privacidad"
+		LABEL_PROFILE = "Perfil"
+		LABEL_REGISTER = "Registrar"
+		LABEL_SAVE = "Guardar"
+		LABEL_SEARCH = "Buscar"
+		LABEL_TAG = "Etiqueta"
+		LABEL_TEXT = "Texto"
+		LABEL_TITLE = "T&iacute;tulo"
+		LABEL_USER = "Usuario"
+		LABEL_WORKS = "Obras de Ficci&oacute;n"
+        MENU_DOMUS = "Inicio" 
+        MENU_EDITIO = "Versi&oacute;n Imprimible"
+        MENU_EFFLUO = "Contrase&ntilde;a Olvidada"
+        MENU_FOLIUM = "P&aacute;gina"
+        MENU_INDICIUM = "Acerca de" 
+        MENU_NAUTA = "Mi Perfil" 
+        MENU_REGISTER = "Incripci&oacute;n" 
+        MENU_TRACTUS = "Mapa" 
+		PAGE_FOLIUM_DTL = "Detalle de Cap&iacute;tulo"
+		PAGE_FOLIUM_LST  = "Lista de Cap&iacute;tulos"
+		PAGE_DOMUS  = "Inicio"
+		PAGE_EDITIO  = "Versi&oacute;n Imprimible"
+		PAGE_EFFLUO  = "Contrase&ntilde;a Olvidada"
+		PAGE_FOLIUM  = "Cap&iacute;tulo"
+		PAGE_INDICIUM  = "Acerca de Literatr&oacute;nica"
+		PAGE_NAUTA  = "Datos Personales"
+		PAGE_QUESTIO  = "B&uacute;squeda"
+		PAGE_TRACTUS  = "Mapa"
+	case "italia"
+	case "gallia"
+	case "germania"
+	case "graecia"
+	case "arabia"
+END SELECT 
+
+Select case lcase(rtrim(ltrim(sPage)))
+    case "domus.aspx"
+        sPageTitle = PAGE_DOMUS
+    case "editio.aspx"
+        sPageTitle = PAGE_EDITIO
+    case "effluo.aspx"
+        sPageTitle = PAGE_EFFLUO
+    case "indicium.aspx"
+        sPageTitle = PAGE_INDICIUM
+    case "nauta.aspx"
+        sPageTitle = PAGE_NAUTA
+    case "questio.aspx"
+        sPageTitle = PAGE_QUESTIO
+    case "tractus.aspx"
+        sPageTitle = PAGE_TRACTUS
+end select
+
+%>

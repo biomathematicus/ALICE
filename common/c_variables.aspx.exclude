@@ -1,0 +1,8 @@
+<%
+Dim sAuthentication as string
+Dim sBreadcrumb as string
+Dim nPathIninLenght as integer = 20 '/Edutronica/src/
+Dim sPage as String = lcase(rtrim(mid(Request.path, nPathIninLenght, len(Request.path))))
+Dim sPageTitle as String
+Dim sLingua as String 
+%>

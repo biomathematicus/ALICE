@@ -1,15 +1,15 @@
 //<![CDATA[
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: false,
-            element: "content",
-            ignoreClass: "(tex2jax_ignore|mw-search-results|searchresults)", /* note: this is part of a regex, check the docs! */
-            skipTags: ["script","noscript","style","textarea","code"] /* removed pre as wikimedia renders math in there */
-        },
-        TeX: {
-          Macros: {
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$', '$'], ["\\(", "\\)"]],
+        displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+        processEscapes: false,
+        element: "content",
+        ignoreClass: "(tex2jax_ignore|mw-search-results|searchresults)", /* note: this is part of a regex, check the docs! */
+        skipTags: ["script", "noscript", "style", "textarea", "code"] /* removed pre as wikimedia renders math in there */
+    },
+    TeX: {
+        Macros: {
             /* Wikipedia compatibility: these macros are used on Wikipedia */
             empty: '\\emptyset',
             P: '\\unicode{xb6}',
@@ -59,7 +59,7 @@
             QQ: '\\mathbb{Q}',
             CC: '\\mathbb{C}',
             FF: '\\mathbb{F}'
-          }
         }
-    });
+    }
+});
 //]]>
