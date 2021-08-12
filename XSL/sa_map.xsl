@@ -12,7 +12,7 @@
       <script type="text/javascript" src="../common/map.js">  </script>
       <script type="text/javascript" src="../common/vis.js">
       </script>
-      <link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+      <link href="../common/vis-network.min.css" rel="stylesheet" type="text/css" />
       <style type="text/css">
         #mynetwork{
         var w= $(document).width()/2;
