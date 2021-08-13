@@ -74,36 +74,36 @@ Namespace Literatronica
             End Try
         End Sub
 
-        Private Function ConnectToPostgres(sLinguaCok As String, sOpusType As String, sPageName As String, sPageCode As String, cd_nuntius As String, id_opus As String, sUserID As String) As XmlDocument
-            Try
+        'Private Function ConnectToPostgres(sLinguaCok As String, sOpusType As String, sPageName As String, sPageCode As String, cd_nuntius As String, id_opus As String, sUserID As String) As XmlDocument
+        '    Try
 
-                Dim conn As NpgsqlConnection
-                conn = New NpgsqlConnection("Server=localhost;User ID=usr;Password=edutronica;Database=ALICE")
-                conn.Open()
-                Dim Params As String = sLinguaCok + "," + sOpusType + "," + sPageCode + "," + sPageName + "," + cd_nuntius + "," + id_opus + "," + sUserID
-                Dim Command As NpgsqlCommand = New NpgsqlCommand("SELECT * FROM out_nuntius(" + Params + ")", conn)
-                Dim reader As NpgsqlDataReader = Command.ExecuteReader()
-                Dim data_Table1 As New DataTable
-                Dim mystring As String = ""
-                Dim DR As DataRow
+        '        Dim conn As NpgsqlConnection
+        '        conn = New NpgsqlConnection("Server=localhost;User ID=usr;Password=edutronica;Database=ALICE")
+        '        conn.Open()
+        '        Dim Params As String = sLinguaCok + "," + sOpusType + "," + sPageCode + "," + sPageName + "," + cd_nuntius + "," + id_opus + "," + sUserID
+        '        Dim Command As NpgsqlCommand = New NpgsqlCommand("SELECT * FROM out_nuntius(" + Params + ")", conn)
+        '        Dim reader As NpgsqlDataReader = Command.ExecuteReader()
+        '        Dim data_Table1 As New DataTable
+        '        Dim mystring As String = ""
+        '        Dim DR As DataRow
 
-                Dim doc As XmlDocument = New XmlDocument
-                data_Table1.Load(reader)
+        '        Dim doc As XmlDocument = New XmlDocument
+        '        data_Table1.Load(reader)
 
-                For Each DR In data_Table1.Rows
-                    mystring &= DR.Item(0).ToString
-                Next
+        '        For Each DR In data_Table1.Rows
+        '            mystring &= DR.Item(0).ToString
+        '        Next
 
-                doc.LoadXml(mystring)
-                'trans.Load("C:\\Users\\Alice\\Documents\\Visual Studio 2012\\Projects\\npgsql1\\npgsql1\\XSL\\test.xslt")
+        '        doc.LoadXml(mystring)
+        '        'trans.Load("C:\\Users\\Alice\\Documents\\Visual Studio 2012\\Projects\\npgsql1\\npgsql1\\XSL\\test.xslt")
 
-                reader.Close()
-                conn.Close()
-                Return doc
-            Catch ex As Exception
-                Response.Write(ex.ToString)
-            End Try
-        End Function
+        '        reader.Close()
+        '        conn.Close()
+        '        Return doc
+        '    Catch ex As Exception
+        '        Response.Write(ex.ToString)
+        '    End Try
+        'End Function
 
     End Class
 

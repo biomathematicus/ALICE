@@ -1,4 +1,4 @@
-.TabOn {font-family: Calibri, Helvetica, sans-serif; text-align:center; font-size: medium; font-weight:   bold; background-color: rgba(230, 8, 8, 0.40); text-align: center; background-repeat: no-repeat; text-decoration: none; width: 74px}
+.TabOn {font-family: Calibri, Helvetica, sans-serif; text-align:center; font-size: medium; font-weight:   bold; background-color: #f08660; text-align: center; background-repeat: no-repeat; text-decoration: none; width: 74px}
 .TabOff{font-family: Calibri, Helvetica, sans-serif; text-align:center; font-size: medium; font-weight: normal; background-color: #DDDDDD; text-align: center; background-repeat: no-repeat; text-decoration: none; width: 74px}
 
 BODY {
@@ -12,7 +12,7 @@ BODY {
 	}
 
 H1, H2, H3 {
-    COLOR: #CC0000;
+    COLOR: #d34000;
 	}
 
 H1	{
@@ -75,25 +75,25 @@ TD	{
 A:link	{
 	font-size:	medium;
 	text-decoration:	none;
-	color:	#3333cc;
+	color:	#0C23cc;
 	}
 
 A:visited {
 	font-size:	medium;
 	text-decoration:	none;
-	color:	#333399;
+	color:	#0C2399;
 	}
 
 A:active {
 	font-size:	medium;
 	text-decoration:	none;
-	color:	#333399;
+	color:	#0C2399;
 	}
 
 A:hover	{
 	font-size:	medium;
 	text-decoration:	underline;
-	color:	#3333cc;
+	color:	#0C23cc;
 	}
 
 .BOLD {
@@ -153,7 +153,7 @@ A:hover	{
     font-style: normal;
     font-weight: normal;
     background-color: #cccccc;
-    COLOR: #cc0000;
+    COLOR: #d34000;
 	}
 
 .TITLE	{
@@ -165,7 +165,7 @@ A:hover	{
 	word-spacing:	normal;
 	letter-spacing:	normal;
 	text-transform:	none;
-    COLOR: #cc0000;
+    COLOR: #d34000;
     background-color: #cccccc;
 	}
 
@@ -218,7 +218,7 @@ A:hover	{
 	}
 
 .BAR_OFF {
-	background-color: #C22F45;
+	background-color: #F15A22;
 	font-family:  Calibri, Helvetica, sans-serif;
 	font-size: larger;
 	font-weight: bold;
@@ -272,46 +272,46 @@ A:hover	{
 	}
 
 INPUT.ContactsTextbox {
-	BORDER-RIGHT: #333333 1px solid;
+	BORDER-RIGHT: #0C2333 1px solid;
 	BORDER-TOP: #666666 2px solid;
 	FONT-WEIGHT: normal;
 	FONT-SIZE: 10px;
 	BORDER-LEFT: #666666 2px solid;
 	WIDTH: 150px;
 	COLOR: #000000;
-	BORDER-BOTTOM: #333333 1px solid;
+	BORDER-BOTTOM: #0C2333 1px solid;
 	BACKGROUND-COLOR: #ffffff;
 	}
 
 INPUT.DefaultButton {
 	BORDER-RIGHT: #000000 1px solid;
-	BORDER-TOP: #333333 1px solid;
+	BORDER-TOP: #0C2333 1px solid;
 	FONT-WEIGHT: normal;
 	FONT-SIZE: 11px;
-	BORDER-LEFT: #333333 1px solid;
+	BORDER-LEFT: #0C2333 1px solid;
 	COLOR: #000000;
 	BORDER-BOTTOM: #000000 1px solid;
 	BACKGROUND-COLOR: #d9eaf0;
 	}
 
 INPUT.DefaultTextbox {
-	BORDER-RIGHT: #333333 1px solid;
+	BORDER-RIGHT: #0C2333 1px solid;
 	BORDER-TOP: #666666 2px solid;
 	FONT-WEIGHT: normal;
 	FONT-SIZE: 11px;
 	BORDER-LEFT: #666666 2px solid;
 	WIDTH: 200px;
 	COLOR: #000000;
-	BORDER-BOTTOM: #333333 1px solid;
+	BORDER-BOTTOM: #0C2333 1px solid;
 	BACKGROUND-COLOR: #ffffff;
 	}
 
 INPUT.DefaultFile {
 	BORDER-RIGHT: #000000 1px solid;
-	BORDER-TOP: #333333 1px solid;
+	BORDER-TOP: #0C2333 1px solid;
 	FONT-WEIGHT: normal;
 	FONT-SIZE: 10px;
-	BORDER-LEFT: #333333 1px solid;
+	BORDER-LEFT: #0C2333 1px solid;
 	COLOR: #000000;
 	BORDER-BOTTOM: #000000 1px solid;
 	}

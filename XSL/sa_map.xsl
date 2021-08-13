@@ -15,54 +15,54 @@
       <link href="../common/vis-network.min.css" rel="stylesheet" type="text/css" />
       <style type="text/css">
         #mynetwork{
-        var w= $(document).width()/2;
-        var h=height:$(document).height()/2;
-        w=window.innerWidth-200;
-        h = window.innerHeight-2;
+            var w= $(document).width()/2;
+            var h=height:$(document).height()/2;
+            w=window.innerWidth-200;
+            h = window.innerHeight-2;
 
-        width:700;
-        height:h;
-        border: 1px solid lightgray;
+            width:100%;
+            height:1000px;
+            border: 1px solid lightgray;
         }
 
         #personalize_net{
-        width: $(document).width();
-        height:$(document).height();
-        border: 1px solid lightgray;
+            width: $(document).width();
+            height:$(document).height();
+            border: 1px solid lightgray;
         }
 
         #operation {
-        font-size:28px;
+            font-size:28px;
         }
         #node-popUp {
-        display:none;
-        position:absolute;
-        top:350px;
-        left:170px;
-        z-index:299;
-        width:250px;
-        height:120px;
-        background-color: #f9f9f9;
-        border-style:solid;
-        border-width:3px;
-        border-color: #5394ed;
-        padding:10px;
-        text-align: center;
+            display:none;
+            position:absolute;
+            top:350px;
+            left:170px;
+            z-index:299;
+            width:250px;
+            height:120px;
+            background-color: #f9f9f9;
+            border-style:solid;
+            border-width:3px;
+            border-color: #5394ed;
+            padding:10px;
+            text-align: center;
         }
         #edge-popUp {
-        display:none;
-        position:absolute;
-        top:350px;
-        left:170px;
-        z-index:299;
-        width:250px;
-        height:90px;
-        background-color: #f9f9f9;
-        border-style:solid;
-        border-width:3px;
-        border-color: #5394ed;
-        padding:10px;
-        text-align: center;
+            display:none;
+            position:absolute;
+            top:350px;
+            left:170px;
+            z-index:299;
+            width:250px;
+            height:90px;
+            background-color: #f9f9f9;
+            border-style:solid;
+            border-width:3px;
+            border-color: #5394ed;
+            padding:10px;
+            text-align: center;
         }
       </style>
 
@@ -84,24 +84,24 @@
             for (i = 0; i &lt; d.length; i++)
             {
 
-            try {
+                try {
 
-            pp= JSON.stringify(nodes.get(), null, 4);
+                    pp= JSON.stringify(nodes.get(), null, 4);
 
-            obj = JSON.parse(pp);
-            var pp1= network.getPositions(obj[i].id);
-            var new_id=obj[i].id;
-            var startNode = JSON.stringify(pp1);
-            var json = JSON.parse(startNode);
-            var X=json[new_id].x;
-            var Y=json[new_id].y;
+                    obj = JSON.parse(pp);
+                    var pp1= network.getPositions(obj[i].id);
+                    var new_id=obj[i].id;
+                    var startNode = JSON.stringify(pp1);
+                    var json = JSON.parse(startNode);
+                    var X=json[new_id].x;
+                    var Y=json[new_id].y;
 
-            positions=positions+","+new_id+"," +X+","+Y+"#";
+                    positions=positions+","+new_id+"," +X+","+Y+"#";
 
-            }
-            catch (err) {
+                }
+                catch (err) {
 
-            }
+                }
 
             }
 
@@ -111,10 +111,10 @@
             positions=positions+"#$$,"+network.getScale()+"," +locx+","+locy+"%%";
 
             var options = {
-            position: {x:159.524,y:-142.316},
-            scale: 1,
-            offset: {x:0,y:0},
-            animation: true
+                position: {x:159.524,y:-142.316},
+                scale: 1,
+                offset: {x:0,y:0},
+                animation: true
             };
             network.moveTo(options);
 
@@ -129,7 +129,7 @@
             //***************************************************************************************
             function recover_position(list_position) {
 
-            all_position=list_position;
+                all_position=list_position;
             }
 
             //***************************************************************************************
@@ -291,22 +291,22 @@
           </script>
           <script type="text/javascript">
             function categoryOnClick() {
-            var rows = document.getElementsByName('chbox');
-            var selectedRows = [];
-            for (var i = 0, l = rows.length; i  &lt; l; i++) {
-            if (rows[i].checked) {
-            selectedRows.push(rows[i].value);
+                var rows = document.getElementsByName('chbox');
+                var selectedRows = [];
+                for (var i = 0, l = rows.length; i  &lt; l; i++) {
+                    if (rows[i].checked) {
+                        selectedRows.push(rows[i].value);
+                }
             }
-            }
-            $("#senddata").val(selectedRows);
-            var kk=$("#senddata").val();
+                $("#senddata").val(selectedRows);
+                var kk=$("#senddata").val();
             }
 
-            $( document ).ready(function() {
-            $('div#divOutputWindow table tr td').eq(0).css('height','1000px');
-            network=graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork','',all_position,capstone_,'');
+                $( document ).ready(function() {
+                $('div#divOutputWindow table tr td').eq(0).css('height','1000px');
+                network=graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork','',all_position,capstone_,'');
 
-            call(1);
+                call(1);
 
             });
           </script>
