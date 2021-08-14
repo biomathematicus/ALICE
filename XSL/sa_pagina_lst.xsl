@@ -10,7 +10,7 @@
       <xsl:apply-templates select="//html_header" />
       <body>
         <xsl:if test="//user_status = 3">
-          <table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
+          <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
             <tr valign="top">
               <td rowspan="3" valign="top" class='BAR_OFF'>
                 <!-- Insert left menu -->
@@ -136,6 +136,28 @@
                             </xsl:when>
                             <xsl:otherwise>
                               <xsl:value-of select="connections_pre-req" />
+                            </xsl:otherwise>
+                          </xsl:choose>
+                        </b>
+                      </td>
+                      <td CLASS="TITLE_LIGHT" nowrap="true" align="right">
+                        <a>
+                          <xsl:attribute name="href">
+                            javascript:document.frmSession.action='sa_doctrina_lst.aspx?pagina=<xsl:value-of select="id" />&#38;opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
+                          </xsl:attribute>
+                          SLOs<!-- <xsl:value-of select="/doc/admin_tags/sa_doctrina_lst" /> -->
+                        </a>
+                        <br />
+                        <xsl:value-of select="/doc/admin/L_COUNT" />:
+                        <b>
+                          <xsl:choose>
+                            <xsl:when test ="SLOs = 0">
+                              <font color="red">
+                                <xsl:value-of select="SLOs" />
+                              </font>
+                            </xsl:when>
+                            <xsl:otherwise>
+                              <xsl:value-of select="SLOs" />
                             </xsl:otherwise>
                           </xsl:choose>
                         </b>
