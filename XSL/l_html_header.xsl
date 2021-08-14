@@ -14,6 +14,7 @@
 				<xsl:value-of select="//L_LITERATRONIC" /> - <xsl:value-of select="//T_PAGE_TITLE" />
 			</TITLE>
       <META http-equiv="Pragma" content="no-cache" />
+      <META HTTP-EQUIV="Expires" CONTENT="-1" />
       <script language="JavaScript" type="text/JavaScript" src="../common/Script.js" />
       <script language="JavaScript" type="text/JavaScript">
       /*********************************************************
