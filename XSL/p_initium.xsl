@@ -10,7 +10,7 @@
       <!-- Insert HTML header -->
       <xsl:apply-templates select="//html_header" />
       <body>
-        <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0">
+        <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
           <tr valign="top">
             <td rowspan="3" valign="top">
               <!-- Insert left menu -->
@@ -33,9 +33,9 @@
                   <td id="ALICE" width="50%" valign="top">
                     <xsl:value-of select="//T_DEFINITION" disable-output-escaping="yes" />
                   </td>
-                  <td id="SAIL" width="50%" valign="top">
+                  <!-- <td id="SAIL" width="50%" valign="top">
                     <xsl:value-of select="//T_DEFINITION_SAIL" disable-output-escaping="yes" />
-                  </td>
+                  </td> -->
                   <td width="50%" valign="top">
                     <xsl:value-of select="//T_INTRODUCTION" disable-output-escaping="yes" />
                   </td>
@@ -133,6 +133,7 @@
         <script>
 
           $( document ).ready(function() {
+          return;
 
           var str=window.location.href;
 
@@ -140,14 +141,13 @@
           var n = str.includes("/sail/");
 
           if (n) {
-          var contentToRemove = document.querySelectorAll("#ALICE");
-          $(contentToRemove).remove();
-
+            var contentToRemove = document.querySelectorAll("#ALICE");
+            $(contentToRemove).remove();
           }
-          else {
-          var contentToRemove = document.querySelectorAll("#SAIL");
-          $(contentToRemove).remove();
-
+          else 
+          {
+            var contentToRemove = document.querySelectorAll("#SAIL");
+            $(contentToRemove).remove();
           }
 
           });

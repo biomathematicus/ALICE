@@ -2,7 +2,7 @@
 	<xsl:template match="page_counter">
 		<table border="0" cellpadding="1" cellspacing="0" width="100%">
 			<tr>
-  			<td class="CONTENT" align="left" style="white-space: nowrap">
+  			<td class="CONTENT" align="left" style="white-space: nowrap" colspan="4">
           <!-- xsl:value-of select="//L_BOOK"/ -->
 					<span class="BOLD">
 					<xsl:choose>
@@ -11,16 +11,16 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-						<!--		<xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="id_opus" />','<xsl:value-of select="id_pagina" />')</xsl:attribute> -->
-
-                <xsl:attribute name="href">javascript:Map('<xsl:value-of select="//language" />','<xsl:value-of select="id_opus" />')</xsl:attribute>
+                <!-- <xsl:attribute name="href">javascript:Page('<xsl:value-of select="//language" />','<xsl:value-of select="id_opus" />','<xsl:value-of select="id_pagina" />')</xsl:attribute> -->
+                <xsl:attribute name="href">javascript:Map('<xsl:value-of select="//language" />','<xsl:value-of select="id_opus" />')</xsl:attribute> 
                 <xsl:value-of select="ds_opus" />
 							</a>
 						</xsl:otherwise>
 					</xsl:choose>
 					</span>
 				</td>
-        <td width="80%"></td>
+      </tr>
+      <tr>
         <xsl:if test="//user_id != ''">
           <td valign="bottom" class="XSMALL" style="white-space: nowrap">
             <xsl:value-of select="//percentage_g" />% <xsl:value-of select="//L_Graded_" />   &#160;&#160;&#160;
@@ -74,7 +74,8 @@
 						</a>
 					</xsl:if>
 				</td>
-			</tr>
+        <td width="99%">&#160;</td>
+      </tr>
 		</table>
 	</xsl:template>
 </xsl:stylesheet>

@@ -149,11 +149,10 @@
           </script>
 
           <form id="frmSession1" method="post" name="frmSession1" action="">
-
             <input type="hidden" id="hAction" name="hAction"></input>
           </form>
 
-          <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+          <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
             <tr valign="top">
               <td rowspan="3" valign="top">
                 <!-- Insert left menu -->

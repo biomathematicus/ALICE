@@ -16,13 +16,12 @@
             var text_box='';
             function get_text_box_value(id)
             {
-            text_box= document.getElementById(id).value;
-            alert(text_box);
-
+              text_box= document.getElementById(id).value;
+              alert(text_box);
             }
           </script>
 
-          <table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
+          <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
             <tr valign="top">
               <td rowspan="3" valign="top" class='BAR_OFF'>
                 <!-- Insert left menu -->

@@ -221,7 +221,7 @@
           id_category_interest_base=<xsl:value-of select="//id_category_interest_base" />;
         </script>
 
-        <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+        <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
           <tr valign="top">
             <td rowspan="3" valign="top">
               <!-- Insert left menu -->

@@ -184,7 +184,7 @@
           id_category_interest_base=<xsl:value-of select="//id_category_interest_base" />;
         </script>
 
-        <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+        <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
           <tr valign="top">
             <td rowspan="3" valign="top">
               <!-- Insert left menu -->
@@ -563,8 +563,8 @@
       <script type="text/javascript">
         $( document ).ready(function() {
 
-        document.getElementById('mynetwork').style.width = "100%";
-        document.getElementById('mynetwork').style.height = "800";
+        document.getElementById('mynetwork').style.width = "800px";
+        document.getElementById('mynetwork').style.height = "800px";
 
         network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show);
 
@@ -574,30 +574,34 @@
         $("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
         var node_list_b = path_b.split(",");
         var next_l=0;
-        for (i = 0; i &#60; node_list_b.length - 1 ; i++) {
-        if ( node_list_b[i]==Pagina_id_)
+        for (i = 0; i &#60; node_list_b.length - 1 ; i++) 
         {
-        next_lesson_=node_list_b[i+1];
-        next_l=parseInt(node_list_b[i+1]);
-        }
+          if ( node_list_b[i]==Pagina_id_)
+          {
+            next_lesson_=node_list_b[i+1];
+            next_l=parseInt(node_list_b[i+1]);
+          }
         }
         next_lesson_str=next_lesson_.toString();
-        if (next_l > 0) {
-        var searchEles = document.getElementById("captions1").children;
-        nameOfNextLesson=document.getElementById(searchEles[next_l-1].id).value;
-        $("#herf_next_lesson").text(nameOfNextLesson);
-        }else
+        if (next_l > 0) 
         {
-        $("#herf_next_lesson").text("there is no next course for this lesson");
+          var searchEles = document.getElementById("captions1").children;
+          nameOfNextLesson=document.getElementById(searchEles[next_l-1].id).value;
+          $("#herf_next_lesson").text(nameOfNextLesson);
+        }
+        else
+        {
+          $("#herf_next_lesson").text("there is no next course for this lesson");
         }
 
+        /*
         if(Opus_id=33)
         {
-        var mediatab=document.getElementById("tabMedia");
-        document.getElementById("tabWiki").style.display = "";
-        document.getElementById("tabWiki").style.visibility = "visible";
-
+          var mediatab=document.getElementById("tabMedia");
+          document.getElementById("tabWiki").style.display = "";
+          document.getElementById("tabWiki").style.visibility = "visible";
         }
+        */
         });
       </script>
     </html>

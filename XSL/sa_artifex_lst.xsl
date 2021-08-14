@@ -11,7 +11,7 @@
       <body>
         
         <xsl:if test="//user_status = 3 or //user_status = 2">
-          <table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
+          <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
             <tr valign="top">
               <td rowspan="3" valign="top" class='BAR_OFF'>
                 <!-- Insert left menu -->

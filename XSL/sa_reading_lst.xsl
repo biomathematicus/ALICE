@@ -9,8 +9,8 @@
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
 			<body>
-				<table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
-					<tr valign="top">
+        <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
+          <tr valign="top">
 						<td rowspan="3" valign="top" class='BAR_OFF'>
 							<!-- Insert left menu -->
 							<xsl:apply-templates select="//left_menu" />
