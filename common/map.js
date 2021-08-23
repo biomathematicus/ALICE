@@ -541,10 +541,20 @@ function escapeXml(unsafe) {
     });
 }
 
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
 function call(node_num) {
     if (node_num > 0) {
         // document.getElementById('iframe_id').src = 'http://localhost/alice_dev/admin/sa_pagina_dtl_for_map.aspx?pagina=10&#38;opus=28&#38;lng=BRITANNIA';
-
+        id_opus = getParameterByName('opus')
+        //alert(id_opus);
         var address = '../admin/sa_pagina_dtl_for_map.aspx?lng=BRITANNIA' + '&opus=' + id_opus + '&pagina=' + node_num;
         //  alert(address);
 
