@@ -7,133 +7,125 @@
   <xsl:template match="/">
     <html>
       <!-- Insert HTML header -->
-
-      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-
+      <script src="../common/jquery-1.10.2.js"></script>
       <body>
-
         <script>
-
-          function insertAtCaret(areaId,text) {
-              var txtarea = document.getElementById(areaId);
-              var scrollPos = txtarea.scrollTop;
-              var strPos = 0;
-              var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
-              "ff" : (document.selection ? "ie" : false ) );
-              if (br == "ie") {
-              txtarea.focus();
-              var range = document.selection.createRange();
-              range.moveStart ('character', -txtarea.value.length);
-              strPos = range.text.length;
-          }
-          else if (br == "ff") strPos = txtarea.selectionStart;
-
-          var front = (txtarea.value).substring(0,strPos);
-          var back = (txtarea.value).substring(strPos,txtarea.value.length);
-          txtarea.value=front+text+back;
-          strPos = strPos + text.length;
-          if (br == "ie") {
-              txtarea.focus();
-              var range = document.selection.createRange();
-              range.moveStart ('character', -txtarea.value.length);
-              range.moveStart ('character', strPos);
-              range.moveEnd ('character', 0);
-              range.select();
-          }
-          else if (br == "ff") {
-              txtarea.selectionStart = strPos;
-              txtarea.selectionEnd = strPos;
-              txtarea.focus();
-          }
-          txtarea.scrollTop = scrollPos;
-          }
-
-          function chekbox_f() {
-
-          if(document.getElementById("chbox").checked == true)
+          //-----------------------------------------
+          function insertAtCaret(areaId,text) 
           {
-          document.getElementById("chbox").value="true";
-          }
+            var txtarea = document.getElementById(areaId);
+            var scrollPos = txtarea.scrollTop;
+            var strPos = 0;
+            var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ? "ff" : (document.selection ? "ie" : false ) );
+            if (br == "ie") 
+            {
+                txtarea.focus();
+                var range = document.selection.createRange();
+                range.moveStart ('character', -txtarea.value.length);
+                strPos = range.text.length;
+            }
+            else if (br == "ff") 
+              strPos = txtarea.selectionStart;
 
-          if(document.getElementById("chbox").checked == false)
+            var front = (txtarea.value).substring(0,strPos);
+            var back = (txtarea.value).substring(strPos,txtarea.value.length);
+            txtarea.value=front+text+back;
+            strPos = strPos + text.length;
+            if (br == "ie") 
+            {
+                txtarea.focus();
+                var range = document.selection.createRange();
+                range.moveStart ('character', -txtarea.value.length);
+                range.moveStart ('character', strPos);
+                range.moveEnd ('character', 0);
+                range.select();
+            }
+            else if (br == "ff") 
+            {
+                txtarea.selectionStart = strPos;
+                txtarea.selectionEnd = strPos;
+                txtarea.focus();
+            }
+            txtarea.scrollTop = scrollPos;
+          }
+          //-----------------------------------------
+          function chekbox_f() 
           {
-          document.getElementById("chbox").value="false";
-          document.getElementById("chbox1").value="remove";
-
-          }
-          }
-
-          function chekbox_start() {
-
-          if(document.getElementById("chboxstart").checked == true)
-          {
-          document.getElementById("chboxstart").value="true";
-          }
-
-          if(document.getElementById("chboxstart").checked == false)
-          {
-          document.getElementById("chboxstart").value="false";
-          document.getElementById("chboxstart1").value="remove";
-
-          }
-          }
-
-          function make_check(){
-              document.getElementById("chbox").checked = true;
+            if(document.getElementById("chbox").checked == true)
+            {
               document.getElementById("chbox").value="true";
+            }
+            if(document.getElementById("chbox").checked == false)
+            {
+              document.getElementById("chbox").value="false";
+              document.getElementById("chbox1").value="remove";
+            }
           }
-
-          function make_check_start(){
-              document.getElementById("chboxstart").checked = true;
+          //-----------------------------------------
+          function chekbox_start() 
+          {
+            if(document.getElementById("chboxstart").checked == true)
+            {
               document.getElementById("chboxstart").value="true";
+            }
+            if(document.getElementById("chboxstart").checked == false)
+            {
+              document.getElementById("chboxstart").value="false";
+              document.getElementById("chboxstart1").value="remove";
+            }
+          }
+          //-----------------------------------------
+          function make_check()
+          {
+            document.getElementById("chbox").checked = true;
+            document.getElementById("chbox").value="true";
           }
 
-          function setValue(type,cat) {
-
-              var type_idx=20;
-              var cat_idx=30;
-
-          switch(cat)
+          function make_check_start()
           {
-              case "BIOLOGY":
-              cat_idx=0;
-              break;
-              case "PHYSICS":
-              cat_idx=3;
-              break;
-              case "COMPUTER SCIENCE":
-              cat_idx=1;
-              break;
-              case "MATHEMATICS":
-              cat_idx=2;
-              break;
-              case "STATISTICS":
-              cat_idx=4;
+            document.getElementById("chboxstart").checked = true;
+            document.getElementById("chboxstart").value="true";
           }
-
-          switch(type)
+          //-----------------------------------------
+          function setValue(type,cat) 
           {
+            var type_idx=20;
+            var cat_idx=30;
+            switch(cat)
+            {
+                case "BIOLOGY":
+                  cat_idx=0;
+                  break;
+                case "PHYSICS":
+                  cat_idx=3;
+                  break;
+                case "COMPUTER SCIENCE":
+                  cat_idx=1;
+                  break;
+                case "MATHEMATICS":
+                  cat_idx=2;
+                  break;
+                case "STATISTICS":
+                  cat_idx=4;
+            }
+            switch(type)
+            {
               case "ROOT":
-              type_idx=0;
-              break;
+                type_idx=0;
+                break;
               case "PRE-REQ":
-              type_idx=1;
-              break;
+                type_idx=1;
+                break;
               case "EXAMPLE":
-              type_idx=2;
+                type_idx=2;
+            }
+            $("#pagina_cat_id").prop("selectedIndex", cat-1);
+            $("#pagina_type_id").prop("selectedIndex", type_idx);
           }
-
-          $("#pagina_cat_id").prop("selectedIndex", cat-1);
-          $("#pagina_type_id").prop("selectedIndex", type_idx);
-
-          }
-
-          function add_option(id,value1){
-
-          $('#pagina_cat_id').append($(' &lt;option &gt;', {
-              value: id,
-              text: value1
-              }))
+          //-----------------------------------------
+          function add_option(id,value1)
+          {
+            $('#pagina_cat_id').append($(' &lt;option &gt;', {value: id,text: value1}))
           }
         </script>
 
@@ -172,10 +164,6 @@
                     <td CLASS="TITLE_DARK" ALIGN="RIGHT">
                       <input type="button">
                         <xsl:attribute name="onclick">
-                          <script>
-                            alert('ali');
-                          </script>
-
                           javascript:document.form_id.hAction.value = 'Update';document.form_id.action='sa_pagina_dtl_for_map.aspx?redirect=true&#38;lng=<xsl:value-of select="//language" />';document.form_id.submit();
                         </xsl:attribute>
                         <xsl:attribute name="value">

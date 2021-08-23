@@ -126,7 +126,7 @@
           <tr>
             <td align="center">
               <!-- Insert footer -->
-              <xsl:apply-templates select="//footer" />
+              
             </td>
           </tr>
         </table>

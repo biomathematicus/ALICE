@@ -10,14 +10,17 @@
       <!-- Insert HTML header -->
       <xsl:apply-templates select="//html_header" />
       <script type="text/javascript" src="../common/vis.js">      </script>
-
       <script type="text/javascript" src="../common/tractus.js">
       </script>
       <link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
       <style type="text/css">
+        .center {
+          border: 5px solid #FFFF00;
+          text-align: center;        
+        }        
         #mynetwork{
-        width: $(document).width();
-        height:$(document).height();
+        width:  800px; /* $(document).width(); */
+        height: 800px; /* $(document).height(); */
         border: 1px solid lightgray;
         }
 
@@ -223,7 +226,7 @@
 
         <table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
           <tr valign="top">
-            <td rowspan="3" valign="top">
+            <td rowspan="4" valign="top">
               <!-- Insert left menu -->
               <xsl:apply-templates select="//left_menu" />
             </td>
@@ -231,12 +234,11 @@
               <!-- Insert header -->
               <xsl:apply-templates select="//top_menu" />
             </td>
-            <td rowspan="3" valign="top">
+            <td rowspan="4" valign="top">
               <!-- Insert right menu -->
               <xsl:apply-templates select="//right_menu" />
             </td>
           </tr>
-
           <tr>
             <td valign="top" align="left" class="MEDIUM">
               <!-- ************ BEGINS CONTENT ************ -->
@@ -258,7 +260,6 @@
                   javascript:document.frmSession.action='Pagina.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//pag_nxt" />&#38;opus=<xsl:value-of select="//id_opus" />';document.frmSession.submit();
                 </xsl:attribute>
                 <span class="MEDIUM">
-                  x
                   <xsl:value-of select="//opus_name" />
                 </span>
               </a>
@@ -460,6 +461,41 @@
               <!-- ************  ENDS CONTENT  ************ -->
             </td>
           </tr>
+          <tr>
+            <td  CLASS="TITLE_DARK">
+              <form name="p_tractus" id="p_tractus" method="post">
+                <xsl:attribute name="action">
+                  Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//id_opus" />
+                </xsl:attribute>
+                <input  onclick="categoryOnClick()"  type="hidden">
+                  <xsl:attribute name="value">
+                    <xsl:value-of select="//L_set_known" />
+                  </xsl:attribute>
+                </input>
+                <input type="hidden" id="senddata" value="click" name="sendata1"></input>
+                <input type="hidden" id="send_interest"  name="send_interest"></input>
+                <input type="hidden" id="pagina_cat_status" value="click" name="pagina_cat_status"></input>
+                <div id="choose_category">
+                  <p>Please Choose Your Interest</p>
+                  <select name ="pagina_cat" id="pagina_cat_id" onchange="update_map()">
+                    <script>
+                      add_option(0,"Please Select your Interest")
+                      <xsl:for-each select="/doc/Lables">
+                        add_option( '<xsl:value-of select="id_opus_category" />','<xsl:value-of select="id_opus_Lable" />');
+                      </xsl:for-each>
+                    </script>
+                    <xsl:attribute name="onclick">
+                    </xsl:attribute>
+                  </select>
+                </div>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>        
+              <div id="mynetwork" class ="center"> </div>
+            </td>
+          </tr>
 
           <!--tr>
 						<td align="center">
@@ -468,44 +504,7 @@
 						</td>
 					</tr-->
         </table>
-
-        <form name="p_tractus" id="p_tractus" method="post">
-
-          <xsl:attribute name="action">
-            Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//id_opus" />
-          </xsl:attribute>
-          <input  onclick="categoryOnClick()"  type="hidden">
-            <!--   type="submit"-->
-
-            <xsl:attribute name="value">
-              <xsl:value-of select="//L_set_known" />
-            </xsl:attribute>
-          </input>
-          <input type="hidden" id="senddata" value="click" name="sendata1"></input>
-          <input type="hidden" id="send_interest"  name="send_interest"></input>
-
-          <input type="hidden" id="pagina_cat_status" value="click" name="pagina_cat_status"></input>
-
-          <td  CLASS="TITLE_LIGHT" colspan="2">
-
-            <div id="choose_category">
-              <p>Please Choose Your Interest</p>
-              <select name ="pagina_cat" id="pagina_cat_id" onchange="update_map()">
-                <script>
-                  add_option(0,"Please Select your Interest")
-                  <xsl:for-each select="/doc/Lables">
-                    add_option( '<xsl:value-of select="id_opus_category" />','<xsl:value-of select="id_opus_Lable" />');
-                  </xsl:for-each>
-                </script>
-                <xsl:attribute name="onclick">
-                </xsl:attribute>
-              </select>
-            </div>
-          </td>
-        </form>
-        <div id="mynetwork" >        </div>
-        <div id="personalize_net">
-
+      <div id="personalize_net">
           <xsl:for-each select="/doc/tractus/pagina">
             <div>
               <xsl:attribute name="name">
