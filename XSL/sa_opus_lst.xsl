@@ -130,7 +130,7 @@
                       <td CLASS="TITLE_WARNING">
                         <a>
                           <xsl:attribute name="href">
-                            javascript:document.frmSession.action='sa_opus_dtl.aspx?opus=<xsl:value-of select="id" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();
+                            javascript:var result=confirm("Deletion is irreversible");if (result){document.frmSession.action='sa_opus_dtl.aspx?opus=<xsl:value-of select="id" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit()};
                           </xsl:attribute>
                           <xsl:value-of select="//L_DELETE" />
                         </a>
