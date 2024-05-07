@@ -1,1 +1,0 @@
--- Working query to promote out of development after April 26, 2017

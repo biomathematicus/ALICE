@@ -1,2 +1,0 @@
-<%@ Page Language="vb" CodeFile="Editio.aspx.vb" AutoEventWireup="false" Inherits="Literatronica.editio" %>
-<asp:Xml id="XMLContent" runat="server" />
