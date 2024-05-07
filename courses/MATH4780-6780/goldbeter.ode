@@ -1,0 +1,37 @@
+# goldbeter.ode
+#
+# Dimensional form of the Goldbeter-Lefever model for glycolytic
+# oscillations via ADP feedback onto phosphofructokinase 1.
+# See p. 21-24 of Keener-Sneyd book.
+
+ATP(0)=0.5
+ADP(0)=0.5
+
+# substrate (ATP) influx rate
+par nu=1
+
+# product (ADP) removal rate
+par eta=120
+
+# ratio k_2/k_(-2)
+par k=20
+
+# time scale parameter (in sec)
+par tau=500
+
+# Functions
+
+fun = ATP*(1+k*ADP)^2
+
+# Equations
+
+ATP' = (nu - fun)/tau
+ADP' = (fun - eta*ADP)/tau
+
+# These are the xpp parameters
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=0.2, total=1000, maxstor=20000
+@ bounds=10000000, xp=t, yp=ATP
+@ xlo=-1, xhi=1000, ylo=-1, yhi=2
+
+done
+

@@ -1,0 +1,53 @@
+# circadian.ode
+#
+# Model for circadian oscillator
+# for Scheper  e.t.c paper
+
+# initial concentrations
+
+M(0)=1
+P(0)=0.2
+
+
+# Parameters
+# time delay constant
+par tau=4
+
+# MRNA production rate rate
+par rm=1
+
+# Protein production rate
+par rp=1
+
+# MRNA degradation rate
+par qm=0.21
+par qp=0.21
+
+
+# Protein degradation rate - square-wave pulse train 
+# declare parameters
+par r0=0.21
+par period=26, pulse=0.4
+
+num tf=5,tp=1,tstart=5
+
+# Functions
+
+fM= 1/(1+P^2)
+fP=(delay(M,tau))^3
+ts=t-tstart
+rstar = r0 + pulse*(heav(mod(ts,period)-tf)-heav(mod(ts,period)-(tf+tp)))
+qp_en=rstar
+
+# Equations
+
+M' = rm*fM-qm*M
+P' = rp*fP-qp_en*P
+
+# These are the xpp parameters
+@toler=1.0e-10, atoler=1.0e-10, dt=0.2, total=1000, maxstor=20000
+@ bounds=10000000, xp=t, yp=M
+@ xlo=0, xhi=100, ylo=0, yhi=2
+@ delay=20
+
+done

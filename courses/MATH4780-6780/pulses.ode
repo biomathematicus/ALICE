@@ -1,0 +1,26 @@
+# pulses.ode, A program that produces a square-wave pulse train of any period.
+
+# declare parameters
+par r0=1
+par period=21,pulse=3
+
+# don't need to change these. They specify when pulse begin and the pulse
+# duration.
+num tf=5,tp=1,tstart=5
+
+# Initial conditions
+x(0)=1
+
+ts=t-tstart
+rstar = r0 + pulse*(heav(mod(ts,period)-tf)-heav(mod(ts,period)-(tf+tp)))
+
+# ODE that responds to the pulsed input.
+dx/dt = rstar
+
+aux R1=rstar
+
+# set xpp parameters
+@ total=200, xp=t, yp=R1, xlo=0, xhi=200, ylo=0, yhi=5, bounds=1000000, dt=0.2
+
+
+done

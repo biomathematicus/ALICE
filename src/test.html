@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Markdown and KaTeX Example</title>
+	<link rel="stylesheet" href="../common/katex/katex.min.css">
+	<script src="../common/katex/katex.min.js"></script>
+	<script src="../common/katex/contrib/auto-render.min.js"></script>
+	<script src="../common/showdown/showdown.min.js"></script>
+	<style>
+		body {
+			padding: 20px;
+			font-family: Arial, sans-serif;
+		}
+
+		textarea {
+			width: 100%;
+			height: 200px;
+		}
+
+		#output {
+			border: 1px solid #ccc;
+			padding: 10px;
+			margin-top: 20px;
+			white-space: pre-wrap; /* Maintains whitespace formatting */
+		}
+	</style>
+</head>
+<body>
+	<h1>Markdown with KaTeX</h1>
+	<textarea id="markdownInput">Here is an inline math equation: $x^2 + y^2 = z^2$
+
+Here is a displayed math equation:
+$$\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$
+
+*Italic*, **bold**, and `code` text styles.</textarea>
+	<button onclick="convertMarkdownToHtml()">Convert Markdown</button>
+	<div id="output"></div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var converter = new showdown.Converter(),
+				input = document.getElementById('markdownInput'),
+				output = document.getElementById('output');
+
+			window.convertMarkdownToHtml = function () {
+				var html = converter.makeHtml(input.value);
+				output.innerHTML = html;
+				renderMathInElement(output, {
+					delimiters: [
+						{ left: "$$", right: "$$", display: true },
+						{ left: "\\[", right: "\\]", display: true },
+						{ left: "$", right: "$", display: false },
+						{ left: "\\(", right: "\\)", display: false }
+					]
+				});
+			};
+		});
+	</script>
+</body>
+</html>
