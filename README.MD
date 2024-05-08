@@ -13,16 +13,6 @@ ALICE implements an educational philosophy that favors connectedness across subj
 From K-16 science classrooms, to graduate studies and professional teams, STEM education has traditionally consisted of a hierarchical and deterministic organization of concepts, i.e. tree-like structures with starting points and well defined paths. The preference of a fixated learning pathway to navigate through scientific material ignores each student's prior learning and abilities. Tradition in science education also assumes a clear separation between various scientific disciplines, thus neglecting problem-solving structures of multi-disciplinary and trans-disciplinary scientific environments. The metaphor of the tree in traditional STEM education is replaced in ALICE by a dense rhizome-like network that does not privilege a particular path, but instead offers a milieu for traversal. In practice, it is the student during the learning process who makes an abstract knowledge network come to a unique realization. ALICE generates individualized development plans, according to previous experiences and current challenges. Furthermore, ALICE is designed to connect lexias from multiple subject matters, thus bypassing disciplinary barriers that in many cases are artificial.
 
 
-<style>
-    img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    }
-</style>
-![ALICE Educational Model](/images/system/ALICE.png)
-
-
 ## Components of ALICE
 
 
