@@ -13,3 +13,5 @@ data/*
 .DS_Store
 # Ignore Visual Studion preferences file
 ALICE.suo
+
+.fake
