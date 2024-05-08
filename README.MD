@@ -13,7 +13,7 @@ ALICE implements an educational philosophy that favors connectedness across subj
 ## Components of ALICE
 
 
-ALICE was conceived in 1996, designed in 1999 using ASP and a draft of the XML standard adopted by the Word Wide Web Consortium, and finally implemented very close to its current state in 2003 in VB.NET. It is an ancient system by Web standards. However, it is still a valid development approach... and blazingly fast.  
+ALICE was conceived in 1996, designed in 1999 using ASP and a draft of the XML standard adopted by the Word Wide Web Consortium, and finally implemented very close to its current state in 2003 in VB.NET. It is an ancient system by Web standards. However, because it uses an international standard, it will remain current for decades to come... and it is blazingly fast.  
 
 To install ALICE: 
 
