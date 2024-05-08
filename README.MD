@@ -10,13 +10,10 @@ ALICE stands for *Adaptive Learning for Interdisciplinary Collaborative Environm
 ALICE implements an educational philosophy that favors connectedness across subject areas, and acquisition of broad competencies that deploy multiple skills to solve real-world problems.
 
 
-From K-16 science classrooms, to graduate studies and professional teams, STEM education has traditionally consisted of a hierarchical and deterministic organization of concepts, i.e. tree-like structures with starting points and well defined paths. The preference of a fixated learning pathway to navigate through scientific material ignores each student's prior learning and abilities. Tradition in science education also assumes a clear separation between various scientific disciplines, thus neglecting problem-solving structures of multi-disciplinary and trans-disciplinary scientific environments. The metaphor of the tree in traditional STEM education is replaced in ALICE by a dense rhizome-like network that does not privilege a particular path, but instead offers a milieu for traversal. In practice, it is the student during the learning process who makes an abstract knowledge network come to a unique realization. ALICE generates individualized development plans, according to previous experiences and current challenges. Furthermore, ALICE is designed to connect lexias from multiple subject matters, thus bypassing disciplinary barriers that in many cases are artificial.
-
-
 ## Components of ALICE
 
 
-ALICE was conceived in 1996, designed in 1999 using ASP and a draft of the XML standard adopted by the Word Wide Web Consortium, and finally implemented very close to its current state in 2003 in VB.NET. It is an ancient system by Web standards. However, it is still a valid development approach... and blazingly fast.  
+ALICE was conceived in 1996, designed in 1999 using ASP and a draft of the XML standard adopted by the Word Wide Web Consortium, and finally implemented very close to its current state in 2003 in VB.NET. It is an ancient system by Web standards. However, because it uses an international standard, it will remain current for decades to come... and it is blazingly fast.  
 
 To install ALICE: 
 
