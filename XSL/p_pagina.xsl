@@ -271,17 +271,23 @@
 														<a href="javascript:LoadTab('Intro')"><xsl:value-of select="//TAB_INTRO" /></a>
 													</td>
 													<!-- _____________________ -->
+													<xsl:if test="//ds_wiki != ''">
 													<td id="tabWiki" class="TabOff" width="74" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('Wiki');"><xsl:value-of select="//TAB_WIKI" /></a>
 													</td>
-													<!-- _____________________ -->											
+													</xsl:if>
+													<!-- _____________________ -->
+													<xsl:if test="//ds_pdf != ''">										
 													<td width="74" id="tabPDF" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('PDF');"><xsl:value-of select="//TAB_PDF" /></a>
 													</td>
+													</xsl:if>
 													<!-- _____________________ -->
-													<td width="74" id="tabMedia" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
+													<xsl:if test="//ds_youtube != ''">
+														<td width="74" id="tabMedia" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('Media');"><xsl:value-of select="//TAB_MEDIA" /></a>
 													</td>
+													</xsl:if>
 													<!-- _____________________ -->
 													<td width="74" id="tabGraph" class="TabOff" background="../images/system/bgd_tab_80x20.gif" >
 														<a href="javascript:LoadTab('mynetwork');"><xsl:value-of select="//TAB_MAPPA"/></a>
@@ -362,7 +368,18 @@
 											<div id="pag_content">
 											<xsl:value-of select="//pag_content"  disable-output-escaping="yes" />
 											</div>
-											<script>MarkdownToHtml('pag_content');</script>
+											<script>
+												MarkdownToHtml('pag_content');
+												<xsl:if test="//ds_wiki != ''">
+													LoadWiki('<xsl:value-of select="//ds_wiki"/>');
+												</xsl:if>
+												<xsl:if test="//ds_youtube != ''">
+													LoadMedia('<xsl:value-of select="//ds_youtube"/>');
+												</xsl:if>
+												<xsl:if test="//ds_pdf != ''">
+													LoadPDF('<xsl:value-of select="//ds_pdf"/>');
+												</xsl:if>
+											</script>
 										</div>
 										<script>LoadTab("Intro");</script>
 										<xsl:if test="//user_logon !='LOGGED-OFF'">
@@ -373,8 +390,30 @@
 															<xsl:value-of select="//language" />
 														</xsl:attribute>
 													</input>
-													<h1>Homework Assignment for this Lesson</h1>
-													<script  type="text/javascript">document.write('<p>' + sHW + '</p>');</script>
+													<br />
+
+													<h2>Student Learning Outcomes:</h2>
+													<div id="SLO">
+														<xsl:value-of select="//ds_slo"  disable-output-escaping="yes" />
+													</div>
+
+													<h2>Assessment:</h2>
+													<div id="ASSESS">
+														<xsl:value-of select="//ds_assess"  disable-output-escaping="yes" />
+													</div>
+
+													<h2>Student:</h2>
+													<textarea name="ds_assess_his" cols="90" rows="20" wrap="VIRTUAL" />
+													<br />
+													<button onclick="alert('Pending')">Submit</button>
+													<br />
+													<br />
+
+													<script  type="text/javascript">
+														MarkdownToHtml('SLO');
+														MarkdownToHtml('ASSESS');
+														document.write('<p>' + sHW + '</p>');
+													</script>
 													<!-- <xsl:choose><xsl:when test="//take='0'">  -->
 													<div>
 														<input type="file" accept=".pdf,.doc,.docx,.rtf">

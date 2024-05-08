@@ -30,10 +30,13 @@ Namespace Literatronica
 
             'RETRIEVE DATA FROM DATABASE
             Dim sSQL As String
-            'Variables for saving, inserting and deleting data
-            Dim id_opus, id_pagina, am_link, ds_title_his, ds_tag_his, ds_content_his, _
-             ds_title_bri, ds_tag_bri, ds_content_bri, hAction, sCapston, sCapstonStatus, sStartLesson, sStartLessonStatus As String
-            Dim sPaginaType, sPaginaCat As String
+			'Variables for saving, inserting and deleting data
+			Dim id_opus, id_pagina, am_link, ds_title_his, ds_tag_his, ds_content_his,
+				ds_title_bri, ds_tag_bri, ds_content_bri, hAction, sCapston, sCapstonStatus,
+				sStartLesson, sStartLessonStatus, ds_pdf_his, ds_pdf_bri,
+				ds_wiki_his, ds_wiki_bri, ds_youtube_his, ds_youtube_bri,
+				ds_assess_his, ds_assess_bri, ds_slo_his, ds_slo_bri As String
+			Dim sPaginaType, sPaginaCat As String
             Dim sCapston1 As Boolean
             'Dataservice
             Dim doc As XmlDocument = New XmlDocument
@@ -68,8 +71,22 @@ Namespace Literatronica
             ds_content_bri = oDBService.formatTextInput(Request.Form("ds_content_bri"))
             sPaginaType = oDBService.formatTextInput(Request.Form("pagina_type"))
             sPaginaCat = oDBService.formatTextInput(Request.Form("pagina_cat"))
-            sCapston = Request.Form("Capstone")
-            sCapstonStatus = Request.Form("capstone_status")
+
+			ds_pdf_his = oDBService.formatTextInput(Request.Form("ds_pdf_his"))
+			ds_wiki_his = oDBService.formatTextInput(Request.Form("ds_wiki_his"))
+			ds_youtube_his = oDBService.formatTextInput(Request.Form("ds_youtube_his"))
+			ds_pdf_bri = oDBService.formatTextInput(Request.Form("ds_pdf_bri"))
+			ds_wiki_bri = oDBService.formatTextInput(Request.Form("ds_wiki_bri"))
+			ds_youtube_bri = oDBService.formatTextInput(Request.Form("ds_youtube_bri"))
+
+
+			ds_assess_his = oDBService.formatTextInput(Request.Form("ds_assess_his"))
+			ds_slo_his = oDBService.formatTextInput(Request.Form("ds_slo_his"))
+			ds_assess_bri = oDBService.formatTextInput(Request.Form("ds_assess_bri"))
+			ds_slo_bri = oDBService.formatTextInput(Request.Form("ds_slo_bri"))
+
+			sCapston = Request.Form("Capstone")
+			sCapstonStatus = Request.Form("capstone_status")
             If sCapston Is Nothing And sCapstonStatus = "remove" Then
 
                 sCapston = "false"
@@ -90,29 +107,39 @@ Namespace Literatronica
                 sStartLesson = "nothing"
             End If
 
-            sSQL = "exec sa_pagina_dtl" &
-              " @Language='" & sLinguaCok & "'" &
-              ",@OpusType=''" &
-              ",@PageCode='sa_menu'" &
-              ",@PageName='sa_pagina_dtl.aspx'" &
-              ",@userID='" & sUserID & "'" &
-              ",@hAction='" & hAction & "'" &
-              ",@sCapston='" & sCapston & "'" &
-              ",@sStartLesson='" & sStartLesson & "'" &
-              ",@id_opus=" & id_opus &
-              ",@id_pagina=" & id_pagina &
-              ",@am_link=" & am_link &
-              ",@ds_title_his='" & ds_title_his & "'" &
-              ",@ds_tag_his='" & ds_tag_his & "'" &
-              ",@ds_content_his='" & ds_content_his & "'" &
-              ",@ds_title_bri='" & ds_title_bri & "'" &
-              ",@ds_tag_bri='" & ds_tag_bri & "'" &
-              ",@sPaginaType='" & sPaginaType & "'" &
-              ",@sPaginaCat='" & sPaginaCat & "'" &
-              ",@ds_content_bri='" & ds_content_bri & "'"
+			sSQL = "exec sa_pagina_dtl" &
+			  " @Language='" & sLinguaCok & "'" &
+			  ",@OpusType=''" &
+			  ",@PageCode='sa_menu'" &
+			  ",@PageName='sa_pagina_dtl.aspx'" &
+			  ",@userID='" & sUserID & "'" &
+			  ",@hAction='" & hAction & "'" &
+			  ",@sCapston='" & sCapston & "'" &
+			  ",@sStartLesson='" & sStartLesson & "'" &
+			  ",@id_opus=" & id_opus &
+			  ",@id_pagina=" & id_pagina &
+			  ",@am_link=" & am_link &
+			  ",@ds_title_his='" & ds_title_his & "'" &
+			  ",@ds_tag_his='" & ds_tag_his & "'" &
+			  ",@ds_content_his='" & ds_content_his & "'" &
+			  ",@ds_title_bri='" & ds_title_bri & "'" &
+			  ",@ds_tag_bri='" & ds_tag_bri & "'" &
+			  ",@sPaginaType='" & sPaginaType & "'" &
+			  ",@sPaginaCat='" & sPaginaCat & "'" &
+			  ",@ds_content_bri='" & ds_content_bri & "'" &
+			  ",@ds_pdf_his='" & ds_pdf_his & "'" &
+			  ",@ds_youtube_his='" & ds_youtube_his & "'" &
+			  ",@ds_wiki_his='" & ds_wiki_his & "'" &
+			  ",@ds_pdf_bri='" & ds_pdf_bri & "'" &
+			  ",@ds_youtube_bri='" & ds_youtube_bri & "'" &
+			  ",@ds_wiki_bri='" & ds_wiki_bri & "'" &
+			  ",@ds_assess_his='" & ds_assess_his & "'" &
+			  ",@ds_assess_bri='" & ds_assess_bri & "'" &
+			  ",@ds_slo_his='" & ds_slo_his & "'" &
+			  ",@ds_slo_bri='" & ds_slo_bri & "'"
 
-            doc.LoadXml(oDBService.DBXML(sSQL))
-            trans.Load(Server.MapPath("..\XSL\sa_pagina_dtl.xsl"))
+			doc.LoadXml(oDBService.DBXML(sSQL))
+			trans.Load(Server.MapPath("..\XSL\sa_pagina_dtl.xsl"))
             If Request.QueryString("redirect") = "true" Then _
              Response.Redirect("sa_pagina_lst.aspx?opus=" & id_opus & "&lng=" & sLinguaCok & "&#" & id_pagina)
             ' doc.Save(Server.MapPath("..\debug.xml"))

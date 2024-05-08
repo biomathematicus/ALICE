@@ -142,8 +142,8 @@
                         </strong><br />
                         <xsl:value-of select="//L_DISTANCE" />: <input name="am_value" id="am_value" type="text" size="6" value="10" />
                         <select name="LinkType" id="LinkType">
-                          <option selected="" value="PRE-REQ">PRE-REQ</option>
-                          <option value="NEXT">NEXT</option>
+                          <option value="PRE-REQ">PRE-REQ</option>
+                          <option selected="" value="NEXT">NEXT</option>
                         </select>
                       </td>
                     </tr>

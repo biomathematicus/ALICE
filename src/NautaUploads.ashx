@@ -13,7 +13,7 @@ Public Class h1
 
 		Dim oDBService As New Connection
 		Dim sUser, sOpus, sPagina, sPath, iid_new As String
-		Dim iid_user, iid_pagina, iid_opus As Integer
+		Dim iid_user, iid_pagina, iid_opus As String
 		Dim sExtention As String = ""
 		Dim sDir As String
 		Dim fname As String
@@ -50,7 +50,7 @@ Public Class h1
 		sTemp = String.Concat(sTemp, "/")
 		' sDir = String.Concat(sTemp, sPagina)
 		' sTemp = String.Concat(sDir, "/")
-		sUser = sTemp + "User" + iid_user.ToString + "Course" + iid_opus.ToString + "_Lesson" + iid_new
+		sUser = sTemp + "User" + iid_user + "Course" + iid_opus + "_Lesson" + iid_new
 		'  sPath = String.Concat(sTemp, sUser)
 
 		sDir = Replace(sDir, ".", "")
@@ -88,7 +88,7 @@ Public Class h1
 				fname = context.Server.MapPath(sPath)
 				fileNameOnly = iid_new
 				path_ = path1
-				path_ = Path.Combine(path_, "User" + iid_user.ToString + "Course" + iid_opus.ToString + "_Lesson")
+				path_ = Path.Combine(path_, "User" + iid_user + "Course" + iid_opus + "_Lesson")
 				newFullPath = fname
 				Try
 					' Determine whether the directory exists.
@@ -129,7 +129,7 @@ Public Class h1
 		'iOpus = sOpus 
 		'iPagina = Upload.iPagina_id
 		'iUser = Upload.iUser_id
-		sUser = sTemp + "User" + iid_user.ToString + "Course" + iid_opus.ToString + "_Lesson" + tempFileName
+		sUser = sTemp + "User" + iid_user + "Course" + iid_opus + "_Lesson" + tempFileName
 		sPath = sUser & sExtention
 		sSQL = "exec p_labor_add" &
 				 " @Opus_Id=" & sUser &

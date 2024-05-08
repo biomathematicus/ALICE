@@ -9,9 +9,8 @@
       <!-- Insert HTML header -->
       <xsl:apply-templates select="//html_header" />
       <body>
-
-        <script>
-
+		  <!-- script language="JavaScript" type="text/JavaScript" src="sa_pagina_dtl.js" / -->
+		  <script>
           function insertAtCaret(areaId,text) {
           var txtarea = document.getElementById(areaId);
           var scrollPos = txtarea.scrollTop;
@@ -228,7 +227,7 @@
                       <input type="hidden" id="chbox1" name="capstone_status"> </input>
                     </td>
                     <td CLASS="TITLE_LIGHT" colspan ="2">
-                      <p>Capstone Experience</p>
+                      Capstone Experience
                     </td>
                   </tr>
                   <tr>
@@ -237,7 +236,7 @@
                       <input type="hidden" id="chboxstart1" name="startlesson_status"> </input>
                     </td>
                     <td CLASS="TITLE_LIGHT" colspan ="2">
-                      <p>As a Start Lesson</p>
+                      As a Start Lesson
                     </td>
                   </tr>
 
@@ -307,7 +306,8 @@
                       <b>BRITANNIA</b>
                     </td>
                   </tr>
-                  <tr>
+					<!--*********************************************************************************************************-->
+					<tr>
                     <td CLASS="TITLE_LIGHT">
                       <xsl:value-of select="//L_SA_TITLE" />
                     </td>
@@ -326,7 +326,8 @@
                       </input>
                     </td>
                   </tr>
-                  <tr>
+					<!--*********************************************************************************************************-->
+					<tr>
                     <td CLASS="TITLE_LIGHT">
                       <xsl:value-of select="//L_SA_TAG" />
                     </td>
@@ -341,28 +342,106 @@
                       </textarea>
                     </td>
                   </tr>
-                  <tr>
-                    <td CLASS="TITLE_LIGHT">
-                      <xsl:value-of select="//L_SA_CONTENT" />
-                    </td>
-                    <td CLASS="TITLE_LIGHT">
-                      <textarea name="ds_content_his" cols="45" rows="25" wrap="VIRTUAL">
-                        <xsl:value-of select="//ds_content_his" />
-                      </textarea>
-                    </td>
-                    <!--*********************************************************************************************************-->
-                    <td CLASS="TITLE_LIGHT">
-                      <textarea  id="ds_content_bri1" name="ds_content_bri" cols="45" rows="25" wrap="VIRTUAL">
-                        <xsl:value-of select="//ds_content_bri" />
-                      </textarea>
-
-                      <input type="button" value="Add Paragraph"  onclick="insertAtCaret('ds_content_bri1','&lt;p&gt;please add you paraghraph here&lt;/p&gt;');return false;" />
-
-                      <input type="button" value="Add Pdf"  onclick="insertAtCaret('ds_content_bri1','&lt;script&gt;LoadPDF(&#39;Please add the name of pdf here&#39;)&lt;/script&gt;');return false;" />
-                    </td>
-                    <!--*********************************************************************************************************-->
-                  </tr>
-                  <tr>
+					<!--*********************************************************************************************************-->
+					<tr>
+						<td CLASS="TITLE_LIGHT">
+							<xsl:value-of select="//L_SA_CONTENT" />
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_content_his" cols="45" rows="25" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_content_his" />
+							</textarea>
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea  id="ds_content_bri1" name="ds_content_bri" cols="45" rows="25" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_content_bri" />
+							</textarea>
+							<!-- input type="button" value="Add Paragraph"  onclick="insertAtCaret('ds_content_bri1','&lt;p&gt;please add you paraghraph here&lt;/p&gt;');return false;" />
+                      <input type="button" value="Add Pdf"  onclick="insertAtCaret('ds_content_bri1','&lt;script&gt;LoadPDF(&#39;Please add the name of pdf here&#39;)&lt;/script&gt;');return false;" / -->
+						</td>
+					</tr>
+					<!--*********************************************************************************************************-->
+					<tr>
+						<td CLASS="TITLE_LIGHT">
+							SLO
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_slo_his" cols="45" rows="10" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_slo_his" />
+							</textarea>
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_slo_bri" cols="45" rows="10" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_slo_bri" />
+							</textarea>
+						</td>
+					</tr>
+					<!--*********************************************************************************************************-->
+					<tr>
+						<td CLASS="TITLE_LIGHT">
+							Assessment
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_assess_his" cols="45" rows="10" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_assess_his" />
+							</textarea>
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_assess_bri" cols="45" rows="10" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_assess_bri" />
+							</textarea>
+						</td>
+					</tr>
+					<!--*********************************************************************************************************-->
+					<tr>
+						<td CLASS="TITLE_LIGHT">
+							PDF
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_pdf_his" cols="45" rows="5" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_pdf_his" />
+							</textarea>
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_pdf_bri" cols="45" rows="5" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_pdf_bri" />
+							</textarea>
+						</td>
+					</tr>
+					<!--*********************************************************************************************************-->
+					<tr>
+						<td CLASS="TITLE_LIGHT">
+							Youtube
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_youtube_his" cols="45" rows="5" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_youtube_his" />
+							</textarea>
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_youtube_bri" cols="45" rows="5" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_youtube_bri" />
+							</textarea>
+						</td>
+					</tr>
+					<!--*********************************************************************************************************-->
+					<tr>
+						<td CLASS="TITLE_LIGHT">
+							ALICE Wiki
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_wiki_his" cols="45" rows="1" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_wiki_his" />
+							</textarea>
+						</td>
+						<td CLASS="TITLE_LIGHT">
+							<textarea name="ds_wiki_bri" cols="45" rows="1" wrap="VIRTUAL">
+								<xsl:value-of select="//ds_wiki_bri" />
+							</textarea>
+						</td>
+					</tr>
+					<!--*********************************************************************************************************-->
+					<tr>
                     <td CLASS="TITLE_DARK" ALIGN="right" COLSPAN="3">
                       <input type="hidden" name="cd_lingua">
                         <xsl:attribute name="value">
