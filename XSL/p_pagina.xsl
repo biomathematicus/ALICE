@@ -235,7 +235,8 @@
 								</a>
 								<B>&#62;</B>
 								<span class="BOLDMEDIUM">
-									<xsl:choose>
+									<xsl:value-of select="//pag_title" />
+									<!-- xsl:choose>
 										<xsl:when test="//user_status = '1'">
 											<xsl:value-of select="//pag_title" />
 										</xsl:when>
@@ -247,7 +248,7 @@
 												<xsl:value-of select="//pag_title" />
 											</a>
 										</xsl:when>
-									</xsl:choose>
+									</xsl:choose -->
 								</span>								
 							</td>
 							<td width="80%"></td>
