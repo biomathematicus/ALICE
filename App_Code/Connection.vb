@@ -9,7 +9,7 @@ Namespace Literatronica
 
 	Public Class Connection
 		Private m_oConn As SqlConnection
-		Private DB_CONN_STRING As String
+		Public DB_CONN_STRING As String
 
 		Public Sub New()
 			' Get the name of the environment variable from web.config
@@ -40,24 +40,24 @@ Namespace Literatronica
 				Return ""
 			End If
 			sTxtToClean = sTxtToClean.ToString.Replace("'", "''")
-			sTxtToClean = sTxtToClean.ToString.Replace("select", "sel&#101;ct")
-			sTxtToClean = sTxtToClean.ToString.Replace("join", "jo&#105;n")
-			sTxtToClean = sTxtToClean.ToString.Replace("union", "un&#105;on")
-			sTxtToClean = sTxtToClean.ToString.Replace("where", "wh&#101;re")
-			sTxtToClean = sTxtToClean.ToString.Replace("insert", "ins&#101;rt")
-			sTxtToClean = sTxtToClean.ToString.Replace("delete", "del&#101;te")
-			sTxtToClean = sTxtToClean.ToString.Replace("update", "up&#100;ate")
-			sTxtToClean = sTxtToClean.ToString.Replace("like", "lik&#101;")
-			sTxtToClean = sTxtToClean.ToString.Replace("drop", "dro&#112;")
-			sTxtToClean = sTxtToClean.ToString.Replace("create", "cr&#101;ate")
-			sTxtToClean = sTxtToClean.ToString.Replace("modify", "mod&#105;fy")
-			sTxtToClean = sTxtToClean.ToString.Replace("rename", "ren&#097;me")
-			sTxtToClean = sTxtToClean.ToString.Replace("alter", "alt&#101;r")
-			sTxtToClean = sTxtToClean.ToString.Replace("cast", "ca&#115;t")
-			sTxtToClean = sTxtToClean.ToString.Replace("pass", "pa&#115;s")
-			sTxtToClean = sTxtToClean.ToString.Replace("code", "co&#100;e")
+			'sTxtToClean = sTxtToClean.ToString.Replace("select", "sel&#101;ct")
+			'sTxtToClean = sTxtToClean.ToString.Replace("join", "jo&#105;n")
+			'sTxtToClean = sTxtToClean.ToString.Replace("union", "un&#105;on")
+			'sTxtToClean = sTxtToClean.ToString.Replace("where", "wh&#101;re")
+			'sTxtToClean = sTxtToClean.ToString.Replace("insert", "ins&#101;rt")
+			'sTxtToClean = sTxtToClean.ToString.Replace("delete", "del&#101;te")
+			'sTxtToClean = sTxtToClean.ToString.Replace("update", "up&#100;ate")
+			'sTxtToClean = sTxtToClean.ToString.Replace("like", "lik&#101;")
+			'sTxtToClean = sTxtToClean.ToString.Replace("drop", "dro&#112;")
+			'sTxtToClean = sTxtToClean.ToString.Replace("create", "cr&#101;ate")
+			'sTxtToClean = sTxtToClean.ToString.Replace("modify", "mod&#105;fy")
+			'sTxtToClean = sTxtToClean.ToString.Replace("rename", "ren&#097;me")
+			'sTxtToClean = sTxtToClean.ToString.Replace("alter", "alt&#101;r")
+			'sTxtToClean = sTxtToClean.ToString.Replace("cast", "ca&#115;t")
+			'sTxtToClean = sTxtToClean.ToString.Replace("pass", "pa&#115;s")
+			'sTxtToClean = sTxtToClean.ToString.Replace("code", "co&#100;e")
 			'sTxtToClean = sTxtToClean.ToString.Replace("author", "aut&#104;or")
-			sTxtToClean = sTxtToClean.ToString.Replace("username", "usernam&#101;")
+			'sTxtToClean = sTxtToClean.ToString.Replace("username", "usernam&#101;")
 			Return sTxtToClean
 		End Function
 
@@ -83,7 +83,7 @@ Namespace Literatronica
 
 		Public Function DataReaderOpen(ByVal sSQL As String) As SqlDataReader
 			'Open the data connection
-			'm_oConn = New SqlConnection(DB_CONN_STRING)
+			m_oConn = New SqlConnection(DB_CONN_STRING)
 			m_oConn.Open()
 			'Create a command object
 			Dim oCommand As SqlCommand

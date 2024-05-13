@@ -248,7 +248,7 @@
 											</a>
 										</xsl:when>
 									</xsl:choose>
-								</span>
+								</span>								
 							</td>
 							<td width="80%"></td>
 						</tr>
@@ -370,20 +370,20 @@
 											</div>
 											<script>
 												MarkdownToHtml('pag_content');
+												<xsl:if test="//ds_pdf != ''">
+													LoadPDF('<xsl:value-of select="//ds_pdf"/>');
+												</xsl:if>
 												<xsl:if test="//ds_wiki != ''">
 													LoadWiki('<xsl:value-of select="//ds_wiki"/>');
 												</xsl:if>
 												<xsl:if test="//ds_youtube != ''">
 													LoadMedia('<xsl:value-of select="//ds_youtube"/>');
 												</xsl:if>
-												<xsl:if test="//ds_pdf != ''">
-													LoadPDF('<xsl:value-of select="//ds_pdf"/>');
-												</xsl:if>
 											</script>
 										</div>
 										<script>LoadTab("Intro");</script>
 										<xsl:if test="//user_logon !='LOGGED-OFF'">
-											<div id="Test" style="visibility:hidden">
+											<div id="Test" style="visibility:hidden; display:none;">
 												<form id="frmUpload" runat="server">
 													<input id="state" type="hidden">
 														<xsl:attribute name="value">
@@ -403,19 +403,53 @@
 													</div>
 
 													<h2>Student:</h2>
-													<textarea name="ds_assess_his" cols="90" rows="20" wrap="VIRTUAL" />
+													<textarea name="ds_assess_his" cols="90" rows="10" wrap="VIRTUAL">
+														<xsl:value-of select="//ds_labor" />
+													</textarea>
+													<div id="FormattedHomework" style="display:none;">
+														<xsl:value-of select="//ds_labor" />
+													</div>
 													<br />
-													<button onclick="alert('Pending')">Submit</button>
+													<br />
+													<button id="submitBtn">
+														<xsl:attribute name="onclick">
+															javascript:Labor('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>');renderMarkdown();
+														</xsl:attribute>
+														Submit
+													</button>
+													<button id="renderBtn" type="button"  onclick="renderMarkdown();">Render markdown</button>
+													<button id="editBtn" type="button"  onclick="editMarkdown();" style="display:none;">Edit markdown</button>
+													<script type="text/javascript">
+														function renderMarkdown() {
+														var textArea = document.getElementsByName('ds_assess_his')[0];
+														var formattedDiv = document.getElementById('FormattedHomework');
+														formattedDiv.innerHTML = textArea.value;
+														MarkdownToHtml('FormattedHomework');
+														textArea.style.display = 'none';
+														formattedDiv.style.display = 'block';
+														document.getElementById('renderBtn').style.display = 'none';
+														document.getElementById('editBtn').style.display = 'inline';
+														}
+
+														function editMarkdown() {
+														var textArea = document.getElementsByName('ds_assess_his')[0];
+														var formattedDiv = document.getElementById('FormattedHomework');
+														textArea.style.display = 'block';
+														formattedDiv.style.display = 'none';
+														document.getElementById('renderBtn').style.display = 'inline';
+														document.getElementById('editBtn').style.display = 'none';
+														}
+													</script>
 													<br />
 													<br />
 
 													<script  type="text/javascript">
 														MarkdownToHtml('SLO');
 														MarkdownToHtml('ASSESS');
-														document.write('<p>' + sHW + '</p>');
+														//document.write('<p>' + sHW + '</p>');
 													</script>
 													<!-- <xsl:choose><xsl:when test="//take='0'">  -->
-													<div>
+													<!--div>
 														<input type="file" accept=".pdf,.doc,.docx,.rtf">
 															<xsl:attribute name="id">
 																<xsl:value-of select="/doc/id_pagina" />
@@ -426,18 +460,19 @@
 																javascript:show(<xsl:value-of select="/doc/id_pagina" />,'<xsl:value-of select="//user_name" />',' ', '  ','<xsl:value-of select="//user_id" />','<xsl:value-of select="//id_opus" />' ,'<xsl:value-of select="/doc/cd_new_id" />' )
 															</xsl:attribute>
 														</input>
-													</div>
+													</div -->
 													<!-- </xsl:when> </xsl:choose>   -->
+													<h3>Instructor: </h3>
 													<xsl:choose>
 														<xsl:when test="//take &gt;'0'">
-															<div>
+															<!-- div>
 																<a id="myLink" href="#"><xsl:attribute name="onclick">produce_add('<xsl:value-of select="//link_homework" />')</xsl:attribute>
 																	<xsl:value-of select="//L_SEE_HM" />
 																</a>
 																<p>
 																	<xsl:value-of select="//L_UPLOADED_HM" />
 																</p>
-															</div>
+															</div-->
 														</xsl:when>
 													</xsl:choose>
 													<xsl:choose>
@@ -462,12 +497,12 @@
 													</xsl:choose>
 
 													<!--upload home work-->
-													<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
+													<!-- a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
 														<xsl:attribute name="href">
 															javascript:document.frmSession.action='../src/upload.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//id_pagina" />&#38;opus=<xsl:value-of select="//id_opus" />';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();
 														</xsl:attribute>
 														<xsl:value-of select="//L_SEE_SB_HM" />
-													</a>
+													</a -->
 													<!--upload home work-->
 												</form>
 											</div>
@@ -537,10 +572,10 @@
 						<div id="choose_category">
 							<xsl:variable name="selectedCategory" select="//id_category_interest_base" />
 							<p>Select your area of emphasis:
-								<select name ="pagina_cat" id="pagina_cat_id" onchange="update_map()">
+								<select name ="pagina_cat" title="Area of emphasis" id="pagina_cat_id" onchange="update_map()">
 									<xsl:for-each select="/doc/labels/label">
 										<option value="{id_opus_category}">
-											<xsl:if test="$selectedCategory = id_opus_category">
+											<xsl:if test="string($selectedCategory) = string(id_opus_category)">
 												<xsl:attribute name="selected">selected</xsl:attribute>
 											</xsl:if>
 											<xsl:value-of select="id_opus_label"/>
@@ -595,7 +630,7 @@
 				network.fit();
 				document.getElementById("mynetwork").style.display = "none";
 				document.getElementById("choose_category").style.display = "none";
-				$("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
+				//$("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
 				var node_list_b = path_b.split(",");
 				var next_l=0;
 				for (i = 0; i &#60; node_list_b.length - 1 ; i++) {

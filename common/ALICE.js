@@ -6,6 +6,43 @@ Ensure that no site is presenting Literatronic within frames
 }*/
 
 /*********************************************************
+Function	: Labor()
+Purpose		: Saves student homework
+Parameters	: idOpus, idPagina, userId
+Returns		: 
+JBG - 05/2024
+*********************************************************/
+function Labor(idOpus, idPagina, userId) {
+	// Prevent the default form submission if this is part of a form
+	event.preventDefault();
+
+	// Collect the textarea content
+	var assessmentText = $('textarea[name="ds_assess_his"]').val();
+
+	// Setup the data object to send
+	var data = {
+		'id_opus': idOpus,
+		'id_pagina': idPagina,
+		'user_id': userId,
+		'ds_assess_his': assessmentText
+	};
+
+	// Make the AJAX call
+	$.ajax({
+		type: "POST",
+		url: "Pagina.ashx", 
+		data: data,
+		success: function (response) {
+			alert('Data submitted: ' + response);
+		},
+		error: function () {
+			alert('Error submitting data');
+		}
+	});
+}
+
+
+/*********************************************************
 Function	: Search()
 Purpose		: Sends a search string to the search engine
 Parameters	: None

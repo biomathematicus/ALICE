@@ -69,8 +69,8 @@ Namespace Literatronica
                 For index_1 = 0 To 6
                     oDBService.CalculateBook(id_opus, index_1)
                 Next
-                Response.Redirect("sa_opus_lst.aspx?artifex=" & id_artifex & "&lng=" & sLinguaCok)
-            Else
+				Response.Redirect("sa_opus_optum.aspx?opus=" & id_opus & "&lng=" & sLinguaCok)
+			Else
                 sSQL = "exec sa_opus_dtl" &
                   " @Language='" & sLinguaCok & "'" &
                   ",@OpusType=''" &
@@ -94,9 +94,9 @@ Namespace Literatronica
                 trans.Load(Server.MapPath("..\XSL\sa_opus_dtl.xsl"))
                 '   doc.Save(Server.MapPath("..\sa_opus_dtl.xml"))
                 If Request.QueryString("redirect") = "true" Then _
-                 Response.Redirect("sa_opus_lst.aspx?artifex=" & id_artifex & "&lng=" & sLinguaCok)
+				 Response.Redirect("sa_opus_optum.aspx?opus=" & id_opus & "&lng=" & sLinguaCok)
 
-                XMLContent.Document = doc
+				XMLContent.Document = doc
                 XMLContent.Transform = trans
             End If
         End Sub

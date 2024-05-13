@@ -64,18 +64,17 @@ Namespace Literatronica
           ",@id_pagina=" & id_pagina & _
           ",@userID='" & sUserID & "'" &
           ",@id_category=" & sCategory
-            'Response.Write(sSQL)
-            'response.end()
-            doc.LoadXml(oDBService.DBXML(sSQL))
+			Try
+				'Response.Write(sSQL)
+				'response.end()
+				doc.LoadXml(oDBService.DBXML(sSQL))
+				trans.Load(Server.MapPath("..\XSL\p_PAGINA.xsl"))
+				XMLContent.Document = doc
 
-            Try
-                trans.Load(Server.MapPath("..\XSL\p_PAGINA.xsl"))
-                XMLContent.Document = doc
-
-                XMLContent.Transform = trans
-            Catch
-                'if sUserID = "" then Response.redirect("../BBS_" & sLinguaCok & "/log_off_user.asp")
-                Response.Redirect("Nuntius.aspx?lng=" & sLinguaCok & "&nuntius=T_ERROR")
+				XMLContent.Transform = trans
+			Catch
+				'if sUserID = "" then Response.redirect("../BBS_" & sLinguaCok & "/log_off_user.asp")
+				Response.Redirect("Nuntius.aspx?lng=" & sLinguaCok & "&nuntius=T_ERROR")
             End Try
         End Sub
 

@@ -62,15 +62,15 @@ Namespace Literatronica
                     sUserID = "LOGGED-OFF"
                 End If
             End If
-            sSQL = "exec out_SECRETUS" & _
-            " @Language='" & sLinguaCok & "'" & _
-            ",@OpusType=''" & _
-            ",@LoginName='" & sLogin & "'" & _
-            ",@LoginPassword='" & sPwd & "'" & _
-            ",@PageCode='P_SECRETUS'" & _
-            ",@PageName='Secretus.aspx'" & _
-            ",@userID='" & sUserID & "'"
-            Try
+			sSQL = "exec out_SECRETUS" &
+			" @Language='" & sLinguaCok & "'" &
+			",@OpusType=''" &
+			",@LoginName='" & Trim(sLogin) & "'" &
+			",@LoginPassword='" & Trim(sPwd) & "'" &
+			",@PageCode='P_SECRETUS'" &
+			",@PageName='Secretus.aspx'" &
+			",@userID='" & sUserID & "'"
+			Try
                 doc.LoadXml(oDBService.DBXML(sSQL))
 
                 Dim MyXMLNode As XmlNode = doc.SelectSingleNode("//successful_login")

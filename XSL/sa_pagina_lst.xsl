@@ -102,7 +102,7 @@
 							  <img src="../images/system/down.png" style="width:15px"/>
 						  </a>
 					  </td>
-                      <td CLASS="TITLE_LIGHT"  width="24%">
+                      <td CLASS="TITLE_LIGHT"  width="40%">
                         <a>
                           <xsl:attribute name="href">
                             javascript:document.frmSession.action='../src/Pagina.aspx?pagina=<xsl:value-of select="id" />&#38;opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = '';document.frmSession.submit();
@@ -158,12 +158,12 @@
                           </xsl:choose>
                         </b>
                       </td>
-                      <td CLASS="TITLE_LIGHT" width="24%" nowrap="true" align="right">
+						<!-- td CLASS="TITLE_LIGHT" width="24%" nowrap="true" align="right">
                         <a>
                           <xsl:attribute name="href">
                             javascript:document.frmSession.action='sa_doctrina_lst.aspx?pagina=<xsl:value-of select="id" />&#38;opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
                           </xsl:attribute>
-                          SLOs<!-- <xsl:value-of select="/doc/admin_tags/sa_doctrina_lst" /> -->
+                          SLOs
                         </a>
                         <br />
                         <xsl:value-of select="/doc/admin/L_COUNT" />:
@@ -179,9 +179,9 @@
                             </xsl:otherwise>
                           </xsl:choose>
                         </b>
-                      </td>
+                      </td -->
                       <td width="20px">&#160;</td>
-                      <td CLASS="TITLE_WARNING">
+                      <td CLASS="TITLE_WARNING" width="50px">
                         <a>
                           <xsl:attribute name="href">
                             javascript:document.frmSession.action='sa_pagina_dtl.aspx?pagina=<xsl:value-of select="id" />&#38;opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_agregar';document.frmSession.submit();

@@ -81,7 +81,7 @@
                         </td>
                         <!-- ************ BEGINS CONTENT ************ -->
                         <td>
-                          <input type="text" name="txtLogin" id="username1" maxlength="15"/>
+                          <input type="text" name="txtLogin" id="username1" maxlength="50"/>
                         </td>
                       </tr>
                       <tr>

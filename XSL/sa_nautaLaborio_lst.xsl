@@ -159,14 +159,15 @@
                       </a>
                     </b>
                   </td>
-                  <td CLASS="TITLE_LIGHT">
+                  <td CLASS="TITLE_LIGHT" width="25%">
                     <b>
-                      <a>
-                        <xsl:attribute name="href">
+						<!-- a>
+                         <xsl:attribute name="href">
                           javascript:document.frmSession.action='sa_nautaLaborio_lst.aspx?id=<xsl:value-of select="//user_id_" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;opus=<xsl:value-of select="//opus_id" />&#38;lng=<xsl:value-of select="//language" />&#38;action=date';document.frmSession.submit();
                         </xsl:attribute>
                         Date
-                      </a>
+                      </a -->
+						Lesson Input
                     </b>
                   </td>
                   <td CLASS="TITLE_LIGHT">
@@ -200,12 +201,13 @@
                       -->
                       <td CLASS="TITLE_LIGHT">
                         <xsl:if test="ds_file != ''">
-                          <a id="myLink" href="#">
+							<!-- a id="myLink" href="#">
                             <xsl:attribute name="onclick">
                               produce_add( '<xsl:value-of select="ds_file" />')
                             </xsl:attribute>
                             <xsl:value-of select="dt_upload" />
-                          </a>
+                          </a -->
+							<xsl:value-of select="ds_labor" />
                         </xsl:if>
                         <xsl:if test="ds_file = ''">
                           <p>  Not Submitted </p>
@@ -226,7 +228,7 @@
 
                       <td CLASS="TITLE_LIGHT">
 
-                        <textarea rows="4" cols="50" name="txt_area">
+                        <textarea rows="4" cols="30" name="txt_area">
                           <xsl:attribute name="id">
                             <xsl:value-of select="pagina_id_txt" />
                           </xsl:attribute>
@@ -237,10 +239,7 @@
 
                       <td CLASS="TITLE_LIGHT">
                         <input type="button"  value="Update">
-
-                          <xsl:attribute name="onclick">
-                            send_comments( <xsl:value-of select="user_id_" />,<xsl:value-of select="opus_id_" />,<xsl:value-of select="pagina_id_" />  )
-                          </xsl:attribute>
+                          <xsl:attribute name="onclick">send_comments( <xsl:value-of select="user_id_" />,<xsl:value-of select="opus_id_" />,<xsl:value-of select="pagina_id_" /> );</xsl:attribute>
                         </input>
                       </td>
                       <script>
