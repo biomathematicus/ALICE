@@ -83,8 +83,8 @@ Namespace Literatronica
                 trans.Load(Server.MapPath("..\XSL\p_TRACTUS.xsl"))
                 XMLContent.Document = doc
                 XMLContent.Transform = trans
-                doc.Save(Server.MapPath("..\tractus.xml"))
-            Catch ex As Exception
+				'doc.Save(Server.MapPath("..\tractus.xml"))
+			Catch ex As Exception
                 Response.Redirect("Nuntius.aspx?lng=" & sLinguaCok & "&nuntius=T_ERROR")
             End Try
         End Sub
