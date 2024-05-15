@@ -105,6 +105,7 @@ function bold_path_info(new_node) {
 //***************************************************************************************
 
 function graph(nodes_name_1, nodes_id_1, nodes_type_1, nodes_cat_1, matrix_of_edges_1, LAnguage_1, net_1, path_bold, all_position, capstone_, color_g) {
+	conlose.log('graph()');
 	console.log('nodes_name_1 = ' + nodes_name_1 + '\n' +
 		'nodes_id_1 = ' + nodes_id_1 + '\n' +
 		'nodes_type_1 = ' + nodes_type_1 + '\n' +

@@ -168,7 +168,7 @@
 			}
 
 			function update_map(){
-				document.getElementById("p_pagina").submit()
+				document.getElementById("p_pagina").submit();
 				network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show_1);
 				network.fit();
 			}
@@ -382,7 +382,6 @@
 												</xsl:if>
 											</script>
 										</div>
-										<script>LoadTab("Intro");</script>
 										<xsl:if test="//user_logon !='LOGGED-OFF'">
 											<div id="Test" style="visibility:hidden; display:none;">
 												<form id="frmUpload" runat="server">
@@ -621,30 +620,34 @@
 			window.location.href = 'Nuntius.aspx?lng=<xsl:value-of select="//language" />&#38;nuntius=T_UNAUTHORIZED'
 		</script>
 	</xsl:if>
+	<script>LoadTab("Intro");</script>
 	</body>
 	<script type="text/javascript">
 		$( document ).ready(
-			function() {
-				document.getElementById('mynetwork').style.width = "800px";
-				document.getElementById('mynetwork').style.height = "500px";
-				network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show);
-				network.fit();
-				document.getElementById("mynetwork").style.display = "none";
-				document.getElementById("choose_category").style.display = "none";
-				//$("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
-				var node_list_b = path_b.split(",");
-				var next_l=0;
-				for (i = 0; i &#60; node_list_b.length - 1 ; i++) {
+		function() {
+		//alert('function() in pagina ');
+		document.getElementById('mynetwork').style.width = "800px";
+		document.getElementById('mynetwork').style.height = "500px";
+		network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show);
+		network.fit();
+		document.getElementById("mynetwork").style.display = "none";
+		document.getElementById("choose_category").style.display = "none";
+		//$("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
+		var node_list_b = path_b.split(",");
+		var next_l=0;
+		for (i = 0; i &#60; node_list_b.length - 1 ; i++) {
 					if ( node_list_b[i]==Pagina_id_) {
 						next_lesson_=node_list_b[i+1];
 						next_l=parseInt(node_list_b[i+1]);
 					}
 				}
 				next_lesson_str=next_lesson_.toString();
+				console.log('next_lesson_str='+next_lesson_str);
 				if (next_l > 0) {
 					var searchEles = document.getElementById("captions1").children;
 					nameOfNextLesson=document.getElementById(searchEles[next_l-1].id).value;
 					$("#herf_next_lesson").text(nameOfNextLesson);
+					console.log(nameOfNextLesson);
 				} else {
 					$("#herf_next_lesson").text("there is no next course for this lesson");
 				}

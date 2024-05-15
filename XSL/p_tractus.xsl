@@ -605,33 +605,33 @@
           var rows = document.getElementsByName('chbox');
           var selectedRows = [];
           for (var i = 0, l = rows.length; i  &lt; l; i++) {
-          if (rows[i].checked) {
-          selectedRows.push(rows[i].value);
-          }
-          }
-          $("#senddata").val(selectedRows);
-          var kk=$("#senddata").val();
-          }
+			if (rows[i].checked) {
+			selectedRows.push(rows[i].value);
+			}
+			}
+			$("#senddata").val(selectedRows);
+			var kk=$("#senddata").val();
+			}
 
-          $( document ).ready(function() {
-          network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show);
+			$( document ).ready(function() {
+			network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show);
+			network.fit();
 
-          network.fit();
+			document.getElementById("mynetwork").style.display = "none";
+			document.getElementById("personalize_net").style.display = "none";
+			graph_json=exportMyNetwork(network);
+			document.getElementById("choose_category").style.display = "none";
 
-          document.getElementById("mynetwork").style.display = "none";
-          document.getElementById("personalize_net").style.display = "none";
-          graph_json=exportMyNetwork(network);
-          document.getElementById("choose_category").style.display = "none";
+			$("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
 
-          $("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
+			SingleCapstone( '<xsl:value-of select="//single_capstone" />');
+			if (path_b==''){alert('Select a Capstone')}
+			var node_list_b = path_b.split(",");
 
-          SingleCapstone( '<xsl:value-of select="//single_capstone" />');
-          var node_list_b = path_b.split(",");
+			var searchEles = document.getElementById("personalize_net").children;
+			var list_number_=node_list_b.map(Number);
 
-          var searchEles = document.getElementById("personalize_net").children;
-          var list_number_=node_list_b.map(Number);
-
-          for(var i = 0; i &#60; searchEles.length; i++) {
+			for(var i = 0; i &#60; searchEles.length; i++) {
           if(searchEles[i].id.indexOf('course') >-1) {
 
           if(list_number_.indexOf(i+1)>-1){

@@ -4,12 +4,15 @@ Imports System.Data
 Imports System.Reflection
 Imports System.Data.SqlClient
 Imports System.Diagnostics
+Imports System.IO
+Imports System.Runtime.ConstrainedExecution
 
 Namespace Literatronica
 
 	Public Class Connection
 		Private m_oConn As SqlConnection
 		Public DB_CONN_STRING As String
+		Private Const INFINITY = 1 / 0
 
 		Public Sub New()
 			' Get the name of the environment variable from web.config
@@ -237,55 +240,55 @@ Namespace Literatronica
 
 #Region " Function CalculateBook: Calculates the book's minimal paths using Gomory-Hu algorithm "
 
-		Sub Floyd_Warshal(ByRef graph(,) As Single, ByRef D(,) As Single, ByRef P(,) As Long, ByRef M(,) As String, ByVal numberOfNodes As Integer)
+		Sub Floyd_Warshal(ByRef MCA(,) As Single, ByRef CMR(,) As Single, ByRef MNI(,) As Long, ByRef Path(,) As String, ByVal n As Integer)
+			' Floyd_Warshal(MCA, CMR, MNI, Path, n)
+			' Dim Path(n, n) As String
+			For i As Integer = 1 To n
+				For j As Integer = 1 To n
 
-			'  Dim M(numberOfNodes, numberOfNodes) As String
-			For i As Integer = 1 To numberOfNodes
-				For j As Integer = 1 To numberOfNodes
-
-					If graph(i, j) = 0 Then
-						graph(i, j) = 10000
-						D(i, j) = graph(i, j)
-						P(i, j) = -1
-						M(i, j) = "empty"
+					If MCA(i, j) = 0 Then
+						MCA(i, j) = INFINITY
+						CMR(i, j) = MCA(i, j)
+						MNI(i, j) = -1
+						Path(i, j) = "empty"
 					Else
-						D(i, j) = graph(i, j)
-						P(i, j) = j
-						M(i, j) = j.ToString
+						CMR(i, j) = MCA(i, j)
+						MNI(i, j) = j
+						Path(i, j) = j.ToString
 
 					End If
 
 				Next
 			Next
-			For k As Integer = 1 To numberOfNodes
-				For i As Integer = 1 To numberOfNodes
-					For j As Integer = 1 To numberOfNodes
-						If D(i, j) > D(i, k) + D(k, j) Then
-							'    Debug.WriteLine("  " & i & " ,  " & j & " ,  " & k & " , " & D(i, j) & " , " & D(i, k) & " , " & D(k, j))
-							D(i, j) = D(i, k) + D(k, j)
-							P(i, j) = k
-							M(i, j) = M(i, k) + " , " + M(k, j)
+			For k As Integer = 1 To n
+				For i As Integer = 1 To n
+					For j As Integer = 1 To n
+						If CMR(i, j) > CMR(i, k) + CMR(k, j) Then
+							'    Debug.WriteLine("  " & i & " ,  " & j & " ,  " & k & " , " & CMR(i, j) & " , " & CMR(i, k) & " , " & CMR(k, j))
+							CMR(i, j) = CMR(i, k) + CMR(k, j)
+							MNI(i, j) = k
+							Path(i, j) = Path(i, k) + " , " + Path(k, j)
 
 						End If
 					Next
 				Next
 			Next
 
-			For i As Integer = 1 To numberOfNodes
-				For j As Integer = 1 To numberOfNodes
+			For i As Integer = 1 To n
+				For j As Integer = 1 To n
 
-					If M(i, j).Equals("empty") Then
+					If Path(i, j).Equals("empty") Then
 					Else
-						M(i, j) = i.ToString + "," + M(i, j)
+						Path(i, j) = i.ToString + "," + Path(i, j)
 
 					End If
 				Next
 			Next
 
-			For i As Integer = 1 To numberOfNodes
-				For j As Integer = 1 To numberOfNodes
+			For i As Integer = 1 To n
+				For j As Integer = 1 To n
 
-					Debug.WriteLine("  " & i & " ,  " & j & M(i, j))
+					Debug.WriteLine("  " & i & " ,  " & j & Path(i, j))
 
 				Next
 			Next
@@ -301,7 +304,6 @@ Namespace Literatronica
 			Dim n As Long, i As Long, j As Long, k As Long, l As Long
 			Dim rsMCA As SqlDataReader
 			Dim sInsert As New StringBuilder
-			Const INFINITY = 1 / 0
 			If nCategory = 0 Then
 				rsMCA = DataReaderOpen("exec matMCA  " & nBookID)
 			Else
@@ -326,7 +328,8 @@ Namespace Literatronica
 			End If
 			For i = 1 To n
 				For j = 1 To n
-					If CMR(i, j) > 10000 - 1 Then CMR(i, j) = 999999999
+					'Replace INFINITY with the maximum Integer in VB.NET, which is also the maximum int in SQL Server
+					If CMR(i, j) > 2147483647 Then CMR(i, j) = 2147483647 'Ncessary because SQL Server cannot store the constant INFINITY
 					If nCategory = 0 Then
 
 						sInsert.Append("insert into MATRIX (cd_matrix_type, id_opus, i, j, am_value) " &
@@ -338,8 +341,6 @@ Namespace Literatronica
 					Else
 						sInsert.Append(" Update MATRIX set Category_" & nCategory & "='" & Path(i, j) & "'" &
 							" where [MATRIX].cd_matrix_type='MNI' and MATRIX.i=" & i & " and MATRIX.j=" & j & ";")
-						Dim kkk As String
-
 					End If
 
 				Next j

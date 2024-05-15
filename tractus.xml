@@ -167,7 +167,7 @@
     <pagina_name>
       <id>5</id>
       <name><![CDATA[Ethical considerations of ChatGPT]]></name>
-      <pagina_type>ROOT</pagina_type>
+      <pagina_type>PRE-REQ</pagina_type>
       <pagina_cat>1</pagina_cat>
       <capstone>false</capstone>
       <submit>false</submit>
@@ -176,7 +176,7 @@
     <pagina_name>
       <id>6</id>
       <name><![CDATA[The Data Challenge]]></name>
-      <pagina_type>ROOT</pagina_type>
+      <pagina_type>PRE-REQ</pagina_type>
       <pagina_cat>1</pagina_cat>
       <capstone>false</capstone>
       <submit>false</submit>
@@ -185,7 +185,7 @@
     <pagina_name>
       <id>7</id>
       <name><![CDATA[How Many School Districts?]]></name>
-      <pagina_type>ROOT</pagina_type>
+      <pagina_type>PRE-REQ</pagina_type>
       <pagina_cat>1</pagina_cat>
       <capstone>false</capstone>
       <submit>false</submit>
@@ -219,7 +219,7 @@
       <color>red</color>
     </pagina_name>
     <positions_graph>,1,-566,-169#,2,-368,-375#,3,-365,-167#,4,-360,18#,5,-162,-173#,6,36,-171#,7,225,-173#,8,369,-369#,9,397,-183#,10,372,10##$$,0.6937723595934152,-73.87561710453579,-36.42037189090434%%</positions_graph>
-    <id_category_interest_base>1</id_category_interest_base>
+    <id_category_interest_base>0</id_category_interest_base>
     <percentage_g>0</percentage_g>
     <percentage>0</percentage>
     <perct_incomplete>100</perct_incomplete>
@@ -253,13 +253,13 @@
     <opus_type>
     </opus_type>
     <page_code>P_TRACTUS</page_code>
-    <user_logon>DAIR-3</user_logon>
+    <user_logon>Liu.Liu</user_logon>
     <page_name>Tractus.aspx</page_name>
     <id_opus>
     </id_opus>
-    <user_name>DAIR-3</user_name>
+    <user_name>Liu.Liu</user_name>
     <user_status>2</user_status>
-    <user_id>165</user_id>
+    <user_id>170</user_id>
   </param>
   <constants>
   </constants>

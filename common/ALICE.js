@@ -84,7 +84,7 @@ function MarkdownToHtml(sDiv) {
 				{ left: "\\(", right: "\\)", display: false }
 			]
 		});
-		console.log(markdownText);
+		//console.log(markdownText);
 	} else {
 		console.error('Element with id "' + sDiv + '" not found.');
 	}
