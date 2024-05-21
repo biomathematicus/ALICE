@@ -165,14 +165,19 @@
                 </xsl:attribute>
                 <xsl:value-of select="//sa_opus_lst" />
               </a> &#62;
-              <a>
-                <xsl:attribute name="href">
-                  javascript:document.frmSession.action='sa_pagina_lst.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
-                </xsl:attribute>
-                <xsl:value-of select="//opus_name" />&#160;
-                <xsl:value-of select="//sa_pagina_lst" />
-              </a> &#62;
-              <b>
+				<a>
+					<xsl:attribute name="href">
+						javascript:document.frmSession.action='sa_opus_optum.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
+					</xsl:attribute>
+					<xsl:value-of select="//opus_name" />&#160;
+				</a> &#62;
+				<a>
+					<xsl:attribute name="href">
+						javascript:document.frmSession.action='sa_pagina_lst.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
+					</xsl:attribute>
+					<xsl:value-of select="//sa_pagina_lst" />
+				</a> &#62;
+				<b>
                 <xsl:value-of select="//sa_pagina_dtl" />
               </b>
               <p />

@@ -38,14 +38,14 @@
                   </xsl:attribute>
                   <xsl:value-of select="//sa_menu" />
                 </a> &#62;
-                <xsl:if test="//user_status = 3">
+				  <!-- xsl:if test="//user_status = 3">
                   <a>
                     <xsl:attribute name="href">
                       sa_artifex_lst.aspx?lng=<xsl:value-of select="//language" />
                     </xsl:attribute>
                     <xsl:value-of select="//sa_artifex_lst" />
                   </a> &#62;
-                </xsl:if>
+                </xsl:if -->
 
                 <a>
                   <xsl:attribute name="href">
@@ -58,7 +58,7 @@
 					  <xsl:attribute name="href">
 						  javascript:document.frmSession.action='sa_opus_optum.aspx?opus=<xsl:value-of select="//opus_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
 					  </xsl:attribute>
-					  <xsl:value-of select="//ds_opus" />
+					  <xsl:value-of select="//OpusName1" />
 				  </a> &#62;
                 <a>
                   <xsl:attribute name="href">

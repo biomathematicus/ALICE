@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ?xml-stylesheet type="text/xsl" href="sa_reticulum_dtl.xsl"? -->
+<?xml-stylesheet type="text/xsl" href="test.xsl"?>
+<doc>
+	<admin_tags>
+		<sa_artifex_dtl>Author Detail</sa_artifex_dtl>
+		<sa_artifex_lst>Academic Unit List</sa_artifex_lst>
+		<sa_nauta_lst>Student List</sa_nauta_lst>
+		<sa_menu>Administrator</sa_menu>
+		<sa_nuntius_dtl>Message Detail</sa_nuntius_dtl>
+		<sa_nuntius_lst>Message List</sa_nuntius_lst>
+		<sa_opus_dtl>Course Detail</sa_opus_dtl>
+		<sa_opus_lst>Course List</sa_opus_lst>
+		<sa_pagina_dtl>Lesson Detail</sa_pagina_dtl>
+		<sa_pagina_lst>Lesson List</sa_pagina_lst>
+		<sa_reticulum_dtl>Connection</sa_reticulum_dtl>
+		<sa_nautaCommunicatio_lst>Social Interaction</sa_nautaCommunicatio_lst>
+		<sa_nautaVia_lst>Study Record</sa_nautaVia_lst>
+		<sa_nautaLaborio_lst>Homework Assignments</sa_nautaLaborio_lst>
+	</admin_tags>
+	<sa_reticulum_dtl>
+		<id_artifex>1</id_artifex>
+		<id_opus>60</id_opus>
+		<id_pagina>2</id_pagina>
+		<artifex_name>Department of Mathematics</artifex_name>
+		<opus_name>DAIR-3</opus_name>
+		<current>
+			<id>2</id>
+			<title>
+			<![CDATA[0-RCR in the context of biomedical data science: Responsible authorship and peer review data code and algorithm sharing]]>
+			</title>
+			<tag></tag>
+		</current>
+		<linked>
+			<node>
+				<id>1</id>
+				<title>
+				<![CDATA[0-RCR in the context of biomedical data science: Research misconduct]]>
+				</title>
+				<tag></tag>
+				<value>10</value>
+				<link_type>PRE-REQ</link_type>
+			</node>
+			<node>
+				<id>3</id>
+				<title>
+				<![CDATA[0-RCR in the context of biomedical data science: Conflict of interest]]>
+				</title>
+				<tag></tag>
+				<value>10</value>
+				<link_type>NEXT</link_type>
+			</node>
+		</linked>
+		<non_linked>
+			<node>
+				<id>1</id>
+				<title>
+				<![CDATA[0-RCR in the context of biomedical data science: Research misconduct]]>
+				</title>
+				<tag></tag>
+			</node>
+			<node>
+				<id>4</id>
+				<title>
+				<![CDATA[0-RCR in the context of biomedical data science: Team dynamics for rigor and reproducibility]]>
+				</title>
+				<tag></tag>
+			</node>
+			<node>
+				<id>5</id>
+				<title>
+				<![CDATA[0-RCR in the context of biomedical data science: Data scientists as responsible members of society]]>
+				</title>
+				<tag></tag>
+			</node>
+			<node>
+				<id>6</id>
+				<title>
+				<![CDATA[0-An overview of rigor and reproducibility considerations]]>
+				</title>
+				<tag></tag>
+			</node>
+			<node>
+				<id>7</id>
+				<title>
+				<![CDATA[0-The complexity of biomedical data and the need for insight integration: Common data types and the]]>
+				</title>
+				<tag></tag>
+			</node>
+			<node>
+				<id>8</id>
+				<title>
+				<![CDATA[0-The complexity of biomedical data and the need for insight integration: Nuanced considerations for]]>
+				</title>
+				<tag></tag>
+			</node>
+			<node>
+				<id>9</id>
+				<title>
+				<![CDATA[1.1-What are ethics?]]>
+				</title>
+				<tag></tag>
+			</node>
+			<node>
+				<id>10</id>
+				<title>
+				<![CDATA[1.2-Informed Consent]]>
+				</title>
+				<tag>The Tuskegee experiments, the Belmont Report, and the history of regulating human subjects research</tag>
+			</node>
+			<node>
+				<id>11</id>
+				<title>
+				<![CDATA[1.2-Informed Consent]]>
+				</title>
+				<tag>Informed Consent as a central principle for interventional studies</tag>
+			</node>
+			<node>
+				<id>12</id>
+				<title>
+				<![CDATA[1.2-Informed Consent]]>
+				</title>
+				<tag>Possible alternative frameworks to determine  appropriateness.</tag>
+			</node>
+			<node>
+				<id>13</id>
+				<title>
+				<![CDATA[1.3-Privacy]]>
+				</title>
+				<tag>The significant privacy risks that remain even  with de-identified data.</tag>
+			</node>
+			<node>
+				<id>14</id>
+				<title>
+				<![CDATA[1.2-Informed Consent]]>
+				</title>
+				<tag>Limitations of informed consent</tag>
+			</node>
+			<node>
+				<id>15</id>
+				<title>
+				<![CDATA[1.3-Privacy]]>
+				</title>
+				<tag>Individual harms that can result from the lack of privacy</tag>
+			</node>
+			<node>
+				<id>16</id>
+				<title>
+				<![CDATA[1.4-Fairness]]>
+				</title>
+				<tag>The many ways in which results of studies could be biased or unfair</tag>
+			</node>
+			<node>
+				<id>17</id>
+				<title>
+				<![CDATA[1.4-Fairness]]>
+				</title>
+				<tag>The many ways in which this bias could creep into the analysis.</tag>
+			</node>
+			<node>
+				<id>18</id>
+				<title>
+				<![CDATA[1.4-Fairness]]>
+				</title>
+				<tag>The many definitions of fairness.</tag>
+			</node>
+			<node>
+				<id>19</id>
+				<title>
+				<![CDATA[1.4-Fairness]]>
+				</title>
+				<tag>A framework to think about issues of fairness and  equity in the data analysis pipeline, all the way from  data collection to result presentation.</tag>
+			</node>
+			<node>
+				<id>20</id>
+				<title>
+				<![CDATA[2.1-Data Management]]>
+				</title>
+				<tag>The role leadership plays in the overall success of a research project</tag>
+			</node>
+			<node>
+				<id>21</id>
+				<title>
+				<![CDATA[2.1-Data Management]]>
+				</title>
+				<tag>How Framing Influences Leadership Effectiveness</tag>
+			</node>
+			<node>
+				<id>22</id>
+				<title>
+				<![CDATA[2.1-Data Management]]>
+				</title>
+				<tag>Manual of Operations: Standard Operating Procedure | SOP Purpose & Examples</tag>
+			</node>
+			<node>
+				<id>23</id>
+				<title>
+				<![CDATA[2.1-Data Management]]>
+				</title>
+				<tag>Leading as a Function of Management</tag>
+			</node>
+			<node>
+				<id>24</id>
+				<title>
+				<![CDATA[7.1 Transformers and Artificial Neural Networks]]>
+				</title>
+				<tag>This lesson delves into transformers and attention mechanisms, crucial innovations in Natural Language Processing (NLP). It equips students with a deep understanding of transformer models, exploring their structure, functioning, significance.</tag>
+			</node>
+			<node>
+				<id>25</id>
+				<title>
+				<![CDATA[Environment Setup]]>
+				</title>
+				<tag>Installation and configuration of the necessary software and libraries using OpenAI libraries</tag>
+			</node>
+			<node>
+				<id>26</id>
+				<title>
+				<![CDATA[7.1 Example 1 - Intr0]]>
+				</title>
+				<tag>Example 1 - Intr0</tag>
+			</node>
+			<node>
+				<id>27</id>
+				<title>
+				<![CDATA[Example 3 - Advanced]]>
+				</title>
+				<tag>Example 3 - Advanced</tag>
+			</node>
+			<node>
+				<id>28</id>
+				<title>
+				<![CDATA[Example 2 - Intermediate]]>
+				</title>
+				<tag>Example 2 - Intermediate</tag>
+			</node>
+			<node>
+				<id>29</id>
+				<title>
+				<![CDATA[Example 4 - Advanced]]>
+				</title>
+				<tag>Example 4 - Advanced</tag>
+			</node>
+			<node>
+				<id>30</id>
+				<title>
+				<![CDATA[Final Project LLM]]>
+				</title>
+				<tag>Installation and configuration of the necessary software and libraries using OpenAI libraries</tag>
+			</node>
+		</non_linked>
+		<L_DISTANCE>
+			<![CDATA[Distance]]>
+		</L_DISTANCE>
+		<L_NON_LINKED>
+			<![CDATA[Non-Linked Pages]]>
+		</L_NON_LINKED>
+		<L_LINKED>
+			<![CDATA[Linked Pages]]>
+		</L_LINKED>
+		<L_DELETE>
+			<![CDATA[Delete]]>
+		</L_DELETE>
+		<L_NEW>
+			<![CDATA[Add]]>
+		</L_NEW>
+	</sa_reticulum_dtl>
+	<param>
+	<language>BRITANNIA</language>
+	<opus_type></opus_type>
+	<page_code>sa_menu</page_code>
+	<user_logon>matvan</user_logon>
+	<page_name>sa_reticulum_dtl.aspx</page_name>
+	<id_opus></id_opus>
+	<user_name>matvan</user_name>
+	<user_status>3</user_status>
+	<user_id>153</user_id>
+	</param>
+	<constants> </constants>
+	<top_menu>
+		<html_header>
+			<T_PAGE_TITLE>Administrator</T_PAGE_TITLE>
+			<T_META_KEYWRD>ALICE,Adaptive,Learning,Interdisciplinary,Collaborative,Environments,juan b. gutierrez</T_META_KEYWRD>
+			<T_META_DESCR>ALICE - Adaptive Learning for Interdisciplinary Collaborative Environments</T_META_DESCR>
+			<L_LITERATRONIC>ALICE</L_LITERATRONIC>
+		</html_header>
+		<P_FORUM>Forums</P_FORUM>
+		<P_INITIUM>Home</P_INITIUM>
+		<P_INDEX>Courses</P_INDEX>
+		<P_TRACTUS>Map</P_TRACTUS>
+		<P_HISTORIA>History</P_HISTORIA>
+		<P_COLLABORATORIUM>Collaboratorium</P_COLLABORATORIUM>
+		<P_NAUTA>My Profile</P_NAUTA>
+		<P_INDICIUM>About...</P_INDICIUM>
+		<sa_menu selected = "true">Administrator</sa_menu>
+		<L_LOGOUT>Logout</L_LOGOUT>
+		<L_USER>User</L_USER>
+		<L_OLD_USER>Existing User</L_OLD_USER>
+		<L_NEW_USER>New User</L_NEW_USER>
+		<F_SEARCH>Search</F_SEARCH>
+		<L_SEARCH>Search</L_SEARCH>
+		<ERR_SRCH_LEN>The minimum length of the search string is four (4) characters.</ERR_SRCH_LEN>
+		<L_NUMBER_ASSETS_PART1>The number of assets in this tab is</L_NUMBER_ASSETS_PART1>
+		<L_NUMBER_ASSETS_PART2>You might need to scroll down to access all assets in this tab.</L_NUMBER_ASSETS_PART2>
+		<L_DYNAMIC>Adaptive Hypertext</L_DYNAMIC>
+		<L_STATIC>Static Hypertext</L_STATIC>
+	</top_menu>
+	<admin>
+		<L_SA_UPDATE>Update</L_SA_UPDATE>
+		<L_SA_TYPE>Topic Type</L_SA_TYPE>
+		<L_SA_TITLE>Title</L_SA_TITLE>
+		<L_SA_TAG>Short Description</L_SA_TAG>
+		<L_SA_PAGE>Page</L_SA_PAGE>
+		<L_SA_DELETE>Delete</L_SA_DELETE>
+		<L_SA_CONTENT>Content</L_SA_CONTENT>
+		<L_SA_BOOK>Course</L_SA_BOOK>
+		<L_SA_AUTHOR>Author</L_SA_AUTHOR>
+		<L_SA_ADD>Add</L_SA_ADD>
+		<L_SA_ABOUT>Edit "About..." Text</L_SA_ABOUT>
+		<L_CAPSTONE>Capstone Experience</L_CAPSTONE>
+	</admin>
+	<footer>
+		<L_COPYRIGHT>� Juan B. Gutierrez</L_COPYRIGHT>
+		<L_PRIVACY>Privacy Statement</L_PRIVACY>
+	</footer>
+</doc>

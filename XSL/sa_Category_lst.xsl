@@ -44,14 +44,14 @@
                   </xsl:attribute>
                   <xsl:value-of select="//sa_menu" />
                 </a> &#62;
-                <xsl:if test="//user_status = 3">
+				  <!--xsl:if test="//user_status = 3">
                   <a>
                     <xsl:attribute name="href">
                       sa_artifex_lst.aspx?lng=<xsl:value-of select="//language" />
                     </xsl:attribute>
                     <xsl:value-of select="//sa_artifex_lst" />
                   </a> &#62;
-                </xsl:if>
+                </xsl:if -->
 
                 <a>
                   <xsl:attribute name="href">

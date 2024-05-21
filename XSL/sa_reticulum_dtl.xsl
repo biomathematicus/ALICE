@@ -35,21 +35,27 @@
                   </xsl:attribute>
                   <xsl:value-of select="//sa_menu" />
                 </a> &#62;
-                <xsl:if test="//user_status = 3">
+				<!-- xsl:if test="//user_status = 3">
                   <a>
                     <xsl:attribute name="href">
                       sa_artifex_lst.aspx?lng=<xsl:value-of select="//language" />
                     </xsl:attribute>
                     <xsl:value-of select="//sa_artifex_lst" />
                   </a> &#62;
-                </xsl:if>
-                <a>
+                </xsl:if -->
+				  <a>
                   <xsl:attribute name="href">
                     javascript:document.sa_reticulum_dtl.action='sa_opus_lst.aspx?artifex=<xsl:value-of select="//id_artifex" />&#38;lng=<xsl:value-of select="//language" />';document.sa_reticulum_dtl.submit();
                   </xsl:attribute>
                   <xsl:value-of select="//sa_opus_lst" />
                 </a> &#62;
-                <a>
+				  <a>
+					  <xsl:attribute name="href">
+						  javascript:document.frmSession.action='sa_opus_optum.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
+					  </xsl:attribute>
+					  <xsl:value-of select="//opus_name" />&#160;
+				  </a> &#62;
+				  <a>
                   <xsl:attribute name="href">
                     javascript:document.sa_reticulum_dtl.action='sa_pagina_lst.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.sa_reticulum_dtl.submit();
                   </xsl:attribute>
