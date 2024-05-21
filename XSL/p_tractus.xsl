@@ -625,7 +625,7 @@
 			$("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
 
 			SingleCapstone( '<xsl:value-of select="//single_capstone" />');
-			if (path_b==''){alert('Select a Capstone')}
+			//if (path_b==''){alert('Select a Capstone')}
 			var node_list_b = path_b.split(",");
 
 			var searchEles = document.getElementById("personalize_net").children;

@@ -94,7 +94,7 @@ Namespace Literatronica
                 trans.Load(Server.MapPath("..\XSL\sa_opus_dtl.xsl"))
                 '   doc.Save(Server.MapPath("..\sa_opus_dtl.xml"))
                 If Request.QueryString("redirect") = "true" Then _
-				 Response.Redirect("sa_opus_optum.aspx?opus=" & id_opus & "&lng=" & sLinguaCok)
+				 Response.Redirect("sa_opus_lst.aspx?lng=" & sLinguaCok)
 
 				XMLContent.Document = doc
                 XMLContent.Transform = trans
