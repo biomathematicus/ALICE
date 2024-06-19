@@ -27,6 +27,7 @@ Partial Class admin_sa_reading_rpt
 		  ",@PageCode='sa_menu'" &
 		  ",@PageName='sa_reading_rpt.aspx'" &
 		  ",@userID='" & sUserID & "'" &
+		  ",@OpusID='" & oDBService.formatSQLInput(Request("opus")) & "'" &
 		  ",@ReadingGroup='" & oDBService.formatSQLInput(Request("group")) & "'" &
 		  ",@NautaCode='" & Trim(oDBService.formatSQLInput(Request("nauta"))) & "'"
 

@@ -5,12 +5,12 @@ Imports System.Xml
 Namespace Literatronica
 
     Partial Class Folium
-        Inherits System.Web.UI.Page
+		Inherits BasePage
 
 #Region " Web Form Designer Generated Code "
 
-        'This call is required by the Web Form Designer.
-        <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+		'This call is required by the Web Form Designer.
+		<System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
 
         End Sub
 
@@ -23,21 +23,13 @@ Namespace Literatronica
 #End Region
 
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-            'CHECK COOKIES
-            Dim oDBService As New Connection
-            Dim sLinguaCok, sLinguaQry, sUserID As String
-            oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
 
-            'RETRIEVE DATA FROM DATABASE
-            Dim sSQL, sCategory As String
-            Dim sLingua, id_opus, id_pagina As String
-            Dim doc As XmlDocument = New XmlDocument
-            Dim trans As XslTransform = New XslTransform
-            'Create DLL Instance
-            oDBService = New Connection
-            'Clean malicious code from parameters that will be sent to the database
-            sLinguaCok = oDBService.formatSQLInput(sLinguaCok)
-            sUserID = oDBService.formatSQLInput(sUserID)
+			Dim id_opus, id_pagina, sCategory As String
+
+			'Clean malicious code from parameters that will be sent to the database
+			oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
+			sLinguaCok = oDBService.formatSQLInput(sLinguaCok)
+			sUserID = oDBService.formatSQLInput(sUserID)
             If Request.QueryString("pagina") <> "" Then
                 id_pagina = oDBService.formatSQLInput(Request.QueryString("pagina"))
             Else
@@ -55,24 +47,23 @@ Namespace Literatronica
                 sCategory = "-1"
             End If
 
-            sSQL = "exec out_PAGINA" & _
-          " @Language='" & sLinguaCok & "'" & _
-          ",@OpusType=''" & _
-          ",@PageCode='P_INDEX'" & _
-          ",@PageName='Pagina.aspx'" & _
-          ",@id_opus=" & id_opus & _
-          ",@id_pagina=" & id_pagina & _
-          ",@userID='" & sUserID & "'" &
-          ",@id_category=" & sCategory
 			Try
-				'Response.Write(sSQL)
-				'response.end()
+				sSQL = "exec out_PAGINA" &
+				  " @Language='" & sLinguaCok & "'" &
+				  ",@OpusType=''" &
+				  ",@PageCode='P_INDEX'" &
+				  ",@PageName='Pagina.aspx'" &
+				  ",@id_opus=" & id_opus &
+				  ",@id_pagina=" & id_pagina &
+				  ",@userID='" & sUserID & "'" &
+				  ",@id_category=" & sCategory
+				'RETRIEVE DATA FROM DATABASE
 				doc.LoadXml(oDBService.DBXML(sSQL))
 				trans.Load(Server.MapPath("..\XSL\p_PAGINA.xsl"))
 				XMLContent.Document = doc
 
 				XMLContent.Transform = trans
-			Catch
+			Catch ex As Exception
 				'if sUserID = "" then Response.redirect("../BBS_" & sLinguaCok & "/log_off_user.asp")
 				Response.Redirect("Nuntius.aspx?lng=" & sLinguaCok & "&nuntius=T_ERROR")
             End Try

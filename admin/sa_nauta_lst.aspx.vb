@@ -40,21 +40,22 @@ Namespace Literatronica
             'Clean malicious code from parameters that will be sent to the database
             sLinguaCok = oDBService.formatSQLInput(sLinguaCok)
             sUserID = oDBService.formatSQLInput(sUserID)
-            sArtifex = oDBService.formatSQLInput(Request.QueryString("artifex"))
-            sOpus = oDBService.formatSQLInput(Request.QueryString("opus"))
+			sArtifex = oDBService.formatSQLInput(Request.QueryString("artifex"))
+			If sArtifex = "" Then sArtifex = "1"
+			sOpus = oDBService.formatSQLInput(Request.QueryString("opus"))
             ' sPagina = oDBService.formatSQLInput(Request.QueryString("pagina"))
             sChorus = oDBService.formatSQLInput(Request.QueryString("chorus")) 'HttpContext.Current.Request("myText")
-            '  sChorus = "fa 2014"
-            sSQL = "exec sa_nauta_lst" &
-              " @Language='" & sLinguaCok & "'" &
-              ",@Artifex_id=" & sArtifex &
-              ",@Opus=" & sOpus &
-              ",@Chorus='" & sChorus & "'" &
-              ",@OpusType=''" &
-              ",@PageCode='sa_menu'" &
-              ",@PageName='sa_opus_lst.aspx'" &
-              ",@userID='" & sUserID & "'"
-            doc.LoadXml(oDBService.DBXML(sSQL))
+			'  sChorus = "fa 2014"
+			sSQL = "exec sa_nauta_lst" &
+			  " @Language='" & sLinguaCok & "'" &
+			  ",@Artifex_id=" & sArtifex &
+			  ",@Opus=" & sOpus &
+			  ",@Chorus='" & sChorus & "'" &
+			  ",@OpusType=''" &
+			  ",@PageCode='sa_menu'" &
+			  ",@PageName='sa_nauta_lst.aspx'" &
+			  ",@userID='" & sUserID & "'"
+			doc.LoadXml(oDBService.DBXML(sSQL))
             trans.Load(Server.MapPath("..\XSL\sa_nauta_lst.xslt"))
 
             Session("artifex") = Request.QueryString("artifex")

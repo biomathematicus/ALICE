@@ -6,8 +6,26 @@ Imports System.Data.SqlClient
 Imports System.Diagnostics
 Imports System.IO
 Imports System.Runtime.ConstrainedExecution
+Imports System.Xml
+Imports System.Xml.Xsl
 
 Namespace Literatronica
+	Public Class BasePage
+		Inherits System.Web.UI.Page
+
+		Public oDBService As Connection
+		Public sLingua, sLinguaCok, sLinguaQry, sUserID As String
+		Public sSQL As String
+		Public doc As XmlDocument = New XmlDocument
+		Public trans As XslTransform = New XslTransform
+
+		Public Sub New()
+			'CHECK COOKIES
+			oDBService = New Connection
+
+		End Sub
+
+	End Class
 
 	Public Class Connection
 		Private m_oConn As SqlConnection

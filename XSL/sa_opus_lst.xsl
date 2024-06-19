@@ -9,7 +9,7 @@
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
 			<body>
-				<xsl:if test="//user_status = 3">
+				<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
 					<table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
 						<tr valign="top">
 							<td rowspan="3" valign="top" class='BAR_OFF'>
@@ -30,11 +30,8 @@
 								<!-- ************ BEGINS CONTENT ************ -->
 								<!-- Breadcrumbs -->
 								<a>
-									<xsl:attribute name="href">
-										sa_menu.aspx?lng=
-										<xsl:value-of select="//language" />
-									</xsl:attribute>
-									<xsl:value-of select="//sa_menu" />
+									<xsl:attribute name="href">sa_menu.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
+									<xsl:value-of select="//user_role_name" />
 								</a>
 								&#62;
 								<!-- xsl:if test="//user_status = 3">
@@ -80,9 +77,7 @@
 											</td>
 											<td colspan="2" CLASS="TITLE_LIGHT">
 												<a>
-													<xsl:attribute name="href">
-														javascript:document.frmSession.action='sa_opus_optum.aspx?opus=<xsl:value-of select="id"/>&#38;lng=<xsl:value-of select="//language"/>';document.frmSession.submit();
-													</xsl:attribute>
+													<xsl:attribute name="href">javascript:document.frmSession.action='sa_opus_optum.aspx?opus=<xsl:value-of select="id"/>&#38;lng=<xsl:value-of select="//language"/>';document.frmSession.submit();</xsl:attribute>
 													<xsl:value-of select="title" />
 												</a>											
 											</td>
@@ -231,19 +226,13 @@
 								<!-- ************ BEGINS CONTENT ************ -->
 								<!-- Breadcrumbs -->
 								<a>
-									<xsl:attribute name="href">
-										sa_menu.aspx?lng=
-										<xsl:value-of select="//language" />
-									</xsl:attribute>
+									<xsl:attribute name="href">sa_menu.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
 									<xsl:value-of select="//sa_menu" />
 								</a>
 								&#62;
 								<xsl:if test="//user_status = 2">
 									<a>
-										<xsl:attribute name="href">
-											sa_artifex_lst.aspx?lng=
-											<xsl:value-of select="//language" />
-										</xsl:attribute>
+										<xsl:attribute name="href">sa_artifex_lst.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
 										<xsl:value-of select="//sa_artifex_lst" />
 									</a>
 									&#62;
@@ -272,25 +261,13 @@
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<a>
-													<xsl:attribute name="href">
-														javascript:document.frmSession.action='sa_map.aspx?opus=
-														<xsl:value-of select="id" />
-														&#38;lng=
-														<xsl:value-of select="//language" />
-														';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();
-													</xsl:attribute>
+													<xsl:attribute name="href">javascript:document.frmSession.action='sa_map.aspx?opus=<xsl:value-of select="id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();</xsl:attribute>
 													<xsl:value-of select="//L_MAP" />
 												</a>
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<a>
-													<xsl:attribute name="href">
-														javascript:document.frmSession.action='sa_Category_lst.aspx?opus=
-														<xsl:value-of select="id" />
-														&#38;lng=
-														<xsl:value-of select="//language" />
-														';document.frmSession.submit();
-													</xsl:attribute>
+													<xsl:attribute name="href">javascript:document.frmSession.action='sa_Category_lst.aspx?opus=<xsl:value-of select="id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
 													<xsl:value-of select="//L_Category" />
 												</a>
 											</td>

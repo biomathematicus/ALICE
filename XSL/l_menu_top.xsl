@@ -171,7 +171,7 @@
 			</tr>
 			<!-- Ends Header Table -->
 		</table>
-		<!-- Starts Toolbar Table -->
+		<!-- Toolbar Table Starts -->
 		<table width="100%" border="0" cellspacing="0" cellpadding="3">
 			<tr>
 				<td>&#160;</td>
@@ -233,13 +233,13 @@
 				<!-- sa_menu -->
 				<xsl:if test="//user_logon != ''">
 				<td>&#160;</td>
-					<xsl:if test="//user_status = 3 or //user_status = 5">
+					<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
 						<xsl:choose>
 							<xsl:when test="//sa_menu[@selected[. = 'true']]">
 								<td class='BAR_OFF' align="center" nowrap="true" width="20%">
 									<span class='BAR_MENU'>
 										<span class="MEDIUM">
-											<xsl:value-of select="//sa_menu" />
+											<xsl:value-of select="//user_role_name" />
 										</span>
 									</span>
 								</td>
@@ -253,7 +253,7 @@
 											';document.frmSession.submit();
 										</xsl:attribute>
 										<span class='MEDIUM'>
-											<xsl:value-of select="//sa_menu" />
+											<xsl:value-of select="//user_role_name" />
 										</span>
 									</a>
 								</td>

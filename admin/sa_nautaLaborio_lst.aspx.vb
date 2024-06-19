@@ -33,33 +33,34 @@ Namespace Literatronica
             Dim sArtifex As String
             Dim act As String
             Dim sOpus As String
-            Dim iId As String
-            Dim doc As XmlDocument = New XmlDocument
+			Dim sIdNauta As String
+			Dim doc As XmlDocument = New XmlDocument
             Dim trans As XslTransform = New XslTransform
             'Create DLL Instance
             oDBService = New Connection
             'Clean malicious code from parameters that will be sent to the database
             sLinguaCok = oDBService.formatSQLInput(sLinguaCok)
             sUserID = oDBService.formatSQLInput(sUserID)
-            sArtifex = oDBService.formatSQLInput(Request.QueryString("artifex"))
-            act = oDBService.formatSQLInput(Request.QueryString("action"))
+			sArtifex = oDBService.formatSQLInput(Request.QueryString("artifex"))
+			If sArtifex = "" Then sArtifex = "1"
+			act = oDBService.formatSQLInput(Request.QueryString("action"))
             sOpus = oDBService.formatSQLInput(Request.QueryString("opus"))
-            iId = oDBService.formatSQLInput(Request.QueryString("id"))
-            If act = "date" Or act = "name" Then
+			sIdNauta = oDBService.formatSQLInput(Request.QueryString("id_nauta"))
+			If act = "date" Or act = "name" Then
             Else
                 act = "nothing"
             End If
-            sSQL = "exec sa_nautaLaborio_lst" &
-              " @Language='" & sLinguaCok & "'" &
-              ",@Artifex_id=" & sArtifex &
-              ",@Id='" & iId & "'" &
-              ",@Opus=" & sOpus &
-              ",@OpusType=''" &
-              ",@PageCode='sa_menu'" &
-              ",@PageName='sa_opus_lst.aspx'" &
-              ",@action='" & act & "'" &
-              ",@userID='" & sUserID & "'"
-            doc.LoadXml(oDBService.DBXML(sSQL))
+			sSQL = "exec sa_nautaLaborio_lst" &
+			  " @Language='" & sLinguaCok & "'" &
+			  ",@Artifex_id=" & sArtifex &
+			  ",@id_nauta=" & sIdNauta &
+			  ",@Opus=" & sOpus &
+			  ",@OpusType=''" &
+			  ",@PageCode='sa_menu'" &
+			  ",@PageName='sa_nautaLaborio_lst.aspx'" &
+			  ",@action='" & act & "'" &
+			  ",@userID='" & sUserID & "'"
+			doc.LoadXml(oDBService.DBXML(sSQL))
             trans.Load(Server.MapPath("..\XSL\sa_nautaLaborio_lst.xsl"))
             Session("artifex") = Request.QueryString("artifex")
 

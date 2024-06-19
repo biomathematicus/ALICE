@@ -5,12 +5,12 @@ Imports System.Xml
 Namespace Literatronica
 
     Partial Class Initium
-        Inherits System.Web.UI.Page
+		Inherits BasePage
 
 #Region " Web Form Designer Generated Code "
 
-        'This call is required by the Web Form Designer.
-        <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+		'This call is required by the Web Form Designer.
+		<System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
 
         End Sub
 
@@ -26,15 +26,12 @@ Namespace Literatronica
 
             Dim sAction As String
 
-            Dim oDBService As New Connection
+			oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
 
-            Dim sLinguaCok, sLinguaQry, sUserID As String
-            oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
-
-            'RETRIEVE DATA FROM DATABASE
-            Dim sSQL As String
-            Dim sLingua As String = "BRITANNIA"
-            Dim doc As XmlDocument = New XmlDocument
+			'RETRIEVE DATA FROM DATABASE
+			Dim sSQL As String
+			'Dim sLingua As String = "BRITANNIA"
+			Dim doc As XmlDocument = New XmlDocument
             Dim trans As XslTransform = New XslTransform
             'Create DLL Instance
             oDBService = New Connection

@@ -65,7 +65,7 @@
 		}
     </style>
     <body>
-    <xsl:if test="//user_status = 3 or //Validation = 1">
+	<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
     <script   type="text/javascript">
         var arry_ds_title = [];
         var arry_ds_tag_bri = [];
@@ -153,16 +153,16 @@
                   <xsl:attribute name="href">
                     sa_menu.aspx?lng=<xsl:value-of select="//language" />
                   </xsl:attribute>
-                  <xsl:value-of select="//sa_menu" />
+                  <xsl:value-of select="//user_role_name" />
                 </a> &#62;
-                <xsl:if test="//user_status = 3">
+				  <!--xsl:if test="//user_status = 3">
                   <a>
                     <xsl:attribute name="href">
                       sa_artifex_lst.aspx?lng=<xsl:value-of select="//language" />
                     </xsl:attribute>
                     <xsl:value-of select="//sa_artifex_lst" />
                   </a> &#62;
-                </xsl:if>
+                </xsl:if -->
                 <a>
                   <xsl:attribute name="href">
                     sa_opus_lst.aspx?artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />

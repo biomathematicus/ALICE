@@ -9,7 +9,7 @@
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
 			<body>
-				<xsl:if test="//user_status = 3">
+				<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
 					<table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
 						<tr valign="top">
 							<td rowspan="3" valign="top" class='BAR_OFF'>
@@ -30,11 +30,8 @@
 								<!-- ************ BEGINS CONTENT ************ -->
 								<!-- Breadcrumbs Begin -->
 								<a>
-									<xsl:attribute name="href">
-										sa_menu.aspx?lng=
-										<xsl:value-of select="//language" />
-									</xsl:attribute>
-									<xsl:value-of select="//sa_menu" />
+									<xsl:attribute name="href">sa_menu.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
+									<xsl:value-of select="//user_role_name" />
 								</a>
 								&#62;
 								<!-- xsl:if test="//user_status = 3">
@@ -48,13 +45,7 @@
 									&#62;
 								</xsl:if -->
 								<a>
-									<xsl:attribute name="href">
-										javascript:document.frmSession.action='sa_opus_lst.aspx?artifex=
-										<xsl:value-of select="//artifex_id" />
-										&#38;lng=
-										<xsl:value-of select="//language" />
-										';document.frmSession.submit();
-									</xsl:attribute>
+									<xsl:attribute name="href">javascript:document.frmSession.action='sa_opus_lst.aspx?artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
 									<xsl:value-of select="//sa_opus_lst" />
 								</a>
 								&#62;
@@ -66,8 +57,7 @@
 								<!-- ======================================== -->
 								<!-- Title Begins -->
 								<h1>
-									<xsl:value-of select="/doc/sa_opus_lst/opus/id" />
-									.
+									<xsl:value-of select="//id_opus" />. 
 									<xsl:value-of select="/doc/sa_opus_lst/opus/title" />
 								</h1>
 								<!-- Title Ends -->
@@ -76,15 +66,7 @@
 								<p>
 									<b>
 										<a>
-											<xsl:attribute name="href">
-												javascript:document.frmSession.action='sa_opus_dtl.aspx?opus=
-												<xsl:value-of select="/doc/sa_opus_lst/opus/id" />
-												&#38;artifex=
-												<xsl:value-of select="//artifex_id" />
-												&#38;lng=
-												<xsl:value-of select="//language" />
-												';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();
-											</xsl:attribute>
+											<xsl:attribute name="href">javascript:document.frmSession.action='sa_opus_dtl.aspx?opus=<xsl:value-of select="//id_opus" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();</xsl:attribute>
 											<xsl:value-of select="/doc/admin_tags/sa_opus_dtl" />
 										</a>:
 									</b>
@@ -96,13 +78,7 @@
 								<p>
 									<b>
 										<a>
-											<xsl:attribute name="href">
-												javascript:document.frmSession.action='sa_pagina_lst.aspx?opus=
-												<xsl:value-of select="/doc/sa_opus_lst/opus/id" />
-												&#38;lng=
-												<xsl:value-of select="//language" />
-												';document.frmSession.submit();
-											</xsl:attribute>
+											<xsl:attribute name="href">javascript:document.frmSession.action='sa_pagina_lst.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
 											<xsl:value-of select="/doc/admin_tags/sa_pagina_lst" />
 										</a>: 
 									</b>
@@ -114,13 +90,7 @@
 								<p>
 									<b>
 										<a>
-											<xsl:attribute name="href">
-												javascript:document.frmSession.action='sa_map.aspx?opus=
-												<xsl:value-of select="/doc/sa_opus_lst/opus/id" />
-												&#38;lng=
-												<xsl:value-of select="//language" />
-												';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();
-											</xsl:attribute>
+											<xsl:attribute name="href">javascript:document.frmSession.action='sa_map.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();</xsl:attribute>
 											<xsl:value-of select="//L_MAP" />
 										</a>:
 									</b>
@@ -132,9 +102,7 @@
 								<p>
 									<b>
 										<a>
-											<xsl:attribute name="href">
-												javascript:document.frmSession.action='sa_Category_lst.aspx?opus=<xsl:value-of select="/doc/sa_opus_lst/opus/id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
-											</xsl:attribute>
+											<xsl:attribute name="href">javascript:document.frmSession.action='sa_Category_lst.aspx?opus=<xsl:value-of select="//id_opus" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
 											<xsl:value-of select="//L_Category" />
 										</a>:
 									</b>
@@ -146,9 +114,7 @@
 								<p>
 									<b>
 										<a>
-											<xsl:attribute name="href">
-												javascript:document.frmSession.action='sa_nauta_lst.aspx?opus=<xsl:value-of select="/doc/sa_opus_lst/opus/id" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />&#38;chorus=<xsl:value-of select="/doc/sa_opus_lst/opus/ds_chorus" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();
-											</xsl:attribute>
+											<xsl:attribute name="href">javascript:document.frmSession.action='sa_nauta_lst.aspx?opus=<xsl:value-of select="//id_opus" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />&#38;chorus=<xsl:value-of select="/doc/sa_opus_lst/opus/ds_chorus" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();</xsl:attribute>
 											<xsl:value-of select="//sa_nauta_lst" />
 										</a>: 
 									</b>
@@ -160,9 +126,7 @@
 								<p>
 									<b>
 										<a>
-											<xsl:attribute name="href">
-												javascript:document.frmSession.action='sa_opus_dtl.aspx?opus=<xsl:value-of select="/doc/sa_opus_lst/opus/id"/>&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value='calcular';document.frmSession.submit();
-											</xsl:attribute>
+											<xsl:attribute name="href">javascript:document.frmSession.action='sa_opus_dtl.aspx?opus=<xsl:value-of select="//id_opus"/>&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value='calcular';document.frmSession.submit();</xsl:attribute>
 											CALCULUS
 										</a>:
 									</b>
@@ -172,9 +136,7 @@
 								<!-- ======================================== -->
 								<div style="align: right; display: inline; padding: 10px; width: 150px"  CLASS="TITLE_WARNING">
 									<a>
-										<xsl:attribute name="href">
-											javascript:var result=confirm("Deletion is irreversible. Are you sure?");if (result){document.frmSession.action='sa_opus_dtl.aspx?opus=<xsl:value-of select="/doc/sa_opus_lst/opus/id" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit()};
-										</xsl:attribute>
+										<xsl:attribute name="href">javascript:var result=confirm("Deletion is irreversible. Are you sure?");if (result){document.frmSession.action='sa_opus_dtl.aspx?opus=<xsl:value-of select="//id_opus" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit()};</xsl:attribute>
 										<xsl:value-of select="//L_DELETE" />
 									</a>
 								</div>
@@ -348,10 +310,7 @@ ifex_id" />
 								&#62;
 								<xsl:if test="//user_status = 2">
 									<a>
-										<xsl:attribute name="href">
-											sa_artifex_lst.aspx?lng=
-											<xsl:value-of select="//language" />
-										</xsl:attribute>
+										<xsl:attribute name="href">sa_artifex_lst.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
 										<xsl:value-of select="//sa_artifex_lst" />
 									</a>
 									&#62;
@@ -380,25 +339,13 @@ ifex_id" />
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<a>
-													<xsl:attribute name="href">
-														javascript:document.frmSession.action='sa_map.aspx?opus=
-														<xsl:value-of select="id" />
-														&#38;lng=
-														<xsl:value-of select="//language" />
-														';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();
-													</xsl:attribute>
+													<xsl:attribute name="href">javascript:document.frmSession.action='sa_map.aspx?opus=<xsl:value-of select="id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();</xsl:attribute>
 													<xsl:value-of select="//L_MAP" />
 												</a>
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<a>
-													<xsl:attribute name="href">
-														javascript:document.frmSession.action='sa_Category_lst.aspx?opus=
-														<xsl:value-of select="id" />
-														&#38;lng=
-														<xsl:value-of select="//language" />
-														';document.frmSession.submit();
-													</xsl:attribute>
+													<xsl:attribute name="href">javascript:document.frmSession.action='sa_Category_lst.aspx?opus=<xsl:value-of select="id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
 													<xsl:value-of select="//L_Category" />
 												</a>
 											</td>

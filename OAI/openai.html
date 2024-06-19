@@ -4,11 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-	<meta http-equiv="Pragma" content="no-cache" />
-	<meta http-equiv="Expires" content="0" />
+	<meta http-equiv="Pragma" no-cache />
+	<meta http-equiv="Expires" 0 />
 	<title>Conversation with OpenAI</title>
-	<script src="../common/jquery.min.js"></script> <!-- https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js -->
-	<script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script> <!-- ../common/showdown/showdown.min.js -->
+	<script language="JavaScript" type="text/JavaScript" src="../common/katex/katex.min.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="../common/katex/contrib/auto-render.min.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="../common/showdown/showdown.min.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="../common/jquery-3.7.1.min.js"></script>
 	<style>
 		body {
 			font-family: Arial, sans-serif;
@@ -56,13 +58,19 @@
 </head>
 <body>
 	<div id="openai">
+		<select id="modelSelect">
+			<option value="gpt-4o">gpt-4o</option>
+			<option value="gpt-4-turbo">gpt-4-turbo</option>
+			<option value="gpt-4">gpt-4</option>
+			<option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+		</select>&#160;&#160;&#160;
+		<button id="resetButton">RESET</button>
 		<div id="messageArea" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
 			<!-- Messages will be added here -->
 			<div id="loader" class="loader" style="display: none;"></div>
 		</div>
 		<div id="userInterface">
-			<input type="text" id="userInput" placeholder="Enter your prompt" >
-			<!-- textarea  id="userInput" placeholder="Enter your prompt"  rows="3" cols="30"></!--textarea -->
+			<input type="text" id="userInput" placeholder="Enter your prompt">
 			<br />
 			<button id="sendButton">Send</button>
 		</div>
@@ -104,16 +112,37 @@
 						loader.style.display = "none"; // Hide the loader once data is received
 						var converter = new showdown.Converter();
 						var message = jsonData.choices[0].message.content;
-						message = converter.makeHtml(message);
+						var html = converter.makeHtml(message);
+
+						// Create a temporary container to hold the HTML
+						var tempDiv = document.createElement('div');
+						tempDiv.innerHTML = html;
+
+						// Render LaTeX using KaTeX on the temporary container
+						renderMathInElement(tempDiv, {
+							delimiters: [
+								{ left: "$$", right: "$$", display: true },
+								{ left: "$", right: "$", display: false }
+							]
+						});
+
+						// Remove the spans that are causing repetition
+						tempDiv.querySelectorAll('.katex-html').forEach(span => span.remove());
+
+						// Create a new message div and append the processed content
 						var messageDiv = document.createElement('div');
-						console.log(message); 
-						console.log(jsonData);
-						messageDiv.innerHTML = message; //.textContent
 						messageDiv.className = 'ai-response';
-						messageArea.appendChild(messageDiv);
+						messageDiv.innerHTML = tempDiv.innerHTML; // Use innerHTML to avoid appending the element itself
+						document.getElementById("messageArea").appendChild(messageDiv);
 
 						// Scroll to the bottom of the message area
 						messageArea.scrollTop = messageArea.scrollHeight;
+
+						console.log('OAI MESSAGE');
+						console.log(message);
+						console.log('RENDERED');
+						console.log(messageDiv.innerHTML);
+
 					} catch (error) {
 						loader.style.display = "none"; // Hide the loader on error
 						console.error("Error handling response or updating DOM:", error);
@@ -127,6 +156,5 @@
 			document.getElementById("userInput").value = ''
 		});
 	</script>
-
 </body>
 </html>

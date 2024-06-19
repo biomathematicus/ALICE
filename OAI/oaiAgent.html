@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" no-cache />
+	<meta http-equiv="Expires" 0 />
+	<title>oaiAgent</title>
+	<script language="JavaScript" type="text/JavaScript" src="../common/katex/katex.min.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="../common/katex/contrib/auto-render.min.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="../common/showdown/showdown.min.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="../common/jquery-3.7.1.min.js"></script>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		.user-question {
+			background-color: #f0f0f0;
+			padding: 8px;
+			margin: 5px 0;
+			border-radius: 4px;
+		}
+
+		.ai-response {
+			padding: 8px;
+			margin: 5px 0;
+			border-radius: 4px;
+		}
+
+		.loader {
+			border: 6px solid #f3f3f3; /* Light grey */
+			border-top: 6px solid #3498db; /* Blue */
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			animation: spin 2s linear infinite;
+			margin: 5px auto; /* Center the loader horizontally */
+			display: none; /* Ensure it is hidden initially */
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		input {
+			width: 80%;
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div id="openai">
+		<select id="modelSelect">
+			<option value="gpt-4o">gpt-4o</option>
+			<option value="gpt-4-turbo">gpt-4-turbo</option>
+			<option value="gpt-4">gpt-4</option>
+			<option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+		</select>&#160;&#160;&#160;
+		<button id="resetButton">RESET</button>
+		<div id="messageArea" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+			<!-- Messages will be added here -->
+			<div id="loader" class="loader" style="display: none;"></div>
+		</div>
+		<div id="userInterface">
+			<input type="text" id="userInput" placeholder="Enter your prompt">
+			<br />
+			<button id="sendButton">Send</button>
+		</div>
+	</div>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const urlParams = new URLSearchParams(window.location.search);
+			const OPUS = urlParams.get('OPUS');
+			const PAGINA = urlParams.get('PAGINA');
+			const NAUTA = urlParams.get('NAUTA');
+			const LINGUA = urlParams.get('LINGUA');
+
+			if (!OPUS || !PAGINA || !NAUTA || !LINGUA) {
+				return;
+			}
+
+			initializeChat(OPUS, PAGINA, NAUTA, LINGUA);
+
+			document.getElementById('sendButton').addEventListener('click', function () {
+				const userInput = document.getElementById('userInput').value;
+				const model = document.getElementById('modelSelect').value;
+				if (userInput.trim() === "") {
+					alert("Please enter some text.");
+					return;
+				}
+				sendMessage(userInput, model);
+			});
+
+			document.getElementById('resetButton').addEventListener('click', function () {
+				initializeChat(OPUS, PAGINA, NAUTA, LINGUA, true);
+			});
+
+			document.getElementById('userInput').addEventListener('keyup', function (event) {
+				if (event.code === "Enter" || event.code === "NumpadEnter") {
+					event.preventDefault();
+					document.getElementById('sendButton').click();
+				}
+			});
+		});
+
+		function initializeChat(OPUS, PAGINA, NAUTA, LINGUA, reset = false) {
+			$.ajax({
+				url: 'oaiAgent.ashx',
+				type: 'POST',
+				data: {
+					action: reset ? 'reset' : 'initialize',
+					OPUS: OPUS,
+					PAGINA: PAGINA,
+					NAUTA: NAUTA,
+					LINGUA: LINGUA
+				},
+				success: function (jsonData) {
+					if (jsonData.success) {
+						if (reset) {
+							$('#messageArea').empty();
+						} else {
+							jsonData.chat.forEach(message => {
+								addMessageToUI(message);
+							});
+						}
+					} else {
+						alert("Error initializing chat: " + jsonData.error);
+					}
+				},
+				error: function (xhr, status, error) {
+					console.log("AJAX error:", error);
+				}
+			});
+		}
+
+		function sendMessage(userInput, model) {
+			const messageArea = document.getElementById('messageArea');
+			const loader = document.getElementById('loader');
+			const userDiv = document.createElement('div');
+			userDiv.textContent = userInput;
+			userDiv.className = 'user-question';
+			document.getElementById("messageArea").appendChild(userDiv);
+			document.getElementById("messageArea").appendChild(loader);
+			loader.style.display = "block";
+			messageArea.scrollTop = messageArea.scrollHeight;
+
+			$.ajax({
+				url: 'oaiAgent.ashx',
+				type: 'POST',
+				data: {
+					action: 'sendMessage',
+					userInput: userInput,
+					model: model
+				},
+				success: function (jsonData) {
+					loader.style.display = "none";
+					if (jsonData.success) {
+						addMessageToUI(jsonData.message);
+					} else {
+						alert("Error sending message: " + jsonData.error);
+					}
+				},
+				error: function (xhr, status, error) {
+					loader.style.display = "none";
+					console.log("AJAX error:", error);
+				}
+			});
+			document.getElementById("userInput").value = '';
+		}
+
+		function addMessageToUI(message) {
+			const messageArea = document.getElementById('messageArea');
+			const converter = new showdown.Converter();
+			const html = converter.makeHtml(message.content);
+			const tempDiv = document.createElement('div');
+			tempDiv.innerHTML = html;
+			renderMathInElement(tempDiv, {
+				delimiters: [
+					{ left: "$$", right: "$$", display: true },
+					{ left: "$", right: "$", display: false }
+				]
+			});
+			tempDiv.querySelectorAll('.katex-html').forEach(span => span.remove());
+			const messageDiv = document.createElement('div');
+			messageDiv.className = 'ai-response';
+			messageDiv.innerHTML = tempDiv.innerHTML;
+			messageArea.appendChild(messageDiv);
+			messageArea.scrollTop = messageArea.scrollHeight;
+		}
+	</script>
+</body>
+</html>

@@ -9,7 +9,7 @@
       <!-- Insert HTML header -->
       <xsl:apply-templates select="//html_header" />
       <body>
-        <xsl:if test="//user_status = 3">
+		  <xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
           <table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
             <tr valign="top">
               <td rowspan="3" valign="top" class='BAR_OFF'>

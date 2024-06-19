@@ -67,17 +67,17 @@ Namespace Literatronica
                 sAcces = "0000"
             End If
 
-            sSQL = "exec sa_map" &
-              " @Language='" & sLinguaCok & "'" &
-              ",@OpusType=''" &
-              ",@Action='" & sAction & "'" &
-              ",@Acces='" & sPosition & "'" &
-              ",@PageCode='sa_menu'" &
-              ",@PageName='Tractus.aspx'" &
-              ",@id_opus=" & id_opus &
-              ",@sCheck='" & sCheck & "'" &
-              ",@userID='" & sUserID & "'"
-            Try
+			sSQL = "exec sa_map" &
+			  " @Language='" & sLinguaCok & "'" &
+			  ",@OpusType=''" &
+			  ",@Action='" & sAction & "'" &
+			  ",@Acces='" & sPosition & "'" &
+			  ",@PageCode='sa_menu'" &
+			  ",@PageName='sa_map.aspx'" &
+			  ",@id_opus=" & id_opus &
+			  ",@sCheck='" & sCheck & "'" &
+			  ",@userID='" & sUserID & "'"
+			Try
                 doc.LoadXml(oDBService.DBXML(sSQL))
                 trans.Load(Server.MapPath("..\XSL\sa_map.xsl"))
                 XMLContent.Document = doc

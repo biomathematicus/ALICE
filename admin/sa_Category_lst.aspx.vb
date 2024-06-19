@@ -48,18 +48,18 @@ Namespace Literatronica
             sOpus = oDBService.formatSQLInput(Request.QueryString("opus"))
             iId = oDBService.formatSQLInput(Request.QueryString("id"))
 
-            sSQL = "exec sa_Category_lst" &
-              " @Language='" & sLinguaCok & "'" &
-              ",@Opus=" & sOpus &
-              ",@PageCode='sa_menu'" &
-              ",@OpusType=''" &
-              ",@PageName='sa_opus_lst.aspx'" &
-              ",@action='" & act & "'" &
-              ",@Id='" & iId & "'" &
-              ",@value='" & value & "'" &
-              ",@userID='" & sUserID & "'"
-            doc.LoadXml(oDBService.DBXML(sSQL))
-            trans.Load(Server.MapPath("..\XSL\sa_Category_lst.xsl"))
+			sSQL = "exec sa_Category_lst" &
+			  " @Language='" & sLinguaCok & "'" &
+			  ",@Opus=" & sOpus &
+			  ",@PageCode='sa_menu'" &
+			  ",@OpusType=''" &
+			  ",@PageName='sa_category_lst.aspx'" &
+			  ",@action='" & act & "'" &
+			  ",@Id='" & iId & "'" &
+			  ",@value='" & value & "'" &
+			  ",@userID='" & sUserID & "'"
+			doc.LoadXml(oDBService.DBXML(sSQL))
+			trans.Load(Server.MapPath("..\XSL\sa_Category_lst.xsl"))
             Session("artifex") = Request.QueryString("artifex")
 
             XMLContent.Document = doc
