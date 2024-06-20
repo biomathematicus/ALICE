@@ -12,7 +12,7 @@
 			<style>
 				/* Limit the maximum width of the first column */
 				.column-1 {
-				width: 400px; /* maximum width */
+				max-width: 400px; /* maximum width */
 				word-wrap: break-word; /* Force wrapping of lines */
 				white-space: normal; /* Allow wrapping */
 				}
@@ -120,7 +120,7 @@
 											<td >
 												<xsl:value-of select="title" />
 											</td>
-											<td class="column-1" width="250px">
+											<td class="column-1">
 												<xsl:if test="ds_file != ''">
 													<div>
 														<xsl:attribute name="id">labor<xsl:value-of select="pagina_id_"/></xsl:attribute>
