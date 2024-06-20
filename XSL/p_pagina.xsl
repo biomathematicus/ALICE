@@ -490,7 +490,13 @@
 															<div>
 																<p>
 																	Feedback :
-																	<xsl:value-of select="//Comments_" />
+																	<div id="InstructorComments">
+																		<xsl:value-of select="//Comments_" />
+																	</div>
+																	<script>
+																		MarkdownToHtml('InstructorComments');
+																	</script>
+
 																</p>
 															</div>
 														</xsl:when>

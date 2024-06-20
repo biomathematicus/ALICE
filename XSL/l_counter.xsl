@@ -42,13 +42,13 @@
 					<!-- Graded Progress Segment -->
 					<div>
 						<xsl:attribute name="style">
-							<xsl:text>height: 4px; background-color: #495A70; display: inline; width:</xsl:text><xsl:value-of select="percentage_g"/><xsl:text>%;</xsl:text>
+							<xsl:text>height: 4px; background-color: #F15A22; display: inline; width:</xsl:text><xsl:value-of select="percentage_g"/><xsl:text>%;</xsl:text>
 						</xsl:attribute>
 					</div>
 					<!-- Ungraded Progress Segment -->
 					<div>
 						<xsl:attribute name="style">
-							<xsl:text>height: 4px; background-color: #F15A22; display: inline; width:</xsl:text><xsl:value-of select="percentage"/><xsl:text>%;</xsl:text>
+							<xsl:text>height: 4px; background-color: #495A70; display: inline; width:</xsl:text><xsl:value-of select="perc_diff"/><xsl:text>%;</xsl:text>
 						</xsl:attribute>
 					</div>
 					<!-- Pending Progress Segment -->
