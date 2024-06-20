@@ -57,59 +57,46 @@
 
 								<!-- TABLE OF WORKS -->
 
-								<table border="0" cellpadding="6" align="center">
-									<tr>
-										<td colspan="5" CLASS="TITLE_DARK">
-											<b>
-												<xsl:value-of select="//sa_nauta_lst" />
-											</b>
-										</td>
-
-										<!--*****************************************************************
-                  <a>
-                    <xsl:attribute name="href">
-                      sa_menu.aspx?lng=<xsl:value-of select="//language" />
-                    </xsl:attribute>
-                    <xsl:value-of select="//sa_menu" />
-                  </a> &#62;
-
-                                    *****************************************************************-->
-
-										<!--********************************************************************************
-                    
-                    
-                                          <xsl:attribute name="onchange">
-                        javascript:document.frmSession.action='sa_nauta_lst.aspx?opus=<xsl:value-of select="//id_opus" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />&#38;chorus='alert(ali); document.getElementById(lstChorus).value;document.frmSession.hAction.value = '';document.frmSession.submit();
-                        javascript:redirect_nauta_lst('<xsl:value-of select="//language" />', '<xsl:value-of select="//id_opus" />',<xsl:value-of select="//artifex_id" />,chorusValue)
-
-                      </xsl:attribute>
-                    
-                    -->
-										<!--form id="myForm" action=""   method="post" -->
-										<input type="hidden" name="myText" value="testValue" />
-										<select CLASS="TITLE_LIGHT" id="lstChorus_id" name="lstChorus" >
-											<xsl:attribute name="onchange">
-												javascript:redirect_nauta_lst('<xsl:value-of select="//language" />', <xsl:value-of select="//id_opus" />,<xsl:value-of select="//artifex_id" />,this);
+								<input type="hidden" name="myText" value="testValue" />
+								<select CLASS="TITLE_LIGHT" id="lstChorus_id" name="lstChorus" >
+									<xsl:attribute name="onchange">
+										javascript:redirect_nauta_lst('<xsl:value-of select="//language" />', <xsl:value-of select="//id_opus" />,<xsl:value-of select="//artifex_id" />,this);
+									</xsl:attribute>
+									<xsl:for-each select="/doc/sa_opus_lst/chorus">
+										<option>
+											<xsl:attribute name="value">
+												<xsl:value-of select="id_chorus" />
 											</xsl:attribute>
-											<xsl:for-each select="/doc/sa_opus_lst/chorus">
-												<option>
-													<xsl:attribute name="value">
-														<xsl:value-of select="id_chorus" />
-													</xsl:attribute>
-													<xsl:value-of select="ds_chorus" />
-												</option>
-											</xsl:for-each>
-										</select>
-										<!--/form -->
-
-										<!--*********************************************************************************-->
+											<xsl:value-of select="ds_chorus" />
+										</option>
+									</xsl:for-each>
+								</select>
+								<table border="0" cellpadding="6" align="center">
+									<!--*********************************************************************************-->
+									<tr CLASS="TITLE_DARK">
+										<td>
+											<b>NAUTA</b>
+										</td>
+										<td>
+											<b>LABOR</b>
+										</td>
+										<td>
+											
+										</td>
+										<td>
+											
+										</td>
 									</tr>
+									<!--*********************************************************************************-->
 									<xsl:for-each select="/doc/sa_opus_lst/nauta">
-										<tr>
-											<td CLASS="TITLE_LIGHT">
+										<tr  CLASS="TITLE_LIGHT">
+											<td>
 												<xsl:value-of select="nm_nauta" />
 											</td>
-											<td CLASS="TITLE_LIGHT">
+											<td>
+												<xsl:value-of select="count" />
+											</td>
+											<td>
 												<a>
 													<xsl:attribute name="href">
 														javascript:document.frmSession.action='sa_nautaLaborio_lst.aspx?id_nauta=<xsl:value-of select="id_nauta" />&#38;opus=<xsl:value-of select="//id_opus" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
@@ -117,19 +104,13 @@
 													<xsl:value-of select="/doc/admin_tags/sa_nautaLaborio_lst" />
 												</a>
 											</td>
-											<td CLASS="TITLE_LIGHT">
+											<td>
 												<a>
 													<xsl:attribute name="href">
 														javascript:document.frmSession.action='sa_reading_rpt.aspx?opus=<xsl:value-of select="//id_opus" />&#38;nauta=<xsl:value-of select="ds_login" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
 													<xsl:value-of select="/doc/admin_tags/sa_nautaVia_lst" />
 												</a>
 											</td>
-											<!-- td CLASS="TITLE_LIGHT">
-                        <a>
-                          <xsl:attribute name="href">javascript:document.frmSession.action='sa_nautaCommunicatio_lst.aspx?id=<xsl:value-of select="id_nauta" />&#38;opus=<xsl:value-of select="//id_opus" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.hAction.value = 'ir_borrar';document.frmSession.submit();</xsl:attribute>
-                          <xsl:value-of select="//sa_nautaCommunicatio_lst" />
-                        </a>
-                      </td-->
 										</tr>
 									</xsl:for-each>
 								</table>

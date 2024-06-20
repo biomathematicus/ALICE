@@ -8,7 +8,21 @@
 		<html>
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
-			<body>
+			<style>
+				/* Limit the maximum width of the first column */
+				.column-1 {
+				max-width: 800px; /* maximum width */
+				word-wrap: break-word; /* Force wrapping of lines */
+				white-space: normal; /* Allow wrapping */
+				}
+
+				/* Limit the maximum width of the second column */
+				.column-2 {
+				max-width: 250px; /* maximum width */
+				word-wrap: break-word; /* Force wrapping of lines */
+				white-space: normal; /* Allow wrapping */
+				}
+			</style>			<body>
 				<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
 					<table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
 						<tr valign="top">
@@ -57,7 +71,7 @@
 												</a -->
 											</td>
 										</tr>
-										<xsl:if test="//user_role_code = 'AUTHOR'">
+										<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR'">
 											<tr>
 												<td>
 													<b>INBOX</b>
@@ -65,7 +79,7 @@
 											</tr>
 											<xsl:for-each select="/doc/inbox/labor">
 												<tr  CLASS="TITLE_LIGHT">
-													<td>
+													<td  class="column-1">
 														<b>STUDENT:</b>&#160;  <xsl:value-of select="nm_nauta" /> (<xsl:value-of select="ds_login" />)
 														<br/>
 														<b>OPUS:</b>&#160;

@@ -9,7 +9,21 @@
 		<html>
 			<!-- Insert HTML header -->
 			<xsl:apply-templates select="//html_header" />
+			<style>
+				/* Limit the maximum width of the first column */
+				.column-1 {
+				width: 400px; /* maximum width */
+				word-wrap: break-word; /* Force wrapping of lines */
+				white-space: normal; /* Allow wrapping */
+				}
 
+				/* Limit the maximum width of the second column */
+				.column-2 {
+				max-width: 250px; /* maximum width */
+				word-wrap: break-word; /* Force wrapping of lines */
+				white-space: normal; /* Allow wrapping */
+				}
+			</style>
 			<body>
 				<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
 					<script   type="text/javascript">
@@ -42,15 +56,6 @@
 									</xsl:attribute>
 									<xsl:value-of select="//user_role_name" />
 								</a> &#62;
-								<!-- xsl:if test="//user_status = 3">
-                  <a>
-                    <xsl:attribute name="href">
-                      sa_artifex_lst.aspx?lng=<xsl:value-of select="//language" />
-                    </xsl:attribute>
-                    <xsl:value-of select="//sa_artifex_lst" />
-                  </a> &#62;
-                </xsl:if -->
-
 								<a>
 									<xsl:attribute name="href">
 										sa_opus_lst.aspx?artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />
@@ -84,7 +89,7 @@
 									<td CLASS="TITLE_LIGHT">
 										<b>Name</b>
 									</td>
-									<td CLASS="TITLE_LIGHT" width="25%">
+									<td CLASS="TITLE_LIGHT" width="45%">
 										<b>
 											<!-- a>
 											 <xsl:attribute name="href">
@@ -95,7 +100,7 @@
 											Lesson Input
 										</b>
 									</td>
-									<td CLASS="TITLE_LIGHT"> Grades </td>
+									<td CLASS="TITLE_LIGHT" width="5%"> Grades </td>
 									<td CLASS="TITLE_LIGHT">
 										<xsl:value-of select="//L_COMMENTS" />
 									</td>
@@ -103,8 +108,8 @@
 										<xsl:value-of select="//L_Action" />
 									</td>
 									<xsl:for-each select="/doc/sa_opus_lst_page/opus">
-										<tr>
-											<td CLASS="TITLE_LIGHT">
+										<tr CLASS="TITLE_LIGHT">
+											<td>
 												<xsl:value-of select="pagina_id_" />
 												<a>
 													<xsl:attribute name="id">
@@ -112,10 +117,10 @@
 													</xsl:attribute>
 												</a>
 											</td>
-											<td CLASS="TITLE_LIGHT">
+											<td >
 												<xsl:value-of select="title" />
 											</td>
-											<td CLASS="TITLE_LIGHT">
+											<td class="column-1" width="250px">
 												<xsl:if test="ds_file != ''">
 													<div>
 														<xsl:attribute name="id">labor<xsl:value-of select="pagina_id_"/></xsl:attribute>
@@ -140,7 +145,7 @@
 												</input>
 											</td>
 											<td CLASS="TITLE_LIGHT">
-												<textarea rows="4" cols="30" name="txt_area">
+												<textarea rows="10" cols="30" name="txt_area">
 													<xsl:attribute name="id">
 														<xsl:value-of select="pagina_id_txt" />
 													</xsl:attribute>
