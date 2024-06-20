@@ -685,15 +685,16 @@ saeid safaei - 03/2016
 *********************************************************/
 
 function send_comments(userid, opusid, pagina_id) {
-    var pagina_id = pagina_id;
+	console.log('here');
+	var pagina_id = pagina_id;
     var user_id = userid;
     var opus_id = opusid;
     var i = 0;
     var k = "#txt" + pagina_id;
     var comment = $(k).val();
 
-    var k1 = "#" + pagina_id;
-    var grad = $(k1).val();
+    var k1 = "#score" + pagina_id;
+	var grad = $(k1).val();
     $.post("../src/Comment_handler.ashx", { grad: grad, comment: comment, user_id: user_id, pagina_id: pagina_id, opus_id: opus_id }, function (data) { });
 }
 //********************************************************************************************************************************************************************

@@ -136,28 +136,20 @@
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<input type="text" name="fname" maxlength="3" size="3">
-													<xsl:attribute name="id">
-														<xsl:value-of select="pagina_id_" />
-													</xsl:attribute>
-													<xsl:attribute name="value">
-														<xsl:value-of select="grade_con" />
-													</xsl:attribute>
+													<xsl:attribute name="id">score<xsl:value-of select="pagina_id_" /></xsl:attribute>
+													<xsl:attribute name="value"><xsl:value-of select="grade_con" /></xsl:attribute>
 												</input>
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<textarea rows="10" cols="30" name="txt_area">
-													<xsl:attribute name="id">
-														<xsl:value-of select="pagina_id_txt" />
-													</xsl:attribute>
+													<xsl:attribute name="id"><xsl:value-of select="pagina_id_txt" /></xsl:attribute>
 
 													<xsl:value-of select="comment_con" />
 												</textarea>
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<input type="button"  value="Update">
-													<xsl:attribute name="onclick">
-														send_comments( <xsl:value-of select="user_id_" />,<xsl:value-of select="opus_id_" />,<xsl:value-of select="pagina_id_" /> );
-													</xsl:attribute>
+													<xsl:attribute name="onclick">send_comments( <xsl:value-of select="user_id_" />,<xsl:value-of select="opus_id_" />,<xsl:value-of select="pagina_id_" /> );</xsl:attribute>
 												</input>
 											</td>
 											<script>
