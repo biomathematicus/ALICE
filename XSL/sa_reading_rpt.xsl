@@ -53,18 +53,17 @@
 								<xsl:value-of select="//sa_nauta_lst" />
 							</a> &#62;
 							<b>
-								<xsl:value-of select="//sa_reading_rpt" />: <xsl:value-of select="//name" /> (<xsl:value-of select="//username" />)
+								<xsl:value-of select="//sa_reading_rpt" />
 							</b>
 							<p />
 
 							<!-- Reading Report -->
 							<table border="0" cellpadding="6" align="center">
 								<tr>
-									<td CLASS="TITLE_DARK" colspan="4">
+									<td CLASS="TITLE_DARK" colspan="6">
 										<b>
 											<xsl:value-of select="//sa_reading_rpt" />
-											:
-											<xsl:value-of select ="//username" />
+											: <xsl:value-of select="//name" /> (<xsl:value-of select="//username" />)
 										</b>
 									</td>
 								</tr>
