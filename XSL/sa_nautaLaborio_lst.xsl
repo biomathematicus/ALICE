@@ -100,9 +100,11 @@
 											Lesson Input
 										</b>
 									</td>
-									<td CLASS="TITLE_LIGHT" width="5%"> Grades </td>
+									<td CLASS="TITLE_LIGHT" width="5%">
+										<b> Grades</b> 
+									</td>
 									<td CLASS="TITLE_LIGHT">
-										<xsl:value-of select="//L_COMMENTS" />
+										<b><xsl:value-of select="//L_COMMENTS" /></b>
 									</td>
 									<td CLASS="TITLE_LIGHT">
 										<xsl:value-of select="//L_Action" />
@@ -118,7 +120,12 @@
 												</a>
 											</td>
 											<td >
-												<xsl:value-of select="title" />
+												<a>
+													<xsl:attribute name="href">
+														../src/pagina.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//opus_id" />&#38;pagina=<xsl:value-of select="pagina_id_" />
+													</xsl:attribute>
+													<xsl:value-of select="title" />
+												</a>
 											</td>
 											<td class="column-1">
 												<xsl:if test="ds_file != ''">
