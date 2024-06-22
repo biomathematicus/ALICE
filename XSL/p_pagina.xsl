@@ -385,67 +385,117 @@
 										<xsl:if test="//user_logon !='LOGGED-OFF'">
 											<div id="Test" style="visibility:hidden; display:none;">
 												<form id="frmUpload" runat="server">
+													<script type="text/javascript">
+														function renderMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
+														var textArea = document.getElementsByName(oTextArea)[0];
+														var formattedDiv = document.getElementById(oFormattedDiv);
+														formattedDiv.innerHTML = textArea.value;
+														MarkdownToHtml(oFormattedDiv);
+														textArea.style.display = 'none';
+														formattedDiv.style.display = 'block';
+														document.getElementById(renderBtn).style.display = 'none';
+														document.getElementById(editBtn).style.display = 'inline';
+														}
+
+														function editMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
+														var textArea = document.getElementsByName(oTextArea)[0];
+														var formattedDiv = document.getElementById(oFormattedDiv);
+														textArea.style.display = 'block';
+														formattedDiv.style.display = 'none';
+														document.getElementById(renderBtn).style.display = 'inline';
+														document.getElementById(editBtn).style.display = 'none';
+														}
+
+														function showButton(btn){
+														document.getElementById(btn).style.display = 'inline';
+														}
+
+														function hideButton(btn){
+														document.getElementById(btn).style.display = 'none';
+														}
+
+														function setAJAXAction(s){
+														document.getElementById('actionAJAX').value = s;
+														}
+													</script>
 													<input id="state" type="hidden">
 														<xsl:attribute name="value">
 															<xsl:value-of select="//language" />
 														</xsl:attribute>
 													</input>
+													<input id="actionAJAX" type="hidden" />
 													<br />
-
+													<!-- =========================================== -->
 													<h2>Student Learning Outcomes:</h2>
-													<div id="SLO">
+													<div id="divSLO">
 														<xsl:value-of select="//ds_slo"  disable-output-escaping="yes" />
 													</div>
+													<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
+													<textarea name="txtSLO" cols="90" rows="10" wrap="VIRTUAL">
+														<xsl:value-of select="//ds_slo" />
+													</textarea>
+													<br />
+													<button id="saveSLO" style="display:none;">
+														<xsl:attribute name="onclick">
+															javascript:setAJAXAction('SLO');SLO('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//language" />','SLO');renderMarkdown('txtSLO','divSLO','renderSLO','editSLO');hideButton('saveSLO');
+														</xsl:attribute>
+														Save
+													</button>
+													<button id="renderSLO" type="button"  onclick="renderMarkdown('txtSLO','divSLO','renderSLO','editSLO');hideButton('saveSLO');">Render markdown</button>
+													<button id="editSLO" type="button"  onclick="editMarkdown('txtSLO','divSLO','renderSLO','editSLO');showButton('saveSLO');">Edit markdown</button>
+													</xsl:if>
+													<br />
 
+													<!-- =========================================== -->
 													<h2>Assessment:</h2>
-													<div id="ASSESS">
+													<div id="divASSESS">
 														<xsl:value-of select="//ds_assess"  disable-output-escaping="yes" />
 													</div>
+													<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
+													<textarea name="txtASSESS" cols="90" rows="10" wrap="VIRTUAL">
+													<xsl:value-of select="//ds_assess" />
+													</textarea>
+													<br />
+													<button id="saveASSESS"  style="display:none;">
+														<xsl:attribute name="onclick">
+															javascript:setAJAXAction('ASSESS');ASSESS('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//language" />', 'ASSESS');renderMarkdown('txtASSESS','divASSESS','renderASSESS','editASSESS');;hideButton('saveASSESS');
+														</xsl:attribute>
+														Save
+													</button>
+													<button id="renderASSESS" type="button"  onclick="renderMarkdown('txtASSESS','divASSESS','renderASSESS','editASSESS');hideButton('saveASSESS');">Render markdown</button>
+													<button id="editASSESS" type="button"  onclick="editMarkdown('txtASSESS','divASSESS','renderASSESS','editASSESS');showButton('saveASSESS');" >Edit markdown</button>
+													</xsl:if>
+													<br />
 
+													<!-- =========================================== -->
 													<h2>Student:</h2>
-													<textarea name="ds_assess_his" cols="90" rows="10" wrap="VIRTUAL">
+													<textarea name="txtSTUDENT" cols="90" rows="10" wrap="VIRTUAL">
 														<xsl:value-of select="//ds_labor" />
 													</textarea>
-													<div id="FormattedHomework" style="display:none;">
+													<div id="divSTUDENT" style="display:none;">
 														<xsl:value-of select="//ds_labor" />
 													</div>
 													<br />
-													<br />
-													<button id="submitBtn">
+													<button id="saveSTUDENT">
 														<xsl:attribute name="onclick">
-															javascript:Labor('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>');renderMarkdown();
+															javascript:setAJAXAction('STUDENT');Labor('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>','STUDENT');renderMarkdown('txtSTUDENT','divSTUDENT','renderSTUDENT','editSTUDENT');
 														</xsl:attribute>
 														Submit
 													</button>
-													<button id="renderBtn" type="button"  onclick="renderMarkdown();">Render markdown</button>
-													<button id="editBtn" type="button"  onclick="editMarkdown();" style="display:none;">Edit markdown</button>
-													<script type="text/javascript">
-														function renderMarkdown() {
-														var textArea = document.getElementsByName('ds_assess_his')[0];
-														var formattedDiv = document.getElementById('FormattedHomework');
-														formattedDiv.innerHTML = textArea.value;
-														MarkdownToHtml('FormattedHomework');
-														textArea.style.display = 'none';
-														formattedDiv.style.display = 'block';
-														document.getElementById('renderBtn').style.display = 'none';
-														document.getElementById('editBtn').style.display = 'inline';
-														}
-
-														function editMarkdown() {
-														var textArea = document.getElementsByName('ds_assess_his')[0];
-														var formattedDiv = document.getElementById('FormattedHomework');
-														textArea.style.display = 'block';
-														formattedDiv.style.display = 'none';
-														document.getElementById('renderBtn').style.display = 'inline';
-														document.getElementById('editBtn').style.display = 'none';
-														}
-													</script>
+													<button id="renderSTUDENT" type="button"  onclick="renderMarkdown('txtSTUDENT','divSTUDENT','renderSTUDENT','editSTUDENT');">Render markdown</button>
+													<button id="editSTUDENT" type="button"  onclick="editMarkdown('txtSTUDENT','divSTUDENT','renderSTUDENT','editSTUDENT');" style="display:none;">Edit markdown</button>
 													<br />
-													<br />
-
+	
+													<!-- =========================================== -->
 													<script  type="text/javascript">
-														MarkdownToHtml('SLO');
-														MarkdownToHtml('ASSESS');
+														<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
+															renderMarkdown('txtSLO','divSLO','renderSLO','editSLO');
+															renderMarkdown('txtASSESS','divASSESS','renderASSESS','editASSESS');
+														</xsl:if>
+														<xsl:if test="//user_role_code = 'READER'">
+															MarkdownToHtml('divSLO');
+															MarkdownToHtml('divASSESS');
+														</xsl:if>
 														//document.write('<p>' + sHW + '</p>');
 													</script>
 													<!-- <xsl:choose><xsl:when test="//take='0'">  -->
@@ -462,7 +512,9 @@
 														</input>
 													</div -->
 													<!-- </xsl:when> </xsl:choose>   -->
-													<h3>Instructor: </h3>
+
+													<!-- =========================================== -->
+													<h2>Instructor: </h2>
 													<xsl:choose>
 														<xsl:when test="//take &gt;'0'">
 															<!-- div>
