@@ -147,7 +147,7 @@
 																<td  class="column-1">
 																	<a>
 																		<xsl:attribute name="href">
-																			sa_nautaLaborio_lst.aspx?id_nauta=<xsl:value-of select="id_nauta"/>&#38;opus=<xsl:value-of select="id_opus"/>&#38;lng=<xsl:value-of select="//language" />#<xsl:value-of select="id_pagina"/>
+																			sa_nautaLaborio_lst.aspx?id_nauta=<xsl:value-of select="id_nauta"/>&#38;opus=<xsl:value-of select="id_opus"/>&#38;lng=<xsl:value-of select="//language" />&#38;inbox=true#<xsl:value-of select="id_pagina"/>
 																		</xsl:attribute>
 																		<b>
 																			<xsl:value-of select="dt_upload" />

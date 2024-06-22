@@ -76,12 +76,17 @@
 									<xsl:value-of select="//sa_nauta_lst" />
 									<!--   sa_nauta_lst.aspx?opus=1&artifex=3993&lng=BRITANNIA-->
 								</a> &#62; <b>
-									<xsl:value-of select="//sa_nautaLaborio_lst" />:  <xsl:value-of select="//nm_nauta" /> (<xsl:value-of select="//ds_login" />)
+									<xsl:value-of select="//sa_nautaLaborio_lst" />
 								</b>
 								<p />
 
 								<!-- TABLE OF WORKS -->
 
+								<p>
+									<b>
+										<xsl:value-of select="//sa_nautaLaborio_lst" />:  <xsl:value-of select="//nm_nauta" /> (<xsl:value-of select="//ds_login" />)
+									</b>
+								</p>
 								<table border="0" cellpadding="6" align="center">
 									<td CLASS="TITLE_LIGHT">
 										<b>ID</b>

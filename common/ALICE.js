@@ -143,6 +143,7 @@ JBG - 05/2024
 *********************************************************/
 // Function to convert Markdown inside a div to HTML
 function MarkdownToHtml(sDiv) {
+	console.log('MarkdownToHtml for element: ' + sDiv)
 	var converter = new showdown.Converter(); 
 	var element = document.getElementById(sDiv); // Access the element by ID
 
@@ -759,7 +760,6 @@ saeid safaei - 03/2016
 *********************************************************/
 
 function send_comments(userid, opusid, pagina_id) {
-	console.log('here');
 	var pagina_id = pagina_id;
     var user_id = userid;
     var opus_id = opusid;
@@ -770,6 +770,9 @@ function send_comments(userid, opusid, pagina_id) {
     var k1 = "#score" + pagina_id;
 	var grad = $(k1).val();
     $.post("../src/Comment_handler.ashx", { grad: grad, comment: comment, user_id: user_id, pagina_id: pagina_id, opus_id: opus_id }, function (data) { });
+	if (new URLSearchParams(window.location.search).get('inbox') === 'true') {
+		window.location.href = 'sa_menu.aspx';
+	}
 }
 //********************************************************************************************************************************************************************
 function redirect_pagina(sLanguage, nBook, pagina_id__) {
