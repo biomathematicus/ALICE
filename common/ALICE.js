@@ -759,17 +759,16 @@ Returns		: None
 saeid safaei - 03/2016
 *********************************************************/
 
-function send_comments(userid, opusid, pagina_id) {
-	var pagina_id = pagina_id;
-    var user_id = userid;
-    var opus_id = opusid;
-    var i = 0;
-    var k = "#txt" + pagina_id;
+function send_comments(userid, nautaid, opusid, paginaid) {
+	//var opus_id = opusid;
+	//var pagina_id = paginaid;
+	//var nauta_id = nautaid;
+    //var user_id = userid;
+    var k = "#txt" + paginaid;
     var comment = $(k).val();
-
-    var k1 = "#score" + pagina_id;
+    var k1 = "#score" + paginaid;
 	var grad = $(k1).val();
-    $.post("../src/Comment_handler.ashx", { grad: grad, comment: comment, user_id: user_id, pagina_id: pagina_id, opus_id: opus_id }, function (data) { });
+	$.post("../src/Comment_handler.ashx", { grad: grad, comment: comment, user_id: userid, nauta_id: nautaid, pagina_id: paginaid, opus_id: opusid }, function (data) { });
 	if (new URLSearchParams(window.location.search).get('inbox') === 'true') {
 		window.location.href = 'sa_menu.aspx';
 	}

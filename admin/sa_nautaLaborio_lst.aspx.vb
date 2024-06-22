@@ -31,8 +31,7 @@ Namespace Literatronica
             'RETRIEVE DATA FROM DATABASE
             Dim sSQL As String
             Dim sArtifex As String
-            Dim act As String
-            Dim sOpus As String
+			Dim sOpus As String
 			Dim sIdNauta As String
 			Dim doc As XmlDocument = New XmlDocument
             Dim trans As XslTransform = New XslTransform
@@ -43,13 +42,8 @@ Namespace Literatronica
             sUserID = oDBService.formatSQLInput(sUserID)
 			sArtifex = oDBService.formatSQLInput(Request.QueryString("artifex"))
 			If sArtifex = "" Then sArtifex = "1"
-			act = oDBService.formatSQLInput(Request.QueryString("action"))
-            sOpus = oDBService.formatSQLInput(Request.QueryString("opus"))
+			sOpus = oDBService.formatSQLInput(Request.QueryString("opus"))
 			sIdNauta = oDBService.formatSQLInput(Request.QueryString("id_nauta"))
-			If act = "date" Or act = "name" Then
-            Else
-                act = "nothing"
-            End If
 			sSQL = "exec sa_nautaLaborio_lst" &
 			  " @Language='" & sLinguaCok & "'" &
 			  ",@Artifex_id=" & sArtifex &
@@ -58,7 +52,6 @@ Namespace Literatronica
 			  ",@OpusType=''" &
 			  ",@PageCode='sa_menu'" &
 			  ",@PageName='sa_nautaLaborio_lst.aspx'" &
-			  ",@action='" & act & "'" &
 			  ",@userID='" & sUserID & "'"
 			doc.LoadXml(oDBService.DBXML(sSQL))
             trans.Load(Server.MapPath("..\XSL\sa_nautaLaborio_lst.xsl"))
