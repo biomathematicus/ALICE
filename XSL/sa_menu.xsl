@@ -92,6 +92,20 @@
 											<tr>
 												<td>
 													<b>Inbox</b>
+													<input type="hidden" name="myText" value="testValue" />
+													<select CLASS="TITLE_LIGHT" id="lstChorus_id" name="lstChorus" >
+														<xsl:attribute name="onchange">
+															javascript:redirect_nauta_lst('<xsl:value-of select="//language" />', <xsl:value-of select="//id_opus" />,<xsl:value-of select="//artifex_id" />,this);
+														</xsl:attribute>
+														<xsl:for-each select="/doc/sa_opus_lst/chorus">
+															<option>
+																<xsl:attribute name="value">
+																	<xsl:value-of select="id_chorus" />
+																</xsl:attribute>
+																<xsl:value-of select="ds_chorus" />
+															</option>
+														</xsl:for-each>
+													</select>
 												</td>
 											</tr>
 												<td>

@@ -9,11 +9,10 @@
 <html lang="EN">
     <!-- Insert HTML header -->
     <xsl:apply-templates select="//html_header" />
-    <script src="../common/vis.js" type="text/javascript" />
-    <script src="../common/tractus.js" type="text/javascript" />
+	<!-- script src="../common/vis.js" type="text/javascript" / -->
+    <!-- script src="../common/tractus.js" type="text/javascript" / -->
     <link href="../common/vis-network.min.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-
+	<!-- style type="text/css">
 		#mynetwork{
 		width: $(document).width();
 		height: 400px; /* $(document).height(); */
@@ -42,10 +41,43 @@
 		align-items: flex-end; /* Right aligns all children within the div */
 		padding: 20px; /* Adds padding around the content, adjust as needed */
 		}
-	</style>
-    <body>
-	<xsl:if test="//user_logon !='LOGGED-OFF'">
-		<script   type="text/javascript">
+	</style -->
+	<body>
+		<script type="text/javascript">
+			function renderMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
+			var textArea = document.getElementsByName(oTextArea)[0];
+			var formattedDiv = document.getElementById(oFormattedDiv);
+			formattedDiv.innerHTML = textArea.value;
+			MarkdownToHtml(oFormattedDiv);
+			textArea.style.display = 'none';
+			formattedDiv.style.display = 'block';
+			document.getElementById(renderBtn).style.display = 'none';
+			document.getElementById(editBtn).style.display = 'inline';
+			}
+
+			function editMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
+			var textArea = document.getElementsByName(oTextArea)[0];
+			var formattedDiv = document.getElementById(oFormattedDiv);
+			textArea.style.display = 'block';
+			formattedDiv.style.display = 'none';
+			document.getElementById(renderBtn).style.display = 'inline';
+			document.getElementById(editBtn).style.display = 'none';
+			}
+
+			function showButton(btn){
+			document.getElementById(btn).style.display = 'inline';
+			}
+
+			function hideButton(btn){
+			document.getElementById(btn).style.display = 'none';
+			}
+
+			function setAJAXAction(s){
+			document.getElementById('actionAJAX').value = s;
+			}
+		</script>
+		<xsl:if test="//user_logon !='LOGGED-OFF'">
+		<!-- script   type="text/javascript">
 			var category_show=0;
 			var id_category_interest_base='';
 			var next_lesson_=0;
@@ -138,7 +170,6 @@
 				return new vis.DataSet(networkEdges);
 			}
 
-			//--------------------------------------------------------
 			function objectToArray(obj) {
 				return Object.keys(obj).map(
 					function (key) {
@@ -148,12 +179,10 @@
 				);
 			}
 
-			//--------------------------------------------------------
 			function resizeExportArea() {
 				exportArea.style.height = (1 + exportArea.scrollHeight) + "px";
 			}
 
-			//--------------------------------------------------------
 			function exportMyNetwork(network1) {
 				var nodes = objectToArray(network.getPositions());
 				nodes.forEach(addConnections);
@@ -161,7 +190,6 @@
 				return exportValue;
 			}
 		
-			//--------------------------------------------------------
 
 			function add_option(id,value1){
 				$('#pagina_cat_id').append($(' &lt;option &gt;', {value: id,text: value1} ))
@@ -187,7 +215,7 @@
 			recover_position('<xsl:value-of select="//positions_graph" />');
 			Opus_id=<xsl:value-of select="//id_opus" />;
 			id_category_interest_base=<xsl:value-of select="//id_category_interest_base" />;
-		</script>
+		</script -->
 
 		<table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
 			<tr valign="top">
@@ -290,9 +318,9 @@
 													</td>
 													</xsl:if>
 													<!-- _____________________ -->
-													<td width="74" id="tabGraph" class="TabOff" background="../images/system/bgd_tab_80x20.gif" >
+													<!-- td width="74" id="tabGraph" class="TabOff" background="../images/system/bgd_tab_80x20.gif" >
 														<a href="javascript:LoadTab('mynetwork');"><xsl:value-of select="//TAB_MAPPA"/></a>
-													</td>
+													</td -->
 													<!-- _____________________ -->
 													<td width="74" id="tabGenAI" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('GenAI');">GenAI</a>
@@ -366,11 +394,26 @@
 												</a>
 												<br />
 											</xsl:for-each>
-											<div id="pag_content">
+											<!-- =========================================== -->
+											<div id="divLESSON">
 											<xsl:value-of select="//pag_content"  disable-output-escaping="yes" />
 											</div>
+											<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
+												<textarea name="txtLESSON" cols="90" rows="10" wrap="VIRTUAL">
+													<xsl:value-of select="//pag_content" />
+												</textarea>
+												<br />
+												<button id="saveLESSON"  style="display:none;">
+													<xsl:attribute name="onclick">
+														javascript:setAJAXAction('LESSON');LESSON('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//language" />', 'LESSON');renderMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');;hideButton('saveLESSON');
+													</xsl:attribute>
+													Save
+												</button>
+												<button id="renderLESSON" type="button"  onclick="renderMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');hideButton('saveLESSON');">Render markdown</button>
+												<button id="editLESSON" type="button"  onclick="editMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');showButton('saveLESSON');" >Edit markdown</button>
+											</xsl:if>
 											<script>
-												MarkdownToHtml('pag_content');
+												MarkdownToHtml('txtLESSON');
 												<xsl:if test="//ds_pdf != ''">
 													LoadPDF('<xsl:value-of select="//ds_pdf"/>');
 												</xsl:if>
@@ -385,39 +428,6 @@
 										<xsl:if test="//user_logon !='LOGGED-OFF'">
 											<div id="Test" style="visibility:hidden; display:none;">
 												<form id="frmUpload" runat="server">
-													<script type="text/javascript">
-														function renderMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
-														var textArea = document.getElementsByName(oTextArea)[0];
-														var formattedDiv = document.getElementById(oFormattedDiv);
-														formattedDiv.innerHTML = textArea.value;
-														MarkdownToHtml(oFormattedDiv);
-														textArea.style.display = 'none';
-														formattedDiv.style.display = 'block';
-														document.getElementById(renderBtn).style.display = 'none';
-														document.getElementById(editBtn).style.display = 'inline';
-														}
-
-														function editMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
-														var textArea = document.getElementsByName(oTextArea)[0];
-														var formattedDiv = document.getElementById(oFormattedDiv);
-														textArea.style.display = 'block';
-														formattedDiv.style.display = 'none';
-														document.getElementById(renderBtn).style.display = 'inline';
-														document.getElementById(editBtn).style.display = 'none';
-														}
-
-														function showButton(btn){
-														document.getElementById(btn).style.display = 'inline';
-														}
-
-														function hideButton(btn){
-														document.getElementById(btn).style.display = 'none';
-														}
-
-														function setAJAXAction(s){
-														document.getElementById('actionAJAX').value = s;
-														}
-													</script>
 													<input id="state" type="hidden">
 														<xsl:attribute name="value">
 															<xsl:value-of select="//language" />
@@ -472,6 +482,19 @@
 													<textarea name="txtSTUDENT" cols="90" rows="10" wrap="VIRTUAL">
 														<xsl:value-of select="//ds_labor" />
 													</textarea>
+
+													<script type="text/javascript">
+														document.querySelector('textarea[name="txtSTUDENT"]').addEventListener('keydown', function(event) {
+														console.log('Key pressed:', event.key);
+														});
+
+														document.addEventListener('keydown', function(event) {
+														if (event.target.name === 'txtSTUDENT') {
+														console.log('Key pressed in textarea:', event.key);
+														}
+														});
+													</script>
+
 													<div id="divSTUDENT" style="display:none;">
 														<xsl:value-of select="//ds_labor" />
 													</div>
@@ -486,18 +509,6 @@
 													<button id="editSTUDENT" type="button"  onclick="editMarkdown('txtSTUDENT','divSTUDENT','renderSTUDENT','editSTUDENT');" style="display:none;">Edit markdown</button>
 													<br />
 	
-													<!-- =========================================== -->
-													<script  type="text/javascript">
-														<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
-															renderMarkdown('txtSLO','divSLO','renderSLO','editSLO');
-															renderMarkdown('txtASSESS','divASSESS','renderASSESS','editASSESS');
-														</xsl:if>
-														<xsl:if test="//user_role_code = 'READER'">
-															MarkdownToHtml('divSLO');
-															MarkdownToHtml('divASSESS');
-														</xsl:if>
-														//document.write('<p>' + sHW + '</p>');
-													</script>
 													<!-- <xsl:choose><xsl:when test="//take='0'">  -->
 													<!--div>
 														<input type="file" accept=".pdf,.doc,.docx,.rtf">
@@ -661,6 +672,19 @@
 						</xsl:for-each>
 					</div>
 					<p />
+					<!-- =========================================== -->
+					<script  type="text/javascript">
+						<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
+							renderMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');
+							renderMarkdown('txtSLO','divSLO','renderSLO','editSLO');
+							renderMarkdown('txtASSESS','divASSESS','renderASSESS','editASSESS');
+						</xsl:if>
+						<xsl:if test="//user_role_code = 'READER'">
+							MarkdownToHtml('divSLO');
+							MarkdownToHtml('divASSESS');
+						</xsl:if>
+						//document.write('<p>' + sHW + '</p>');
+					</script>
 					<!-- ************  ENDS CONTENT  ************ -->
 				</td>
 			</tr>
@@ -680,7 +704,7 @@
 	</xsl:if>
 	<script>LoadTab("Intro");</script>
 	</body>
-	<script type="text/javascript">
+	<!-- script type="text/javascript">
 		$( document ).ready(
 		function() {
 		//alert('function() in pagina ');
@@ -720,7 +744,7 @@
 				*/
 			}
 		);
-	</script>
+	</script -->
 </html>
 </xsl:template>
 </xsl:stylesheet>

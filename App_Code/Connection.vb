@@ -91,10 +91,10 @@ Namespace Literatronica
 				Return ""
 			End If
 			sTxtToClean = formatTextInput(sTxtToClean)
-			sTxtToClean = sTxtToClean.ToString.Replace("<", "&lt;")
-			sTxtToClean = sTxtToClean.ToString.Replace(">", "&gt;")
-			sTxtToClean = sTxtToClean.ToString.Replace("""", "")
-			sTxtToClean = sTxtToClean.ToString.Replace("=", "&#061;")
+			'sTxtToClean = sTxtToClean.ToString.Replace("<", "&lt;")
+			'sTxtToClean = sTxtToClean.ToString.Replace(">", "&gt;")
+			'sTxtToClean = sTxtToClean.ToString.Replace("""", "")
+			'sTxtToClean = sTxtToClean.ToString.Replace("=", "&#061;")
 			Return sTxtToClean
 		End Function
 
@@ -358,7 +358,7 @@ Namespace Literatronica
 							MNI(i, j) & "," & " '" & Path(i, j) & "' " & "); ")
 					Else
 						sInsert.Append(" Update MATRIX set Category_" & nCategory & "='" & Path(i, j) & "'" &
-							" where [MATRIX].cd_matrix_type='MNI' and MATRIX.i=" & i & " and MATRIX.j=" & j & ";")
+							" where [MATRIX].cd_matrix_type='MNI' and MATRIX.i=" & i & " and MATRIX.j=" & j & " and id_opus=" & nBookID & ";")
 					End If
 
 				Next j

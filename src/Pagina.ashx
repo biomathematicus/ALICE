@@ -106,6 +106,35 @@ Public Class SubmitHandlerPagina
 				Else
 					context.Response.Write("No assessment provided.")
 				End If
+			Case "LESSON"
+				Dim LESSONtext As String = oDBService.formatSQLInput(context.Request.Form("txtLESSON"))
+				Dim language As String = oDBService.formatSQLInput(context.Request.Form("cd_lingua"))
+				If Not String.IsNullOrEmpty(LESSONtext) Then
+					Dim connectionString As String = oDBService.DB_CONN_STRING
+					Using connection As New SqlConnection(connectionString)
+						connection.Open()
+						Dim transaction As SqlTransaction = connection.BeginTransaction()
+
+						Try
+							Dim sql As String = "UPDATE LINGUA_PAGINA SET ds_content = @ds_lesson WHERE cd_lingua = @cd_lingua AND id_opus = @id_opus AND id_pagina = @id_pagina"
+
+							Dim command As New SqlCommand(sql, connection, transaction)
+							command.Parameters.AddWithValue("@cd_lingua", language)
+							command.Parameters.AddWithValue("@id_opus", idOpus)
+							command.Parameters.AddWithValue("@id_pagina", idPagina)
+							command.Parameters.AddWithValue("@ds_lesson", LESSONtext)
+
+							command.ExecuteNonQuery()
+							transaction.Commit()
+							context.Response.Write("Lesson saved successfully.")
+						Catch ex As Exception
+							transaction.Rollback()
+							context.Response.Write("Error in saving lesson: " & ex.Message)
+						End Try
+					End Using
+				Else
+					context.Response.Write("No lesson provided.")
+				End If
 		End Select
 
 	End Sub

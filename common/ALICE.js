@@ -117,6 +117,43 @@ function ASSESS(idOpus, idPagina, cdLingua, action) {
 }
 
 /*********************************************************
+Function	: LESSON()
+Purpose		: Saves lesson content on a page
+Parameters	: idOpus, idPagina, cdLingua, action
+Returns		: 
+JBG - 05/2024
+*********************************************************/
+function LESSON(idOpus, idPagina, cdLingua, action) {
+	// Prevent the default form submission if this is part of a form
+	event.preventDefault();
+
+	// Collect the textarea content
+	var LESSONText = $('textarea[name="txtLESSON"]').val();
+
+	// Setup the data object to send
+	var data = {
+		'id_opus': idOpus,
+		'id_pagina': idPagina,
+		'cd_lingua': cdLingua,
+		'txtLESSON': LESSONText,
+		'actionAJAX': action
+	};
+
+	// Make the AJAX call
+	$.ajax({
+		type: "POST",
+		url: "Pagina.ashx",
+		data: data,
+		success: function (response) {
+			alert('Data submitted: ' + response);
+		},
+		error: function () {
+			alert('Error submitting data');
+		}
+	});
+}
+
+/*********************************************************
 Function	: Search()
 Purpose		: Sends a search string to the search engine
 Parameters	: None
@@ -263,6 +300,14 @@ function LoadTab(sDiv) {
         document.getElementById("choose_category").style.display = "none";
         document.getElementById("choose_category").style.visibility = "hidden";
     }
+
+	if (sDiv == 'GenAI') {
+		// Ensure iframe is only loaded once
+		var iframe = document.getElementById('GenAIFrame');
+		if (!iframe.src) {
+			iframe.src = "../OAI/openai.html";
+		}
+	}
 
     p = document.getElementById("tblTab");
     o = p.rows[0].cells;
