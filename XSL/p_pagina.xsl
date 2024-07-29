@@ -513,7 +513,7 @@
 														<xsl:attribute name="onclick">
 															javascript:setAJAXAction('STUDENT');Labor('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>','STUDENT');renderMarkdown('txtSTUDENT','divSTUDENT','renderSTUDENT','editSTUDENT');
 														</xsl:attribute>
-														Submit
+														Save
 													</button>
 													<button id="renderSTUDENT" type="button"  onclick="renderMarkdown('txtSTUDENT','divSTUDENT','renderSTUDENT','editSTUDENT');">Render markdown</button>
 													<button id="editSTUDENT" type="button"  onclick="editMarkdown('txtSTUDENT','divSTUDENT','renderSTUDENT','editSTUDENT');" style="display:none;">Edit markdown</button>
