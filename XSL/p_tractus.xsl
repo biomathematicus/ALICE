@@ -374,26 +374,15 @@
 																	  <xsl:attribute name="alt">
 																		  <xsl:value-of select="//L_CHAPTER_DEL" />
 																	  </xsl:attribute>
-																  </img>&#160; <span class="XSMALL"> </span>
+																  </img>&#160;
 															  </a>&#160;
 														  </xsl:if>
 														  <xsl:if test="choose_capstone != 'false'">
-															  <a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-																  <xsl:attribute name="href">
-																	  javascript:document.frmSession.action='../src/Tractus.aspx?lng=
-																	  <xsl:value-of select="//language" />
-																	  &#38;action=cap_r&#38;opus=
-																	  <xsl:value-of select="//id_opus" />
-																	  &#38;pagina=
-																	  <xsl:value-of select="id" />
-																	  ';document.frmSession.submit();
+															  <img src="../images/select.ico" border="0">
+																  <xsl:attribute name="alt">
+																	  <xsl:value-of select="//L_CHAPTER_DEL" />
 																  </xsl:attribute>
-																  <img src="../images/select.ico" border="0">
-																	  <xsl:attribute name="alt">
-																		  <xsl:value-of select="//L_CHAPTER_DEL" />
-																	  </xsl:attribute>
-																  </img>&#160; <span class="XSMALL"> </span>
-															  </a>&#160;
+															  </img>&#160;
 														  </xsl:if>
 													  </xsl:when>
 												  </xsl:choose>
@@ -402,19 +391,14 @@
 										  <td CLASS="CONTENT">
 											  <a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
 												  <xsl:attribute name="href">
-													  javascript:document.frmSession.action='../src/Pagina.aspx?lng=
-													  <xsl:value-of select="//language" />
-													  &#38;opus=
-													  <xsl:value-of select="//id_opus" />
-													  &#38;pagina=
-													  <xsl:value-of select="id" />
-													  ';document.frmSession.submit();
+													  javascript:Capstone('<xsl:value-of select="//language" />', '<xsl:value-of select="//id_opus" />', '<xsl:value-of select="id" />');
 												  </xsl:attribute>
 												  <B>
 													  <xsl:value-of select="title" />
 												  </B>
 											  </a>
-											  <span class="XSMALL">
+											  <br />
+											  <!-- span class="XSMALL">
 												  <xsl:if test="visited[. = 'true'] and //user_id != ''">
 													  (
 													  <xsl:value-of select="//L_VISITED" />
@@ -460,20 +444,19 @@
 													  <xsl:value-of select="//L_VISITED_NOT" />
 													  )
 												  </xsl:if>
-											  </span>
-											  <br />
-											  <xsl:if test="visited[. = 'false'] and //user_id != ''">
-												  <!-- Checkbox is present if the lexia has not been accessed -->
-												  <input type="checkbox"  name="chbox">
-													  <xsl:attribute name="value">
-														  <xsl:value-of select="id" />
-													  </xsl:attribute>
-													  <xsl:attribute name="id">
-														  chk
-														  <xsl:value-of select="id" />
-													  </xsl:attribute>
-												  </input>
-											  </xsl:if>
+												  <br />
+												  <xsl:if test="visited[. = 'false'] and //user_id != ''">
+													  <input type="checkbox"  name="chbox">
+														  <xsl:attribute name="value">
+															  <xsl:value-of select="id" />
+														  </xsl:attribute>
+														  <xsl:attribute name="id">
+															  chk
+															  <xsl:value-of select="id" />
+														  </xsl:attribute>
+													  </input>
+												  </xsl:if>
+											  </span -->
 											  <xsl:value-of select="tag" disable-output-escaping="yes" />
 										  </td>
 									  </tr>

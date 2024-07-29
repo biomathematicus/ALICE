@@ -42,6 +42,16 @@
 		padding: 20px; /* Adds padding around the content, adjust as needed */
 		}
 	</style -->
+	<style>
+		.hidden {
+			visibility: hidden;
+			display: none;
+		}
+		.visible {
+			visibility: visible;
+			display: block;
+		}
+	</style>
 	<body>
 		<script type="text/javascript">
 			function renderMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
@@ -349,7 +359,7 @@
 										<div id="Source" style="visibility:hidden; display:none; width: 800px;"></div>
 										<div id="PDF1" style="width: 800px;"></div>
 										<div id="GenAI"  style="visibility:hidden; display:none; width: 800px;">
-											<iframe src="../OAI/openai.html" style="width: 100%; height: 450px; border: none;"></iframe>
+											<iframe id="GenAIFrame" src="../OAI/openai.html" style="width: 100%; height: 450px; border: none;"></iframe>
 										</div>	
 										<div id="Intro"  style="visibility:hidden; display:none; width: 800px;">
 											<br />

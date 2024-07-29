@@ -266,6 +266,49 @@ Parameters	: sDiv: name of the DIV to be loaded into the default DIV named "cont
 Returns		: null
 JBG - 08/2001
 *********************************************************/
+function LoadTabX(sDiv) {
+	var tabs = ['Intro', 'Wiki', 'PDF', 'Media', 'Source', 'GenAI', 'Test'];
+	for (var i = 0; i < tabs.length; i++) {
+		var tab = tabs[i];
+		var element = document.getElementById(tab);
+		if (element) {
+			if (tab === sDiv) {
+				element.classList.add('visible');
+				element.classList.remove('hidden');
+				} else {
+				element.classList.add('hidden');
+				element.classList.remove('visible');
+			}
+		}
+	}
+
+	// Specific action for PDF1
+	if (sDiv == 'PDF') {
+		document.getElementById("PDF1").style.display = "";
+	} else {
+		document.getElementById("PDF1").style.display = "none";
+	}
+
+	// Ensure iframe is only loaded once
+	if (sDiv == 'GenAI') {
+		var iframe = document.getElementById('GenAIFrame');
+		if (iframe && !iframe.getAttribute('src')) {
+			iframe.setAttribute('src', "../OAI/openai.html");
+		}
+	}
+
+	var p = document.getElementById("tblTab");
+	var o = p.rows[0].cells;
+	for (var i = 0; i < o.length; i++) {
+		if (o[i].id == "tab" + sDiv) {
+			o[i].className = "TabOn";
+		} else {
+			o[i].className = "TabOff";
+		}
+	}
+	$("#herf_next_lesson").text(nameOfNextLesson);
+}
+
 function LoadTab(sDiv) {
     oOrigin = document.getElementById(sDiv);
     oDestination = document.getElementById("container");
@@ -304,9 +347,14 @@ function LoadTab(sDiv) {
 	if (sDiv == 'GenAI') {
 		// Ensure iframe is only loaded once
 		var iframe = document.getElementById('GenAIFrame');
-		if (!iframe.src) {
-			iframe.src = "../OAI/openai.html";
+		if (!iframe.getAttribute('src')) {
+			iframe.setAttribute('src', "../OAI/openai.html");
 		}
+		document.getElementById('GenAI').classList.add('visible');
+		document.getElementById('GenAI').classList.remove('hidden');
+	} else {
+		document.getElementById('GenAI').classList.add('hidden');
+		document.getElementById('GenAI').classList.remove('visible');
 	}
 
     p = document.getElementById("tblTab");
