@@ -182,7 +182,19 @@ JBG - 05/2024
 function MarkdownToHtml(sDiv) {
 	console.log('MarkdownToHtml for element: ' + sDiv)
 	var converter = new showdown.Converter(); 
-	var element = document.getElementById(sDiv); // Access the element by ID
+	try {
+		// Access the element by ID
+		var element = document.getElementById(sDiv); 
+	}catch (error) { 
+		// Since the element is not found by ID, try getting it by name
+		var elementsByName = document.getElementsByName(elementIdOrName);
+
+		// Since getElementsByName returns a NodeList, check if it has any elements
+		if (elementsByName.length > 0) {
+			// Optionally, handle multiple elements with the same name
+			element = elementsByName[0];  // Assuming you want the first element with that name
+		}
+	}
 
 	if (element) {
 		var markdownText = element.textContent || element.innerText; // Get the text content of the element

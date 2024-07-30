@@ -406,24 +406,24 @@
 											</xsl:for-each>
 											<!-- =========================================== -->
 											<div id="divLESSON">
-											<xsl:value-of select="//pag_content"  disable-output-escaping="yes" />
+												<xsl:value-of select="//pag_content"  disable-output-escaping="yes" />
 											</div>
 											<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
-												<textarea name="txtLESSON" cols="90" rows="10" wrap="VIRTUAL">
-													<xsl:value-of select="//pag_content" />
-												</textarea>
-												<br />
-												<button id="saveLESSON"  style="display:none;">
-													<xsl:attribute name="onclick">
-														javascript:setAJAXAction('LESSON');LESSON('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//language" />', 'LESSON');renderMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');;hideButton('saveLESSON');
-													</xsl:attribute>
-													Save
-												</button>
-												<button id="renderLESSON" type="button"  onclick="renderMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');hideButton('saveLESSON');">Render markdown</button>
-												<button id="editLESSON" type="button"  onclick="editMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');showButton('saveLESSON');" >Edit markdown</button>
+											<textarea name="txtLESSON" cols="90" rows="10" wrap="VIRTUAL">
+												<xsl:value-of select="//pag_content" />
+											</textarea>
+											<br />
+											<button id="saveLESSON"  style="display:none;">
+												<xsl:attribute name="onclick">
+													javascript:setAJAXAction('LESSON');LESSON('<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//language" />', 'LESSON');renderMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');;hideButton('saveLESSON');
+												</xsl:attribute>
+												Save
+											</button>
+											<button id="renderLESSON" type="button"  onclick="renderMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');hideButton('saveLESSON');">Render markdown</button>
+											<button id="editLESSON" type="button"  onclick="editMarkdown('txtLESSON','divLESSON','renderLESSON','editLESSON');showButton('saveLESSON');" >Edit markdown</button>
 											</xsl:if>
 											<script>
-												MarkdownToHtml('txtLESSON');
+												MarkdownToHtml('divLESSON');
 												<xsl:if test="//ds_pdf != ''">
 													LoadPDF('<xsl:value-of select="//ds_pdf"/>');
 												</xsl:if>

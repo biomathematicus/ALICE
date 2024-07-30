@@ -24,8 +24,8 @@ Namespace Literatronica
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
             'CHECK COOKIES
             Dim oDBService As New Connection
-            Dim sLinguaCok, sLinguaQry, sUserID As String
-            oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
+			Dim sLinguaCok, sLinguaQry, sUserID, sChorus As String
+			oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
 
             'RETRIEVE DATA FROM DATABASE
             Dim sSQL As String
@@ -36,14 +36,16 @@ Namespace Literatronica
             'Clean malicious code from parameters that will be sent to the database
             sLinguaCok = oDBService.formatSQLInput(sLinguaCok)
             sUserID = oDBService.formatSQLInput(sUserID)
+			sChorus = oDBService.formatSQLInput(Request.QueryString("chorus"))
 
-            sSQL = "exec sa_menu" & _
-              " @Language=" & sLinguaCok & _
-              ",@OpusType=''" & _
-              ",@PageCode='sa_menu'" & _
-              ",@PageName='sa_menu.aspx'" & _
-              ",@userID='" & sUserID & "'"
-            doc.LoadXml(oDBService.DBXML(sSQL))
+			sSQL = "exec sa_menu" &
+			  " @Language=" & sLinguaCok &
+			  ",@OpusType=''" &
+			  ",@PageCode='sa_menu'" &
+			  ",@PageName='sa_menu.aspx'" &
+			  ",@userID='" & sUserID & "'" &
+			  ",@ChorusName='" & sChorus & "'"
+			doc.LoadXml(oDBService.DBXML(sSQL))
             trans.Load(Server.MapPath("..\XSL\sa_menu.xsl"))
 
             XMLContent.Document = doc

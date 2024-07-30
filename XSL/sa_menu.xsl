@@ -38,7 +38,17 @@
 				.no-wrap {
 				white-space: nowrap;
 				}
-			</style>		
+			</style>
+			<script>
+				function RedirectMenu(sLanguage, sChorus) {
+				var f = document.frmSession;
+				var chorusValue = document.getElementById("lstChorus_id").value;
+				var str_ = 'sa_menu.aspx?lng=' + sLanguage + '>&#38;chorus=' + sChorus;
+				str_ = str_.replace(" ", "");
+				f.action = str_;
+				f.submit();
+				}
+			</script>	
 			<body>
 				<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
 					<table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
@@ -94,14 +104,17 @@
 													<b>Inbox</b>
 													<input type="hidden" name="myText" value="testValue" />
 													<select CLASS="TITLE_LIGHT" id="lstChorus_id" name="lstChorus" >
-														<xsl:attribute name="onchange">
-															javascript:redirect_nauta_lst('<xsl:value-of select="//language" />', <xsl:value-of select="//id_opus" />,<xsl:value-of select="//artifex_id" />,this);
-														</xsl:attribute>
-														<xsl:for-each select="/doc/sa_opus_lst/chorus">
+														<xsl:attribute name="onchange">RedirectMenu('<xsl:value-of select="//language" />',this.options[this.selectedIndex].text);</xsl:attribute>
+														<xsl:for-each select="/doc/inbox/chorus/item">
 															<option>
 																<xsl:attribute name="value">
 																	<xsl:value-of select="id_chorus" />
 																</xsl:attribute>
+																<xsl:if test="selected = 'true'">
+																	<xsl:attribute name="selected">
+																		true
+																	</xsl:attribute>
+																</xsl:if>
 																<xsl:value-of select="ds_chorus" />
 															</option>
 														</xsl:for-each>
