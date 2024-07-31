@@ -863,8 +863,7 @@ Parameters	:
 Returns		: None
 saeid safaei - 03/2016
 *********************************************************/
-
-function send_comments(userid, nautaid, opusid, paginaid) {
+function send_comments(userid, nautaid, opusid, paginaid, chorusid) {
 	//var opus_id = opusid;
 	//var pagina_id = paginaid;
 	//var nauta_id = nautaid;
@@ -873,10 +872,17 @@ function send_comments(userid, nautaid, opusid, paginaid) {
     var comment = $(k).val();
     var k1 = "#score" + paginaid;
 	var grad = $(k1).val();
-	$.post("../src/Comment_handler.ashx", { grad: grad, comment: comment, user_id: userid, nauta_id: nautaid, pagina_id: paginaid, opus_id: opusid }, function (data) { });
-	if (new URLSearchParams(window.location.search).get('inbox') === 'true') {
-		window.location.href = 'sa_menu.aspx';
+	// var sSebug = 'userid=' + userid + ' - nautaid=' + nautaid + ' - opusid= ' + opusid + " - paginaid=" + paginaid;
+	// console.log(sDebug);
+	// alert(sDebug);
+	var sInbox = new URLSearchParams(window.location.search).get('inbox'); 
+	var sChorus = new URLSearchParams(window.location.search).get('chorus'); 
+	$.post("../src/Comment_handler.ashx?chorus=" + sChorus + "&inbox=" + sInbox, { grad: grad, comment: comment, user_id: userid, nauta_id: nautaid, pagina_id: paginaid, opus_id: opusid, chorus_id: chorusid}, function (data) { });
+	
+	if (sInbox === 'true') {
+		window.location.href = 'sa_menu.aspx?chorus=' + sChorus;
 	}
+	
 }
 //********************************************************************************************************************************************************************
 function redirect_pagina(sLanguage, nBook, pagina_id__) {

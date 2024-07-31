@@ -28,14 +28,18 @@ Public Class Comment_handler : Implements IHttpHandler
 		comment = oDBService.formatSQLInput(context.Request.Form("comment"))
 
 		sSQL = "exec P_comment_add " &
-				" @id_opus='" & opus_id & "'" &
-				",@id_pagina='" & pagina_id & "'" &
-				",@id_nauta='" & nauta_id & "'" &
-				",@userID='" & user_id & "'" &
+				" @id_opus=" & opus_id &
+				",@id_pagina=" & pagina_id &
+				",@id_nauta=" & nauta_id &
+				",@userID=" & user_id &
 				",@grade='" & grade & "'" &
 				",@comment='" & comment & "'"
 
 		oDBService.DBXML(sSQL)
+
+		'If context.Request.QueryString("inbox") = "true" Then
+		'	context.Response.Redirect("../admin/sa_menu.aspx?chorus=" + context.Request.QueryString("chorus"))
+		'End If
 
 	End Sub
 

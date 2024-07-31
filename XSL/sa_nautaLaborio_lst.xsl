@@ -152,7 +152,7 @@
 											</td>
 											<td CLASS="TITLE_LIGHT">
 												<input type="button"  value="Update">
-													<xsl:attribute name="onclick">send_comments(<xsl:value-of select="//user_id" />, <xsl:value-of select="id_nauta" />,<xsl:value-of select="id_opus" />,<xsl:value-of select="id_pagina" /> );</xsl:attribute>
+													<xsl:attribute name="onclick">send_comments(<xsl:value-of select="//user_id" />, <xsl:value-of select="id_nauta" />,<xsl:value-of select="id_opus" />,<xsl:value-of select="id_pagina" />,<xsl:value-of select="id_chorus" />)</xsl:attribute>
 												</input>
 											</td>
 											<script>
