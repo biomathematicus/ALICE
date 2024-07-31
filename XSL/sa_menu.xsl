@@ -104,7 +104,7 @@
 													<b>Inbox</b>
 													<input type="hidden" name="myText" value="testValue" />
 													<select CLASS="TITLE_LIGHT" id="lstChorus_id" name="lstChorus" >
-														<xsl:attribute name="onchange">RedirectMenu('<xsl:value-of select="//language" />',this.options[this.selectedIndex].text);</xsl:attribute>
+														<xsl:attribute name="onchange">RedirectMenu('<xsl:value-of select="//language" />',this.options[this.selectedIndex].value);</xsl:attribute>
 														<xsl:for-each select="/doc/inbox/chorus/item">
 															<option>
 																<xsl:attribute name="value">

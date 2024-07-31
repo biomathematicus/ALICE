@@ -44,7 +44,7 @@ Namespace Literatronica
 			  ",@PageCode='sa_menu'" &
 			  ",@PageName='sa_menu.aspx'" &
 			  ",@userID='" & sUserID & "'" &
-			  ",@ChorusName='" & sChorus & "'"
+			  ",@Chorus='" & sChorus & "'"
 			doc.LoadXml(oDBService.DBXML(sSQL))
             trans.Load(Server.MapPath("..\XSL\sa_menu.xsl"))
 
