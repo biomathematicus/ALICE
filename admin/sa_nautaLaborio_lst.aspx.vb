@@ -25,8 +25,8 @@ Namespace Literatronica
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
             'CHECK COOKIES
             Dim oDBService As New Connection
-            Dim sLinguaCok, sLinguaQry, sUserID As String
-            oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
+			Dim sLinguaCok, sLinguaQry, sUserID, sChorus As String
+			oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)
 
             'RETRIEVE DATA FROM DATABASE
             Dim sSQL As String
@@ -44,6 +44,7 @@ Namespace Literatronica
 			If sArtifex = "" Then sArtifex = "1"
 			sOpus = oDBService.formatSQLInput(Request.QueryString("opus"))
 			sIdNauta = oDBService.formatSQLInput(Request.QueryString("id_nauta"))
+			sChorus = oDBService.formatSQLInput(Request.QueryString("chorus"))
 			sSQL = "exec sa_nautaLaborio_lst" &
 			  " @Language='" & sLinguaCok & "'" &
 			  ",@Artifex_id=" & sArtifex &
@@ -52,7 +53,8 @@ Namespace Literatronica
 			  ",@OpusType=''" &
 			  ",@PageCode='sa_menu'" &
 			  ",@PageName='sa_nautaLaborio_lst.aspx'" &
-			  ",@userID='" & sUserID & "'"
+			  ",@userID='" & sUserID & "'" &
+			  ",@Chorus = '" & sChorus & "'"
 			doc.LoadXml(oDBService.DBXML(sSQL))
             trans.Load(Server.MapPath("..\XSL\sa_nautaLaborio_lst.xsl"))
             Session("artifex") = Request.QueryString("artifex")

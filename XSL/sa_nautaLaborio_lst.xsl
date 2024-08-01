@@ -140,7 +140,7 @@
 												</textarea>
 											</td>
 											<td CLASS="TITLE_LIGHT">
-												<input type="button"  value="Update"><xsl:attribute name="onclick">send_comments(<xsl:value-of select="//user_id" />, <xsl:value-of select="id_nauta" />,<xsl:value-of select="id_opus" />,<xsl:value-of select="id_pagina" />,new URLSearchParams(window.location.search).get('chorus'))</xsl:attribute></input>
+												<input type="button"  value="Update"><xsl:attribute name="onclick">send_comments(<xsl:value-of select="//user_id" />, <xsl:value-of select="id_nauta" />,<xsl:value-of select="id_opus" />,<xsl:value-of select="id_pagina" />,<xsl:value-of select="id_chorus" />)</xsl:attribute></input>
 											</td>
 											<script>
 												change_color(<xsl:value-of select="update_status_" />,<xsl:value-of select="id_pagina" />);
