@@ -51,28 +51,19 @@
 								<!-- ************ BEGINS CONTENT ************ -->
 								<!-- Breadcrumbs -->
 								<a>
-									<xsl:attribute name="href">
-										sa_menu.aspx?lng=<xsl:value-of select="//language" />
-									</xsl:attribute>
+									<xsl:attribute name="href">sa_menu.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
 									<xsl:value-of select="//user_role_name" />
 								</a> &#62;
 								<a>
-									<xsl:attribute name="href">
-										sa_opus_lst.aspx?artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />
-									</xsl:attribute>
+									<xsl:attribute name="href">sa_opus_lst.aspx?artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" /></xsl:attribute>
 									<xsl:value-of select="//sa_opus_lst" />
 									<!--   sa_opus_lst.aspx?artifex=1&lng=BRITANNIA-->
 								</a> &#62; <!--&#62;  <xsl:value-of select="//sa_nauta_lst" /> -->
 								<a>
-									<xsl:attribute name="href">
-										javascript:document.frmSession.action='sa_opus_optum.aspx?opus=<xsl:value-of select="//opus_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();
-									</xsl:attribute>
+									<xsl:attribute name="href">javascript:document.frmSession.action='sa_opus_optum.aspx?opus=<xsl:value-of select="//opus_id" />&#38;lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
 									<xsl:value-of select="//OpusName1" />
 								</a> &#62; <a>
-									<xsl:attribute name="href">
-										<!-- home work  sa_nautaLaborio_lst.aspx?opus=1&artifex=3993&lng=BRITANNIA -->
-										sa_nauta_lst.aspx?opus=<xsl:value-of select="//opus_id" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" />
-									</xsl:attribute>
+									<xsl:attribute name="href">sa_nauta_lst.aspx?opus=<xsl:value-of select="//opus_id" />&#38;artifex=<xsl:value-of select="//artifex_id" />&#38;lng=<xsl:value-of select="//language" /></xsl:attribute>
 									<xsl:value-of select="//sa_nauta_lst" />
 									<!--   sa_nauta_lst.aspx?opus=1&artifex=3993&lng=BRITANNIA-->
 								</a> &#62; <b>
@@ -118,9 +109,7 @@
 											</td>
 											<td >
 												<a>
-													<xsl:attribute name="href">
-														../src/pagina.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//opus_id" />&#38;pagina=<xsl:value-of select="id_pagina" />
-													</xsl:attribute>
+													<xsl:attribute name="href">../src/pagina.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//opus_id" />&#38;pagina=<xsl:value-of select="id_pagina" /></xsl:attribute>
 													<xsl:value-of select="title" />
 												</a>
 											</td>
@@ -151,9 +140,7 @@
 												</textarea>
 											</td>
 											<td CLASS="TITLE_LIGHT">
-												<input type="button"  value="Update">
-													<xsl:attribute name="onclick">send_comments(<xsl:value-of select="//user_id" />, <xsl:value-of select="id_nauta" />,<xsl:value-of select="id_opus" />,<xsl:value-of select="id_pagina" />,<xsl:value-of select="id_chorus" />)</xsl:attribute>
-												</input>
+												<input type="button"  value="Update"><xsl:attribute name="onclick">send_comments(<xsl:value-of select="//user_id" />, <xsl:value-of select="id_nauta" />,<xsl:value-of select="id_opus" />,<xsl:value-of select="id_pagina" />,new URLSearchParams(window.location.search).get('chorus'))</xsl:attribute></input>
 											</td>
 											<script>
 												change_color(<xsl:value-of select="update_status_" />,<xsl:value-of select="id_pagina" />);
