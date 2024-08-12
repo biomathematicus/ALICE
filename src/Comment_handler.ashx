@@ -37,6 +37,7 @@ Public Class Comment_handler : Implements IHttpHandler
 
 		oDBService.DBXML(sSQL)
 
+
 		'If context.Request.QueryString("inbox") = "true" Then
 		'	context.Response.Redirect("../admin/sa_menu.aspx?chorus=" + context.Request.QueryString("chorus"))
 		'End If

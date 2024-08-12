@@ -13,7 +13,7 @@ Partial Class Folio
 		If FileUploadControl.HasFile Then
 			Try
 				Dim filename As String = Path.GetFileName(FileUploadControl.FileName)
-				FileUploadControl.SaveAs(Server.MapPath("~/artifex_uploads/") & filename)
+				FileUploadControl.SaveAs(Server.MapPath("~/docs/") & filename)
 				StatusLabel.Text = "File uploaded successfully."
 				LoadFiles()
 			Catch ex As Exception
@@ -25,7 +25,7 @@ Partial Class Folio
 	End Sub
 
 	Private Sub xLoadFiles()
-		Dim filePaths As String() = Directory.GetFiles(Server.MapPath("~/artifex_uploads/"))
+		Dim filePaths As String() = Directory.GetFiles(Server.MapPath("~/docs/"))
 		Dim files As New List(Of ListItem)
 		For Each filePath As String In filePaths
 			files.Add(New ListItem(Path.GetFileName(filePath), filePath))
@@ -35,7 +35,7 @@ Partial Class Folio
 	End Sub
 
 	Private Sub LoadFiles()
-		Dim filePaths As String() = Directory.GetFiles(Server.MapPath("~/artifex_uploads/"))
+		Dim filePaths As String() = Directory.GetFiles(Server.MapPath("~/docs/"))
 		Dim files As New List(Of FileInfoItem)
 		For Each filePath As String In filePaths
 			files.Add(New FileInfoItem() With {.FileName = Path.GetFileName(filePath), .FilePath = filePath})

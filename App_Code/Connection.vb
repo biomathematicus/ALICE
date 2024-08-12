@@ -322,6 +322,7 @@ Namespace Literatronica
 			Dim n As Long, i As Long, j As Long, k As Long, l As Long
 			Dim rsMCA As SqlDataReader
 			Dim sInsert As New StringBuilder
+			Dim s As String
 			If nCategory = 0 Then
 				rsMCA = DataReaderOpen("exec matMCA  " & nBookID)
 			Else
@@ -360,10 +361,12 @@ Namespace Literatronica
 						sInsert.Append(" Update MATRIX set Category_" & nCategory & "='" & Path(i, j) & "'" &
 							" where [MATRIX].cd_matrix_type='MNI' and MATRIX.i=" & i & " and MATRIX.j=" & j & " and id_opus=" & nBookID & ";")
 					End If
-
+					'sInsert.Append(Environment.NewLine)
 				Next j
 			Next i
-			rsMCA = DataReaderOpen(sInsert.ToString())
+			s = sInsert.ToString()
+			rsMCA = DataReaderOpen(s)
+			rsMCA.Read()
 			rsMCA.Close()
 			DataConnClose()
 		End Sub

@@ -33,14 +33,14 @@
 					<asp:BoundField DataField="FileName" HeaderText="File Name" />
 					<asp:TemplateField HeaderText="File Link">
 						<ItemTemplate>
-							<a href='<%# "../artifex_uploads/" + Eval("FileName") %>' target="_blank">
-								../artifex_uploads/<%# Eval("FileName") %>
+							<a href='<%# "../docs/" + Eval("FileName") %>' target="_blank">
+								../docs/<%# Eval("FileName") %>
 							</a>
 						</ItemTemplate>
 					</asp:TemplateField>
 					<asp:TemplateField HeaderText="Copy Link">
 						<ItemTemplate>
-							<button type="button" onclick="copyToClipboard('<%# "../artifex_uploads/" + Eval("FileName") %>'); return false;">Copy</button>
+							<button type="button" onclick="copyToClipboard('<%# "../docs/" + Eval("FileName") %>'); return false;">Copy</button>
 						</ItemTemplate>
 					</asp:TemplateField>
 					<asp:TemplateField>
