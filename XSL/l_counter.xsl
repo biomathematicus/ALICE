@@ -79,6 +79,13 @@
 						</span>
 					</a>
 				</xsl:if>
+				<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
+					|
+					<a>
+						<xsl:attribute name="href">../admin/sa_pagina_lst.aspx?opus=<xsl:value-of select="//id_opus"/></xsl:attribute>
+						<span class="SMALL">Page list</span>
+					</a>
+				</xsl:if>
 			</div>
 		</xsl:if>
 	</xsl:template>
