@@ -44,12 +44,17 @@
 	</style -->
 	<style>
 		.hidden {
-			visibility: hidden;
-			display: none;
+		visibility: hidden;
+		display: none;
 		}
 		.visible {
-			visibility: visible;
-			display: block;
+		visibility: visible;
+		display: block;
+		}
+		#container img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
 		}
 	</style>
 	<body>
