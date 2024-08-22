@@ -73,8 +73,6 @@
         //*****************************************************************************************
         function saveposition(network,nodes) {
             var d=nodes.get();
-			console.log(d);
-			alert(d);
             var positions="";
             for (i = 0; i &lt; d.length; i++) {
                 try {
