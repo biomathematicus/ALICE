@@ -327,7 +327,8 @@ function graph(nodes_name_1, nodes_id_1, nodes_type_1, nodes_cat_1, matrix_of_ed
 
             manipulation: {
                 //*************************************************************************************
-                addNode: function (data, callback) {
+				addNode: function (data, callback) {
+					alert('addNode');
                     var d = nodes.get();
                     var len = Object.keys(d).length;
                     data.id = len + 1;
@@ -560,7 +561,7 @@ function call(node_num) {
         var address = '../admin/sa_pagina_dtl_for_map.aspx?lng=BRITANNIA' + '&opus=' + id_opus + '&pagina=' + node_num;
         //  alert(address);
 
-        document.getElementById('iframe_id').src = address;
+        //document.getElementById('iframe_id').src = address;
         //  alert(address);
     }
-}
+} 

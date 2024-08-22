@@ -73,6 +73,8 @@
         //*****************************************************************************************
         function saveposition(network,nodes) {
             var d=nodes.get();
+			console.log(d);
+			alert(d);
             var positions="";
             for (i = 0; i &lt; d.length; i++) {
                 try {
@@ -236,12 +238,12 @@
                 <td  style="padding: 50px;">
                   <div id="mynetwork" ></div>
                 </td>
-                <td  align="center">
+				  <!-- >td  align="center">
 
                   <iframe id="iframe_id" src="" width="800" height="800">
                     <p>Your browser does not support iframes.</p>
                   </iframe>
-                </td>
+                </td -->
               </tr>
             </table>
           </div>
