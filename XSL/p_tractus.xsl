@@ -232,7 +232,7 @@
           }
           //***************************************************************************************
           <xsl:for-each select="/doc/tractus/pagina_name">
-            collect_str('<xsl:value-of select="name" />','<xsl:value-of select="id" />','<xsl:value-of select="pagina_type" />','<xsl:value-of select="pagina_cat" />','<xsl:value-of select="capstone" />','<xsl:value-of select="color" />');
+            collect_str("<xsl:value-of select="name" />",'<xsl:value-of select="id" />','<xsl:value-of select="pagina_type" />','<xsl:value-of select="pagina_cat" />','<xsl:value-of select="capstone" />','<xsl:value-of select="color" />');
           </xsl:for-each>
           <xsl:for-each select="/doc/tractus/trail/vertex">
           </xsl:for-each>
