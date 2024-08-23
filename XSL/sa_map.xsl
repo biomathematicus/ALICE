@@ -114,7 +114,7 @@
         }
         //***************************************************************************************
         <xsl:for-each select="/doc/tractus/pagina_name">
-        collect_str('<xsl:value-of select="name" />','<xsl:value-of select="id" />','<xsl:value-of select="pagina_type" />','<xsl:value-of select="pagina_cat" />','<xsl:value-of select="capstone" />','<xsl:value-of select="color" />');
+        collect_str("<xsl:value-of select="name" />",'<xsl:value-of select="id" />','<xsl:value-of select="pagina_type" />','<xsl:value-of select="pagina_cat" />','<xsl:value-of select="capstone" />','<xsl:value-of select="color" />');
         </xsl:for-each>
         id_opus='<xsl:value-of select="//id_opus" />';
         bold_path_info('<xsl:value-of select="//id_vertex" />');
