@@ -180,7 +180,11 @@ Namespace Literatronica
 				User_S = oCookie("UserID")
 			End If
 
-			If oCookie Is Nothing Then
+			If User_S = "LOGGED-OFF" And DateDiff("d", oCookie.Expires, Now()) > 365 Then
+				oCookie.Expires = DateAdd("yyyy", 1, Now())
+			End If
+
+			If oCookie Is Nothing Then ' OrElse oCookie.Expires = Date.MinValue OrElse DateDiff("d", oCookie.Expires, Now()) > 365 Then
 				oCookie = New HttpCookie("Forum")
 				oCookie("Lingua") = "BRITANNIA"
 				oCookie("UserID") = "LOGGED-OFF"
@@ -196,7 +200,6 @@ Namespace Literatronica
 				BasePage.Response.Cookies.Set(oCookie)
 				If parent_page <> "secretus" Then
 					'BasePage.Response.Redirect("secretus.aspx")
-
 				End If
 
 			End If
