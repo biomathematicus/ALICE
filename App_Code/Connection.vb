@@ -180,8 +180,11 @@ Namespace Literatronica
 				User_S = oCookie("UserID")
 			End If
 
-			If User_S = "LOGGED-OFF" And DateDiff("d", oCookie.Expires, Now()) > 365 Then
-				oCookie.Expires = DateAdd("yyyy", 1, Now())
+			If oCookie Is Nothing Then
+			Else
+				If User_S = "LOGGED-OFF" And DateDiff("d", oCookie.Expires, Now()) > 365 Then
+					oCookie.Expires = DateAdd("yyyy", 1, Now())
+				End If
 			End If
 
 			If oCookie Is Nothing Then ' OrElse oCookie.Expires = Date.MinValue OrElse DateDiff("d", oCookie.Expires, Now()) > 365 Then

@@ -491,7 +491,12 @@
 													<button id="editASSESS" type="button"  onclick="editMarkdown('txtASSESS','divASSESS','renderASSESS','editASSESS');showButton('saveASSESS');" >Edit markdown</button>
 													</xsl:if>
 													<br />
-
+													<h2>Survey:</h2>
+													<a>
+														<xsl:attribute name="href">https://umich.qualtrics.com/jfe/form/SV_6hfizPhNLBJZG5w?userID=<xsl:value-of select="//user_id"/></xsl:attribute>
+														<xsl:attribute name="target">_blank</xsl:attribute>
+														Qualtrics Survey
+													</a>
 													<!-- =========================================== -->
 													<h2>Student:</h2>
 													<textarea name="txtSTUDENT" cols="90" rows="10" wrap="VIRTUAL">
