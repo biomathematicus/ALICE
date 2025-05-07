@@ -117,6 +117,7 @@
 											</td>
 											<td CLASS="TITLE_LIGHT" colspan ="2"> As a Start Lesson </td>
 										</tr>
+										<!--*************************************************-->
 										<tr>
 											<td CLASS="TITLE_LIGHT">
 												<xsl:value-of select="//L_SA_PAGE" /> ID
@@ -130,6 +131,18 @@
 												</input>
 											</td>
 										</tr>
+										<!--*************************************************-->
+										<tr>
+											<td CLASS="TITLE_LIGHT"> Survey </td>
+											<td CLASS="TITLE_LIGHT" COLSPAN="2">
+												<input type="text" name="ds_survey">
+													<xsl:attribute name="value">
+														<xsl:value-of select="//ds_survey" />
+													</xsl:attribute>
+												</input>
+											</td>
+										</tr>
+										<!--*************************************************-->
 										<tr>
 											<td CLASS="TITLE_LIGHT"> Link </td>
 											<td CLASS="TITLE_LIGHT" COLSPAN="2">
@@ -140,10 +153,9 @@
 												</input>
 											</td>
 										</tr>
+										<!--*************************************************-->
 										<tr>
 											<td CLASS="TITLE_LIGHT"> Category </td>
-
-											<!--*************************************************-->
 											<td  CLASS="TITLE_LIGHT" colspan="2">
 												<select name ="pagina_cat" id="pagina_cat_id">
 													<script>
@@ -153,8 +165,8 @@
 													</script>
 												</select>
 											</td>
-											<!--*************************************************-->
 										</tr>
+										<!--*************************************************-->
 										<tr>
 											<td CLASS="TITLE_LIGHT"> Type </td>
 											<td  CLASS="TITLE_LIGHT" colspan="2">
