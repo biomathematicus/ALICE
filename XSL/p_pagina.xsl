@@ -337,9 +337,9 @@
 														<a href="javascript:LoadTab('mynetwork');"><xsl:value-of select="//TAB_MAPPA"/></a>
 													</td -->
 													<!-- _____________________ -->
-													<td width="74" id="tabGenAI" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
+													<!-- td width="74" id="tabGenAI" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('GenAI');">GenAI</a>
-													</td>
+													</td -->
 													<!-- _____________________ -->
 													<td width="74" id="tabTest" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('Test');"><xsl:value-of select="//TAB_SCRUTINIUM"/></a>
