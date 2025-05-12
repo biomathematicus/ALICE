@@ -1,0 +1,17 @@
+{
+    "CONFIG": {
+        "general_instructions": "This project is an AI assistant for a given lesson. The output of each request must be response that guides an student in understanding a topic.  \\n",
+        "description": "The Data and AI Intensive Research with Rigor and Reproducibility (DAIR\u00b3) program is funded by Award 5R25GM151182 of the National Institute of General Medical Sciences, one of the 27 institutes of the National Institutes of Health of the United States. The principal investigators are Jing Liu (University of Michigan) and Juan B. Guti\u00e9rrez (University of Texas at San Antonio). \\nThe rigor of scientific research and the reproducibility of research results are essential for the validity of research findings and the trustworthiness of science. However, research rigor and reproducibility remains a significant challenge across scientific fields, especially for research with complex data types from heterogeneous sources, and long data manipulation pipelines. This is especially critical as data science and artificial intelligence (AI) methods emerge at lightning speed and researchers scramble to seize the opportunities that the new methods bring.  \\n\\nWhile researchers recognize the importance of rigor and reproducibility, they often lack the resources and the technical know-how to achieve this consistently in practice. With funding from the National Institutes of Health, a multi-university team offers a nationwide program to equip faculty and technical staff in biomedical sciences with the skills needed to improve the rigor and reproducibility of their research, and help them transfer such skills to their trainees. \\n\\nTrainees will then be guided over a one-year period to incorporate the newly acquired mindset, skills and tools into their research; and develop training for their own institutions.  \\n\\nThe DAIR3 team and instructors include faculty and staff research leaders from the University of Michigan, the College of William and Mary, Jackson State University, and University of Texas San Antonio. This highly diverse team will model the culture of diversity that we promote, and will support trainees who are demographically, professionally and scientifically diverse, and are from a diverse range of institutions, including those with limited resources.",
+        "harmonizer_code": "gpt-4o",
+        "harmonizer_temperature": 0.1,
+        "harmonizer_name": "Harmonizer"
+    },
+    "MODELS": [
+        {
+            "model_code": "gpt-4o",
+            "model_name": "OpenAI GPT 4o",
+            "temperature": 0.15,
+            "agent_name": "ALICE AI Agent"
+        }
+    ]
+}

@@ -31,7 +31,7 @@ Namespace Literatronica
             'RETRIEVE DATA FROM DATABASE
             Dim sSQL As String
 			'Variables for saving, inserting and deleting data
-			Dim id_opus, id_pagina, ds_survey, am_link, ds_title_his, ds_tag_his, ds_content_his,
+			Dim id_opus, id_pagina, ds_AIagentFile, ds_survey, am_link, ds_title_his, ds_tag_his, ds_content_his,
 				ds_title_bri, ds_tag_bri, ds_content_bri, hAction, sCapston, sCapstonStatus,
 				sStartLesson, sStartLessonStatus, ds_pdf_his, ds_pdf_bri,
 				ds_wiki_his, ds_wiki_bri, ds_youtube_his, ds_youtube_bri,
@@ -61,9 +61,10 @@ Namespace Literatronica
             If hAction = "Update" Then hAction = "Actualizar"
             If hAction = "Delete" Then hAction = "Borrar"
 			hAction = oDBService.formatSQLInput(hAction)
+			ds_AIagentFile = oDBService.formatSQLInput(Request.Form("ds_AIagentFile"))
 			ds_survey = oDBService.formatSQLInput(Request.Form("ds_survey"))
 			am_link = oDBService.formatSQLInput(Request.Form("am_link"))
-            If am_link = "" Then am_link = "0"
+			If am_link = "" Then am_link = "0"
             ds_title_his = oDBService.formatTextInput(Request.Form("ds_title_his"))
             ds_tag_his = oDBService.formatTextInput(Request.Form("ds_tag_his"))
             ds_content_his = oDBService.formatTextInput(Request.Form("ds_content_his"))
@@ -119,6 +120,7 @@ Namespace Literatronica
 			  ",@sStartLesson='" & sStartLesson & "'" &
 			  ",@id_opus=" & id_opus &
 			  ",@id_pagina=" & id_pagina &
+			  ",@ds_AIagentFile='" & ds_AIagentFile & "'" &
 			  ",@ds_survey='" & ds_survey & "'" &
 			  ",@am_link=" & am_link &
 			  ",@ds_title_his='" & ds_title_his & "'" &

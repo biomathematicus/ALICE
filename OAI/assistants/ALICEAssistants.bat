@@ -1,0 +1,1 @@
+ActivateEnv DataAnalytics "C:\Dropbox\ALICE\alice\OAI\assistants"
