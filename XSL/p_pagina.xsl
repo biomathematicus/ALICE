@@ -442,11 +442,21 @@
 										</div>
 										<xsl:if test="//user_logon !='LOGGED-OFF'">
 											<div id="Test" style="visibility:hidden; display:none;">
-												<form id="frmUpload" runat="server">
+												<form id="frmUpload" runat="server" enctype="multipart/form-data">
+													<input type="hidden" name="id_chorus" id ="id_chorus">
+														<xsl:attribute name="value"><xsl:value-of select="//id_chorus" /></xsl:attribute>
+													</input>
+													<input type="hidden" name="id_opus" id ="id_opus">
+														<xsl:attribute name="value"><xsl:value-of select="//id_opus" /></xsl:attribute>
+													</input>
+													<input type="hidden" name="id_pagina" id ="id_pagina">
+														<xsl:attribute name="value"><xsl:value-of select="//id_pagina" /></xsl:attribute>
+													</input>
+													<input type="hidden" name="id_nauta" id ="id_nauta">
+														<xsl:attribute name="value"><xsl:value-of select="//user_id" /></xsl:attribute>
+													</input>
 													<input id="state" type="hidden">
-														<xsl:attribute name="value">
-															<xsl:value-of select="//language" />
-														</xsl:attribute>
+														<xsl:attribute name="value"><xsl:value-of select="//language" /></xsl:attribute>
 													</input>
 													<input id="actionAJAX" type="hidden" />
 													<br />
@@ -502,6 +512,33 @@
 													</xsl:if>
 													<!-- =========================================== -->
 													<h2>Student:</h2>
+													<!-- Upload File Section >
+													<input type="file" accept=".pdf" id="fileUploadButton"></input>
+													<button id="btnUpload"  value="Upload PDF maximum 10 MB">
+														<xsl:attribute name="onclick">javascript:setAJAXAction('UPLOAD');Upload('<xsl:value-of select="//id_chorus"/>', '<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>','UPLOAD');</xsl:attribute>
+														Save
+													</button -->
+													<!-- input type="button" id="btnUpload" value="Upload Files">
+														<xsl:attribute name="onclick">
+															javascript:show(<xsl:value-of select="/doc/id_pagina" />,'<xsl:value-of select="//user_name" />',' ', '  ','<xsl:value-of select="//user_id" />','<xsl:value-of select="//id_opus" />' ,'<xsl:value-of select="/doc/cd_new_id" />' )
+														</xsl:attribute>
+													</input -->
+													<div id="UploadMessage">
+														<xsl:for-each select="//files/file">
+															<div class="uploaded-file-entry"
+																 data-url="{.}"
+																 data-chorus="{//id_chorus}"
+																 data-opus="{//id_opus}"
+																 data-pagina="{/doc/id_pagina}"
+																 data-user="{//user_id}">
+																<a href="{.}" target="_blank">There is a document uploaded for this lesson</a>
+																<button type="button">Delete</button>
+															</div>
+														</xsl:for-each>
+													</div>
+
+
+
 													<textarea name="txtSTUDENT" cols="90" rows="10" wrap="VIRTUAL">
 														<xsl:value-of select="//ds_labor" />
 													</textarea>
@@ -533,18 +570,6 @@
 													<br />
 	
 													<!-- <xsl:choose><xsl:when test="//take='0'">  -->
-													<!--div>
-														<input type="file" accept=".pdf,.doc,.docx,.rtf">
-															<xsl:attribute name="id">
-																<xsl:value-of select="/doc/id_pagina" />
-															</xsl:attribute>
-														</input>
-														<input type="button" id="btnUpload" value="Upload Files">
-															<xsl:attribute name="onclick">
-																javascript:show(<xsl:value-of select="/doc/id_pagina" />,'<xsl:value-of select="//user_name" />',' ', '  ','<xsl:value-of select="//user_id" />','<xsl:value-of select="//id_opus" />' ,'<xsl:value-of select="/doc/cd_new_id" />' )
-															</xsl:attribute>
-														</input>
-													</div -->
 													<!-- </xsl:when> </xsl:choose>   -->
 
 													<!-- =========================================== -->
@@ -725,7 +750,10 @@
 			window.location.href = 'Nuntius.aspx?lng=<xsl:value-of select="//language" />&#38;nuntius=T_UNAUTHORIZED'
 		</script>
 	</xsl:if>
+
+	<script language="JavaScript" type="text/JavaScript" src="../src/Pagina.js"></script>
 	<script>LoadTab("Intro");</script>
+
 	</body>
 	<!-- script type="text/javascript">
 		$( document ).ready(

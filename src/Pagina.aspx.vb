@@ -1,6 +1,8 @@
 Imports Literatronica
 Imports System.Xml.Xsl
 Imports System.Xml
+Imports System.Diagnostics
+
 
 Namespace Literatronica
 
@@ -25,6 +27,7 @@ Namespace Literatronica
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
 			Dim id_opus, id_pagina, sCategory As String
+			System.IO.File.AppendAllText("C:\temp\debug_trace.txt", "ASPX page PID: " & Process.GetCurrentProcess().Id.ToString() & Environment.NewLine)
 
 			'Clean malicious code from parameters that will be sent to the database
 			oDBService.ManageCookies(sLinguaCok, sLinguaQry, sUserID, MyBase.Page)

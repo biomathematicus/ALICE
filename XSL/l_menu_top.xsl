@@ -11,10 +11,15 @@
 		<script></script>
 		<form id="frmSession" method="post" name="frmSession" action="">
 			<!-- User ID -->
-
 			<input type="hidden" name="user_logon">
 				<xsl:attribute name="value">
 					<xsl:value-of select="//user_logon" />
+				</xsl:attribute>
+			</input>
+			<!-- Cohort -->
+			<input type="hidden" name="id_chorus">
+				<xsl:attribute name="value">
+					<xsl:value-of select="//id_chorus" />
 				</xsl:attribute>
 			</input>
 			<!-- Language -->

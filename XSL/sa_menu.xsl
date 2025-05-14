@@ -43,7 +43,7 @@
 				function RedirectMenu(sLanguage, sChorus) {
 				var f = document.frmSession;
 				var chorusValue = document.getElementById("lstChorus_id").value;
-				var str_ = 'sa_menu.aspx?lng=' + sLanguage + '>&#38;chorus=' + sChorus;
+				var str_ = 'sa_menu.aspx?lng=' + sLanguage + '&#38;chorus=' + sChorus;
 				str_ = str_.replace(" ", "");
 				f.action = str_;
 				f.submit();
@@ -105,15 +105,14 @@
 													<input type="hidden" name="myText" value="testValue" />
 													<select CLASS="TITLE_LIGHT" id="lstChorus_id" name="lstChorus" >
 														<xsl:attribute name="onchange">RedirectMenu('<xsl:value-of select="//language" />',this.options[this.selectedIndex].value);</xsl:attribute>
+														<option>[Select a cohort]</option>
 														<xsl:for-each select="/doc/inbox/chorus/item">
 															<option>
 																<xsl:attribute name="value">
 																	<xsl:value-of select="id_chorus" />
 																</xsl:attribute>
 																<xsl:if test="selected = 'true'">
-																	<xsl:attribute name="selected">
-																		true
-																	</xsl:attribute>
+																	<xsl:attribute name="selected">true</xsl:attribute>
 																</xsl:if>
 																<xsl:value-of select="ds_chorus" />
 															</option>

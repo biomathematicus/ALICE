@@ -2,7 +2,9 @@
 
 Imports Literatronica
 Imports System.Web
+Imports System.Web.Services
 Imports System.Data.SqlClient
+Imports System.IO
 
 Public Class SubmitHandlerPagina
 	Implements IHttpHandler
@@ -13,6 +15,8 @@ Public Class SubmitHandlerPagina
 		context.Response.ContentType = "text/plain"
 		Dim action As String = oDBService.formatSQLInput(context.Request.Form("actionAJAX"))
 		Dim idOpus As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_opus")))
+		Dim idChorus As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_chorus")))
+		Dim idNauta As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_nauta")))
 		Dim idPagina As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_pagina")))
 
 		Select Case action
@@ -135,6 +139,82 @@ Public Class SubmitHandlerPagina
 				Else
 					context.Response.Write("No lesson provided.")
 				End If
+			Case "UPLOAD"
+				Dim UPLOAD_PATH As String = System.Configuration.ConfigurationManager.AppSettings("UPLOAD_PATH") & Convert.ToString(idOpus) & "_" & Convert.ToString(idChorus) & "/"
+				Dim uploadDir As String = context.Server.MapPath(UPLOAD_PATH)
+				If Not Directory.Exists(uploadDir) Then
+					Directory.CreateDirectory(uploadDir)
+				End If
+				Dim uniqueID As String = Guid.NewGuid().ToString()
+				Dim finalFileName As String = "CHORUS_" & idChorus & "_OPUS_" & idOpus & "_PAGINA_" & idPagina & "_NAUTA_" & idNauta & "_" & uniqueID & ".pdf"
+				Dim virtualPath As String = UPLOAD_PATH & finalFileName
+				Dim savePath As String = Path.Combine(uploadDir, finalFileName)
+				Dim files As HttpFileCollection = context.Request.Files
+				Dim file As HttpPostedFile = files(0)
+
+				Using connection As New SqlConnection(oDBService.DB_CONN_STRING)
+					connection.Open()
+					Dim transaction As SqlTransaction = connection.BeginTransaction()
+
+					Try
+						If file.ContentLength > 10 * 1024 * 1024 Then ' 10 MB
+							context.Response.StatusCode = 400
+							context.Response.Write("File too large. Max allowed size is 10 MB.")
+							Return
+						End If
+						file.SaveAs(savePath)
+						Dim sql As String = "INSERT INTO FOLIO (id_chorus, id_opus, id_pagina, id_nauta, ds_filename, dt_created) VALUES (@id_chorus, @id_opus, @id_pagina, @id_nauta, @ds_filename, GETDATE())"
+
+						Dim command As New SqlCommand(sql, connection, transaction)
+						command.Parameters.AddWithValue("@id_chorus", idChorus)
+						command.Parameters.AddWithValue("@id_opus", idOpus)
+						command.Parameters.AddWithValue("@id_pagina", idPagina)
+						command.Parameters.AddWithValue("@id_nauta", idNauta)
+						command.Parameters.AddWithValue("@ds_filename", virtualPath)
+						command.ExecuteNonQuery()
+						transaction.Commit()
+						'context.Response.Write("File saved successfully")
+						context.Response.Write(VirtualPathUtility.ToAbsolute(virtualPath))
+					Catch ex As Exception
+						transaction.Rollback()
+						context.Response.Write("Error saving file:" & ex.Message)
+					End Try
+				End Using
+			Case "DELETE_FILE"
+				Dim filePath As String = context.Request.Form("file") ' relative path
+				Dim fileName As String = context.Request.Form("file_name")
+
+				Dim fullPath As String = context.Server.MapPath(filePath)
+
+				Using connection As New SqlConnection(oDBService.DB_CONN_STRING)
+					connection.Open()
+					Dim transaction As SqlTransaction = connection.BeginTransaction()
+
+					Try
+						' Delete the file from disk if it exists
+						If File.Exists(fullPath) Then
+							File.Delete(fullPath)
+						End If
+
+						' Delete the FOLIO record using the relative file path
+						Dim sql As String = "DELETE FROM FOLIO WHERE ds_filename = @ds_filename"
+						Dim command As New SqlCommand(sql, connection, transaction)
+						Dim s As String = filePath.Replace("/alice", "~").Replace("..", "~")
+						command.Parameters.AddWithValue("@ds_filename", s)
+						command.ExecuteNonQuery()
+
+						transaction.Commit()
+						context.Response.Write("Deleted")
+					Catch ex As Exception
+						transaction.Rollback()
+						context.Response.StatusCode = 500
+						context.Response.Write("Error deleting file: " & ex.Message)
+					End Try
+				End Using
+				Return
+
+
+
 		End Select
 
 	End Sub

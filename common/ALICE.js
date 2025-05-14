@@ -6,158 +6,11 @@ Ensure that no site is presenting Literatronic within frames
 }*/
 
 /*********************************************************
-Function	: Labor()
-Purpose		: Saves student homework
-Parameters	: idOpus, idPagina, userId, action
-Returns		: 
-JBG - 05/2024
-*********************************************************/
-function Labor(idOpus, idPagina, userId, action) {
-	// Prevent the default form submission if this is part of a form
-	event.preventDefault();
-
-	// Collect the textarea content
-	var assessmentText = $('textarea[name="txtSTUDENT"]').val();
-
-	// Setup the data object to send
-	var data = {
-		'id_opus': idOpus,
-		'id_pagina': idPagina,
-		'user_id': userId,
-		'txtSTUDENT': assessmentText,
-		'actionAJAX': action
-	};
-
-	// Make the AJAX call
-	$.ajax({
-		type: "POST",
-		url: "Pagina.ashx", 
-		data: data,
-		success: function (response) {
-			alert('Data submitted: ' + response);
-		},
-		error: function () {
-			alert('Error submitting data');
-		}
-	});
-}
-
-/*********************************************************
-Function	: SLO()
-Purpose		: Saves SLOs on a page
-Parameters	: idOpus, idPagina, cdLingua, action
-Returns		: 
-JBG - 05/2024
-*********************************************************/
-function SLO(idOpus, idPagina, cdLingua, action) {
-	// Prevent the default form submission if this is part of a form
-	event.preventDefault();
-
-	// Collect the textarea content
-	var SLOText = $('textarea[name="txtSLO"]').val();
-
-	// Setup the data object to send
-	var data = {
-		'id_opus': idOpus,
-		'id_pagina': idPagina,
-		'cd_lingua': cdLingua,
-		'txtSLO': SLOText,
-		'actionAJAX': action
-	};
-
-	// Make the AJAX call
-	$.ajax({
-		type: "POST",
-		url: "Pagina.ashx",
-		data: data,
-		success: function (response) {
-			alert('Data submitted: ' + response);
-		},
-		error: function () {
-			alert('Error submitting data');
-		}
-	});
-}
-
-/*********************************************************
-Function	: ASSESS()
-Purpose		: Saves asessment on a page
-Parameters	: idOpus, idPagina, cdLingua, action
-Returns		: 
-JBG - 05/2024
-*********************************************************/
-function ASSESS(idOpus, idPagina, cdLingua, action) {
-	// Prevent the default form submission if this is part of a form
-	event.preventDefault();
-
-	// Collect the textarea content
-	var ASSESSText = $('textarea[name="txtASSESS"]').val();
-
-	// Setup the data object to send
-	var data = {
-		'id_opus': idOpus,
-		'id_pagina': idPagina,
-		'cd_lingua': cdLingua,
-		'txtASSESS': ASSESSText,
-		'actionAJAX': action
-	};
-
-	// Make the AJAX call
-	$.ajax({
-		type: "POST",
-		url: "Pagina.ashx",
-		data: data,
-		success: function (response) {
-			alert('Data submitted: ' + response);
-		},
-		error: function () {
-			alert('Error submitting data');
-		}
-	});
-}
-
-/*********************************************************
-Function	: LESSON()
-Purpose		: Saves lesson content on a page
-Parameters	: idOpus, idPagina, cdLingua, action
-Returns		: 
-JBG - 05/2024
-*********************************************************/
-function LESSON(idOpus, idPagina, cdLingua, action) {
-	// Prevent the default form submission if this is part of a form
-	event.preventDefault();
-
-	// Collect the textarea content
-	var LESSONText = $('textarea[name="txtLESSON"]').val();
-
-	// Setup the data object to send
-	var data = {
-		'id_opus': idOpus,
-		'id_pagina': idPagina,
-		'cd_lingua': cdLingua,
-		'txtLESSON': LESSONText,
-		'actionAJAX': action
-	};
-
-	// Make the AJAX call
-	$.ajax({
-		type: "POST",
-		url: "Pagina.ashx",
-		data: data,
-		success: function (response) {
-			alert('Data submitted: ' + response);
-		},
-		error: function () {
-			alert('Error submitting data');
-		}
-	});
-}
-
-/*********************************************************
 Function	: Search()
 Purpose		: Sends a search string to the search engine
 Parameters	: None
-Returns		: if error FALSE, otherwise REDIRECT
+Returns		: if error FALSE, 
+REDIRECT
 JBG - 03/2004
 *********************************************************/
 function Search() {
@@ -318,7 +171,7 @@ function LoadTabX(sDiv) {
 			o[i].className = "TabOff";
 		}
 	}
-	$("#herf_next_lesson").text(nameOfNextLesson);
+	// $("#herf_next_lesson").text(nameOfNextLesson);
 }
 
 function LoadTab(sDiv) {
@@ -378,7 +231,7 @@ function LoadTab(sDiv) {
             o[i].className = "TabOff";
         }
     }
-	$("#herf_next_lesson").text(nameOfNextLesson);
+	// $("#herf_next_lesson").text(nameOfNextLesson);
 }
 
 /*********************************************************
