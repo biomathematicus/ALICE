@@ -312,7 +312,7 @@
 													<input type="file" accept=".pdf" id="fileUploadButton"></input>
 													<button id="btnUpload"  value="Upload PDF maximum 10 MB">
 														<xsl:attribute name="onclick">javascript:setAJAXAction('UPLOAD');Upload('<xsl:value-of select="//id_chorus"/>', '<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>','UPLOAD');</xsl:attribute>
-														Save
+														Upload PDF maximum 10 MB
 													</button>
 													<!--input type="button" id="btnUpload" value="Upload Files">
 														<xsl:attribute name="onclick">
