@@ -9,6 +9,7 @@ window.addEventListener("load", function () {
 	console.log("Window loaded");
 
 	// Attach click event to upload button to prevent form submission
+	/*
 	const uploadBtn = document.getElementById("btnUpload");
 	if (uploadBtn) {
 		uploadBtn.addEventListener("click", function (e) {
@@ -23,6 +24,7 @@ window.addEventListener("load", function () {
 			Upload(idChorus, idOpus, idPagina, idUser, action, e);
 		});
 	}
+	*/
 
 	// Handle delete via event delegation (works for existing and future buttons)
 	document.getElementById("UploadMessage")?.addEventListener("click", function (e) {
@@ -90,6 +92,8 @@ function renderUploadedFile(fileUrl, idChorus, idOpus, idPagina, idUser) {
 	entry.appendChild(link);
 	entry.appendChild(deleteBtn);
 	messageDiv.appendChild(entry);
+
+	console.log("Rendered Link: ", fileUrl);
 }
 
 function Upload(idChorus, idOpus, idPagina, idUser, action, e) {
@@ -124,7 +128,9 @@ function Upload(idChorus, idOpus, idPagina, idUser, action, e) {
 		contentType: false,
 		success: function (response) {
 			//alert("Upload successful: " + response);
+			console.log("Sending to render: ", file);
 			renderUploadedFile(response, idChorus, idOpus, idPagina, idUser);
+			console.log("Returning from render: ", file);
 			fileInput.value = ""; // Clear file input
 		},
 		error: function () {
