@@ -9,39 +9,7 @@
 <html lang="EN">
     <!-- Insert HTML header -->
     <xsl:apply-templates select="//html_header" />
-	<!-- script src="../common/vis.js" type="text/javascript" / -->
-    <!-- script src="../common/tractus.js" type="text/javascript" / -->
     <link href="../common/vis-network.min.css" rel="stylesheet" type="text/css" />
-	<!-- style type="text/css">
-		#mynetwork{
-		width: $(document).width();
-		height: 400px; /* $(document).height(); */
-		border: 1px solid lightgray;
-		}
-		#personalize_net{
-		width: $(document).width();
-		height:500px; /* $(document).height(); */
-		border: 1px solid lightgray;
-		}
-		.container {
-		display: flex;
-		align-items: flex-end; /* Ensures vertical alignment at the bottom */
-		justify-content: space-between; /* Adjusts spacing between the two elements */
-		width: 100%;
-		}
-
-		/*.table-wrapper,
-		.counter {
-		display: inline-block; /* Ensures elements are displayed inline and are block-level */
-		}*/
-
-		.counter {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end; /* Right aligns all children within the div */
-		padding: 20px; /* Adds padding around the content, adjust as needed */
-		}
-	</style -->
 	<style>
 		.hidden {
 		visibility: hidden;
@@ -58,180 +26,8 @@
 		}
 	</style>
 	<body>
-		<script type="text/javascript">
-			function renderMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
-			var textArea = document.getElementsByName(oTextArea)[0];
-			var formattedDiv = document.getElementById(oFormattedDiv);
-			formattedDiv.innerHTML = textArea.value;
-			MarkdownToHtml(oFormattedDiv);
-			textArea.style.display = 'none';
-			formattedDiv.style.display = 'block';
-			document.getElementById(renderBtn).style.display = 'none';
-			document.getElementById(editBtn).style.display = 'inline';
-			}
-
-			function editMarkdown(oTextArea,oFormattedDiv,renderBtn,editBtn) {
-			var textArea = document.getElementsByName(oTextArea)[0];
-			var formattedDiv = document.getElementById(oFormattedDiv);
-			textArea.style.display = 'block';
-			formattedDiv.style.display = 'none';
-			document.getElementById(renderBtn).style.display = 'inline';
-			document.getElementById(editBtn).style.display = 'none';
-			}
-
-			function showButton(btn){
-			document.getElementById(btn).style.display = 'inline';
-			}
-
-			function hideButton(btn){
-			document.getElementById(btn).style.display = 'none';
-			}
-
-			function setAJAXAction(s){
-			document.getElementById('actionAJAX').value = s;
-			}
-		</script>
+		<script language="JavaScript" type="text/JavaScript" src="../src/Pagina_Top.js"></script>
 		<xsl:if test="//user_logon !='LOGGED-OFF'">
-		<!-- script   type="text/javascript">
-			var category_show=0;
-			var id_category_interest_base='';
-			var next_lesson_=0;
-			var graph_json='';
-			var next_lesson_str="";
-			var nameOfNextLesson="";
-
-			function init() {
-				container = document.getElementById('mynetwork');
-				exportArea = document.getElementById('input_output');
-				importButton = document.getElementById('import_button');
-				exportButton = document.getElementById('export_button');
-				draw();
-			}
-
-			function addConnections(elem, index) {
-				// need to replace this with a tree of the network, then get child direct children of the element
-				elem.connections = network.getConnectedNodes(index);
-			}
-
-			function destroyNetwork() {
-				network.destroy();
-			}
-
-			function clearOutputArea() {
-				exportArea.value = "";
-			}
-
-			function draw() {
-				// create a network of nodes
-				var data = getScaleFreeNetwork(5);
-				network = new vis.Network(container, data, {manipulation:{enabled:true}});
-				clearOutputArea();
-			}
-
-			function exportNetwork() {
-				clearOutputArea();
-				var nodes = objectToArray(network.getPositions());
-				nodes.forEach(addConnections);
-				// pretty print node data
-				var exportValue = JSON.stringify(nodes, undefined, 2);
-				exportArea.value = exportValue;
-				resizeExportArea();
-			}
-			//*******************************************************************
-
-			function getNodeData(data) {
-				var networkNodes = [];
-				data.forEach(
-				function(elem, index, array) {
-					networkNodes.push({id: elem.id, label: elem.id, x: elem.x, y: elem.y});
-				}
-				);
-				return new vis.DataSet(networkNodes);
-			}
-
-			function getNodeById(data, id) {
-				for (var n = 0; n &lt; data.length; n++) {
-					if (data[n].id == id) {  // double equals since id can be numeric or string
-						return data[n];
-					}
-				}
-				throw 'Can not find id \'' + id + '\' in data';
-			}
-
-			function getEdgeData(data) {
-				var networkEdges = [];
-				data.forEach(
-					function(node) {
-						// add the connection
-						node.connections.forEach(
-							function(connId, cIndex, conns) {
-								networkEdges.push({from: node.id, to: connId});
-								let cNode = getNodeById(data, connId);
-								var elementConnections = cNode.connections;
-								// remove the connection from the other node to prevent duplicate connections
-								var duplicateIndex = elementConnections.findIndex(
-									function(connection) {
-										return connection == node.id; // double equals since id can be numeric or string
-									}
-								);
-								if (duplicateIndex != -1) {
-									elementConnections.splice(duplicateIndex, 1);
-								};
-							}
-						);
-					}
-				);
-
-				return new vis.DataSet(networkEdges);
-			}
-
-			function objectToArray(obj) {
-				return Object.keys(obj).map(
-					function (key) {
-						obj[key].id = key;
-						return obj[key];
-					}
-				);
-			}
-
-			function resizeExportArea() {
-				exportArea.style.height = (1 + exportArea.scrollHeight) + "px";
-			}
-
-			function exportMyNetwork(network1) {
-				var nodes = objectToArray(network.getPositions());
-				nodes.forEach(addConnections);
-				var exportValue = JSON.stringify(nodes, undefined, 2);
-				return exportValue;
-			}
-		
-
-			function add_option(id,value1){
-				$('#pagina_cat_id').append($(' &lt;option &gt;', {value: id,text: value1} ))
-			}
-
-			function update_map(){
-				document.getElementById("p_pagina").submit();
-				network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show_1);
-				network.fit();
-			}
-
-			//***************************************************************************************
-			var Pagina_id_=<xsl:value-of select="//pagina_id_" />;
-			<xsl:for-each select="/doc/pagina_name">
-			collect_str('<xsl:value-of select="name" />','<xsl:value-of select="id" />','<xsl:value-of select="pagina_type" />','<xsl:value-of select="pagina_cat" />','<xsl:value-of select="capstone" />','<xsl:value-of select="color" />');
-			</xsl:for-each>
-			<xsl:for-each select="/doc/vertex">
-			bold_path_info('<xsl:value-of select="id_vertex" />');
-			</xsl:for-each>
-			get_edges_info('<xsl:value-of select="//matrix_edges" />');
-			get_lang(' <xsl:value-of select="//language" />');
-			get_edges_personalize('<xsl:value-of select="//matrix_personalize" />' );
-			recover_position('<xsl:value-of select="//positions_graph" />');
-			Opus_id=<xsl:value-of select="//id_opus" />;
-			id_category_interest_base=<xsl:value-of select="//id_category_interest_base" />;
-		</script -->
-
 		<table width="800px" align="center" border="0" cellpadding="0" cellspacing="0" id="tblMain" name="tblMain">
 			<tr valign="top">
 				<td rowspan="3" valign="top">
@@ -442,7 +238,7 @@
 										</div>
 										<xsl:if test="//user_logon !='LOGGED-OFF'">
 											<div id="Test" style="visibility:hidden; display:none;">
-												<form id="frmUpload" runat="server" enctype="multipart/form-data">
+												<form id="frmUpload" runat="server">
 													<input type="hidden" name="id_chorus" id ="id_chorus">
 														<xsl:attribute name="value"><xsl:value-of select="//id_chorus" /></xsl:attribute>
 													</input>
@@ -512,17 +308,17 @@
 													</xsl:if>
 													<!-- =========================================== -->
 													<h2>Student:</h2>
-													<!-- Upload File Section >
+													<!-- Upload File Section -->
 													<input type="file" accept=".pdf" id="fileUploadButton"></input>
 													<button id="btnUpload"  value="Upload PDF maximum 10 MB">
 														<xsl:attribute name="onclick">javascript:setAJAXAction('UPLOAD');Upload('<xsl:value-of select="//id_chorus"/>', '<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>','UPLOAD');</xsl:attribute>
 														Save
-													</button -->
-													<!-- input type="button" id="btnUpload" value="Upload Files">
+													</button>
+													<!--input type="button" id="btnUpload" value="Upload Files">
 														<xsl:attribute name="onclick">
 															javascript:show(<xsl:value-of select="/doc/id_pagina" />,'<xsl:value-of select="//user_name" />',' ', '  ','<xsl:value-of select="//user_id" />','<xsl:value-of select="//id_opus" />' ,'<xsl:value-of select="/doc/cd_new_id" />' )
 														</xsl:attribute>
-													</input -->
+													</input-->
 													<div id="UploadMessage">
 														<xsl:for-each select="//files/file">
 															<div class="uploaded-file-entry"
@@ -536,8 +332,6 @@
 															</div>
 														</xsl:for-each>
 													</div>
-
-
 
 													<textarea name="txtSTUDENT" cols="90" rows="10" wrap="VIRTUAL">
 														<xsl:value-of select="//ds_labor" />
@@ -751,51 +545,10 @@
 		</script>
 	</xsl:if>
 
-	<script language="JavaScript" type="text/JavaScript" src="../src/Pagina.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="../src/Pagina_Bottom.js"></script>
 	<script>LoadTab("Intro");</script>
 
 	</body>
-	<!-- script type="text/javascript">
-		$( document ).ready(
-		function() {
-		//alert('function() in pagina ');
-		document.getElementById('mynetwork').style.width = "800px";
-		document.getElementById('mynetwork').style.height = "500px";
-		network= graph(nodes_name,nodes_id,nodes_type,nodes_cat,matrix_of_edges,LAnguage_,'mynetwork',path_b,all_position,capstone_,color_g,category_show);
-		network.fit();
-		document.getElementById("mynetwork").style.display = "none";
-		document.getElementById("choose_category").style.display = "none";
-		//$("#pagina_cat_id").prop("selectedIndex", id_category_interest_base);
-		var node_list_b = path_b.split(",");
-		var next_l=0;
-		for (i = 0; i &#60; node_list_b.length - 1 ; i++) {
-					if ( node_list_b[i]==Pagina_id_) {
-						next_lesson_=node_list_b[i+1];
-						next_l=parseInt(node_list_b[i+1]);
-					}
-				}
-				next_lesson_str=next_lesson_.toString();
-				console.log('next_lesson_str='+next_lesson_str);
-				if (next_l > 0) {
-					var searchEles = document.getElementById("captions1").children;
-					nameOfNextLesson=document.getElementById(searchEles[next_l-1].id).value;
-					$("#herf_next_lesson").text(nameOfNextLesson);
-					console.log(nameOfNextLesson);
-				} else {
-					$("#herf_next_lesson").text("there is no next course for this lesson");
-				}
-
-				/*
-				if(Opus_id=33) // debugging
-				{
-				var mediatab=document.getElementById("tabMedia");
-				document.getElementById("tabWiki").style.display = "";
-				document.getElementById("tabWiki").style.visibility = "visible";
-				}
-				*/
-			}
-		);
-	</script -->
 </html>
 </xsl:template>
 </xsl:stylesheet>

@@ -12,17 +12,20 @@ Public Class SubmitHandlerPagina
 	Public Sub ProcessRequest(ByVal context As HttpContext) Implements IHttpHandler.ProcessRequest
 		Dim oDBService As New Connection
 
-		context.Response.ContentType = "text/plain"
+		'context.Response.ContentType = "text/plain"
 		Dim action As String = oDBService.formatSQLInput(context.Request.Form("actionAJAX"))
-		Dim idOpus As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_opus")))
-		Dim idChorus As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_chorus")))
-		Dim idNauta As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_nauta")))
-		Dim idPagina As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_pagina")))
+		Dim idOpus As Integer
+		Dim idNauta As Integer
+		Dim idPagina As Integer
+		Dim idChorus As Integer
 
 		Select Case action
 			Case "STUDENT"
 				Dim assessmentText As String = oDBService.formatSQLInput(context.Request.Form("txtSTUDENT"))
-				Dim userID As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("user_id")))
+				'Dim userID As Integer = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_nauta")))
+				idNauta = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_nauta")))
+				idOpus = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_opus")))
+				idPagina = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_pagina")))
 				If Not String.IsNullOrEmpty(assessmentText) Then
 					Dim connectionString As String = oDBService.DB_CONN_STRING
 					Using connection As New SqlConnection(connectionString)
@@ -36,7 +39,7 @@ Public Class SubmitHandlerPagina
 												"INSERT INTO LABOR (id_nauta, id_opus, id_pagina, ds_labor, dt_upload) VALUES (@id_nauta, @id_opus, @id_pagina, @ds_labor, GETDATE())"
 
 							Dim command As New SqlCommand(sql, connection, transaction)
-							command.Parameters.AddWithValue("@id_nauta", userID)
+							command.Parameters.AddWithValue("@id_nauta", idNauta)
 							command.Parameters.AddWithValue("@id_opus", idOpus)
 							command.Parameters.AddWithValue("@id_pagina", idPagina)
 							command.Parameters.AddWithValue("@ds_labor", assessmentText)
@@ -55,6 +58,9 @@ Public Class SubmitHandlerPagina
 			Case "SLO"
 				Dim SLOtext As String = oDBService.formatSQLInput(context.Request.Form("txtSLO"))
 				Dim language As String = oDBService.formatSQLInput(context.Request.Form("cd_lingua"))
+				idOpus = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_opus")))
+				idPagina = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_pagina")))
+
 				If Not String.IsNullOrEmpty(SLOtext) Then
 					Dim connectionString As String = oDBService.DB_CONN_STRING
 					Using connection As New SqlConnection(connectionString)
@@ -84,6 +90,9 @@ Public Class SubmitHandlerPagina
 			Case "ASSESS"
 				Dim ASSESStext As String = oDBService.formatSQLInput(context.Request.Form("txtASSESS"))
 				Dim language As String = oDBService.formatSQLInput(context.Request.Form("cd_lingua"))
+				idOpus = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_opus")))
+				idPagina = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_pagina")))
+
 				If Not String.IsNullOrEmpty(ASSESStext) Then
 					Dim connectionString As String = oDBService.DB_CONN_STRING
 					Using connection As New SqlConnection(connectionString)
@@ -113,6 +122,9 @@ Public Class SubmitHandlerPagina
 			Case "LESSON"
 				Dim LESSONtext As String = oDBService.formatSQLInput(context.Request.Form("txtLESSON"))
 				Dim language As String = oDBService.formatSQLInput(context.Request.Form("cd_lingua"))
+				idOpus = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_opus")))
+				idPagina = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_pagina")))
+
 				If Not String.IsNullOrEmpty(LESSONtext) Then
 					Dim connectionString As String = oDBService.DB_CONN_STRING
 					Using connection As New SqlConnection(connectionString)
@@ -140,8 +152,13 @@ Public Class SubmitHandlerPagina
 					context.Response.Write("No lesson provided.")
 				End If
 			Case "UPLOAD"
+				idChorus = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_chorus")))
+				idOpus = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_opus")))
+				idPagina = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_pagina")))
+
 				Dim UPLOAD_PATH As String = System.Configuration.ConfigurationManager.AppSettings("UPLOAD_PATH") & Convert.ToString(idOpus) & "_" & Convert.ToString(idChorus) & "/"
 				Dim uploadDir As String = context.Server.MapPath(UPLOAD_PATH)
+				idNauta = Convert.ToInt32(oDBService.formatSQLInput(context.Request.Form("id_nauta")))
 				If Not Directory.Exists(uploadDir) Then
 					Directory.CreateDirectory(uploadDir)
 				End If
@@ -174,7 +191,7 @@ Public Class SubmitHandlerPagina
 						command.ExecuteNonQuery()
 						transaction.Commit()
 						'context.Response.Write("File saved successfully")
-						context.Response.Write(VirtualPathUtility.ToAbsolute(virtualPath))
+						'context.Response.Write(VirtualPathUtility.ToAbsolute(virtualPath))
 					Catch ex As Exception
 						transaction.Rollback()
 						context.Response.Write("Error saving file:" & ex.Message)
@@ -212,8 +229,6 @@ Public Class SubmitHandlerPagina
 					End Try
 				End Using
 				Return
-
-
 
 		End Select
 
