@@ -135,7 +135,7 @@
 										<tr>
 											<td CLASS="TITLE_LIGHT"> GPT File </td>
 											<td CLASS="TITLE_LIGHT" COLSPAN="2">
-												<input type="text" name="ds_AIagentFile">
+												<input type="text" name="ds_AIagentFile" size="40">
 													<xsl:attribute name="value">
 														<xsl:value-of select="//ds_AIagentFile" />
 													</xsl:attribute>
@@ -146,7 +146,7 @@
 										<tr>
 											<td CLASS="TITLE_LIGHT"> Survey </td>
 											<td CLASS="TITLE_LIGHT" COLSPAN="2">
-												<input type="text" name="ds_survey">
+												<input type="text" name="ds_survey" size="40">
 													<xsl:attribute name="value">
 														<xsl:value-of select="//ds_survey" />
 													</xsl:attribute>

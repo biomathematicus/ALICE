@@ -407,14 +407,14 @@
 														</xsl:when>
 													</xsl:choose>
 
-													<!--upload home work-->
+													<!--upload homework-->
 													<!-- a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
 														<xsl:attribute name="href">
 															javascript:document.frmSession.action='../src/upload.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//id_pagina" />&#38;opus=<xsl:value-of select="//id_opus" />';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();
 														</xsl:attribute>
 														<xsl:value-of select="//L_SEE_SB_HM" />
 													</a -->
-													<!--upload home work-->
+													<!--upload homework-->
 												</form>
 											</div>
 										</xsl:if>
