@@ -1,17 +1,10 @@
 {
-    "CONFIG": {
-        "general_instructions": "This project is an AI assistant for a course. The output of each request must be a response that guides a student in understanding a topic. When answering with LaTeX notation, use $ and $$ to enclose expressions; this include single commands, e.g. \sigma, which should appear as $\sigma$ do NOT use any other enclosure for equations. When using LaTeX notation, ensure that variables, cefficients and contants are enclosed by blank spaces. ",
-        "description": "The Data and AI Intensive Research with Rigor and Reproducibility (DAIR-3) program is funded by Award 5R25GM151182 of the National Institute of General Medical Sciences, one of the 27 institutes of the National Institutes of Health of the United States. The principal investigators are Jing Liu (University of Michigan) and Juan B. Gutiérrez (University of Texas at San Antonio). \\nThe rigor of scientific research and the reproducibility of research results are essential for the validity of research findings and the trustworthiness of science. However, research rigor and reproducibility remains a significant challenge across scientific fields, especially for research with complex data types from heterogeneous sources, and long data manipulation pipelines. This is especially critical as data science and artificial intelligence (AI) methods emerge at lightning speed and researchers scramble to seize the opportunities that the new methods bring.  \\n\\nWhile researchers recognize the importance of rigor and reproducibility, they often lack the resources and the technical know-how to achieve this consistently in practice. With funding from the National Institutes of Health, a multi-university team offers a nationwide program to equip faculty and technical staff in biomedical sciences with the skills needed to improve the rigor and reproducibility of their research, and help them transfer such skills to their trainees. \\n\\nTrainees will then be guided over a one-year period to incorporate the newly acquired mindset, skills and tools into their research; and develop training for their own institutions.  \\n\\nThe DAIR3 team and instructors include faculty and staff research leaders from the University of Michigan, the College of William and Mary, Jackson State University, and University of Texas San Antonio. This highly diverse team will model the culture of diversity that we promote, and will support trainees who are demographically, professionally and scientifically diverse, and are from a diverse range of institutions, including those with limited resources.",
-        "harmonizer_code": "gpt-4o",
-        "harmonizer_temperature": 0.1,
-        "harmonizer_name": "Harmonizer"
-    },
-    "MODELS": [
-        {
-            "model_code": "gpt-4o",
-            "model_name": "OpenAI GPT 4o",
-            "temperature": 0.15,
-            "agent_name": "ALICE AI Agent"
-        }
-    ]
+  "CONFIG": {
+    "general_instructions": "The DAIR-3 program, funded by the National Institute of General Medical Sciences, is led by Jing Liu and Juan B. Gutiérrez. It aims to improve scientific rigor and reproducibility, especially in research involving complex data and long processing pipelines. These challenges are heightened by the fast pace of developments in data science and AI, which many researchers are not fully equipped to handle with consistent methodological soundness. \\n To address this, DAIR-3 offers a year-long national training program for faculty and technical staff in biomedical sciences. Participants gain skills to enhance the quality of their research and train others at their institutions. The program is delivered by a diverse team from multiple universities, with a focus on supporting individuals from varied backgrounds and under-resourced institutions. \\n The output of each request must be a response that guides the student in understanding a topic. When answering with LaTeX notation, use $ and $$ to enclose expressions; this include single commands, e.g. \\sigma, which should appear as $\\sigma$ do NOT use any other enclosure for equations. When using LaTeX notation, ensure that variables, cefficients and contants are enclosed by blank spaces. "
+  },
+  "knowledgeBase": [
+    {
+      "summary": ""
+    }
+  ]
 }

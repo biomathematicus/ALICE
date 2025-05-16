@@ -77,6 +77,7 @@ Public Class Auxiliator : Implements IHttpHandler
 					End If
 				End Using
 			End Using
+			conn.Close()
 		End Using
 	End Function
 
@@ -93,6 +94,8 @@ Public Class Auxiliator : Implements IHttpHandler
 				cmd.ExecuteNonQuery()
 				Return New With {Key .success = True}
 			End Using
+
+			conn.Close()
 		End Using
 	End Function
 
@@ -103,8 +106,74 @@ Public Class Auxiliator : Implements IHttpHandler
 		Dim stateJson As String = stateResponse.state
 		Dim history As New List(Of Dictionary(Of String, Object))
 
+		'If Not String.IsNullOrEmpty(stateJson) Then
+		'	Dim existingState = serializer.Deserialize(Of Dictionary(Of String, Object))(stateJson)
+		'	If existingState.ContainsKey("history") Then
+		'		Dim rawList As ArrayList = DirectCast(existingState("history"), ArrayList)
+		'		For Each item As Object In rawList
+		'			history.Add(DirectCast(item, Dictionary(Of String, Object)))
+		'		Next
+		'	End If
+		'End If
+
+		'======================
+		Dim conn As New SqlConnection(connStr)
+		conn.Open()
+		Dim existingState As New Dictionary(Of String, Object)
+		Dim loadDefaults As Boolean = False
+
 		If Not String.IsNullOrEmpty(stateJson) Then
-			Dim existingState = serializer.Deserialize(Of Dictionary(Of String, Object))(stateJson)
+			existingState = serializer.Deserialize(Of Dictionary(Of String, Object))(stateJson)
+
+			' Load defaults only if not previously seeded
+			If Not existingState.ContainsKey("seeded") OrElse Not CBool(existingState("seeded")) Then
+				loadDefaults = True
+			End If
+		Else
+			loadDefaults = True
+		End If
+
+		'Dim history As New List(Of Dictionary(Of String, Object))
+
+		If loadDefaults Then
+			Dim defaultHistory As New List(Of Dictionary(Of String, Object))
+
+			Dim configPath As String = GetAgentFilePath(id_opus, id_pagina, conn)
+			Dim physicalPath As String = HttpContext.Current.Server.MapPath(configPath)
+
+			If File.Exists(physicalPath) Then
+				Dim configJson As String = File.ReadAllText(physicalPath)
+				Dim configData = serializer.Deserialize(Of Dictionary(Of String, Object))(configJson)
+
+				If configData.ContainsKey("CONFIG") Then
+					Dim configSection = DirectCast(configData("CONFIG"), Dictionary(Of String, Object))
+					If configSection.ContainsKey("general_instructions") Then
+						defaultHistory.Add(New Dictionary(Of String, Object) From {
+							{"role", "system"},
+							{"content", configSection("general_instructions").ToString()}
+						})
+					End If
+				End If
+
+				If configData.ContainsKey("knowledgeBase") Then
+					Dim kbList = DirectCast(configData("knowledgeBase"), ArrayList)
+					For Each entry In kbList
+						Dim summary = TryCast(DirectCast(entry, Dictionary(Of String, Object))("summary"), String)
+						If Not String.IsNullOrEmpty(summary) Then
+							defaultHistory.Add(New Dictionary(Of String, Object) From {
+								{"role", "system"},
+								{"content", summary}
+							})
+						End If
+					Next
+				End If
+			End If
+
+			existingState("history") = defaultHistory
+			existingState("seeded") = True
+			history = defaultHistory
+		Else
+			' Deserialize existing history
 			If existingState.ContainsKey("history") Then
 				Dim rawList As ArrayList = DirectCast(existingState("history"), ArrayList)
 				For Each item As Object In rawList
@@ -112,6 +181,8 @@ Public Class Auxiliator : Implements IHttpHandler
 				Next
 			End If
 		End If
+		conn.Close()
+		'======================
 
 		' Add new messages to history
 		For Each msg In messages
@@ -140,9 +211,6 @@ Public Class Auxiliator : Implements IHttpHandler
 			Using reader = New StreamReader(resp.GetResponseStream())
 				Dim raw = reader.ReadToEnd()
 				Dim parsed = serializer.Deserialize(Of Dictionary(Of String, Object))(raw)
-				'Dim choices = CType(parsed("choices"), Object())(0)
-				'Dim msg = CType(choices("message"), Dictionary(Of String, Object))
-				'replyText = msg("content").ToString()
 				Dim choicesList As ArrayList = DirectCast(parsed("choices"), ArrayList)
 				Dim choice As Dictionary(Of String, Object) = DirectCast(choicesList(0), Dictionary(Of String, Object))
 				Dim msg As Dictionary(Of String, Object) = DirectCast(choice("message"), Dictionary(Of String, Object))
@@ -156,16 +224,22 @@ Public Class Auxiliator : Implements IHttpHandler
 			End Using
 		End Using
 
-		' Save updated history
-		Dim newState As New Dictionary(Of String, Object)
-		newState("history") = history
-		Dim updatedStateJson As String = serializer.Serialize(newState)
+		' Save updated history into existingState without replacing it entirely
+		existingState("history") = history
+
+		' Make sure "seeded" remains true if it was ever set
+		If Not existingState.ContainsKey("seeded") Then
+			existingState("seeded") = True
+		End If
+
+		Dim updatedStateJson As String = serializer.Serialize(existingState)
 		UpdateState(id_opus, id_pagina, ds_symbolum, updatedStateJson)
 
 		Return New With {
 			Key .success = True,
 			Key .reply = replyText
 		}
+
 	End Function
 
 	Private Function GetNautaId(ds_symbolum As String, conn As SqlConnection) As Integer
@@ -185,5 +259,15 @@ Public Class Auxiliator : Implements IHttpHandler
 			Return False
 		End Get
 	End Property
+
+	Private Function GetAgentFilePath(id_opus As Integer, id_pagina As Integer, conn As SqlConnection) As String
+		Using cmd As New SqlCommand("SELECT ds_AIagentFile FROM PAGINA WHERE id_opus = @id_opus AND id_pagina = @id_pagina", conn)
+			cmd.Parameters.AddWithValue("@id_opus", id_opus)
+			cmd.Parameters.AddWithValue("@id_pagina", id_pagina)
+			Dim result = cmd.ExecuteScalar()
+			Return If(result IsNot Nothing, result.ToString(), "")
+		End Using
+	End Function
+
 
 End Class

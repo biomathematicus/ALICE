@@ -161,11 +161,11 @@
 										<div id="PDF1" style="width: 800px;"></div>
 										<div id="GenAI"  style="visibility:hidden; display:none; width: 800px;">
 											<iframe id="GenAIFrame" style="width: 100%; height: 450px; border: none;">
-												<xsl:attribute name="src">../OAI/openai.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
+												<xsl:attribute name="src">../OAI/oaiAgent.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
 											</iframe>
 											<a>
-												<xsl:attribute name="href">../OAI/openai.html?opus=<xsl:value-of select="//id_opus"/>&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
-												../OAI/openai.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>	
+												<xsl:attribute name="href">../OAI/oaiAgent.html?opus=<xsl:value-of select="//id_opus"/>&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
+												../OAI/oaiAgent.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>	
 											</a>
 										</div>	
 										<div id="Intro"  style="visibility:hidden; display:none; width: 800px;">
@@ -315,11 +315,12 @@
 													<!-- =========================================== -->
 													<h2>Student:</h2>
 													<!-- Upload File Section -->
+													(Bug: Upload works, but the control is not waiting till the upload finishes. Give it a few seconds and reload the page.)<br/>
 													<input type="file" accept=".pdf" id="fileUploadButton"></input>
 													<button id="btnUpload"  value="Upload PDF maximum 10 MB">
 														<xsl:attribute name="onclick">javascript:setAJAXAction('UPLOAD');Upload('<xsl:value-of select="//id_chorus"/>', '<xsl:value-of select="//id_opus"/>', '<xsl:value-of select="/doc/id_pagina"/>', '<xsl:value-of select="//user_id"/>','UPLOAD');</xsl:attribute>
 														Upload PDF maximum 10 MB
-													</button>
+													</button> <br/>
 													<!--input type="button" id="btnUpload" value="Upload Files">
 														<xsl:attribute name="onclick">
 															javascript:show(<xsl:value-of select="/doc/id_pagina" />,'<xsl:value-of select="//user_name" />',' ', '  ','<xsl:value-of select="//user_id" />','<xsl:value-of select="//id_opus" />' ,'<xsl:value-of select="/doc/cd_new_id" />' )

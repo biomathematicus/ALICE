@@ -82,7 +82,8 @@ def generate_summary(text):
         return "No content found."
     parser = PlaintextParser.from_string(text, Tokenizer("english"))
     total_sentences = len(list(parser.document.sentences))
-    sentence_count = max(1, total_sentences * SUMMARY_PERCENTAGE // 100)
+    #sentence_count = max(1, total_sentences * SUMMARY_PERCENTAGE // 100)
+    sentence_count = 10
     log(f"[!] Total sentences: {total_sentences}, Summarized sentences: {sentence_count}")
     summarizer = TextRankSummarizer()
     summary_sentences = summarizer(parser.document, sentence_count)
