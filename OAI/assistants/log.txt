@@ -212,3 +212,217 @@
 [2025-05-11 19:25:51] [!] Processing folder: C:\temp\Units\UNIT_7 - Transformer - based AI in Biomedical Research - Juan with descriptor: UNIT_7
 [2025-05-11 19:25:51] [✓] Found 0 PDFs in: C:\temp\Units\UNIT_7 - Transformer - based AI in Biomedical Research - Juan
 [2025-05-11 19:25:51] [✓] Written summary JSON: opus_4235_UNIT_7.json
+[2025-05-15 22:37:17] [✓] 'punkt' tokenizer found.
+[2025-05-15 22:37:17] [!] NLTK search paths: ['C:\\Users\\bioma/nltk_data', 'c:\\penv\\DataAnalytics\\nltk_data', 'c:\\penv\\DataAnalytics\\share\\nltk_data', 'c:\\penv\\DataAnalytics\\lib\\nltk_data', 'C:\\Users\\bioma\\AppData\\Roaming\\nltk_data', 'C:\\nltk_data', 'D:\\nltk_data', 'E:\\nltk_data', 'C:\\Dropbox\\ALICE\\ALICE\\OAI\\assistants']
+[2025-05-15 22:37:17] [!] Scanning OPUS_MATERIALS directory...
+[2025-05-15 22:37:17] [✓] Found 12 unit folders.
+[2025-05-15 22:37:17] ==============================
+[2025-05-15 22:37:17] [!] Processing folder: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only) with descriptor: UNIT_0
+[2025-05-15 22:37:17] [✓] Found 11 PDFs in: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)
+[2025-05-15 22:37:17] -------------------------------
+[2025-05-15 22:37:17] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Code Book for PDSA Dataset.pdf
+[2025-05-15 22:37:17] [!] Total sentences: 26, Summarized sentences: 2
+[2025-05-15 22:37:17] -------------------------------
+[2025-05-15 22:37:17] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Hu article on SDOH in JHS.pdf
+[2025-05-15 22:37:17] [!] Total sentences: 544, Summarized sentences: 54
+[2025-05-15 22:37:18] -------------------------------
+[2025-05-15 22:37:18] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Moresis article on Minimal Metadata.pdf
+[2025-05-15 22:37:19] [!] Total sentences: 675, Summarized sentences: 67
+[2025-05-15 22:37:20] -------------------------------
+[2025-05-15 22:37:20] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-3-design.pdf
+[2025-05-15 22:37:20] [!] Total sentences: 368, Summarized sentences: 36
+[2025-05-15 22:37:21] -------------------------------
+[2025-05-15 22:37:21] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-4-Lecture01a_basics.pdf
+[2025-05-15 22:37:21] [!] Total sentences: 63, Summarized sentences: 6
+[2025-05-15 22:37:22] -------------------------------
+[2025-05-15 22:37:22] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-4-Lecture01b-Exploratory Data Analysis.pdf
+[2025-05-15 22:37:22] [!] Total sentences: 430, Summarized sentences: 43
+[2025-05-15 22:37:23] -------------------------------
+[2025-05-15 22:37:23] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-5-JDSSV_V3_I1.pdf
+[2025-05-15 22:37:23] [!] Total sentences: 440, Summarized sentences: 44
+[2025-05-15 22:37:32] -------------------------------
+[2025-05-15 22:37:32] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-6-A_meta-analysis_of_GFR_slope_as_a_surrogate_endpoint_for_kidney_failure.pdf
+[2025-05-15 22:37:32] [!] Total sentences: 763, Summarized sentences: 76
+[2025-05-15 22:37:34] -------------------------------
+[2025-05-15 22:37:34] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-6-gfr_in_healthy_aging__an_individual_participant.24.pdf
+[2025-05-15 22:37:34] [!] Total sentences: 460, Summarized sentences: 46
+[2025-05-15 22:37:35] -------------------------------
+[2025-05-15 22:37:35] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-6-meta.pdf
+[2025-05-15 22:37:35] [!] Total sentences: 138, Summarized sentences: 13
+[2025-05-15 22:37:36] -------------------------------
+[2025-05-15 22:37:36] [✓] Extracted text from: C:\temp\Units\UNIT_0 - Pre-Reading Materials (Kelly Only)\Unit-6-Statistics in Medicine - 2015 - Hoaglin - Misunderstandings about Q and  Cochran s Q test  in meta‐analysis.pdf
+[2025-05-15 22:37:36] [!] Total sentences: 357, Summarized sentences: 35
+[2025-05-15 22:37:36] [✓] Written summary JSON: opus_4235_UNIT_0.json
+[2025-05-15 22:37:36] ==============================
+[2025-05-15 22:37:36] [!] Processing folder: C:\temp\Units\UNIT_1A - RCR - Jodyn with descriptor: UNIT_1A
+[2025-05-15 22:37:36] [✓] Found 5 PDFs in: C:\temp\Units\UNIT_1A - RCR - Jodyn
+[2025-05-15 22:37:36] -------------------------------
+[2025-05-15 22:37:36] [✓] Extracted text from: C:\temp\Units\UNIT_1A - RCR - Jodyn\S1_Assessment .pdf
+[2025-05-15 22:37:36] [!] Total sentences: 10, Summarized sentences: 1
+[2025-05-15 22:37:36] -------------------------------
+[2025-05-15 22:37:36] [✓] Extracted text from: C:\temp\Units\UNIT_1A - RCR - Jodyn\S1_Discussion.pdf
+[2025-05-15 22:37:36] [!] Total sentences: 40, Summarized sentences: 4
+[2025-05-15 22:37:36] -------------------------------
+[2025-05-15 22:37:36] [✓] Extracted text from: C:\temp\Units\UNIT_1A - RCR - Jodyn\S1_Presentation.pdf
+[2025-05-15 22:37:36] [!] Total sentences: 15, Summarized sentences: 1
+[2025-05-15 22:37:37] -------------------------------
+[2025-05-15 22:37:37] [✓] Extracted text from: C:\temp\Units\UNIT_1A - RCR - Jodyn\Pre-reading material for participants\obermeyer.pdf
+[2025-05-15 22:37:37] [!] Total sentences: 372, Summarized sentences: 37
+[2025-05-15 22:37:38] -------------------------------
+[2025-05-15 22:37:38] [✓] Extracted text from: C:\temp\Units\UNIT_1A - RCR - Jodyn\Pre-reading material for participants\shaw.pdf
+[2025-05-15 22:37:38] [!] Total sentences: 414, Summarized sentences: 41
+[2025-05-15 22:37:39] [✓] Written summary JSON: opus_4235_UNIT_1A.json
+[2025-05-15 22:37:39] ==============================
+[2025-05-15 22:37:39] [!] Processing folder: C:\temp\Units\UNIT_1B - Ethical issues in biomedical data science - Jodyn with descriptor: UNIT_1B
+[2025-05-15 22:37:39] [✓] Found 4 PDFs in: C:\temp\Units\UNIT_1B - Ethical issues in biomedical data science - Jodyn
+[2025-05-15 22:37:39] -------------------------------
+[2025-05-15 22:37:39] [✓] Extracted text from: C:\temp\Units\UNIT_1B - Ethical issues in biomedical data science - Jodyn\S2_Assessment .pdf
+[2025-05-15 22:37:39] [!] Total sentences: 13, Summarized sentences: 1
+[2025-05-15 22:37:39] -------------------------------
+[2025-05-15 22:37:39] [✓] Extracted text from: C:\temp\Units\UNIT_1B - Ethical issues in biomedical data science - Jodyn\S2_Discussion.pdf
+[2025-05-15 22:37:39] [!] Total sentences: 26, Summarized sentences: 2
+[2025-05-15 22:37:39] -------------------------------
+[2025-05-15 22:37:39] [✓] Extracted text from: C:\temp\Units\UNIT_1B - Ethical issues in biomedical data science - Jodyn\S2_Presentation.pdf
+[2025-05-15 22:37:39] [!] Total sentences: 38, Summarized sentences: 3
+[2025-05-15 22:37:39] -------------------------------
+[2025-05-15 22:37:39] [✓] Extracted text from: C:\temp\Units\UNIT_1B - Ethical issues in biomedical data science - Jodyn\Pre-reading material for participants\jama_menikoff_2025_vp_250015_1744313610.1028.pdf
+[2025-05-15 22:37:39] [!] Total sentences: 75, Summarized sentences: 7
+[2025-05-15 22:37:39] [✓] Written summary JSON: opus_4235_UNIT_1B.json
+[2025-05-15 22:37:39] ==============================
+[2025-05-15 22:37:39] [!] Processing folder: C:\temp\Units\UNIT_2A - Data Management - Brenda, Clifton, Yalanda with descriptor: UNIT_2A
+[2025-05-15 22:37:39] [✓] Found 1 PDFs in: C:\temp\Units\UNIT_2A - Data Management - Brenda, Clifton, Yalanda
+[2025-05-15 22:37:39] -------------------------------
+[2025-05-15 22:37:39] [✓] Extracted text from: C:\temp\Units\UNIT_2A - Data Management - Brenda, Clifton, Yalanda\The Jackson Heart Study DAIR3 Presentation 2025.pdf
+[2025-05-15 22:37:39] [!] Total sentences: 26, Summarized sentences: 2
+[2025-05-15 22:37:39] [✓] Written summary JSON: opus_4235_UNIT_2A.json
+[2025-05-15 22:37:39] ==============================
+[2025-05-15 22:37:39] [!] Processing folder: C:\temp\Units\UNIT_2B - Meta Data - Erin with descriptor: UNIT_2B
+[2025-05-15 22:37:39] [✓] Found 1 PDFs in: C:\temp\Units\UNIT_2B - Meta Data - Erin
+[2025-05-15 22:37:39] -------------------------------
+[2025-05-15 22:37:39] [✓] Extracted text from: C:\temp\Units\UNIT_2B - Meta Data - Erin\2.2 METADATA_Kaleba_DAIR3_2025.pdf
+[2025-05-15 22:37:39] [!] Total sentences: 19, Summarized sentences: 1
+[2025-05-15 22:37:39] [✓] Written summary JSON: opus_4235_UNIT_2B.json
+[2025-05-15 22:37:39] ==============================
+[2025-05-15 22:37:39] [!] Processing folder: C:\temp\Units\UNIT_2C - Data Representation - Jag with descriptor: UNIT_2C
+[2025-05-15 22:37:39] [✓] Found 2 PDFs in: C:\temp\Units\UNIT_2C - Data Representation - Jag
+[2025-05-15 22:37:39] -------------------------------
+[2025-05-15 22:37:39] [✓] Extracted text from: C:\temp\Units\UNIT_2C - Data Representation - Jag\2.3 (for Assessment) PHF.pdf
+[2025-05-15 22:37:39] [!] Total sentences: 38, Summarized sentences: 3
+[2025-05-15 22:37:40] -------------------------------
+[2025-05-15 22:37:40] [✓] Extracted text from: C:\temp\Units\UNIT_2C - Data Representation - Jag\2.3 Data Representation.pptx.pdf
+[2025-05-15 22:37:40] [!] Total sentences: 61, Summarized sentences: 6
+[2025-05-15 22:37:40] [✓] Written summary JSON: opus_4235_UNIT_2C.json
+[2025-05-15 22:37:40] ==============================
+[2025-05-15 22:37:40] [!] Processing folder: C:\temp\Units\UNIT_2D - Data Sharing - Erin with descriptor: UNIT_2D
+[2025-05-15 22:37:40] [✓] Found 2 PDFs in: C:\temp\Units\UNIT_2D - Data Sharing - Erin
+[2025-05-15 22:37:40] -------------------------------
+[2025-05-15 22:37:40] [✓] Extracted text from: C:\temp\Units\UNIT_2D - Data Sharing - Erin\2.4 DATA SHARING part 1_Kaleba_DAIR3_2025.pdf
+[2025-05-15 22:37:40] [!] Total sentences: 27, Summarized sentences: 2
+[2025-05-15 22:37:40] -------------------------------
+[2025-05-15 22:37:40] [✓] Extracted text from: C:\temp\Units\UNIT_2D - Data Sharing - Erin\2.4 DATA SHARING part 2 The Reality_Kaleba_DAIR3_2025.pdf
+[2025-05-15 22:37:40] [!] Total sentences: 23, Summarized sentences: 2
+[2025-05-15 22:37:40] [✓] Written summary JSON: opus_4235_UNIT_2D.json
+[2025-05-15 22:37:40] ==============================
+[2025-05-15 22:37:40] [!] Processing folder: C:\temp\Units\UNIT_3 - Rigorous Statistical Design - Kerby with descriptor: UNIT_3
+[2025-05-15 22:37:40] [✓] Found 1 PDFs in: C:\temp\Units\UNIT_3 - Rigorous Statistical Design - Kerby
+[2025-05-15 22:37:40] -------------------------------
+[2025-05-15 22:37:40] [✓] Extracted text from: C:\temp\Units\UNIT_3 - Rigorous Statistical Design - Kerby\design.pdf
+[2025-05-15 22:37:40] [!] Total sentences: 368, Summarized sentences: 36
+[2025-05-15 22:37:41] [✓] Written summary JSON: opus_4235_UNIT_3.json
+[2025-05-15 22:37:41] ==============================
+[2025-05-15 22:37:41] [!] Processing folder: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind with descriptor: UNIT_4
+[2025-05-15 22:37:41] [✓] Found 16 PDFs in: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind
+[2025-05-15 22:37:41] -------------------------------
+[2025-05-15 22:37:41] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture02a_pca_mds.pdf
+[2025-05-15 22:37:41] [!] Total sentences: 33, Summarized sentences: 3
+[2025-05-15 22:37:41] -------------------------------
+[2025-05-15 22:37:41] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture02b_clustering.pdf
+[2025-05-15 22:37:41] [!] Total sentences: 10, Summarized sentences: 1
+[2025-05-15 22:37:41] -------------------------------
+[2025-05-15 22:37:41] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture03a_classification.pdf
+[2025-05-15 22:37:41] [!] Total sentences: 13, Summarized sentences: 1
+[2025-05-15 22:37:41] -------------------------------
+[2025-05-15 22:37:41] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture03a_DL_overfit.pdf
+[2025-05-15 22:37:41] [!] Total sentences: 4, Summarized sentences: 1
+[2025-05-15 22:37:42] -------------------------------
+[2025-05-15 22:37:42] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture03b_ML_in_DrugHTS_2023.pdf
+[2025-05-15 22:37:42] [!] Total sentences: 38, Summarized sentences: 3
+[2025-05-15 22:37:42] -------------------------------
+[2025-05-15 22:37:42] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture04a_AI_bias_labelslides_BMDS.pdf
+[2025-05-15 22:37:42] [!] Total sentences: 70, Summarized sentences: 7
+[2025-05-15 22:37:43] -------------------------------
+[2025-05-15 22:37:43] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture04b_colg078378.wt1.pdf
+[2025-05-15 22:37:43] [!] Total sentences: 51, Summarized sentences: 5
+[2025-05-15 22:37:45] -------------------------------
+[2025-05-15 22:37:45] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture04b_colg078378.wt1_1.pdf
+[2025-05-15 22:37:45] [!] Total sentences: 51, Summarized sentences: 5
+[2025-05-15 22:37:47] -------------------------------
+[2025-05-15 22:37:47] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Lecture04b_TRIPOD+AI statement_ updated guidance for reporting clinical prediction models that use regression or machine learning methods - PMC.pdf
+[2025-05-15 22:37:47] [!] Total sentences: 596, Summarized sentences: 59
+[2025-05-15 22:37:49] -------------------------------
+[2025-05-15 22:37:49] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Assignment_Capstone_Project\Capstone_colg078378.wt2.pdf
+[2025-05-15 22:37:49] [!] Total sentences: 21, Summarized sentences: 2
+[2025-05-15 22:37:49] -------------------------------
+[2025-05-15 22:37:49] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Assignment_Capstone_Project\Capstone_paper_medinform-2025-1-e64972.pdf
+[2025-05-15 22:37:49] [!] Total sentences: 418, Summarized sentences: 41
+[2025-05-15 22:37:50] -------------------------------
+[2025-05-15 22:37:50] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Assignment_Capstone_Project\Student Intuition-Building Questions Aligned with the TRIPOD-AI Checklist.pdf
+[2025-05-15 22:37:50] [!] Total sentences: 44, Summarized sentences: 4
+[2025-05-15 22:37:50] -------------------------------
+[2025-05-15 22:37:50] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Assignment_Capstone_Project\post-session reading materials_\2407.12220v1.pdf
+[2025-05-15 22:37:50] [!] Total sentences: 1445, Summarized sentences: 144
+[2025-05-15 22:37:55] -------------------------------
+[2025-05-15 22:37:55] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Assignment_Capstone_Project\post-session reading materials_\ML_pitfalls_arxiv.pdf
+[2025-05-15 22:37:55] [!] Total sentences: 1321, Summarized sentences: 132
+[2025-05-15 22:37:57] -------------------------------
+[2025-05-15 22:37:57] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Pre-reading material for participants\Lecture01a_basics.pdf
+[2025-05-15 22:37:57] [!] Total sentences: 63, Summarized sentences: 6
+[2025-05-15 22:37:58] -------------------------------
+[2025-05-15 22:37:58] [✓] Extracted text from: C:\temp\Units\UNIT_4 - Design and Reporting of Predictive Models - Arvind\Pre-reading material for participants\Lecture01b-Exploratory Data Analysis.pdf
+[2025-05-15 22:37:58] [!] Total sentences: 430, Summarized sentences: 43
+[2025-05-15 22:37:58] [✓] Written summary JSON: opus_4235_UNIT_4.json
+[2025-05-15 22:37:58] ==============================
+[2025-05-15 22:37:58] [!] Processing folder: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg with descriptor: UNIT_5
+[2025-05-15 22:37:58] [✓] Found 7 PDFs in: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg
+[2025-05-15 22:37:58] -------------------------------
+[2025-05-15 22:37:58] [✓] Extracted text from: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg\1_goals.pdf
+[2025-05-15 22:37:58] [!] Total sentences: 17, Summarized sentences: 1
+[2025-05-15 22:37:58] -------------------------------
+[2025-05-15 22:37:58] [✓] Extracted text from: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg\2_notebooks.pdf
+[2025-05-15 22:37:58] [!] Total sentences: 22, Summarized sentences: 2
+[2025-05-15 22:37:59] -------------------------------
+[2025-05-15 22:37:59] [✓] Extracted text from: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg\3_programming.pdf
+[2025-05-15 22:37:59] [!] Total sentences: 81, Summarized sentences: 8
+[2025-05-15 22:37:59] -------------------------------
+[2025-05-15 22:37:59] [✓] Extracted text from: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg\4_versioncontrol.pdf
+[2025-05-15 22:37:59] [!] Total sentences: 19, Summarized sentences: 1
+[2025-05-15 22:37:59] -------------------------------
+[2025-05-15 22:37:59] [✓] Extracted text from: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg\5_containers.pdf
+[2025-05-15 22:37:59] [!] Total sentences: 21, Summarized sentences: 2
+[2025-05-15 22:37:59] -------------------------------
+[2025-05-15 22:37:59] [✓] Extracted text from: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg\6_pipeline.pdf
+[2025-05-15 22:37:59] [!] Total sentences: 12, Summarized sentences: 1
+[2025-05-15 22:38:00] -------------------------------
+[2025-05-15 22:38:00] [✓] Extracted text from: C:\temp\Units\UNIT_5 - Reproducible Workflows - Johann and Greg\Pre-reading material for participants\JDSSV_V3_I1.pdf
+[2025-05-15 22:38:00] [!] Total sentences: 440, Summarized sentences: 44
+[2025-05-15 22:38:00] [✓] Written summary JSON: opus_4235_UNIT_5.json
+[2025-05-15 22:38:00] ==============================
+[2025-05-15 22:38:00] [!] Processing folder: C:\temp\Units\UNIT_6 - Meta-analysis - Kerby with descriptor: UNIT_6
+[2025-05-15 22:38:00] [✓] Found 4 PDFs in: C:\temp\Units\UNIT_6 - Meta-analysis - Kerby
+[2025-05-15 22:38:00] -------------------------------
+[2025-05-15 22:38:00] [✓] Extracted text from: C:\temp\Units\UNIT_6 - Meta-analysis - Kerby\meta.pdf
+[2025-05-15 22:38:00] [!] Total sentences: 138, Summarized sentences: 13
+[2025-05-15 22:38:10] -------------------------------
+[2025-05-15 22:38:10] [✓] Extracted text from: C:\temp\Units\UNIT_6 - Meta-analysis - Kerby\Pre-reading material for participants\A_meta-analysis_of_GFR_slope_as_a_surrogate_endpoint_for_kidney_failure.pdf
+[2025-05-15 22:38:10] [!] Total sentences: 763, Summarized sentences: 76
+[2025-05-15 22:38:11] -------------------------------
+[2025-05-15 22:38:11] [✓] Extracted text from: C:\temp\Units\UNIT_6 - Meta-analysis - Kerby\Pre-reading material for participants\gfr_in_healthy_aging__an_individual_participant.24.pdf
+[2025-05-15 22:38:11] [!] Total sentences: 460, Summarized sentences: 46
+[2025-05-15 22:38:13] -------------------------------
+[2025-05-15 22:38:13] [✓] Extracted text from: C:\temp\Units\UNIT_6 - Meta-analysis - Kerby\Pre-reading material for participants\Statistics in Medicine - 2015 - Hoaglin - Misunderstandings about Q and  Cochran s Q test  in meta‐analysis.pdf
+[2025-05-15 22:38:13] [!] Total sentences: 357, Summarized sentences: 35
+[2025-05-15 22:38:13] [✓] Written summary JSON: opus_4235_UNIT_6.json
+[2025-05-15 22:38:13] ==============================
+[2025-05-15 22:38:13] [!] Processing folder: C:\temp\Units\UNIT_7 - Transformer - based AI in Biomedical Research - Juan with descriptor: UNIT_7
+[2025-05-15 22:38:13] [✓] Found 0 PDFs in: C:\temp\Units\UNIT_7 - Transformer - based AI in Biomedical Research - Juan
+[2025-05-15 22:38:13] [✓] Written summary JSON: opus_4235_UNIT_7.json

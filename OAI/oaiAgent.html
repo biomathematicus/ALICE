@@ -6,7 +6,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 	<meta http-equiv="Pragma" no-cache />
 	<meta http-equiv="Expires" 0 />
-	<title>oaiAgent</title>
+	<title>Persistemt Conversation with OpenAI Completions</title>
 	<script language="JavaScript" type="text/JavaScript" src="../common/katex/katex.min.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="../common/katex/contrib/auto-render.min.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="../common/showdown/showdown.min.js"></script>
@@ -59,10 +59,10 @@
 <body>
 	<div id="openai">
 		<select id="modelSelect">
-			<option value="gpt-4o">gpt-4o</option>
-			<option value="gpt-4-turbo">gpt-4-turbo</option>
-			<option value="gpt-4">gpt-4</option>
 			<option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+			<option value="gpt-4">gpt-4</option>
+			<option value="gpt-4-turbo">gpt-4-turbo</option>
+			<option value="gpt-4o">gpt-4o</option>
 		</select>&#160;&#160;&#160;
 		<button id="resetButton">RESET</button>
 		<div id="messageArea" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
@@ -76,125 +76,208 @@
 		</div>
 	</div>
 	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			const urlParams = new URLSearchParams(window.location.search);
-			const OPUS = urlParams.get('OPUS');
-			const PAGINA = urlParams.get('PAGINA');
-			const NAUTA = urlParams.get('NAUTA');
-			const LINGUA = urlParams.get('LINGUA');
+		const assistantApi = "oaiAgent.ashx";
 
-			if (!OPUS || !PAGINA || !NAUTA || !LINGUA) {
+		document.getElementById('userInput').addEventListener('keyup', function (event) {
+			if (event.code === "Enter" || event.code === "NumpadEnter") {
+				event.preventDefault();
+				document.getElementById('sendButton').click();
+			}
+		});
+
+		document.getElementById("sendButton").addEventListener("click", function () {
+			const userInput = document.getElementById("userInput").value;
+			const messageArea = document.getElementById("messageArea");
+			const loader = document.getElementById("loader");
+
+			if (userInput.trim() === "") {
+				alert("Please enter some text.");
 				return;
 			}
 
-			initializeChat(OPUS, PAGINA, NAUTA, LINGUA);
-
-			document.getElementById('sendButton').addEventListener('click', function () {
-				const userInput = document.getElementById('userInput').value;
-				const model = document.getElementById('modelSelect').value;
-				if (userInput.trim() === "") {
-					alert("Please enter some text.");
-					return;
-				}
-				sendMessage(userInput, model);
-			});
-
-			document.getElementById('resetButton').addEventListener('click', function () {
-				initializeChat(OPUS, PAGINA, NAUTA, LINGUA, true);
-			});
-
-			document.getElementById('userInput').addEventListener('keyup', function (event) {
-				if (event.code === "Enter" || event.code === "NumpadEnter") {
-					event.preventDefault();
-					document.getElementById('sendButton').click();
-				}
-			});
-		});
-
-		function initializeChat(OPUS, PAGINA, NAUTA, LINGUA, reset = false) {
-			$.ajax({
-				url: 'oaiAgent.ashx',
-				type: 'POST',
-				data: {
-					action: reset ? 'reset' : 'initialize',
-					OPUS: OPUS,
-					PAGINA: PAGINA,
-					NAUTA: NAUTA,
-					LINGUA: LINGUA
-				},
-				success: function (jsonData) {
-					if (jsonData.success) {
-						if (reset) {
-							$('#messageArea').empty();
-						} else {
-							jsonData.chat.forEach(message => {
-								addMessageToUI(message);
-							});
-						}
-					} else {
-						alert("Error initializing chat: " + jsonData.error);
-					}
-				},
-				error: function (xhr, status, error) {
-					console.log("AJAX error:", error);
-				}
-			});
-		}
-
-		function sendMessage(userInput, model) {
-			const messageArea = document.getElementById('messageArea');
-			const loader = document.getElementById('loader');
 			const userDiv = document.createElement('div');
 			userDiv.textContent = userInput;
 			userDiv.className = 'user-question';
-			document.getElementById("messageArea").appendChild(userDiv);
-			document.getElementById("messageArea").appendChild(loader);
+			messageArea.appendChild(userDiv);
+			messageArea.appendChild(loader);
 			loader.style.display = "block";
 			messageArea.scrollTop = messageArea.scrollHeight;
 
-			$.ajax({
-				url: 'oaiAgent.ashx',
-				type: 'POST',
-				data: {
-					action: 'sendMessage',
-					userInput: userInput,
-					model: model
-				},
-				success: function (jsonData) {
-					loader.style.display = "none";
-					if (jsonData.success) {
-						addMessageToUI(jsonData.message);
-					} else {
-						alert("Error sending message: " + jsonData.error);
-					}
-				},
-				error: function (xhr, status, error) {
-					loader.style.display = "none";
-					console.log("AJAX error:", error);
-				}
+			const model = document.getElementById("modelSelect").value;
+			const messages = [{ role: "user", content: userInput }];
+
+			sendToAssistant(model, messages, function (replyText) {
+				loader.style.display = "none";
+
+				const converter = new showdown.Converter();
+				const html = converter.makeHtml(replyText);
+
+				const tempDiv = document.createElement('div');
+				tempDiv.innerHTML = html;
+
+				renderMathInElement(tempDiv, {
+					delimiters: [
+						{ left: "$$", right: "$$", display: true },
+						{ left: "$", right: "$", display: false }
+					]
+				});
+				tempDiv.querySelectorAll('.katex-html').forEach(span => span.remove());
+
+				const messageDiv = document.createElement('div');
+				messageDiv.className = 'ai-response';
+				messageDiv.innerHTML = tempDiv.innerHTML;
+				messageArea.appendChild(messageDiv);
+				messageArea.scrollTop = messageArea.scrollHeight;
 			});
+
 			document.getElementById("userInput").value = '';
+		});
+
+		$(document).ready(function () {
+			getAssistantState(function (state) {
+				console.log("Assistant memory loaded:", state);
+			});
+		});
+
+		function getQueryParam(name) {
+			const url = new URL(window.location.href);
+			return url.searchParams.get(name);
 		}
 
-		function addMessageToUI(message) {
-			const messageArea = document.getElementById('messageArea');
-			const converter = new showdown.Converter();
-			const html = converter.makeHtml(message.content);
-			const tempDiv = document.createElement('div');
-			tempDiv.innerHTML = html;
-			renderMathInElement(tempDiv, {
-				delimiters: [
-					{ left: "$$", right: "$$", display: true },
-					{ left: "$", right: "$", display: false }
-				]
+		// Dynamically loaded from querystring
+		const ds_symbolum = getQueryParam("symbolum");
+		const id_opus = parseInt(getQueryParam("opus"), 10);
+		const id_pagina = parseInt(getQueryParam("pagina"), 10);
+
+		function sendToAssistant(model, messages, callback) {
+			$.ajax({
+				url: assistantApi,
+				type: "POST",
+				data: {
+					action: "sendmessage",
+					id_opus,
+					id_pagina,
+					ds_symbolum,
+					model: model,
+					messages: JSON.stringify(messages)
+				},
+				success: function (res) {
+					if (res.success) {
+						callback(res.reply);
+					} else {
+						alert("Error: " + res.message);
+					}
+				}
 			});
-			tempDiv.querySelectorAll('.katex-html').forEach(span => span.remove());
-			const messageDiv = document.createElement('div');
-			messageDiv.className = 'ai-response';
-			messageDiv.innerHTML = tempDiv.innerHTML;
-			messageArea.appendChild(messageDiv);
-			messageArea.scrollTop = messageArea.scrollHeight;
 		}
+
+		function getAssistantState(callback) {
+			$.ajax({
+				url: assistantApi,
+				type: "POST",
+				data: {
+					action: "getstate",
+					id_opus,
+					id_pagina,
+					ds_symbolum
+				},
+				success: function (res) {
+					if (res.success) {
+						const messageArea = document.getElementById("messageArea");
+						const loader = document.getElementById("loader");
+						messageArea.innerHTML = ""; // Clear anything stale
+
+						let stateObj = {};
+						try {
+							stateObj = JSON.parse(res.state);
+						} catch (e) {
+							console.warn("Invalid state format:", e);
+						}
+
+						if (stateObj.history && Array.isArray(stateObj.history)) {
+							const converter = new showdown.Converter();
+							stateObj.history.forEach(entry => {
+								const div = document.createElement('div');
+								div.className = (entry.role === "user") ? "user-question" : "ai-response";
+
+								const html = converter.makeHtml(entry.content);
+								const tempDiv = document.createElement('div');
+								tempDiv.innerHTML = html;
+
+								renderMathInElement(tempDiv, {
+									delimiters: [
+										{ left: "$$", right: "$$", display: true },
+										{ left: "$", right: "$", display: false }
+									]
+								});
+								tempDiv.querySelectorAll('.katex-html').forEach(span => span.remove());
+
+								div.innerHTML = tempDiv.innerHTML;
+								messageArea.appendChild(div);
+							});
+						}
+
+						messageArea.appendChild(loader);
+						loader.style.display = "none";
+						messageArea.scrollTop = messageArea.scrollHeight;
+
+						if (callback) callback(res.state);
+					} else {
+						alert("Error loading state: " + res.message);
+					}
+				},
+				error: function (xhr) {
+					console.error("Request failed", xhr);
+				}
+			});
+		}
+
+
+		function updateAssistantState(stateJson) {
+			$.ajax({
+				url: assistantApi,
+				type: "POST",
+				data: {
+					action: "updatestate",
+					id_opus,
+					id_pagina,
+					ds_symbolum,
+					state_json: stateJson
+				},
+				success: function (res) {
+					if (res.success) {
+						console.log("State saved successfully.");
+					} else {
+						alert("Error saving state: " + res.message);
+					}
+				},
+				error: function (xhr) {
+					console.error("Request failed", xhr);
+				}
+			});
+		}
+
+		document.getElementById("resetButton").addEventListener("click", function () {
+			if (!confirm("Are you sure you want to reset the assistant's memory?")) return;
+
+			const emptyState = JSON.stringify({ history: [] });
+
+			updateAssistantState(emptyState);
+
+			const messageArea = document.getElementById("messageArea");
+			while (messageArea.firstChild) {
+				messageArea.removeChild(messageArea.firstChild);
+			}
+
+			const loader = document.createElement('div');
+			loader.id = "loader";
+			loader.className = "loader";
+			loader.style.display = "none";
+			messageArea.appendChild(loader);
+
+			console.log("Assistant memory reset.");
+		});
+
 	</script>
 </body>
 </html>

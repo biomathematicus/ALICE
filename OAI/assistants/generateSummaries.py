@@ -14,7 +14,7 @@ from datetime import datetime
 OPUS = 4235
 
 # Percentage of total sentences to include in summary
-SUMMARY_PERCENTAGE = 25  # Adjustable summary length control
+SUMMARY_PERCENTAGE = 10  # Adjustable summary length control
 
 # Path to the base OPUS JSON structure used as a template
 OPUS_PATH = "opus_4235.json"

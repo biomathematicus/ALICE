@@ -6,7 +6,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 	<meta http-equiv="Pragma" no-cache />
 	<meta http-equiv="Expires" 0 />
-	<title>Conversation with OpenAI</title>
+	<title>Stateless Conversation with OpenAI Completions</title>
 	<script language="JavaScript" type="text/JavaScript" src="../common/katex/katex.min.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="../common/katex/contrib/auto-render.min.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="../common/showdown/showdown.min.js"></script>
@@ -76,6 +76,8 @@
 		</div>
 	</div>
 	<script>
+		const assistantApi = 'OpenAIHandler.ashx';
+
 		document.getElementById('userInput').addEventListener('keyup', function (event) {
 			if (event.code === "Enter" || event.code === "NumpadEnter") {
 				event.preventDefault();
@@ -104,7 +106,7 @@
 			messageArea.scrollTop = messageArea.scrollHeight;
 
 			$.ajax({
-				url: 'OpenAIHandler.ashx',
+				url: assistantApi,
 				type: 'POST',
 				data: { prompt: userInput },
 				success: function (jsonData) {

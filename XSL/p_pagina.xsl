@@ -133,9 +133,9 @@
 														<a href="javascript:LoadTab('mynetwork');"><xsl:value-of select="//TAB_MAPPA"/></a>
 													</td -->
 													<!-- _____________________ -->
-													<!-- td width="74" id="tabGenAI" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
+													<td width="74" id="tabGenAI" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('GenAI');">GenAI</a>
-													</td -->
+													</td>
 													<!-- _____________________ -->
 													<td width="74" id="tabTest" class="TabOff" background="../images/system/bgd_tab_80x20.gif"  >
 														<a href="javascript:LoadTab('Test');"><xsl:value-of select="//TAB_SCRUTINIUM"/></a>
@@ -160,7 +160,13 @@
 										<div id="Source" style="visibility:hidden; display:none; width: 800px;"></div>
 										<div id="PDF1" style="width: 800px;"></div>
 										<div id="GenAI"  style="visibility:hidden; display:none; width: 800px;">
-											<iframe id="GenAIFrame" src="../OAI/openai.html" style="width: 100%; height: 450px; border: none;"></iframe>
+											<iframe id="GenAIFrame" style="width: 100%; height: 450px; border: none;">
+												<xsl:attribute name="src">../OAI/openai.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
+											</iframe>
+											<a>
+												<xsl:attribute name="href">../OAI/openai.html?opus=<xsl:value-of select="//id_opus"/>&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
+												../OAI/openai.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>	
+											</a>
 										</div>	
 										<div id="Intro"  style="visibility:hidden; display:none; width: 800px;">
 											<br />

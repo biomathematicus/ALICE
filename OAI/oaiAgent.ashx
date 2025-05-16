@@ -1,77 +1,189 @@
-﻿<%@ WebHandler Language="VB" class="oaiAgent"%>
+﻿<%@ WebHandler Language="VB" Class="Auxiliator" %>
+
+Imports System
 Imports System.Web
-Imports System.Web.Services
+Imports System.Data.SqlClient
 Imports System.IO
 Imports System.Net
 Imports System.Text
 Imports System.Web.Script.Serialization
+Imports System.Collections.Generic
+Imports Literatronica
 
-Public Class oaiAgent
-	Implements IHttpHandler
+Public Class Auxiliator : Implements IHttpHandler
+	Dim oDBService As New Connection
 
-	Public Sub ProcessRequest(ByVal context As HttpContext) Implements IHttpHandler.ProcessRequest
-		ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+	Private connStr As String = oDBService.DB_CONN_STRING
+	Private openaiApiKey As String = System.Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+
+	Public Sub ProcessRequest(context As HttpContext) Implements IHttpHandler.ProcessRequest
 		context.Response.ContentType = "application/json"
+		Dim serializer As New JavaScriptSerializer()
+		Dim response As Object = New With {Key .success = False, Key .message = "Unknown error."}
 
-		Dim conversation As String = context.Request.Form("conversation")
+		Try
+			Dim action As String = context.Request("action")
+			Dim id_opus As Integer = Integer.Parse(context.Request("id_opus"))
+			Dim id_pagina As Integer = Integer.Parse(context.Request("id_pagina"))
+			Dim ds_symbolum As String = context.Request("ds_symbolum")
 
-		' Retrieve the API key from the environment variable
-		Dim apiKey As String = System.Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-		If String.IsNullOrEmpty(apiKey) Then
-			context.Response.Write("API Key is not configured properly.")
-			context.Response.End()
-			Return
+			If String.IsNullOrEmpty(action) OrElse String.IsNullOrEmpty(ds_symbolum) Then
+				Throw New ArgumentException("Missing parameters.")
+			End If
+
+			Select Case action.ToLower()
+				Case "getstate"
+					response = GetState(id_opus, id_pagina, ds_symbolum)
+
+				Case "updatestate"
+					Dim state_json As String = context.Request("state_json")
+					response = UpdateState(id_opus, id_pagina, ds_symbolum, state_json)
+
+				Case "sendmessage"
+					Dim model As String = context.Request("model")
+					Dim messageJson As String = context.Request("messages")
+					response = SendMessage(id_opus, id_pagina, ds_symbolum, model, messageJson)
+
+				Case Else
+					response = New With {Key .success = False, Key .message = "Unknown action."}
+			End Select
+
+		Catch ex As Exception
+			response = New With {Key .success = False, Key .message = ex.Message}
+		End Try
+
+		context.Response.Write(serializer.Serialize(response))
+	End Sub
+
+	Private Function GetState(id_opus As Integer, id_pagina As Integer, ds_symbolum As String) As Object
+		Using conn As New SqlConnection(connStr)
+			conn.Open()
+
+			Dim id_nauta As Integer = GetNautaId(ds_symbolum, conn)
+			If id_nauta = -1 Then Throw New Exception("Invalid token")
+
+			Using cmd As New SqlCommand("getAuxiliator", conn)
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddWithValue("@id_opus", id_opus)
+				cmd.Parameters.AddWithValue("@id_pagina", id_pagina)
+				cmd.Parameters.AddWithValue("@ds_symbolum", ds_symbolum)
+
+				Using reader As SqlDataReader = cmd.ExecuteReader()
+					If reader.Read() Then
+						Dim json As String = If(Not IsDBNull(reader("ds_state_json")), reader("ds_state_json").ToString(), "")
+						Return New With {Key .success = True, Key .state = json}
+					Else
+						Return New With {Key .success = True, Key .state = ""}
+					End If
+				End Using
+			End Using
+		End Using
+	End Function
+
+	Private Function UpdateState(id_opus As Integer, id_pagina As Integer, ds_symbolum As String, state_json As String) As Object
+		Using conn As New SqlConnection(connStr)
+			conn.Open()
+
+			Using cmd As New SqlCommand("updateAuxiliator", conn)
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddWithValue("@id_opus", id_opus)
+				cmd.Parameters.AddWithValue("@id_pagina", id_pagina)
+				cmd.Parameters.AddWithValue("@ds_symbolum", ds_symbolum)
+				cmd.Parameters.AddWithValue("@ds_state_json", If(state_json, ""))
+				cmd.ExecuteNonQuery()
+				Return New With {Key .success = True}
+			End Using
+		End Using
+	End Function
+
+	Private Function SendMessage(id_opus As Integer, id_pagina As Integer, ds_symbolum As String, model As String, messageJson As String) As Object
+		Dim serializer As New JavaScriptSerializer()
+		Dim messages As List(Of Dictionary(Of String, Object)) = serializer.Deserialize(Of List(Of Dictionary(Of String, Object)))(messageJson)
+		Dim stateResponse = GetState(id_opus, id_pagina, ds_symbolum)
+		Dim stateJson As String = stateResponse.state
+		Dim history As New List(Of Dictionary(Of String, Object))
+
+		If Not String.IsNullOrEmpty(stateJson) Then
+			Dim existingState = serializer.Deserialize(Of Dictionary(Of String, Object))(stateJson)
+			If existingState.ContainsKey("history") Then
+				Dim rawList As ArrayList = DirectCast(existingState("history"), ArrayList)
+				For Each item As Object In rawList
+					history.Add(DirectCast(item, Dictionary(Of String, Object)))
+				Next
+			End If
 		End If
 
-		' Set up OpenAI API request
-		Dim apiUrl As String = "https://api.openai.com/v1/assistants/threads/runs"
-		Dim assistantId As String = "OPUS60_PAGINA1_NAUTA11" ' Ensure this ID is correct
-		Dim threadId As String = "OPUS60_PAGINA1_NAUTA11" ' Ensure this ID is correct
+		' Add new messages to history
+		For Each msg In messages
+			history.Add(msg)
+		Next
 
-		' Create HTTP request
-		Dim request As HttpWebRequest = CType(WebRequest.Create(apiUrl), HttpWebRequest)
-		request.Method = "POST"
-		request.ContentType = "application/json"
-		request.Headers.Add("Authorization", "Bearer " & apiKey)
-		request.Headers.Add("OpenAI-Beta", "assistants=v2")
+		' Prepare request to OpenAI
+		System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+		Dim req = HttpWebRequest.Create("https://api.openai.com/v1/chat/completions")
+		req.Method = "POST"
+		req.Headers.Add("Authorization", "Bearer " & openaiApiKey)
+		req.ContentType = "application/json"
 
-		' Prepare JSON payload
-		Dim payload As New Dictionary(Of String, Object) From {
-			{"assistant_id", assistantId},
-			{"thread_id", threadId},
-			{"messages", conversation}
+		Dim payload As New Dictionary(Of String, Object)
+		payload("model") = model
+		payload("messages") = history
+
+		Dim jsonPayload As String = serializer.Serialize(payload)
+		Using stream = req.GetRequestStream()
+			Dim bytes = Encoding.UTF8.GetBytes(jsonPayload)
+			stream.Write(bytes, 0, bytes.Length)
+		End Using
+
+		Dim replyText As String = ""
+		Using resp = req.GetResponse()
+			Using reader = New StreamReader(resp.GetResponseStream())
+				Dim raw = reader.ReadToEnd()
+				Dim parsed = serializer.Deserialize(Of Dictionary(Of String, Object))(raw)
+				'Dim choices = CType(parsed("choices"), Object())(0)
+				'Dim msg = CType(choices("message"), Dictionary(Of String, Object))
+				'replyText = msg("content").ToString()
+				Dim choicesList As ArrayList = DirectCast(parsed("choices"), ArrayList)
+				Dim choice As Dictionary(Of String, Object) = DirectCast(choicesList(0), Dictionary(Of String, Object))
+				Dim msg As Dictionary(Of String, Object) = DirectCast(choice("message"), Dictionary(Of String, Object))
+				replyText = msg("content").ToString()
+
+				' Append assistant reply to history
+				Dim replyObj As New Dictionary(Of String, Object)
+				replyObj("role") = "assistant"
+				replyObj("content") = replyText
+				history.Add(replyObj)
+			End Using
+		End Using
+
+		' Save updated history
+		Dim newState As New Dictionary(Of String, Object)
+		newState("history") = history
+		Dim updatedStateJson As String = serializer.Serialize(newState)
+		UpdateState(id_opus, id_pagina, ds_symbolum, updatedStateJson)
+
+		Return New With {
+			Key .success = True,
+			Key .reply = replyText
 		}
-		Dim json As String = (New JavaScriptSerializer()).Serialize(payload)
-		Dim byteArray As Byte() = Encoding.UTF8.GetBytes(json)
+	End Function
 
-		' Write payload to request
-		request.ContentLength = byteArray.Length
-		Dim dataStream As Stream = request.GetRequestStream()
-		dataStream.Write(byteArray, 0, byteArray.Length)
-		dataStream.Close()
-
-		' Get response
-		Try
-			Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
-			Dim reader As New StreamReader(response.GetResponseStream())
-			Dim responseFromServer As String = reader.ReadToEnd()
-
-			' Return response
-			context.Response.Write(responseFromServer)
-		Catch ex As WebException
-			' Capture detailed error message
-			Dim errorResponse As String = New StreamReader(ex.Response.GetResponseStream()).ReadToEnd()
-			context.Response.ContentType = "text/plain"
-			context.Response.Write("Error: " & ex.Message & vbCrLf & errorResponse)
-		Catch ex As Exception
-			context.Response.ContentType = "text/plain"
-			context.Response.Write("Error: " & ex.Message)
-		End Try
-	End Sub
+	Private Function GetNautaId(ds_symbolum As String, conn As SqlConnection) As Integer
+		Using cmd As New SqlCommand("SELECT id_nauta FROM NAUTA WHERE ds_symbolum = @token", conn)
+			cmd.Parameters.AddWithValue("@token", ds_symbolum)
+			Dim result = cmd.ExecuteScalar()
+			If result IsNot Nothing Then
+				Return Convert.ToInt32(result)
+			Else
+				Return -1
+			End If
+		End Using
+	End Function
 
 	Public ReadOnly Property IsReusable() As Boolean Implements IHttpHandler.IsReusable
 		Get
 			Return False
 		End Get
 	End Property
+
 End Class
