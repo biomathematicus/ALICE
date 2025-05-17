@@ -182,7 +182,7 @@
 																	<br/>
 																	<div>
 																		<xsl:attribute name="id">labor<xsl:value-of select="id_pagina"/></xsl:attribute>
-																		<xsl:value-of select="ds_labor" />
+																		<![CDATA[ ]]><xsl:value-of select="ds_labor" />
 																	</div>
 																	<script>
 																		MarkdownToHtml('labor<xsl:value-of select="id_pagina"/>'); 

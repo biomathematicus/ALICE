@@ -75,19 +75,14 @@
 								<B>&#62;</B>
 								<span class="BOLDMEDIUM">
 									<xsl:value-of select="//pag_title" />
-									<!-- xsl:choose>
-										<xsl:when test="//user_status = '1'">
-											<xsl:value-of select="//pag_title" />
-										</xsl:when>
-										<xsl:when test="//user_status != '1'">
-											<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-												<xsl:attribute name="href">
-													javascript:document.frmSession.action='../admin/sa_pagina_dtl.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//id_pagina" />&#38;opus=<xsl:value-of select="//id_opus" />';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();
-												</xsl:attribute>
-												<xsl:value-of select="//pag_title" />
-											</a>
-										</xsl:when>
-									</xsl:choose -->
+									<xsl:if test="//user_role_code = 'ADMIN' or //user_role_code = 'AUTHOR' or //user_role_code = 'UNIT'">
+										<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
+											<xsl:attribute name="href">
+												javascript:document.frmSession.action='../admin/sa_pagina_dtl.aspx?lng=<xsl:value-of select="//language" />&#38;pagina=<xsl:value-of select="//id_pagina" />&#38;opus=<xsl:value-of select="//id_opus" />';document.frmSession.hAction.value = 'ir_actualizar';document.frmSession.submit();
+											</xsl:attribute>
+											&#x1F58D; <!-- Edit icon: &#9998 (U+270E) or &#9999 (U+270F) or red crayo   &#x1F58D (U+1F58D) -->
+										</a>
+									</xsl:if>
 								</span>								
 							</td>
 							<td width="80%"></td>
@@ -170,13 +165,14 @@
 										</div>	
 										<div id="Intro"  style="visibility:hidden; display:none; width: 800px;">
 											<br />
-											The next lesson is :
+											<!-- 
+											<The next lesson is :
 											<a id="herf_next_lesson">
 												<xsl:attribute name="href">javascript:redirect_pagina('<xsl:value-of select="//language" />', '<xsl:value-of select="//id_opus" />',next_lesson_)</xsl:attribute>
 												<xsl:value-of select="//next_lesson" />
 											</a>
 											<br />			
-								
+											-->								
 											<xsl:for-each select="/doc/syllabus/prereq">
 												<xsl:choose>
 													<xsl:when test="(am_grade &gt; 79)">
