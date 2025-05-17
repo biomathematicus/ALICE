@@ -14,7 +14,9 @@ Public Class Auxiliator : Implements IHttpHandler
 	Dim oDBService As New Connection
 
 	Private connStr As String = oDBService.DB_CONN_STRING
-	Private openaiApiKey As String = System.Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+	Private openaiApiKey As String = IIf(System.Configuration.ConfigurationManager.AppSettings("DB_CONN_STRING") = "",
+											System.Environment.GetEnvironmentVariable("OPENAI_API_KEY"),
+											System.Configuration.ConfigurationManager.AppSettings("DB_CONN_STRING"))
 
 	Public Sub ProcessRequest(context As HttpContext) Implements IHttpHandler.ProcessRequest
 		context.Response.ContentType = "application/json"
