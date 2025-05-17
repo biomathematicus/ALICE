@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Router</title>
+	<script>(function () {
+        function getParam(name) {
+          return new URLSearchParams(window.location.search).get(name);
+        }
+
+        var target = getParam("target");
+
+        if (target) {
+          // open the requested address in a new tab without giving the new page access to this one
+          window.open(target, "_blank", "noopener");
+        }
+
+        // return to the previous page after allowing the new tab to open
+        setTimeout(function () {
+          if (window.history.length > 1) {
+            window.history.back();
+          }
+        }, 100);
+      })();</script>
+</head>
+<body>
+	<noscript>This page needs JavaScript enabled.</noscript>
+</body>
+</html>
