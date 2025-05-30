@@ -146,17 +146,13 @@
 															<tr  CLASS="TITLE_LIGHT">
 																<td>
 																	<a>
-																		<xsl:attribute name="href">
-																			sa_reading_rpt.aspx?opus=<xsl:value-of select="id_opus"/>&#38;nauta=<xsl:value-of select="ds_login" />&#38;lng=<xsl:value-of select="//language" />
-																		</xsl:attribute>
+																		<xsl:attribute name="href">sa_reading_rpt.aspx?opus=<xsl:value-of select="id_opus"/>&#38;nauta=<xsl:value-of select="ds_login" />&#38;lng=<xsl:value-of select="//language" /></xsl:attribute>
 																		<xsl:value-of select="nm_nauta" /> (<xsl:value-of select="ds_login" />)
 																	</a>
 																</td>
 																<td>
 																	<a>
-																		<xsl:attribute name="href">
-																			../src/tractus.aspx?opus=<xsl:value-of select="id_opus"/>&#38;lng=<xsl:value-of select="//language" />
-																		</xsl:attribute>
+																		<xsl:attribute name="href">../src/tractus.aspx?opus=<xsl:value-of select="id_opus"/>&#38;lng=<xsl:value-of select="//language" /></xsl:attribute>
 																		<xsl:value-of select="opus_title" />
 																	</a>
 																</td>
@@ -172,9 +168,7 @@
 																</td>
 																<td  class="column-1">
 																	<a>
-																		<xsl:attribute name="href">
-																			sa_nautaLaborio_lst.aspx?id_nauta=<xsl:value-of select="id_nauta"/>&#38;opus=<xsl:value-of select="id_opus"/>&#38;chorus=<xsl:value-of select="id_chorus"/>&#38;lng=<xsl:value-of select="//language" />&#38;inbox=true#<xsl:value-of select="id_pagina"/>
-																		</xsl:attribute>
+																		<xsl:attribute name="href">sa_nautaLaborio_lst.aspx?id_nauta=<xsl:value-of select="id_nauta"/>&#38;opus=<xsl:value-of select="id_opus"/>&#38;chorus=<xsl:value-of select="id_chorus"/>&#38;lng=<xsl:value-of select="//language" />&#38;inbox=true#<xsl:value-of select="id_pagina"/></xsl:attribute>
 																		<b>
 																			<xsl:value-of select="dt_upload" />
 																		</b>
@@ -198,9 +192,7 @@
 											<tr>
 												<td CLASS="TITLE_LIGHT">
 													<a>
-														<xsl:attribute name="href">
-															sa_nuntius_lst.aspx?lng=<xsl:value-of select="//language" />
-														</xsl:attribute>
+														<xsl:attribute name="href">sa_nuntius_lst.aspx?lng=<xsl:value-of select="//language" /></xsl:attribute>
 														<xsl:value-of select="//sa_nuntius_lst" />
 													</a>
 												</td>
@@ -222,9 +214,7 @@
 										<tr>
 											<td CLASS="TITLE_LIGHT">
 												<a>
-													<xsl:attribute name="href">
-														../admin/sa_reading_lst.aspx?lng=<xsl:value-of select="//language" />&#38;group=ADMIN&#38;lng=<xsl:value-of select="//language" />
-													</xsl:attribute>
+													<xsl:attribute name="href">../admin/sa_reading_lst.aspx?lng=<xsl:value-of select="//language" />&#38;group=ADMIN&#38;lng=<xsl:value-of select="//language" /></xsl:attribute>
 													NAUTA
 												</a>
 											</td>
@@ -243,9 +233,7 @@
 														<xsl:value-of select="id_opus" /> -
 													</span>
 													<a>
-														<xsl:attribute name="href">
-															../admin/sa_reading_lst.aspx?lng=<xsl:value-of select="//language" />&#38;group=<xsl:value-of select="cd_classis" />&#38;action=OPUS&#38;id_opus=<xsl:value-of select="id_opus" />
-														</xsl:attribute>
+														<xsl:attribute name="href">../admin/sa_reading_lst.aspx?lng=<xsl:value-of select="//language" />&#38;group=<xsl:value-of select="cd_classis" />&#38;action=OPUS&#38;id_opus=<xsl:value-of select="id_opus" /></xsl:attribute>
 														<span class='XSMALL'>
 															<xsl:value-of select="ds_title" />
 														</span>

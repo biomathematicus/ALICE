@@ -38,19 +38,21 @@ Namespace Literatronica
             'Clean malicious code from parameters that will be sent to the database
             sLinguaCok = oDBService.formatSQLInput(sLinguaCok)
             sUserID = oDBService.formatSQLInput(sUserID)
-            If Request.QueryString("opus") <> "" Then
-                id_opus = oDBService.formatSQLInput(Request.QueryString("opus"))
-            Else
-                id_opus = oDBService.formatSQLInput(Request.Form("id_opus"))
-            End If
+			If Request.QueryString("opus") <> "" Then
+				id_opus = oDBService.formatSQLInput(Request.QueryString("opus"))
+			Else
+				id_opus = oDBService.formatSQLInput(Request.Form("id_opus"))
+			End If
+			If id_opus = "undefined" Or id_opus = "" Then id_opus = 0
 
-            If Request.QueryString("pagina") <> "" Then
+			If Request.QueryString("pagina") <> "" Then
                 id_pagina = oDBService.formatSQLInput(Request.QueryString("pagina"))
             Else
                 id_pagina = oDBService.formatSQLInput(Request.Form("id_pagina"))
             End If
-            If id_pagina = "" Then id_pagina = 0
-            sAction = oDBService.formatSQLInput(Request.QueryString("action"))
+			If id_pagina = "undefined" Or id_pagina = "" Then id_pagina = 0
+
+			sAction = oDBService.formatSQLInput(Request.QueryString("action"))
             sCategory = "0"
             sCategory = Request.Form("pagina_cat")
             'sCategory = Request.Form("pagina_cat_status")

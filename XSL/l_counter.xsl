@@ -32,11 +32,11 @@
 			</div>
 			<div class="XSMALL" style="display: inline-block; "> <!--  vertical-align: top; -->
 				<xsl:value-of select="percentage_g" />%
-				<xsl:value-of select="//L_Graded_" /> | 
+				<xsl:value-of select="L_Graded_" /> | 
 				<xsl:value-of select="percentage" />%
-				<xsl:value-of select="//L_READ" /> | 
+				<xsl:value-of select="L_READ" /> | 
 				<xsl:value-of select="perct_incomplete" />%
-				<xsl:value-of select="//L_pending" /> 
+				<xsl:value-of select="L_pending" /> 
 				<!-- Progress Bar Container -->
 				<div style="height: 4px; width: 150px; display: flex; border: 1px solid #ccc;">
 					<!-- Graded Progress Segment -->

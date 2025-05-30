@@ -468,9 +468,7 @@
 
 					  <!-- DIV element for map begins here -->
 					  <form name="p_tractus" id="p_tractus" method="post">
-						  <xsl:attribute name="action">
-							  Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//id_opus" />
-						  </xsl:attribute>
+						  <xsl:attribute name="action">Tractus.aspx?lng=<xsl:value-of select="//language" />&#38;opus=<xsl:value-of select="//id_opus" /></xsl:attribute>
 						  <input  onclick="categoryOnClick()"  type="hidden">
 							  <xsl:attribute name="value">
 								  <xsl:value-of select="//L_set_known" />

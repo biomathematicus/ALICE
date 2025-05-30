@@ -95,6 +95,9 @@
 											</td>
 											<td>
 												<xsl:value-of select="count" />
+												<xsl:apply-templates select="//page_counter" >
+													<xsl:with-param name="ShowTitle" select="'NO'" />
+												</xsl:apply-templates>
 											</td>
 											<td>
 												<a>

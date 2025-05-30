@@ -94,31 +94,19 @@
 								(
 								<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
 									<xsl:attribute name="href">../src/secretus.aspx?logout=1</xsl:attribute>
-									<span class="MEDIUM">
-										<xsl:value-of select="//L_LOGOUT" />
-									</span>
+									<span class="MEDIUM"><xsl:value-of select="//L_LOGOUT" /></span>
 								</a>
 								)<BR />
 							</xsl:when>
 							<xsl:otherwise>
 								<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-									<xsl:attribute name="href">
-										javascript:document.frmSession.action='../src/Secretus.aspx?lng=
-										<xsl:value-of select="/doc/param/language" />
-										&amp;FPage=../src/
-										<xsl:value-of select="//page_name" />
-										';document.frmSession.submit();
-									</xsl:attribute>
-									<span class="MEDIUM"  id="exist1">
-										<xsl:value-of select="//L_OLD_USER" />
-									</span>
+									<xsl:attribute name="href">javascript:document.frmSession.action='../src/Secretus.aspx?lng=<xsl:value-of select="/doc/param/language" />&amp;FPage=../src/<xsl:value-of select="//page_name" />';document.frmSession.submit();</xsl:attribute>
+									<span class="MEDIUM"  id="exist1"><xsl:value-of select="//L_OLD_USER" /></span>
 								</a>
 								<!-- |
 								<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
 									<xsl:attribute name="href">javascript:document.frmSession.action='../src/register.aspx';document.frmSession.submit();</xsl:attribute>
-									<span class="MEDIUM"  id="new1">
-										<xsl:value-of select="//L_NEW_USER" />
-									</span>
+									<span class="MEDIUM"  id="new1"><xsl:value-of select="//L_NEW_USER" /></span>
 								</a>
 								-->
 								<BR />
@@ -128,17 +116,7 @@
 						<xsl:choose>
 							<xsl:when test="//language[. != 'HISPANIA']">
 								<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-									<xsl:attribute name="href">
-										<xsl:value-of select="//page_name" />
-										?lng=HISPANIA&#38;opus=
-										<xsl:value-of select="//id_opus" />
-										&#38;pagina=
-										<xsl:value-of select="//id_pagina" />
-										&#38;nuntius=
-										<xsl:value-of select="//cd_nuntius" />
-										&#38;artifex=
-										<xsl:value-of select="//artifex_id" />
-									</xsl:attribute>
+									<xsl:attribute name="href"><xsl:value-of select="//page_name" />?lng=HISPANIA&#38;opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="//id_pagina" />&#38;nuntius=<xsl:value-of select="//cd_nuntius" />&#38;artifex=<xsl:value-of select="//artifex_id" /></xsl:attribute>
 									<img src="../images/system/lang_spanish.gif" alt="Castellano" width="17" height="11" border="0" />
 									&#160;
 									<span CLASS="MEDIUM">Castellano</span>
@@ -146,17 +124,7 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-									<xsl:attribute name="href">
-										<xsl:value-of select="//page_name" />
-										?lng=BRITANNIA&#38;opus=
-										<xsl:value-of select="//id_opus" />
-										&#38;pagina=
-										<xsl:value-of select="//id_pagina" />
-										&#38;nuntius=
-										<xsl:value-of select="//cd_nuntius" />
-										&#38;artifex=
-										<xsl:value-of select="//artifex_id" />
-									</xsl:attribute>
+									<xsl:attribute name="href"><xsl:value-of select="//page_name" />?lng=BRITANNIA&#38;opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="//id_pagina" />&#38;nuntius=<xsl:value-of select="//cd_nuntius" />&#38;artifex=<xsl:value-of select="//artifex_id" /></xsl:attribute>
 									<img src="../images/system/lang_english.gif" alt="English" width="17" height="11" border="0" />
 									&#160;
 									<span class="MEDIUM">English</span>
@@ -194,14 +162,8 @@
 					<xsl:otherwise>
 						<td class='TAG' align="center" nowrap="true" width="20%">
 							<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-								<xsl:attribute name="href">
-									javascript:document.frmSession.action='../src/Initium.aspx?lng=
-									<xsl:value-of select="//language" />
-									';document.frmSession.submit();
-								</xsl:attribute>
-								<span class='MEDIUM'>
-									<xsl:value-of select="//P_INITIUM" />
-								</span>
+								<xsl:attribute name="href">javascript:document.frmSession.action='../src/Initium.aspx?lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
+								<span class='MEDIUM'><xsl:value-of select="//P_INITIUM" /></span>
 							</a>
 						</td>
 					</xsl:otherwise>
@@ -222,14 +184,8 @@
 					<xsl:otherwise>
 						<td class='TAG' align="center" nowrap="true" width="20%">
 							<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-								<xsl:attribute name="href">
-									javascript:document.frmSession.action='../src/Index.aspx?lng=
-									<xsl:value-of select="//language" />
-									';document.frmSession.submit();
-								</xsl:attribute>
-								<span class='MEDIUM'>
-									<xsl:value-of select="//P_INDEX" />
-								</span>
+								<xsl:attribute name="href">javascript:document.frmSession.action='../src/Index.aspx?lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
+								<span class='MEDIUM'><xsl:value-of select="//P_INDEX" /></span>
 							</a>
 						</td>
 					</xsl:otherwise>
@@ -252,14 +208,8 @@
 							<xsl:otherwise>
 								<td class='TAG' align="center" nowrap="true" width="20%">
 									<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-										<xsl:attribute name="href">
-											javascript:document.frmSession.action='../admin/sa_menu.aspx?lng=
-											<xsl:value-of select="//language" />
-											';document.frmSession.submit();
-										</xsl:attribute>
-										<span class='MEDIUM'>
-											<xsl:value-of select="//user_role_name" />
-										</span>
+										<xsl:attribute name="href">javascript:document.frmSession.action='../admin/sa_menu.aspx?lng=<xsl:value-of select="//language" />';document.frmSession.submit();</xsl:attribute>
+										<span class='MEDIUM'><xsl:value-of select="//user_role_name" /></span>
 									</a>
 								</td>
 							</xsl:otherwise>
@@ -281,14 +231,8 @@
 					<xsl:otherwise>
 						<td class='TAG' align="center" nowrap="true" width="20%">
 							<a onFocus="window.status=''; return true;"  onBlur="window.status=''; return true;">
-								<xsl:attribute name="href">
-									javascript:document.frmSession.action='../src/Nuntius.aspx?lng=
-									<xsl:value-of select="//language" />
-									&#38;nuntius=T_ABOUT';document.frmSession.submit();
-								</xsl:attribute>
-								<span class='MEDIUM'>
-									<xsl:value-of select="//P_INDICIUM" />
-								</span>
+								<xsl:attribute name="href">javascript:document.frmSession.action='../src/Nuntius.aspx?lng=<xsl:value-of select="//language" />&#38;nuntius=T_ABOUT';document.frmSession.submit();</xsl:attribute>
+								<span class='MEDIUM'><xsl:value-of select="//P_INDICIUM" /></span>
 							</a>
 						</td>
 					</xsl:otherwise>

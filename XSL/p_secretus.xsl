@@ -67,71 +67,71 @@
 							<a href="initium.aspx"><span class="XSMALL"><xsl:value-of select="//P_INITIUM" /></span></a> &#62;
 							<span class="BOLDXSMALL"><xsl:value-of select="//L_LOGIN" /></span>
 							<p />
-              <form id="frmLogin"  method="post" action="">
-                <xsl:choose>
+							<form id="frmLogin"  method="post" action="">
+							<xsl:choose>
 
-                  <xsl:when test="//successful_login &lt; '1'">
-                    <xsl:if test="//user_status =  '0'">
-                      <span class="box"><xsl:value-of select="//L_LOGIN_ERROR" /></span>
-                    </xsl:if>
-                    <table border="0" cellpadding="2" width="100%"  align="left">
-                      <tr>
-                        <td CLASS="TITLE_DARK">
-                          <xsl:value-of select="//L_LOGIN_NAME" />: &#160;
-                        </td>
-                        <!-- ************ BEGINS CONTENT ************ -->
-                        <td>
-                          <input type="text" name="txtLogin" id="username1" maxlength="50"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td CLASS="TITLE_DARK">
-                          <xsl:value-of select="//L_LOGIN_PWD" />: &#160;
-                        </td>
-                        <td>
-                          <input type="password" name="txtPassword" id="password1" />
+								<xsl:when test="//successful_login &lt; '1'">
+								<xsl:if test="//user_status =  '0'">
+									<span class="box"><xsl:value-of select="//L_LOGIN_ERROR" /></span>
+								</xsl:if>
+								<table border="0" cellpadding="2" width="100%"  align="left">
+									<tr>
+									<td CLASS="TITLE_DARK">
+										<xsl:value-of select="//L_LOGIN_NAME" />: &#160;
+									</td>
+									<!-- ************ BEGINS CONTENT ************ -->
+									<td>
+										<input type="text" name="txtLogin" id="username1" maxlength="50"/>
+									</td>
+									</tr>
+									<tr>
+									<td CLASS="TITLE_DARK">
+										<xsl:value-of select="//L_LOGIN_PWD" />: &#160;
+									</td>
+									<td>
+										<input type="password" name="txtPassword" id="password1" />
 
-                          <xsl:element name="paragraph">
-                            <xsl:attribute name="id">demo</xsl:attribute>
-                          </xsl:element>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td CLASS="TITLE_DARK">
-                          &#160;
-                        </td>
-                        <td>
-                          <input type="hidden" name="hAction" value ="login" />
-                          <input type="button" value ="login" onclick="frmLogin_submit()" />
-                        </td>
-                      </tr>
-                    </table>
-                    <!-- ************ BEGINS CONTENT ************ -->
-                  </xsl:when>
+										<xsl:element name="paragraph">
+										<xsl:attribute name="id">demo</xsl:attribute>
+										</xsl:element>
+									</td>
+									</tr>
+									<tr>
+									<td CLASS="TITLE_DARK">
+										&#160;
+									</td>
+									<td>
+										<input type="hidden" name="hAction" value ="login" />
+										<input type="button" value ="login" onclick="frmLogin_submit()" />
+									</td>
+									</tr>
+								</table>
+								<!-- ************ BEGINS CONTENT ************ -->
+								</xsl:when>
 
-                  <xsl:otherwise>
-                    <table border="0" cellpadding="2" width="100%"  align="left">
-                      <tr>
-                        <td CLASS="TITLE_DARK">
-                          <xsl:value-of select="//L_LOGIN_NAME" />: &#160;
-                        </td>
-                        <td>
-                          <xsl:value-of select="//user_name" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td CLASS="TITLE_DARK">
-                          &#160;
-                        </td>
-                        <td>
-                          <p> Salam</p>
-                          <input type="submit" name="hAction" value ="logout" />
-                        </td>
-                      </tr>
-                    </table>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </form>
+								<xsl:otherwise>
+								<table border="0" cellpadding="2" width="100%"  align="left">
+									<tr>
+									<td CLASS="TITLE_DARK">
+										<xsl:value-of select="//L_LOGIN_NAME" />: &#160;
+									</td>
+									<td>
+										<xsl:value-of select="//user_name" />
+									</td>
+									</tr>
+									<tr>
+									<td CLASS="TITLE_DARK">
+										&#160;
+									</td>
+									<td>
+										<p> Salam</p>
+										<input type="submit" name="hAction" value ="logout" />
+									</td>
+									</tr>
+								</table>
+								</xsl:otherwise>
+							</xsl:choose>
+							</form>
 							<!-- ************  ENDS CONTENT  ************ -->
 						</td>
 					</tr>

@@ -157,7 +157,71 @@ Namespace Literatronica
 
 #Region " Function ManageCookies: Reads and sets user settings in cookies "
 
-		Public Sub ManageCookies(ByRef sLinguaCok As String,
+		Public Sub ManageCookies(ByRef linguaCookie As String,
+						 ByRef linguaQuery As String,
+						 ByRef userId As String,
+						 basePage As Page)
+			Const cookieName As String = "Forum"
+			Const defaultLingua As String = "BRITANNIA"
+			Const loggedOffValue As String = "LOGGED-OFF"
+
+			' Check for special page conditions (if necessary)
+			Dim isSecretusPage As Boolean = (userId = "secretus")
+			userId = ""
+
+			' Read or create the cookie
+			Dim cookie As HttpCookie = basePage.Request.Cookies(cookieName)
+			If cookie Is Nothing Then
+				cookie = New HttpCookie(cookieName)
+				cookie("UserID") = loggedOffValue
+				cookie("Lingua") = defaultLingua
+				cookie.Expires = Date.UtcNow.AddYears(1)
+				basePage.Response.Cookies.Add(cookie)
+			End If
+
+			' Get user ID from cookie
+			userId = cookie("UserID")
+			If String.IsNullOrEmpty(userId) Then userId = ""
+
+			' Fix URL-encoded values if present
+			If userId.EndsWith("LOGGED%2DOFF") Then
+				userId = userId.Substring(0, userId.Length - 12)
+			End If
+
+			' Resolve lingua from querystring and cookie
+			linguaQuery = basePage.Request.QueryString("lng")
+			linguaCookie = cookie("Lingua")
+
+			Try
+				' Handle language settings
+				If linguaQuery = "HISPANIA" OrElse linguaQuery = "BRITANNIA" Then
+					linguaCookie = linguaQuery
+				ElseIf String.IsNullOrEmpty(linguaCookie) Then
+					linguaCookie = defaultLingua
+					linguaQuery = defaultLingua
+				Else
+					linguaQuery = linguaCookie
+				End If
+
+				' Ensure final values are valid
+				If linguaCookie <> "HISPANIA" AndAlso linguaCookie <> "BRITANNIA" Then
+					linguaCookie = defaultLingua
+					linguaQuery = defaultLingua
+				End If
+
+				' Update cookie if needed
+				If Not String.IsNullOrEmpty(userId) Then
+					cookie("Lingua") = linguaCookie
+					cookie("UserID") = userId
+					cookie.Expires = Date.UtcNow.AddYears(1)
+					basePage.Response.Cookies.Set(cookie)
+				End If
+			Catch ex As Exception
+				userId = ""
+			End Try
+		End Sub
+
+		Public Sub xManageCookies(ByRef sLinguaCok As String,
 			ByRef sLinguaQry As String,
 			ByRef sUserID As String,
 			ByRef BasePage As Page)
