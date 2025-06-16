@@ -80,10 +80,15 @@ Public Class agents : Implements IHttpHandler,
 				Dim firstRec As Dictionary(Of String, Object) =
 					DirectCast(models(0), Dictionary(Of String, Object))
 
+				Dim apiKey As String = ConfigurationManager.AppSettings("OPENAI_API_KEY")
+				If String.IsNullOrWhiteSpace(apiKey) Then
+					apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+				End If
+
 				_agentName = CStr(firstRec("agent_name"))
 				_agent = New OpenAI(CStr(firstRec("model_code")),
 										_agentName,
-										Environment.GetEnvironmentVariable("OPENAI_API_KEY"),
+										apiKey,
 										CDbl(firstRec("temperature")),
 										CInt(firstRec("max_completion_tokens")))
 				_cfgPath = cfgPath
