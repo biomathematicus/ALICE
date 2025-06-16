@@ -75,6 +75,11 @@ Namespace Literatronica
 				Return _history
 			End Get
 		End Property
+		Public ReadOnly Property APIKey As String
+			Get
+				Return _apiKey
+			End Get
+		End Property
 
 		'==== Send ===========================================================
 		Public Async Function SendAsync(userText As String) As Task(Of String)

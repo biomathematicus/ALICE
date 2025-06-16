@@ -45,7 +45,11 @@ Public Class agents : Implements IHttpHandler,
 	' Instance method so it can use the instance-level parameters &
 	' instance members without hitting the Shared restriction.
 	'==========================================
-	Private Sub EnsureAgent(idOpus As Integer, idPagina As Integer)
+	Private Sub EnsureAgent(idOpus As Integer, idPagina As Integer, token As String)
+		Dim sessionKey As String = "chat_" & idOpus & "_" & idPagina & "_" & token
+		_agent = TryCast(HttpContext.Current.Session(sessionKey), OpenAI)
+		If _agent IsNot Nothing Then Exit Sub
+
 		'— fetch JSON path from DB —------------------------------------------------
 		Dim cfgPath As String
 		Using cn As New SqlConnection(connStr)
@@ -85,12 +89,18 @@ Public Class agents : Implements IHttpHandler,
 					apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
 				End If
 
-				_agentName = CStr(firstRec("agent_name"))
-				_agent = New OpenAI(CStr(firstRec("model_code")),
+				If _agent Is Nothing Then
+					_agentName = CStr(firstRec("agent_name"))
+					_agent = New OpenAI(CStr(firstRec("model_code")),
 										_agentName,
 										apiKey,
 										CDbl(firstRec("temperature")),
 										CInt(firstRec("max_completion_tokens")))
+
+					' Store the initialized agent in session
+					HttpContext.Current.Session(sessionKey) = _agent
+				End If
+
 				_cfgPath = cfgPath
 				SeedAgent()
 			End If
@@ -139,18 +149,28 @@ Public Class agents : Implements IHttpHandler,
 		Dim idOpus As Integer = Integer.Parse(idOpusRaw)
 		Dim idPagina As Integer = Integer.Parse(idPagRaw)
 
-		EnsureAgent(idOpus, idPagina)
+		'─────────────────────────────────────────────────────────────
+		' Restore OpenAI agent from session, if already created
+		'─────────────────────────────────────────────────────────────
+		Dim sessionKey As String = "chat_" & idOpus & "_" & idPagina & "_" & token
+		_agent = TryCast(ctx.Session(sessionKey), OpenAI)
+
+		EnsureAgent(idOpus, idPagina, token)
 
 		Select Case action
 			Case "sendmessage"
 				Dim prompt = req("prompt")
 				Dim reply = _agent.SendAsync(prompt).Result
 				SaveState(idOpus, idPagina, token)
-				ctx.Response.Write(js.Serialize(New With {.success = True, .reply = reply}))
+				'ctx.Response.Write(js.Serialize(New With {.success = True, .reply = reply}))
+				WriteJson(ctx, New With {.success = True, .reply = reply})
+
 
 			Case "getstate"
 				Dim hist = LoadState(idOpus, idPagina, token)
-				ctx.Response.Write(js.Serialize(New With {.success = True, .history = hist}))
+				'ctx.Response.Write(js.Serialize(New With {.success = True, .history = hist}))
+				WriteJson(ctx, New With {.success = True, .history = _agent.History})
+
 
 			Case "updatestate"
 				SaveState(idOpus, idPagina, token, req("state_json"))
@@ -172,6 +192,19 @@ Public Class agents : Implements IHttpHandler,
 						cn.Open()
 						cmd.ExecuteNonQuery()
 					End Using
+
+					_agent.Reset()
+					ctx.Session.Remove("chat_" & idOpus & "_" & idPagina & "_" & token)
+
+					WriteJson(ctx, New With {
+						.success = True,
+						.message = "Chat reset.",
+						.history = New List(Of ChatMessage)
+					})
+
+					Return
+
+
 				End Using
 				SeedAgent()
 				ctx.Response.Write(js.Serialize(New With {.success = True}))
@@ -265,6 +298,13 @@ Public Class agents : Implements IHttpHandler,
 			Return If(result IsNot Nothing, result.ToString(), "")
 		End Using
 	End Function
+
+	Private Sub WriteJson(ctx As HttpContext, obj As Object)
+		Dim js As New JavaScriptSerializer()
+		Dim json As String = js.Serialize(obj)
+		ctx.Response.ContentType = "application/json"
+		ctx.Response.Write(json)
+	End Sub
 
 #End Region
 
