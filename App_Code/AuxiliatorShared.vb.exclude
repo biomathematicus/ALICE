@@ -1,0 +1,18 @@
+﻿Imports System.Collections      'for IList
+
+Namespace Auxiliator
+
+	'------------ universal DTO ---------------
+	<CLSCompliant(True)>
+	Public Class ChatMessage
+		Public Property Role As String      'capitalised names → no style warning
+		Public Property Content As String
+	End Class
+
+	'------------ common façade ---------------
+	Public Interface IChatAgent
+		ReadOnly Property ModelCode As String
+		ReadOnly Property History As IList
+	End Interface
+
+End Namespace

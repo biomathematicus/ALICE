@@ -1,0 +1,78 @@
+﻿Imports System.Collections
+Imports System.Collections.Generic
+Imports System.Net.Http
+Imports System.Text
+Imports System.Threading.Tasks
+Imports System.Web.Script.Serialization
+
+Namespace Auxiliator
+
+	<CLSCompliant(False)> Public MustInherit Class ChatAgentBase : Implements IChatAgent
+
+		'–––––––––––– shared state ––––––––––––
+		Protected ReadOnly ApiKey As String
+		Protected ReadOnly HistoryList As New List(Of ChatMessage)
+		Protected ReadOnly Http As HttpClient =
+			New HttpClient() With {.Timeout = TimeSpan.FromSeconds(100)}
+
+		Protected ReadOnly ModelCodeValue As String
+		Protected ReadOnly AgentNameValue As String
+		Protected ReadOnly TemperatureValue As Double
+		Protected ReadOnly MaxTokensValue As Integer
+
+		'–––––––––––– ctor ––––––––––––
+		Protected Sub New(modelCode As String, agentName As String,
+						  apiKey As String, temperature As Double, maxTokens As Integer)
+
+			ModelCodeValue = modelCode
+			AgentNameValue = agentName
+			Me.ApiKey = apiKey
+			TemperatureValue = temperature
+			MaxTokensValue = maxTokens
+		End Sub
+
+		'–––––––––– IChatAgent ––––––––––
+		Public ReadOnly Property ModelCode As String _
+		  Implements IChatAgent.ModelCode
+			Get
+				Return ModelCodeValue
+			End Get
+		End Property
+
+		Public ReadOnly Property History As IList _
+		  Implements IChatAgent.History
+			Get
+				Return HistoryList
+			End Get
+		End Property
+
+		'–––––––––– helpers ––––––––––––
+		Public Async Function SendAsync(userText As String) As Task(Of String)
+			If String.IsNullOrWhiteSpace(userText) Then
+				Throw New ArgumentException("Prompt is empty.")
+			End If
+
+			Dim reply As String = Await DoApiCallAsync(userText).ConfigureAwait(False)
+
+			HistoryList.Add(New ChatMessage With {.Role = "user", .Content = userText})
+			HistoryList.Add(New ChatMessage With {.Role = "assistant", .Content = reply})
+
+			Return reply
+		End Function
+
+		Public Sub Reset()
+			HistoryList.Clear()
+		End Sub
+
+		Protected Function BuildMessages(latestPrompt As String) As List(Of ChatMessage)
+			Dim msgs As New List(Of ChatMessage)(HistoryList)
+			msgs.Add(New ChatMessage With {.Role = "user", .Content = latestPrompt})
+			Return msgs
+		End Function
+
+		'–––––––––– provider hook ––––––––––––
+		Protected MustOverride Function DoApiCallAsync(userText As String) As Task(Of String)
+
+	End Class
+
+End Namespace

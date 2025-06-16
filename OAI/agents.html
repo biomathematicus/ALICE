@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<!--
+  agents.html  –  Multi‑agent chat front‑end with Markdown + KaTeX support
+  ----------------------------------------------------------------------
+  This single static page talks to agents.ashx (server‑side handler) and
+  renders the conversation with:
+	• Showdown 2.x  – Markdown → HTML
+	• KaTeX 0.16   – LaTeX math → HTML/CSS
+  All JavaScript is inline for ease of deployment in classic ASP.NET‑WebSite.
+  ‑‑ J.G. 2025‑06‑04
+-->
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>ALICE · Agent Chat</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!--
+	  ──────────────────────────────────────────────────────────────────
+	  ✦  CSS + third‑party libs
+	  ------------------------------------------------------------------
+		· Bootstrap 5  – quick spacing/layout helpers
+		· KaTeX CSS   – math font + baseline styles
+	-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous" />
+
+	<!--  JS libs are deferred so they don’t block initial paint  -->
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+
+	<!--
+	  ──────────────────────────────────────────────────────────────────
+	  ✦  Page styling – vanilla CSS
+	  ------------------------------------------------------------------
+		• #chatBox          scrollable message column
+		• .msg.user         left‑aligned grey bubble
+		• .msg.assistant    plain text
+		• .loader           simple CSS spinner (shown while awaiting XHR)
+	-->
+	<style>
+		body {
+			padding: 1.5rem;
+		}
+
+		#chatBox {
+			height: 60vh; /* fixed chat height */
+			overflow-y: auto; /* scroll when tall */
+			border: 1px solid #ced4da;
+			border-radius: .5rem;
+			padding: .75rem;
+			background: #f8f9fa;
+		}
+
+		.msg {
+			margin-bottom: .5rem;
+			line-height: 1.4;
+		}
+
+			.msg.user {
+				background: #f0f0f0;
+				padding: 8px;
+				border-radius: 4px;
+			}
+
+			.msg.system {
+				text-align: center;
+				font-style: italic;
+				color: #6c757d;
+			}
+
+		/* Spinner animation */
+		.loader {
+			border: 6px solid #f3f3f3;
+			border-top: 6px solid #3498db;
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			animation: spin 1s linear infinite;
+			margin: 10px auto;
+			display: none;
+		}
+
+		@keyframes spin {
+			from {
+				transform: rotate(0)
+			}
+
+			to {
+				transform: rotate(360deg)
+			}
+		}
+	</style>
+</head>
+<body>
+	<!--h3 class="mb-3">Agent Chat</!--h3>
+	<!-- Message column & spinner -->
+	<div id="chatBox" class="mb-3"></div>
+	<div id="loader" class="loader"></div>
+
+	<!-- Prompt + Reset row -->
+	<div class="d-flex justify-content-between align-items-start mb-2">
+		<button id="resetBtn" class="btn btn-secondary btn-sm">Reset</button>
+		<div class="input-group w-75">
+			<textarea id="prompt" class="form-control" rows="2" placeholder="Type your message and press ⏎…"></textarea>
+			<button id="sendBtn" class="btn btn-primary">Send</button>
+		</div>
+	</div>
+
+	<!-- jQuery for brevity (already used elsewhere in ALICE) -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+		/*
+		  ====================================================================
+		  Main IIFE – runs after DOM ready
+		  ====================================================================
+		*/
+		$(function () {
+
+			/*───────────────────────────────────────────────────────────────
+			  §1  Runtime constants (query‑string & DOM refs)
+			*/
+			const qs = new URLSearchParams(location.search);
+			const id_opus = +qs.get('opus'); // || +qs.get('id_opus') || 1;
+			const id_pagina = +qs.get('pagina'); // || +qs.get('id_pagina') || 1;
+			const ds_symbolum = qs.get('symbolum'); // || qs.get('ds_symbolum') || 'ANON';
+			const endpoint = 'agents.ashx';
+
+			// jQuery cached nodes
+			const $chat = $('#chatBox');
+			const $loader = $('#loader');
+
+			/*───────────────────────────────────────────────────────────────
+			  §2  KaTeX – render after every DOM mutation
+				  Custom delimiters allow inline ($…$, \(…\)) and display math.
+			*/
+			function renderMath() {
+				if (window.renderMathInElement) {
+					renderMathInElement($chat[0], {
+						delimiters: [
+							{ left: '$$', right: '$$', display: true },
+							{ left: '$', right: '$', display: false },
+							{ left: '\\(', right: '\\)', display: false },
+							{ left: '\\[', right: '\\]', display: true }
+						],
+						throwOnError: false
+					});
+				}
+			}
+
+			/*───────────────────────────────────────────────────────────────
+			  §3  Showdown – Markdown → HTML  (math placeholders to protect • )
+				  Any math segment is stashed, Markdown converted, then restored.
+			*/
+			const md = new showdown.Converter({
+				tables: true, simplifiedAutoLink: true, openLinksInNewWindow: true,
+				strikethrough: true, emoji: true, underline: true,
+				literalMidWordUnderscores: true, simpleLineBreaks: false
+			});
+			const MATH_RE = /(\$\$[\s\S]*?\$\$|\$[^$]+\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\))/g;
+			function mdToHtml(txt = '') {
+				const stash = [];
+				const placeholder = txt.replace(MATH_RE, m => { stash.push(m); return `§§${stash.length - 1}§§` });
+				let html = md.makeHtml(placeholder);
+				stash.forEach((m, i) => { html = html.replace(`§§${i}§§`, m); });
+				return html;
+			}
+
+			/*───────────────────────────────────────────────────────────────
+			  §4  DOM helpers – chat rendering & scroll glue
+			*/
+			function addMsg(role, text) {
+				$('<div>', { html: mdToHtml(text), class: `msg ${role}` }).appendTo($chat);
+				$chat.scrollTop($chat.prop('scrollHeight'));
+				renderMath();
+			}
+			/*function renderHistory(arr) {
+				$chat.empty();
+				(arr || []).forEach(m => addMsg(m.role, m.content));
+			}*/
+			function renderHistory(arr) {
+				$chat.empty();
+				if (!arr || arr.length === 0) return;
+
+				// Find index of first non-system message
+				let startIndex = arr.findIndex(m => m.role !== 'system');
+
+				// If all are system messages (just in case), start from 0
+				if (startIndex === -1) startIndex = 0;
+
+				// Render messages starting from first non-system message
+				for (let i = startIndex; i < arr.length; i++) {
+					addMsg(arr[i].role, arr[i].content);
+				}
+			}
+
+			/*───────────────────────────────────────────────────────────────
+			  §5  AJAX utility – shows spinner & POSTs to agents.ashx
+			*/
+			function callServer(payload, cb) {
+				$loader.show();
+				$.post(endpoint, payload, cb, 'json').always(() => $loader.hide());
+			}
+
+			/*───────────────────────────────────────────────────────────────
+			  §6  Chat actions – load, send, reset
+			*/
+			/*function loadHistory() {
+				callServer({ action: 'getstate', id_opus, id_pagina, ds_symbolum },
+					r => r.success ? renderHistory(r.history)
+						: addMsg('system', '(no prior conversation)'));
+			}*/
+			function loadHistory() {
+				callServer({ action: 'getstate', id_opus, id_pagina, ds_symbolum },
+					r => {
+						console.log("Loaded chat history:", r); // 👈 Logs full server response
+						if (r.success) {
+							console.log("History array:", r.history); // 👈 Logs the history array specifically
+							renderHistory(r.history);
+						} else {
+							addMsg('system', '(no prior conversation)');
+						}
+					});
+			}
+			function sendMessage() {
+				const txt = $('#prompt').val().trim(); if (!txt) return;
+				$('#prompt').val(''); addMsg('user', txt);
+				callServer({ action: 'sendmessage', id_opus, id_pagina, ds_symbolum, prompt: txt },
+					r => r.success ? addMsg('assistant', r.reply)
+						: addMsg('system', 'Error: ' + r.message));
+			}
+			function resetChat() {
+				$chat.empty();
+				callServer({ action: 'deletechat', id_opus, id_pagina, ds_symbolum, state_json: '{"history":[]}' },
+					() => addMsg('system', 'Chat reset.'));
+			}
+
+			/*───────────────────────────────────────────────────────────────
+			  §7  Wire‑up UI events
+			*/
+			$('#sendBtn').on('click', sendMessage);
+			$('#prompt').on('keypress', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
+			$('#resetBtn').on('click', resetChat);
+
+			/*───────────────────────────────────────────────────────────────
+			  Kick‑off
+			*/
+			loadHistory();
+		});
+	</script>
+</body>
+</html>

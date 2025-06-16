@@ -5,6 +5,9 @@ uploads/*
 artifex_uploads/*
 # Ignore local SQL queries
 SQL/*
+#Ignore Nuget packages
+packages/*
+Bin/*
 # Ignore everything in the data directory
 data/*
 # Ignore the local configuration for Visual Studio Code

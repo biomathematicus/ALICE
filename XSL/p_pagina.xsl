@@ -156,10 +156,10 @@
 										<div id="PDF1" style="width: 800px;"></div>
 										<div id="GenAI"  style="visibility:hidden; display:none; width: 800px;">
 											<iframe id="GenAIFrame" style="width: 100%; height: 450px; border: none;">
-												<xsl:attribute name="src">../OAI/oaiAgent.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
+												<xsl:attribute name="src">../OAI/agents.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
 											</iframe>
 											<a>
-												<xsl:attribute name="href">../OAI/oaiAgent.html?opus=<xsl:value-of select="//id_opus"/>&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
+												<xsl:attribute name="href">../OAI/agents.html?opus=<xsl:value-of select="//id_opus"/>&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>&#38;symbolum=<xsl:value-of select="//symbolum"/></xsl:attribute>
 												../OAI/oaiAgent.html?opus=<xsl:value-of select="//id_opus" />&#38;pagina=<xsl:value-of select="/doc/id_pagina"/>	
 											</a>
 										</div>	
