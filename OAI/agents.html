@@ -199,6 +199,7 @@
 			  §5  AJAX utility – shows spinner & POSTs to agents.ashx
 			*/
 			function callServer(payload, cb) {
+				console.log("Calling server with payload:", payload);
 				$loader.show();
 				$.post(endpoint, payload, cb, 'json').always(() => $loader.hide());
 			}
