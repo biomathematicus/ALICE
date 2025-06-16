@@ -95,7 +95,9 @@ Namespace Literatronica
 
 				Using httpResp = Await _http.SendAsync(httpReq).ConfigureAwait(False)
 					If Not httpResp.IsSuccessStatusCode Then
-						Throw New ApplicationException("OpenAI HTTP " & CInt(httpResp.StatusCode))
+						'Throw New ApplicationException("OpenAI HTTP " & CInt(httpResp.StatusCode))
+						Dim errorBody = Await httpResp.Content.ReadAsStringAsync().ConfigureAwait(False)
+						Throw New ApplicationException("OpenAI HTTP " & CInt(httpResp.StatusCode) & ": " & errorBody)
 					End If
 					Dim raw As String = Await httpResp.Content.ReadAsStringAsync().ConfigureAwait(False)
 					Dim reply As String = ParseAssistantReply(raw)
